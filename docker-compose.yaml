@@ -1,0 +1,8 @@
+services:
+  pasteriadb: # Nombre del servicio
+    image: mongo:5.0.0
+    container_name: pasteria-database
+    ports:
+      - 27017:27017 # Puerto de la computadora : Puerto de la imagen
+    volumes:
+      - ./mongo:/data/db # Se mapea la carpeta mongo a /data/db
