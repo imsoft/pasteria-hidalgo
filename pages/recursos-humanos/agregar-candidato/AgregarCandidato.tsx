@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext, useState } from "react";
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
-import { CandidatosContext } from "../../../context/candidatos";
+import { CandidatosContext } from "../../../context/recursos-humanos/candidatos";
 
 export default function AgregarCandidato() {
   const { agregarNuevoCandidato } = useContext(CandidatosContext);

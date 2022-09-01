@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 
 import '../styles/globals.css'
-import { CandidatosProvider } from '../context/candidatos';
+import { CandidatosProvider } from '../context/recursos-humanos/candidatos';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: ( page: ReactElement ) => ReactNode;

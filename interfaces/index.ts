@@ -7,3 +7,4 @@ export * from './productosYaComprados';
 export * from './proveedores';
 export * from './reportesDeCompra';
 export * from './sucursalesYFranquicias';
+export * from './entry';
