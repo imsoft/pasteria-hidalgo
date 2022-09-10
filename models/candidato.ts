@@ -7,7 +7,7 @@ const candidatoSchema = new Schema({
   nombre: { type: String, required: true },
   puesto: { type: String, required: true },
   descripcionDelPuesto: { type: String, required: true },
-  fechaDeNacimiento: { type: Date, required: true },
+  fechaDeNacimiento: { type: String, required: true },
   domicilio: { type: String, required: true },
   curp: { type: String, required: true },
   noImss: { type: String, required: true },

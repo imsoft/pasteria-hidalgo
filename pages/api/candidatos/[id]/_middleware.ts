@@ -1,9 +1,8 @@
 import { NextRequest, NextFetchEvent, NextResponse } from 'next/server';
 
-
 export function middleware( req: NextRequest, ev: NextFetchEvent ) {
 
-    // if (req.page.name === '/api/entries') return NextResponse.next();
+    // if (req.page.name === '/api/candidatos') return NextResponse.next();
 
     // const id = req.page.params?.id || '';
 

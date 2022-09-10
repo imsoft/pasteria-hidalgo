@@ -3,11 +3,12 @@ import { useState, Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import LogoPasteria from "../../../public/images/company/Logo-Pasteria.jpg";
+import LogoPasteria from "../../../public/LogoPasteria.jpg";
 
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   UserAddIcon,
+  EyeIcon,
   PlusCircleIcon,
   BellIcon,
   MenuAlt2Icon,
@@ -22,8 +23,14 @@ type Props = {
 const navigation = [
   {
     name: "Agregar candidato",
-    href: "/recursos-humanos/agregar-candidato",
+    href: "/recursos-humanos/candidato/AgregarCandidato",
     icon: UserAddIcon,
+    current: false,
+  },
+  {
+    name: "Ver Candidatos",
+    href: "/recursos-humanos/candidato/VerCandidatos",
+    icon: EyeIcon,
     current: false,
   },
   {
@@ -234,10 +241,13 @@ export const SidebarLayoutRecursosHumanos: React.FC<Props> = ({ children }) => {
                 <div>
                   <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <span className="sr-only">Open user menu</span>
-                    <img
+                    <Image
                       className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={LogoPasteria}
                       alt=""
+                      width={24}
+                      height={24}
                     />
                   </Menu.Button>
                 </div>

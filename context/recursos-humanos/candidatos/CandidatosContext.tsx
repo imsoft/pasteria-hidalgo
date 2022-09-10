@@ -1,5 +1,5 @@
-import { createContext } from 'react';
-import { Candidato } from '../../../interfaces';
+import { createContext } from "react";
+import { Candidato } from "../../../interfaces";
 
 interface ContextProps {
   candidatos: Candidato[];
@@ -15,6 +15,13 @@ interface ContextProps {
     noImss: string,
     noCartaDePolicia: string
   ) => void;
+
+  actualizarCandidato: (candidato: Candidato) => void;
+  eliminarCandidato: (candidato: Candidato) => void;
+
+  // No hacer caso por el momento
+  // actualizarCandidato: (candidato: Candidato, showSnackbar?: boolean) => void;
+  // eliminarCandidato: (candidato: Candidato, showSnackbar?: boolean) => void;
 }
 
 export const CandidatosContext = createContext({} as ContextProps);

@@ -1,7 +1,7 @@
 export interface Candidato {
   _id: string;
   nombre: string;
-  puesto: string;
+  puesto: PuestoCandidato;
   descripcionDelPuesto: string;
   fechaDeNacimiento: string;
   domicilio: string;
@@ -9,3 +9,5 @@ export interface Candidato {
   noImss: string;
   noCartaDePolicia: string;
 }
+
+export type PuestoCandidato = 'Administrador' | 'Chef' | 'Operador';

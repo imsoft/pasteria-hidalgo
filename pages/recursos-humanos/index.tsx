@@ -5,12 +5,12 @@ import {
   ClockIcon,
 } from "@heroicons/react/outline";
 import { SidebarLayoutRecursosHumanos } from "../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
-import LogoPasteria from "../../public/images/company/LCP_LIGHT_VERTICAL.jpg";
+import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 const actions = [
   {
     title: "Agregar candidato",
-    href: "/recursos-humanos/agregar-candidato",
+    href: "/recursos-humanos/candidato",
     icon: UserAddIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { SidebarLayoutGerenciaVentas } from "../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
-import LogoPasteria from "../../public/images/company/LCP_LIGHT_VERTICAL.jpg";
+import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 import {
   DocumentDuplicateIcon,

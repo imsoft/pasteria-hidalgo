@@ -1,7 +1,7 @@
 import { SidebarLayout } from "../components/layouts/SidebarLayout";
 import Image from "next/image";
 
-import LogoPasteriaBlanco from "../public/images/company/LCP_LIGHT_VERTICAL.jpg";
+import LogoPasteriaBlanco from "../public/LCPLIGHTVERTICAL.jpg";
 
 export default function Home() {
   return (

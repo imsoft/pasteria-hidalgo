@@ -17,9 +17,9 @@ export const seedDataCandidatos: SeedData = {
   candidatos: [
     {
       nombre: "Juan",
-      puesto: "Presidente",
+      puesto: "Administrador",
       descripcionDelPuesto: "Presidente",
-      fechaDeNacimiento: "2020-01-01",
+      fechaDeNacimiento: "16/09/2022",
       domicilio: "Calle falsa 123",
       curp: "ABC123",
       noImss: "123456789",
@@ -27,9 +27,9 @@ export const seedDataCandidatos: SeedData = {
     },
     {
       nombre: "Pedro",
-      puesto: "Secretario",
+      puesto: "Chef",
       descripcionDelPuesto: "Secretario",
-      fechaDeNacimiento: "2020-01-01",
+      fechaDeNacimiento: "17/08/2022",
       domicilio: "Calle falsa 123",
       curp: "ABC123",
       noImss: "123456789",
@@ -37,9 +37,9 @@ export const seedDataCandidatos: SeedData = {
     },
     {
       nombre: "Gabriel",
-      puesto: "Tesorero",
+      puesto: "Operador",
       descripcionDelPuesto: "Tesorero",
-      fechaDeNacimiento: "2020-01-01",
+      fechaDeNacimiento: "15/10/2022",
       domicilio: "Calle falsa 123",
       curp: "ABC123",
       noImss: "123456789",

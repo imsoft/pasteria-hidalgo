@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import LogoPasteria from "../../public/images/company/Logo-Pasteria.jpg";
+import LogoPasteria from "../../public/LogoPasteria.jpg";
 
 const login = () => {
   return (

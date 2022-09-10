@@ -22,6 +22,21 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
     Candidatos_INITIAL_STATE
   );
 
+  const eliminarCandidato = async (candidato: Candidato) => {
+    try {
+      const { data } = await entriesApi.delete<Candidato>(
+        `/candidatos/${candidato._id}`
+      );
+
+      dispatch({
+        type: "[Candidato] Eliminar-Candidato",
+        payload: data,
+      });
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
   const agregarNuevoCandidato = async (
     nombre: string,
     puesto: string,
@@ -32,17 +47,49 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
     noImss: string,
     noCartaDePolicia: string
   ) => {
-    const { data } = await entriesApi.post<Candidato>("/candidatos", {
-      nombre,
-      puesto,
-      descripcionDelPuesto,
-      fechaDeNacimiento,
-      domicilio,
-      curp,
-      noImss,
-      noCartaDePolicia,
-    });
-    dispatch({ type: "[Candidato] Agregar-Candidato", payload: data });
+    try {
+      const { data } = await entriesApi.post<Candidato>("/candidatos", {
+        nombre,
+        puesto,
+        descripcionDelPuesto,
+        fechaDeNacimiento,
+        domicilio,
+        curp,
+        noImss,
+        noCartaDePolicia,
+      });
+      dispatch({ type: "[Candidato] Agregar-Candidato", payload: data });
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  const actualizarCandidato = async ({
+    _id,
+    nombre,
+    puesto,
+    descripcionDelPuesto,
+    fechaDeNacimiento,
+    domicilio,
+    curp,
+    noImss,
+    noCartaDePolicia,
+  }: Candidato) => {
+    try {
+      const { data } = await entriesApi.put<Candidato>(`/candidatos/${_id}`, {
+        nombre,
+        puesto,
+        descripcionDelPuesto,
+        fechaDeNacimiento,
+        domicilio,
+        curp,
+        noImss,
+        noCartaDePolicia,
+      });
+      dispatch({ type: "[Candidato] Actualizar-Candidato", payload: data });
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const refreshCandidatos = async () => {
@@ -62,6 +109,8 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
 
         //Methods
         agregarNuevoCandidato,
+        actualizarCandidato,
+        eliminarCandidato,
       }}
     >
       {children}

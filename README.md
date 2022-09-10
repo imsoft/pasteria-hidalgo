@@ -32,3 +32,40 @@ Llamara:
 ```
 http://localhost:3000/api/seed
 ```
+
+# Pruebas de backend en Postman para __Candidatos__
+
+GET
+
+```
+http://localhost:3000/api/candidatos
+```
+
+POST
+
+```
+http://localhost:3000/api/candidatos
+```
+Un ejemplo puede ser:  
+{  
+    "nombre": "Brandon",  
+    "puesto": "Chef",  
+    "descripcionDelPuesto": "Chef",  
+    "fechaDeNacimiento": "15/03/1997",  
+    "domicilio": "Cipriano Campos #752",  
+    "curp": "GARB970315HJCRMR01",  
+    "noImss": "123456789",  
+    "noCartaDePolicia": "987654321"  
+}  
+
+PUT
+
+```
+http://localhost:3000/api/candidatos/<id>
+```
+
+DELETE
+
+```
+http://localhost:3000/api/candidatos/<id>
+```

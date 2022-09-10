@@ -193,7 +193,7 @@ export default function ManejoAlmacen() {
                                   width={10}
                                   height={10}
                                 /> */}
-                                <img
+                                <Image
                                   className="h-10 w-10 rounded-full"
                                   src={imagen}
                                   alt={imagen}

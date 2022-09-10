@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { SidebarLayoutGerenciaOperativa } from "../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import LogoPasteria from "../../public/images/company/LCP_LIGHT_VERTICAL.jpg";
+import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 import {
   LibraryIcon,
