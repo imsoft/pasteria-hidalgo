@@ -2,13 +2,15 @@ import { ChangeEvent, useContext, useState } from "react";
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import { CandidatosContext } from "../../../context/recursos-humanos/candidatos";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 export default function AgregarCandidato() {
   const { agregarNuevoCandidato } = useContext(CandidatosContext);
 
   const [inputNombre, setInputNombre] = useState("");
   const [inputPuesto, setInputPuesto] = useState("");
-  const [inputDescripcionDelPuesto, setInputDescripcionDelPuesto] =
-    useState("");
+  const [inputDescripcionDelPuesto, setInputDescripcionDelPuesto] = useState("");
   const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState("");
   const [inputDomicilio, setInputDomicilio] = useState("");
   const [inputCurp, setInputCurp] = useState("");
@@ -16,6 +18,8 @@ export default function AgregarCandidato() {
   const [inputNoCartaDePolicia, setInputNoCartaDePolicia] = useState("");
 
   const [touched, setTouched] = useState(false);
+
+  const MySwal = withReactContent(Swal);
 
   // const onTextFieldChanged = (event: ChangeEvent<HTMLInputElement>) => {
   //   console.log( event.target.value );
@@ -82,8 +86,17 @@ export default function AgregarCandidato() {
       inputDomicilio,
       inputCurp,
       inputNoImss,
-      inputNoCartaDePolicia
+      inputNoCartaDePolicia,
+      true
     );
+
+    MySwal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Candidato Agregado",
+      showConfirmButton: false,
+      timer: 5000,
+    });
 
     setTouched(false);
     setInputNombre("");
@@ -110,7 +123,7 @@ export default function AgregarCandidato() {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNombre"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre
@@ -128,7 +141,7 @@ export default function AgregarCandidato() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtDPuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Puesto
@@ -168,7 +181,7 @@ export default function AgregarCandidato() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtFechaDeNacimiento"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Fecha de nacimiento
@@ -186,7 +199,7 @@ export default function AgregarCandidato() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtDomicilio"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Domicilio
@@ -204,7 +217,7 @@ export default function AgregarCandidato() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtCurp"
                   className="block text-sm font-medium text-gray-700"
                 >
                   C.U.R.P.
@@ -222,7 +235,7 @@ export default function AgregarCandidato() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNoImss"
                   className="block text-sm font-medium text-gray-700"
                 >
                   No. IMSS
@@ -240,7 +253,7 @@ export default function AgregarCandidato() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNoCartaPolicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   No. Carta de policía
@@ -259,7 +272,7 @@ export default function AgregarCandidato() {
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="submit"
+              type="button"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
               onClick={onSave}
             >

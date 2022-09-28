@@ -13,15 +13,19 @@ interface ContextProps {
     domicilio: string,
     curp: string,
     noImss: string,
-    noCartaDePolicia: string
+    noCartaDePolicia: string,
+    showNotificacion?: boolean
   ) => void;
 
-  actualizarCandidato: (candidato: Candidato) => void;
-  eliminarCandidato: (candidato: Candidato) => void;
+  actualizarCandidato: (
+    candidato: Candidato,
+    showNotificacion?: boolean
+  ) => void;
 
-  // No hacer caso por el momento
-  // actualizarCandidato: (candidato: Candidato, showSnackbar?: boolean) => void;
-  // eliminarCandidato: (candidato: Candidato, showSnackbar?: boolean) => void;
+  eliminarCandidato: (
+    candidato: Candidato,
+    showNotificacion?: boolean
+  ) => void;
 }
 
 export const CandidatosContext = createContext({} as ContextProps);

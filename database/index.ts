@@ -1,3 +1,11 @@
 export * as db from "./db";
 export * as dbCandidato from './dbCandidato';
+export * as dbCheckInPersonal from './dbCheckInPersonal';
+export * as dbClienteFrecuente from './dbClienteFrecuente';
+export * as dbManejoPersonal from './dbManejoPersonal';
+export * as dbPersonalActivo from './dbPersonalActivo';
+export * as dbProductoYaComprado from './dbProductoYaComprado';
+export * as dbProveedor from './dbProveedor';
+export * as dbReporteDeCompra from './dbReporteDeCompra';
+export * as dbSucursalYFranquicia from './dbSucursalYFranquicia';
 export * from './seed-data';

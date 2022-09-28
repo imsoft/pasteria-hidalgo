@@ -1,7 +1,8 @@
 export interface PersonalActivo {
+  _id: string;
   nombre: string;
   puesto: string;
-  fechaDeContratacion: Date;
+  fechaDeContratacion: string;
   noContrato: string;
   noExpediente: string;
 }

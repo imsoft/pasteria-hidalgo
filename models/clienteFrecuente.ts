@@ -1,6 +1,8 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { ClienteFrecuente } from "../interfaces";
 
+export interface IClienteFrecuente extends ClienteFrecuente {}
+
 const clienteFrecuenteSchema = new Schema({
   nombre: { type: String, required: true },
   correoElectronico: { type: String, required: true },

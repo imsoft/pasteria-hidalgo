@@ -1,9 +1,9 @@
 export { default as Candidato, type ICandidato } from './candidato';
-export { default as CheckInDePersonal } from './checkInPersonal';
-export { default as ClienteFrecuente } from './clienteFrecuente';
-export { default as ManejoPersonal } from './manejoPersonal';
-export { default as PersonalActivo } from './personalActivo';
-export { default as ProductosYaComprados } from './productosYaComprados';
-export { default as Proveedores } from './proveedores';
-export { default as ReportesdeCompra } from './reportesDeCompra';
-export { default as SuvursalesYFranquicias } from './sucursalesYFranquicias';
+export { default as CheckInDePersonal, type ICheckInPersonal } from './checkInPersonal';
+export { default as ClienteFrecuente, type IClienteFrecuente } from './clienteFrecuente';
+export { default as ManejoPersonal, type IManejoPersonal } from './manejoPersonal';
+export { default as PersonalActivo, type IPersonalActivo } from './personalActivo';
+export { default as ProductoYaComprado, type IProductoYaComprado } from './productoYaComprado';
+export { default as Proveedor, type IProveedor } from './proveedor';
+export { default as ReporteDeCompra, type IReporteDeCompra } from './reporteDeCompra';
+export { default as SucursalYFranquicia, type ISucursalYFranquicia } from './sucursalYFranquicia';

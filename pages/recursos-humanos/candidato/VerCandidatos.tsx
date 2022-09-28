@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import { CandidatosContext } from "../../../context/recursos-humanos/candidatos/CandidatosContext";
-import ListaCandidatos from "../../../components/layouts/recursos-humanos/ListaCandidatos";
+import ListaCandidatos from "../../../components/ui/recursos-humanos/ListaCandidatos";
 import Link from "next/link";
 
 const VerCandidatos = () => {
@@ -77,18 +77,6 @@ const VerCandidatos = () => {
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
                         No. Carta De Policia
-                      </th>
-                      <th
-                        scope="col"
-                        className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                      >
-                        <span className="sr-only">Editar</span>
-                      </th>
-                      <th
-                        scope="col"
-                        className="relative py-3.5 pl-3 pr-4 sm:pr-6"
-                      >
-                        <span className="sr-only">Eliminar</span>
                       </th>
                     </tr>
                   </thead>

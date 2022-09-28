@@ -28,21 +28,33 @@ const navigation = [
     current: false,
   },
   {
-    name: "Ver Candidatos",
+    name: "Ver candidatos",
     href: "/recursos-humanos/candidato/VerCandidatos",
     icon: EyeIcon,
     current: false,
   },
   {
     name: "Agregar personal activo",
-    href: "/recursos-humanos/agregar-personal-activo",
+    href: "/recursos-humanos/personalActivo/agregar-personal-activo",
     icon: PlusCircleIcon,
     current: false,
   },
   {
-    name: "Check-In de Personal",
-    href: "/recursos-humanos/check-in-de-personal",
+    name: "Ver personal activo",
+    href: "/recursos-humanos/personalActivo/VerPersonalActivo",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Check-in de personal",
+    href: "/recursos-humanos/checkInPersonal/check-in-de-personal",
     icon: ClockIcon,
+    current: false,
+  },
+  {
+    name: "Ver check-in de personal",
+    href: "/recursos-humanos/checkInPersonal/VerCheckInDePersonal",
+    icon: EyeIcon,
     current: false,
   },
 ];
@@ -62,14 +74,6 @@ export const SidebarLayoutRecursosHumanos: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -136,7 +140,7 @@ export const SidebarLayoutRecursosHumanos: React.FC<Props> = ({ children }) => {
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <Link href={item.href} key={ item.name }>
+                      <Link href={item.href} key={item.name}>
                         <a
                           key={item.name}
                           className={classNames(

@@ -4,6 +4,8 @@ import { entriesApi } from "../../../apis";
 import { Candidato } from "../../../interfaces";
 import { CandidatosContext, candidatosReducer } from ".";
 
+import Swal from "sweetalert2";
+
 export interface CandidatosState {
   candidatos: Candidato[];
 }
@@ -22,7 +24,10 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
     Candidatos_INITIAL_STATE
   );
 
-  const eliminarCandidato = async (candidato: Candidato) => {
+  const eliminarCandidato = async (
+    candidato: Candidato,
+    showNotificacion = false
+  ) => {
     try {
       const { data } = await entriesApi.delete<Candidato>(
         `/candidatos/${candidato._id}`
@@ -35,6 +40,16 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
     } catch (error) {
       console.log({ error });
     }
+
+    if (showNotificacion) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Candidato Eliminado",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
   };
 
   const agregarNuevoCandidato = async (
@@ -45,7 +60,8 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
     domicilio: string,
     curp: string,
     noImss: string,
-    noCartaDePolicia: string
+    noCartaDePolicia: string,
+    showNotificacion = false
   ) => {
     try {
       const { data } = await entriesApi.post<Candidato>("/candidatos", {
@@ -59,22 +75,35 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
         noCartaDePolicia,
       });
       dispatch({ type: "[Candidato] Agregar-Candidato", payload: data });
+
+      if (showNotificacion) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Candidato Agregado",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
     } catch (error) {
       console.log({ error });
     }
   };
 
-  const actualizarCandidato = async ({
-    _id,
-    nombre,
-    puesto,
-    descripcionDelPuesto,
-    fechaDeNacimiento,
-    domicilio,
-    curp,
-    noImss,
-    noCartaDePolicia,
-  }: Candidato) => {
+  const actualizarCandidato = async (
+    {
+      _id,
+      nombre,
+      puesto,
+      descripcionDelPuesto,
+      fechaDeNacimiento,
+      domicilio,
+      curp,
+      noImss,
+      noCartaDePolicia,
+    }: Candidato,
+    showNotificacion = false
+  ) => {
     try {
       const { data } = await entriesApi.put<Candidato>(`/candidatos/${_id}`, {
         nombre,
@@ -87,6 +116,17 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
         noCartaDePolicia,
       });
       dispatch({ type: "[Candidato] Actualizar-Candidato", payload: data });
+
+      if (showNotificacion) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Candidato Actualizado",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+
     } catch (error) {
       console.log({ error });
     }

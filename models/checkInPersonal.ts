@@ -1,11 +1,13 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { CheckInPersonal } from "../interfaces";
 
+export interface ICheckInPersonal extends CheckInPersonal {}
+
 const checkInPersonalSchema = new Schema({
   idFranquicia: { type: String, required: true },
   idSucursal: { type: String, required: true },
   nombre: { type: String, required: true },
-  fecha: { type: Date, required: true },
+  fecha: { type: String, required: true },
   idPersonal: { type: String, required: true },
   horaDeIngreso: { type: String, required: true },
   horaDeSalida: { type: String, required: true },

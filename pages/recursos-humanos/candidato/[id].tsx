@@ -7,6 +7,9 @@ import { CandidatosContext } from "../../../context/recursos-humanos/candidatos/
 import { dbCandidato } from "../../../database";
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 const puestosValidos: PuestoCandidato[] = ["Administrador", "Chef", "Operador"];
 
 interface Props {
@@ -16,17 +19,26 @@ interface Props {
 export const CandidatoPage: FC<Props> = ({ candidato }) => {
   const router = useRouter();
 
-  const { actualizarCandidato, eliminarCandidato } = useContext(CandidatosContext);
+  const { actualizarCandidato, eliminarCandidato } =
+    useContext(CandidatosContext);
 
   const [inputNombre, setInputNombre] = useState(candidato.nombre);
-  const [inputDescripcionDelPuesto, setInputDescripcionDelPuesto] = useState(candidato.descripcionDelPuesto);
-  const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState(candidato.fechaDeNacimiento);
+  const [inputDescripcionDelPuesto, setInputDescripcionDelPuesto] = useState(
+    candidato.descripcionDelPuesto
+  );
+  const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState(
+    candidato.fechaDeNacimiento
+  );
   const [inputDomicilio, setInputDomicilio] = useState(candidato.domicilio);
   const [inputCurp, setInputCurp] = useState(candidato.curp);
   const [inputNoImss, setInputNoImss] = useState(candidato.noImss);
-  const [inputNoCartaDePolicia, setInputNoCartaDePolicia] = useState(candidato.noCartaDePolicia);
+  const [inputNoCartaDePolicia, setInputNoCartaDePolicia] = useState(
+    candidato.noCartaDePolicia
+  );
 
   const [puesto, setPuesto] = useState<PuestoCandidato>(candidato.puesto);
+
+  const MySwal = withReactContent(Swal);
 
   // const [touched, setTouched] = useState(false);
   // const esNombreValido = useMemo( () => inputNombre.length <= 0 && touched, [inputNombre, touched] );
@@ -41,31 +53,39 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
   const onInputValueChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
   };
-  
-  const onInputValueChangedDescripcionDelPuesto = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onInputValueChangedDescripcionDelPuesto = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputDescripcionDelPuesto(event.target.value);
   };
-  
-  const onInputValueChangedFechaDeNacimiento = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onInputValueChangedFechaDeNacimiento = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputFechaDeNacimiento(event.target.value);
   };
-  
-  const onInputValueChangedDomicilio = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onInputValueChangedDomicilio = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputDomicilio(event.target.value);
   };
-  
+
   const onInputValueChangedCurp = (event: ChangeEvent<HTMLInputElement>) => {
     setInputCurp(event.target.value);
   };
-  
+
   const onInputValueChangedNoImss = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNoImss(event.target.value);
   };
-  
-  const onInputValueChangedNoCartaDePolicia = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onInputValueChangedNoCartaDePolicia = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputNoCartaDePolicia(event.target.value);
   };
-  
+
   const onStatusChanged = (event: ChangeEvent<HTMLSelectElement>) => {
     setPuesto(event.target.value as PuestoCandidato);
   };
@@ -83,25 +103,51 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     )
       return;
 
-    const actualizadoCandidato: Candidato = {
-      ...candidato,
-      nombre: inputNombre,
-      puesto,
-      descripcionDelPuesto: inputDescripcionDelPuesto,
-      fechaDeNacimiento: inputFechaDeNacimiento,
-      domicilio: inputDomicilio,
-      curp: inputCurp,
-      noImss: inputNoImss,
-      noCartaDePolicia: inputNoCartaDePolicia,
-    };
+    MySwal.fire({
+      title: "¿Quieres actualizar la información a este candidato?",
+      text: "Verifica los datos antes de la operación",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FFCC33",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Actualizar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const actualizadoCandidato: Candidato = {
+          ...candidato,
+          nombre: inputNombre,
+          puesto,
+          descripcionDelPuesto: inputDescripcionDelPuesto,
+          fechaDeNacimiento: inputFechaDeNacimiento,
+          domicilio: inputDomicilio,
+          curp: inputCurp,
+          noImss: inputNoImss,
+          noCartaDePolicia: inputNoCartaDePolicia,
+        };
 
-    actualizarCandidato(actualizadoCandidato);
-    router.push("/recursos-humanos/candidato/VerCandidatos");
+        actualizarCandidato(actualizadoCandidato, true);
+        router.push("/recursos-humanos/candidato/VerCandidatos");
+      }
+    });
   };
 
   const onDelete = () => {
-    eliminarCandidato(candidato);
-    router.push("/recursos-humanos/candidato/VerCandidatos");
+    MySwal.fire({
+      title: "¿Quieres eliminar a este candidato?",
+      text: "Verifica los datos antes de la operación",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#002D46",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Borrar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        eliminarCandidato(candidato, true);
+        router.push("/recursos-humanos/candidato/VerCandidatos");
+      }
+    });
   };
 
   return (
@@ -276,14 +322,14 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="submit"
+              type="button"
               className="mx-4 bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
               onClick={onSave}
             >
               Actualizar
             </button>
             <button
-              type="submit"
+              type="button"
               className="bg-red-500 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-red-600 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-800"
               onClick={onDelete}
             >
