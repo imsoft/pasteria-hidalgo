@@ -1,3 +1,4 @@
+export * from './acondicionamientoDeSucursal';
 export * from './candidato';
 export * from './checkInPersonal';
 export * from './clienteFrecuente';
@@ -7,3 +8,4 @@ export * from './productoYaComprado';
 export * from './proveedor';
 export * from './reporteDeCompra';
 export * from './sucursalYFranquicia';
+export * from './asignarPrecio';

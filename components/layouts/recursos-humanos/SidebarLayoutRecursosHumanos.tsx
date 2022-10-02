@@ -35,7 +35,7 @@ const navigation = [
   },
   {
     name: "Agregar personal activo",
-    href: "/recursos-humanos/personalActivo/agregar-personal-activo",
+    href: "/recursos-humanos/personalActivo/AgregarPersonalActivo",
     icon: PlusCircleIcon,
     current: false,
   },
@@ -47,13 +47,13 @@ const navigation = [
   },
   {
     name: "Check-in de personal",
-    href: "/recursos-humanos/checkInPersonal/check-in-de-personal",
+    href: "/recursos-humanos/checkInPersonal/CheckInDePersonal",
     icon: ClockIcon,
     current: false,
   },
   {
     name: "Ver check-in de personal",
-    href: "/recursos-humanos/checkInPersonal/VerCheckInDePersonal",
+    href: "/recursos-humanos/checkInPersonal/VerCheckInPersonal",
     icon: EyeIcon,
     current: false,
   },

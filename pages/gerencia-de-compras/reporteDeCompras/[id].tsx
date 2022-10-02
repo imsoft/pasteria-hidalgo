@@ -23,7 +23,6 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
     const [inputCodigoDeReporte, setInputCodigoDeReporte] = useState(reporteDeCompra.codigoDeReporte);
     const [inputFechaDeCompra, setInputFechaDeCompra] = useState(reporteDeCompra.fechaDeCompra);
     const [inputCredito, setInputCredito] = useState(reporteDeCompra.credito);
-    const [inputFechaDePago, setInputFechaDePago] = useState(reporteDeCompra.fechaDePago);
     const [inputIdMateriaPrima, setInputIdMateriaPrima] = useState(reporteDeCompra.idMateriaPrima);
     const [inputMateriaPrima, setInputMateriaPrima] = useState(reporteDeCompra.materiaPrima);
     const [inputCantidad, setInputCantidad] = useState(reporteDeCompra.cantidad);
@@ -51,12 +50,8 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
     setInputFechaDeCompra(event.target.value);
   };
 
-//   const onInputValueChangedCredito = (event: ChangeEvent<HTMLInputElement>) => {
-//     setInputCredito(event.target.value);
-//   };
-  
-  const onInputValueChangedFechaDePago = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputFechaDePago(event.target.value);
+  const onInputValueChangedCredito = (event: ChangeEvent<HTMLSelectElement>) => {
+    setInputCredito(event.target.value);
   };
   
   const onInputValueChangedIdMateriaPrima = (event: ChangeEvent<HTMLInputElement>) => {
@@ -67,11 +62,11 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
     setInputMateriaPrima(event.target.value);
   };
   
-//   const onInputValueChangedCantidad = (event: ChangeEvent<HTMLInputElement>) => {
-//     setInputCantidad(event.target.value);
-//   };
+  const onInputValueChangedCantidad = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputCantidad(event.target.value);
+  };
   
-  const onInputValueChangedUnidades = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedUnidades = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputUnidades(event.target.value);
   };
   
@@ -79,45 +74,52 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
     setInputIdProveedor(event.target.value);
   };
   
-  const onInputValueChangedNombreProveedor = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedNombreProveedor = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputNombreProveedor(event.target.value);
   };
   
-//   const onInputValueChangedPrecioPorUnidad = (event: ChangeEvent<HTMLInputElement>) => {
-//     setInputPrecioPorUnidad(event.target.value);
-//   };
+  const onInputValueChangedPrecioPorUnidad = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputPrecioPorUnidad(event.target.value);
+  };
   
-//   const onInputValueChangedPrecioTotalDelProducto = (event: ChangeEvent<HTMLInputElement>) => {
-//     setInputPrecioTotalDelProducto(event.target.value);
-//   };
+  const onInputValueChangedPrecioTotalDelProducto = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputPrecioTotalDelProducto(event.target.value);
+  };
   
-//   const onInputValueChangedPrecioTotalDelCompra = (event: ChangeEvent<HTMLInputElement>) => {
-//     setInputPrecioTotalDelCompra(event.target.value);
-//   };
+  const onInputValueChangedPrecioTotalDelCompra = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputPrecioTotalDelCompra(event.target.value);
+  };
   
-//   const onInputValueChangedTempetatura = (event: ChangeEvent<HTMLInputElement>) => {
-//     setInputTempetatura(event.target.value);
-//   };
+  const onInputValueChangedTempetatura = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputTempetatura(event.target.value);
+  };
   
   const onInputValueChangedCaducidad = (event: ChangeEvent<HTMLInputElement>) => {
     setInputCaducidad(event.target.value);
   };
   
-//   const onInputValueChangedFactura = (event: ChangeEvent<HTMLInputElement>) => {
-//     setInputFactura(event.target.value);
-//   };
+  const onInputValueChangedFactura = (event: ChangeEvent<HTMLSelectElement>) => {
+    setInputFactura(event.target.value);
+  };
 
   const onSave = () => {
-    if (
-        inputIdReporteDeCompra.trim().length === 0 &&
+    if (inputIdReporteDeCompra.trim().length === 0 &&
         inputCodigoDeReporte.trim().length === 0 &&
         inputFechaDeCompra.trim().length === 0 &&
-        inputFechaDePago.trim().length === 0 &&
+        inputCredito.trim().length === 0 &&
         inputIdMateriaPrima.trim().length === 0 &&
         inputMateriaPrima.trim().length === 0 &&
+        inputCantidad.trim().length === 0 &&
         inputUnidades.trim().length === 0 &&
         inputIdProveedor.trim().length === 0 &&
-        inputNombreProveedor.trim().length === 0
+        inputNombreProveedor.trim().length === 0 &&
+        inputPrecioPorUnidad.trim().length === 0 &&
+        inputPrecioTotalDelProducto.trim().length === 0 &&
+        inputPrecioTotalDelCompra.trim().length === 0 &&
+        inputTempetatura.trim().length === 0 &&
+        inputCaducidad.trim().length === 0 &&
+        inputFactura.trim().length === 0
+
     )
       return;
 
@@ -138,7 +140,6 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
           codigoDeReporte: inputCodigoDeReporte,
           fechaDeCompra: inputFechaDeCompra,
           credito: inputCredito,
-          fechaDePago: inputFechaDePago,
           idMateriaPrima: inputIdMateriaPrima,
           materiaPrima: inputMateriaPrima,
           cantidad: inputCantidad,
@@ -184,7 +185,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Agregar Reporte de compra
+                Actualizar / Eliminar Reporte de compra
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
@@ -236,7 +237,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   Fecha De Compra
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="TxtFechaDeCompra"
                   id="TxtFechaDeCompra"
                   autoComplete="off"
@@ -254,35 +255,19 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                 >
                   Crédito
                 </label>
-                <input
-                  type="text"
-                  name="TxtCredito"
+                <select
                   id="TxtCredito"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                //   value={inputCredito}
-                //   onChange={onInputValueChangedCredito}
+                  name="TxtCredito"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  value={inputCredito}
+                  onChange={onInputValueChangedCredito}
                   // onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtFechaDePago"
-                  className="block text-sm font-medium text-gray-700"
+                  defaultValue="Selecciona un producto..."
                 >
-                  Fecha De Pago
-                </label>
-                <input
-                  type="date"
-                  name="TxtFechaDePago"
-                  id="TxtFechaDePago"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputFechaDePago}
-                  onChange={onInputValueChangedFechaDePago}
-                  // onBlur={() => setTouched(true)}
-                />
+                  <option>Selecciona una opción...</option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -337,7 +322,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputCantidad}
-                  // onChange={onInputValueChangedCantidad}
+                  onChange={onInputValueChangedCantidad}
                   // onBlur={() => setTouched(true)}
                 />
               </div>
@@ -349,16 +334,22 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                 >
                   Unidades
                 </label>
-                <input
-                  type="text"
-                  name="TxtUnidades"
+                <select
                   id="TxtUnidades"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  name="TxtUnidades"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
                   value={inputUnidades}
                   onChange={onInputValueChangedUnidades}
                   // onBlur={() => setTouched(true)}
-                />
+                >
+                  <option>Selecciona las unidades...</option>
+                  <option>gramos</option>
+                  <option>kilogramos</option>
+                  <option>mililitros</option>
+                  <option>litros</option>
+                  <option>unidad</option>
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -387,92 +378,150 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                 >
                   Nombre Proveedor
                 </label>
-                <input
-                  type="text"
-                  name="TxtNombreProveedor"
+                <select
                   id="TxtNombreProveedor"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  name="TxtNombreProveedor"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
                   value={inputNombreProveedor}
                   onChange={onInputValueChangedNombreProveedor}
                   // onBlur={() => setTouched(true)}
-                />
+                >
+                  <option>Selecciona un proveedor...</option>
+                  <option>Juan</option>
+                  <option>Pedro</option>
+                  <option>Luis</option>
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPrecioPorUnidad"
+                  htmlFor="TxtPrecioCompra"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Precio Por Unidad
+                  Precio por unidad de producto
                 </label>
-                <input
-                  type="text"
-                  name="TxtPrecioPorUnidad"
-                  id="TxtPrecioPorUnidad"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputPrecioPorUnidad}
-                  // onChange={onInputValueChangedPrecioPorUnidad}
-                  // onBlur={() => setTouched(true)}
-                />
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span className="text-gray-500 sm:text-sm">$</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputPrecioPorUnidad}
+                    onChange={onInputValueChangedPrecioPorUnidad}
+                    // onBlur={() => setTouched(true)}
+                    placeholder="0.00"
+                    aria-describedby="price-currency"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      MXN
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPrecioTotalDelProducto"
+                  htmlFor="TxtPrecioCompra"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Precio Total Del Producto
+                  Precio total del producto
                 </label>
-                <input
-                  type="text"
-                  name="TxtPrecioTotalDelProducto"
-                  id="TxtPrecioTotalDelProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputPrecioTotalDelProducto}
-                  // onChange={onInputValueChangedPrecioTotalDelProducto}
-                  // onBlur={() => setTouched(true)}
-                />
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span className="text-gray-500 sm:text-sm">$</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputPrecioTotalDelProducto}
+                    onChange={onInputValueChangedPrecioTotalDelProducto}
+                    // onBlur={() => setTouched(true)}
+                    placeholder="0.00"
+                    aria-describedby="price-currency"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      MXN
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPrecioTotalDelCompra"
+                  htmlFor="TxtPrecioCompra"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Precio Total Del Compra
+                  Precio total de la compra
                 </label>
-                <input
-                  type="text"
-                  name="TxtPrecioTotalDelCompra"
-                  id="TxtPrecioTotalDelCompra"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputPrecioTotalDelCompra}
-                  // onChange={onInputValueChangedPrecioTotalDelCompra}
-                  // onBlur={() => setTouched(true)}
-                />
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span className="text-gray-500 sm:text-sm">$</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputPrecioTotalDelCompra}
+                    onChange={onInputValueChangedPrecioTotalDelCompra}
+                    // onBlur={() => setTouched(true)}
+                    placeholder="0.00"
+                    aria-describedby="price-currency"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      MXN
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtTempetatura"
+                  htmlFor="TxtPrecioCompra"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Tempetatura
+                  Temperatura
                 </label>
-                <input
-                  type="text"
-                  name="TxtTempetatura"
-                  id="TxtTempetatura"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputTempetatura}
-                  // onChange={onInputValueChangedTempetatura}
-                  // onBlur={() => setTouched(true)}
-                />
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"></div>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputTempetatura}
+                    onChange={onInputValueChangedTempetatura}
+                    // onBlur={() => setTouched(true)}
+                    placeholder=""
+                    aria-describedby="price-currency"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      °C
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -483,7 +532,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   Caducidad
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="TxtCaducidad"
                   id="TxtCaducidad"
                   autoComplete="off"
@@ -501,16 +550,19 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                 >
                   Factura
                 </label>
-                <input
-                  type="text"
-                  name="TxtFactura"
+                <select
                   id="TxtFactura"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  // value={inputFactura}
-                  // onChange={onInputValueChangedFactura}
+                  name="TxtFactura"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  value={inputFactura}
+                  onChange={onInputValueChangedFactura}
                   // onBlur={() => setTouched(true)}
-                />
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option>Selecciona una opción...</option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
               </div>
 
             </div>

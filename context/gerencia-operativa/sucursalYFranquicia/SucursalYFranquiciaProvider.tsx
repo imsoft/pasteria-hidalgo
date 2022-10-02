@@ -54,7 +54,7 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
 
   const agregarSucursalYFranquicia = async (
     direccion: string,
-    distancia: number,
+    distancia: string,
     showNotificacion = false
   ) => {
     try {

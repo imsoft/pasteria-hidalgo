@@ -1,21 +1,3 @@
-// idReporteDeCompra: string,
-// codigoDeReporte: string,
-// fechaDeCompra: string,
-// credito: boolean,
-// fechaDePago: string,
-// idMateriaPrima: string,
-// materiaPrima: string[],
-// cantidad: number,
-// unidades: string,
-// idProveedor: string,
-// nombreProveedor: string,
-// precioPorUnidad: number,
-// precioTotalDelProducto: number,
-// precioTotalDelCompra: number,
-// tempetatura: number,
-// caducidad: string,
-// factura: boolean,
-
 import { ReportesDeComprasState } from "./ReporteDeComprasProvider";
 import { ReporteDeCompra } from '../../../interfaces/reporteDeCompra';
 
@@ -45,7 +27,6 @@ export const reportesDeComprasReducer = (
             reporteDeCompra.codigoDeReporte = action.payload.codigoDeReporte;
             reporteDeCompra.fechaDeCompra = action.payload.fechaDeCompra;
             reporteDeCompra.credito = action.payload.credito;
-            reporteDeCompra.fechaDePago = action.payload.fechaDePago;
             reporteDeCompra.idMateriaPrima = action.payload.idMateriaPrima;
             reporteDeCompra.materiaPrima = action.payload.materiaPrima;
             reporteDeCompra.cantidad = action.payload.cantidad;

@@ -2,10 +2,10 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import { CheckInPersonal } from "../../../interfaces";
-import { CheckInPersonalContext } from '../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext';
+import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext";
 import { dbCheckInPersonal } from "../../../database";
+import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -17,10 +17,11 @@ interface Props {
 export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
   const router = useRouter();
 
-  const { actualizarCheckInPersonal, eliminarCheckInPersonal } =
-    useContext(CheckInPersonalContext);
+  const { actualizarCheckInPersonal, eliminarCheckInPersonal } = useContext(
+    CheckInPersonalContext
+  );
 
-  const [inputIdFranquicia, setInputIdFranquicia] = useState(checkInDePersonal.idFranquicia);
+  const [inputIdFranquicia, setInputIdFranquicia] = useState(checkInDePersonal.idSucursal);
   const [inputIdSucursal, setInputIdSucursal] = useState(checkInDePersonal.idSucursal);
   const [inputNombre, setInputNombre] = useState(checkInDePersonal.nombre);
   const [inputFecha, setInputFecha] = useState(checkInDePersonal.fecha);
@@ -30,60 +31,53 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
 
   const MySwal = withReactContent(Swal);
 
-  // const [touched, setTouched] = useState(false);
-  // const esIdFranquiciaValido = useMemo( () => inputIdFranquicia.length <= 0 && touched, [inputIdFranquicia, touched] );
-  // const esIdSucursalValido = useMemo( () => inputIdSucursal.length <= 0 && touched, [inputIdSucursal, touched] );
-  // const esNombreValido = useMemo( () => inputNombre.length <= 0 && touched, [inputNombre, touched] );
-  // const esFechaValido = useMemo( () => inputFecha.length <= 0 && touched, [inputFecha, touched] );
-  // const esIdPersonalValido = useMemo( () => inputIdPersonal.length <= 0 && touched, [inputIdPersonal, touched] );
-  // const esHoraDeIngresoValido = useMemo( () => inputHoraDeIngreso.length <= 0 && touched, [inputHoraDeIngreso, touched] );
-  // const esHoraDeSalidaValido = useMemo( () => inputHoraDeSalida.length <= 0 && touched, [inputHoraDeSalida, touched] );
-
-  const onInputValueChangedIdFranquicia = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputNombre(event.target.value);
-  };
-
-  const onInputValueChangedIdSucursal = (
+  const onInputValueChangedIdFranquicia = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setInputIdFranquicia(event.target.value);
   };
 
-  const onInputValueChangedNombre = (
+  const onInputValueChangedIdSucursal = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setInputIdSucursal(event.target.value);
   };
 
-  const onInputValueChangedFecha = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onInputValueChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
   };
 
-  const onInputValueChangedIdPersonal = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedFecha = (event: ChangeEvent<HTMLInputElement>) => {
     setInputFecha(event.target.value);
   };
 
-  const onInputValueChangedHoraDeIngreso = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedIdPersonal = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputIdPersonal(event.target.value);
   };
 
-  const onInputValueChangedHoraDeSalida = (
+  const onInputValueChangedHoraDeIngreso = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setInputHoraDeIngreso(event.target.value);
   };
 
+  const onInputValueChangedHoraDeSalida = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputHoraDeSalida(event.target.value);
+  };
+
   const onSave = () => {
     if (
-        inputIdFranquicia.trim().length === 0 &&
-        inputIdSucursal.trim().length === 0 &&
-        inputNombre.trim().length === 0 &&
-        inputFecha.trim().length === 0 &&
-        inputIdPersonal.trim().length === 0 &&
-        inputHoraDeIngreso.trim().length === 0 &&
-        inputHoraDeSalida.trim().length === 0
+      inputIdFranquicia.trim().length === 0 &&
+      inputIdSucursal.trim().length === 0 &&
+      inputNombre.trim().length === 0 &&
+      inputFecha.trim().length === 0 &&
+      inputIdPersonal.trim().length === 0 &&
+      inputHoraDeIngreso.trim().length === 0 &&
+      inputHoraDeSalida.trim().length === 0
     )
       return;
 
@@ -163,7 +157,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
-            
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtIdSucursal"
@@ -182,7 +176,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
-            
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"
@@ -201,7 +195,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
-            
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtFecha"
@@ -220,7 +214,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
-            
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtIdPersonal"
@@ -239,7 +233,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
-            
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtHoraDeIngreso"
@@ -258,7 +252,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
-              
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtHoraDeSalida"
@@ -306,9 +300,9 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params as { id: string };
 
-  const checkInPersonal = await dbCheckInPersonal.getCheckInPersonalById(id);
+  const checkInDePersonal = await dbCheckInPersonal.getCheckInPersonalById(id);
 
-  if (!checkInPersonal) {
+  if (!checkInDePersonal) {
     return {
       redirect: {
         destination: "/",
@@ -319,7 +313,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
-        checkInPersonal,
+      checkInDePersonal,
     },
   };
 };

@@ -14,6 +14,7 @@ import {
   MenuAlt2Icon,
   XIcon,
   CurrencyDollarIcon,
+  EyeIcon,
 } from "@heroicons/react/outline";
 
 type Props = {
@@ -23,26 +24,50 @@ type Props = {
 const navigation = [
   {
     name: "Acondicionamiento de sucursales",
-    href: "/gerencia-de-compras/acondicionamiento-de-sucursales",
+    href: "/gerencia-de-compras/acondicionamientoDeSucursales/AgregarAcondicionamientoDeSucursal",
     icon: CollectionIcon,
     current: false,
   },
   {
+    name: " Ver Acondicionamiento de sucursales",
+    href: "/gerencia-de-compras/acondicionamientoDeSucursales/VerAcondicinamientoDeSucursal",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Manejo de proveedores",
-    href: "/gerencia-de-compras/manejo-de-proveedores",
+    href: "/gerencia-de-compras/proveedores/AgregarProveedor",
     icon: UserGroupIcon,
     current: false,
   },
   {
+    name: "Ver Manejo de proveedores",
+    href: "/gerencia-de-compras/proveedores/VerProveedores",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Reporte de compras",
-    href: "/gerencia-de-compras/reporte-de-compras",
+    href: "/gerencia-de-compras/reporteDeCompras/AgregarReporteDeCompras",
     icon: DocumentTextIcon,
     current: false,
   },
   {
+    name: "Ver Reporte de compras",
+    href: "/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Precio Máximo de los productos",
-    href: "/gerencia-de-compras/precio-maximo",
+    href: "/gerencia-de-compras/asignarPrecios/AgregarAsignarPrecio",
     icon: CurrencyDollarIcon,
+    current: false,
+  },
+  {
+    name: "Ver Precio Máximo de los productos",
+    href: "/gerencia-de-compras/asignarPrecios/VerAsignarPrecio",
+    icon: EyeIcon,
     current: false,
   },
 ];
@@ -136,7 +161,7 @@ export const SidebarLayoutGerenciaCompras: React.FC<Props> = ({ children }) => {
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <Link href={item.href} key={ item.name }>
+                      <Link href={item.href} key={item.name}>
                         <a
                           key={item.name}
                           className={classNames(

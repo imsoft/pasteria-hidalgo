@@ -15,7 +15,7 @@ const VerCheckInPersonal = () => {
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">Checks In Personal</h1>
             <p className="mt-2 text-sm text-gray-700">
-              Aquí podras ver los candidatos para la empresa.
+              Aquí podras ver los checks in de la empresa para la empresa.
             </p>
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">

@@ -20,8 +20,11 @@ interface ContextProps {
     candidato: CheckInPersonal,
     showNotificacion?: boolean
   ) => void;
-  
-  eliminarCheckInPersonal: (checksInPersonal: CheckInPersonal, showNotificacion?: boolean) => void;
+
+  eliminarCheckInPersonal: (
+    checksInPersonal: CheckInPersonal,
+    showNotificacion?: boolean
+  ) => void;
 }
 
 export const CheckInPersonalContext = createContext({} as ContextProps);

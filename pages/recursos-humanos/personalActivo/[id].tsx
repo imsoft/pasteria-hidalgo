@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
-import { PersonalActivo } from '../../../interfaces/personalActivo';
-import { PersonalActivoContext } from '../../../context/recursos-humanos/personalActivo/PersonalActivoContext';
+import { PersonalActivo } from "../../../interfaces/personalActivo";
+import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 import { dbPersonalActivo } from "../../../database";
 
 import Swal from "sweetalert2";
@@ -16,10 +16,10 @@ interface Props {
 }
 
 export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
+  
   const router = useRouter();
 
-  const { actualizarPersonalActivo, eliminarPersonalActivo } =
-    useContext(PersonalActivoContext);
+  const { actualizarPersonalActivo, eliminarPersonalActivo } = useContext(PersonalActivoContext);
 
   const [inputNombre, setInputNombre] = useState(personalActivo.nombre);
   const [inputPuesto, setInputDescripcionDelPuesto] = useState(personalActivo.puesto);
@@ -31,31 +31,19 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
 
   const [touched, setTouched] = useState(false);
 
-  // const esNombreValido = useMemo( () => inputNombre.length <= 0 && touched, [inputNombre, touched] );
-  // const esPuestoValido = useMemo( () => inputPuesto.length <= 0 && touched, [inputPuesto, touched] );
-  // const esFechaDeContratacionValido = useMemo( () => inputFechaDeContratacion.length <= 0 && touched, [inputFechaDeContratacion, touched] );
-  // const esNoContratoValido = useMemo( () => inputNoContrato.length <= 0 && touched, [inputNoContrato, touched] );
-  // const esNoExpedienteValido = useMemo( () => inputNoExpediente.length <= 0 && touched, [inputNoExpediente, touched] );
-
   const onInputValueChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
   };
 
-  const onInputValueChangedPuesto = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onInputValueChangedPuesto = (event: ChangeEvent<HTMLInputElement>) => {
     setInputDescripcionDelPuesto(event.target.value);
   };
 
-  const onInputValueChangedFechaDeContratacion = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onInputValueChangedFechaDeContratacion = (event: ChangeEvent<HTMLInputElement>) => {
     setInputFechaDeNacimiento(event.target.value);
   };
 
-  const onInputValueChangedNoContrato = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onInputValueChangedNoContrato = (event: ChangeEvent<HTMLInputElement>) => {
     setInputDomicilio(event.target.value);
   };
 
@@ -181,8 +169,8 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                   id="TxtFechaDeContratacion"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputPuesto}
-                  onChange={onInputValueChangedPuesto}
+                  value={inputFechaDeContratacion}
+                  onChange={onInputValueChangedFechaDeContratacion}
                   // onBlur={() => setTouched(true)}
                 />
               </div>
@@ -224,7 +212,6 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
-
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

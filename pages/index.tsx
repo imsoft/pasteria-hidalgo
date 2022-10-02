@@ -16,6 +16,11 @@ export default function Home() {
             alt="Pasteleria La Hidalguense"
           />
         </div>
+        {/* <ul>
+          <li>Recursos Humanos</li>
+          <li>Gerencia Operativa</li>
+          <li>Compras</li>
+        </ul> */}
       </SidebarLayout>
     </>
   );

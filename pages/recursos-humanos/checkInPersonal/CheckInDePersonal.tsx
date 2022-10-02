@@ -4,8 +4,11 @@ import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkI
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
 
 export default function CheckInDePersonal() {
+
+  const router = useRouter();
 
   const { agregarCheckInPersonal } =
     useContext(CheckInPersonalContext);
@@ -22,49 +25,42 @@ export default function CheckInDePersonal() {
 
   const MySwal = withReactContent(Swal);
 
-  // const [touched, setTouched] = useState(false);
-  // const esIdFranquiciaValido = useMemo( () => inputIdFranquicia.length <= 0 && touched, [inputIdFranquicia, touched] );
-  // const esIdSucursalValido = useMemo( () => inputIdSucursal.length <= 0 && touched, [inputIdSucursal, touched] );
-  // const esNombreValido = useMemo( () => inputNombre.length <= 0 && touched, [inputNombre, touched] );
-  // const esFechaValido = useMemo( () => inputFecha.length <= 0 && touched, [inputFecha, touched] );
-  // const esIdPersonalValido = useMemo( () => inputIdPersonal.length <= 0 && touched, [inputIdPersonal, touched] );
-  // const esHoraDeIngresoValido = useMemo( () => inputHoraDeIngreso.length <= 0 && touched, [inputHoraDeIngreso, touched] );
-  // const esHoraDeSalidaValido = useMemo( () => inputHoraDeSalida.length <= 0 && touched, [inputHoraDeSalida, touched] );
-
   const onTextFieldChangedIdFranquicia = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputNombre(event.target.value);
+    setInputIdFranquicia(event.target.value);
   };
 
   const onTextFieldChangedIdSucursal = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputIdFranquicia(event.target.value);
+    setInputIdSucursal(event.target.value);
   };
 
   const onTextFieldChangedNombre = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputIdSucursal(event.target.value);
-  };
-
-  const onTextFieldChangedFecha = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
     setInputNombre(event.target.value);
   };
 
-  const onTextFieldChangedIdPersonal = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedFecha = (event: ChangeEvent<HTMLInputElement>) => {
     setInputFecha(event.target.value);
   };
 
-  const onTextFieldChangedHoraDeIngreso = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedIdPersonal = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputIdPersonal(event.target.value);
+  };
+  
+  const onTextFieldChangedHoraDeIngreso = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputHoraDeIngreso(event.target.value);
   };
 
   const onTextFieldChangedHoraDeSalida = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputHoraDeIngreso(event.target.value);
+    setInputHoraDeSalida(event.target.value);
   };
 
   const onSave = () => {
@@ -97,6 +93,8 @@ export default function CheckInDePersonal() {
       showConfirmButton: false,
       timer: 5000,
     });
+
+    router.push("/recursos-humanos/checkInPersonal/VerCheckInPersonal");
 
     setInputIdFranquicia("");
     setInputIdSucursal("");
@@ -200,7 +198,7 @@ export default function CheckInDePersonal() {
                   Id Personal
                 </label>
                 <input
-                  type="date"
+                  type="text"
                   name="TxtIdPersonal"
                   id="TxtIdPersonal"
                   autoComplete="off"

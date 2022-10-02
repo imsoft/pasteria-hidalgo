@@ -2,19 +2,18 @@ export interface ReporteDeCompra {
   _id: string;
   idReporteDeCompra: string;
   codigoDeReporte: string;
-  fechaDeCompra: string;
   credito: string;
-  fechaDePago: string;
+  fechaDeCompra: string;
   idMateriaPrima: string;
   materiaPrima: string;
-  cantidad: number;
+  cantidad: string;
   unidades: string;
   idProveedor: string;
   nombreProveedor: string;
-  precioPorUnidad: number;
-  precioTotalDelProducto: number;
-  precioTotalDelCompra: number;
-  tempetatura: number;
+  precioPorUnidad: string;
+  precioTotalDelProducto: string;
+  precioTotalDelCompra: string;
+  tempetatura: string;
   caducidad: string;
-  factura: boolean;
+  factura: string;
 }

@@ -1,3 +1,5 @@
+export { default as AcondicionamientoDeSucursal, type IAcondicionamientoDeSucursal } from './acondicionamientoDeSucursal';
+export { default as AsignarPrecio, type IAsignarPrecio } from './asignarPrecio';
 export { default as Candidato, type ICandidato } from './candidato';
 export { default as CheckInDePersonal, type ICheckInPersonal } from './checkInPersonal';
 export { default as ClienteFrecuente, type IClienteFrecuente } from './clienteFrecuente';

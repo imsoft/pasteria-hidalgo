@@ -2,16 +2,16 @@ import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
 import { CheckInPersonal } from "../../../interfaces";
-import { CheckInPersonalContext, checksInPersonalReducer } from '.';
+import { CheckInPersonalContext, checksInPersonalReducer } from ".";
 
 import Swal from "sweetalert2";
 
 export interface ChecksInPersonalState {
-    checksInPersonal: CheckInPersonal[];
+  checksInPersonal: CheckInPersonal[];
 }
 
 const ChecksInPersonal_INITIAL_STATE: ChecksInPersonalState = {
-    checksInPersonal: [],
+  checksInPersonal: [],
 };
 
 interface Props {
@@ -63,16 +63,22 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.post<CheckInPersonal>("/checksInPersonal", {
-        idFranquicia,
-        idSucursal,
-        nombre,
-        fecha,
-        idPersonal,
-        horaDeIngreso,
-        horaDeSalida,
+      const { data } = await entriesApi.post<CheckInPersonal>(
+        "/checksInPersonal",
+        {
+          idFranquicia,
+          idSucursal,
+          nombre,
+          fecha,
+          idPersonal,
+          horaDeIngreso,
+          horaDeSalida,
+        }
+      );
+      dispatch({
+        type: "[Check In Personal] Agregar-Check In Personal",
+        payload: data,
       });
-      dispatch({ type: "[Check In Personal] Agregar-Check In Personal", payload: data });
 
       if (showNotificacion) {
         Swal.fire({
@@ -92,26 +98,32 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
     {
       _id,
       idFranquicia,
-        idSucursal,
-        nombre,
-        fecha,
-        idPersonal,
-        horaDeIngreso,
-        horaDeSalida,
+      idSucursal,
+      nombre,
+      fecha,
+      idPersonal,
+      horaDeIngreso,
+      horaDeSalida,
     }: CheckInPersonal,
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.put<CheckInPersonal>(`/checksInPersonal/${_id}`, {
-        idFranquicia,
-        idSucursal,
-        nombre,
-        fecha,
-        idPersonal,
-        horaDeIngreso,
-        horaDeSalida,
+      const { data } = await entriesApi.put<CheckInPersonal>(
+        `/checksInPersonal/${_id}`,
+        {
+          idFranquicia,
+          idSucursal,
+          nombre,
+          fecha,
+          idPersonal,
+          horaDeIngreso,
+          horaDeSalida,
+        }
+      );
+      dispatch({
+        type: "[Check In Personal] Actualizar-Check In Personal",
+        payload: data,
       });
-      dispatch({ type: "[Check In Personal] Actualizar-Check In Personal", payload: data });
 
       if (showNotificacion) {
         Swal.fire({
@@ -122,14 +134,15 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
           timer: 2000,
         });
       }
-
     } catch (error) {
       console.log({ error });
     }
   };
 
   const refreshCandidatos = async () => {
-    const { data } = await entriesApi.get<CheckInPersonal[]>("/checksInPersonal");
+    const { data } = await entriesApi.get<CheckInPersonal[]>(
+      "/checksInPersonal"
+    );
     console.log(data);
     dispatch({ type: "[Check In Personal] Refrescar-Datos", payload: data });
   };

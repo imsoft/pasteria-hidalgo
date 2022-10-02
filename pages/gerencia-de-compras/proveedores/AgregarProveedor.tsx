@@ -1,10 +1,14 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { useRouter } from 'next/router';
+import { ChangeEvent, useContext, useState, useReducer } from 'react';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores/ManejoDeProveedoresContext";
 
 export default function ManejoDeProveedores() {
+
+  const router = useRouter();
+
   const { agregarNuevoProveedor } = useContext(ProveedoresContext);
 
   const [inputNombre, setInputNombre] = useState("");
@@ -22,9 +26,7 @@ export default function ManejoDeProveedores() {
     setInputNombre(event.target.value);
   };
 
-  const onTextFieldChangedDireccion = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedDireccion = (event: ChangeEvent<HTMLInputElement>) => {
     setInputDireccion(event.target.value);
   };
 
@@ -32,21 +34,15 @@ export default function ManejoDeProveedores() {
     setInputTelefono(event.target.value);
   };
 
-  const onTextFieldChangedHorarioAtencion = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedHorarioAtencion = (event: ChangeEvent<HTMLInputElement>) => {
     setInputHorarioAtencion(event.target.value);
   };
 
-  const onTextFieldChangedProductosQueSeCompran = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
+  const onTextFieldChangedProductosQueSeCompran = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputProductosQueSeCompran(event.target.value);
   };
 
-  const onTextFieldChangedEntregasADomicilio = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedEntregasADomicilio = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputEntregasADomicilio(event.target.value);
   };
 
@@ -55,11 +51,11 @@ export default function ManejoDeProveedores() {
       inputNombre.length === 0 &&
       inputDireccion.length === 0 &&
       inputTelefono.length === 0 &&
-      inputHorarioAtencion.length === 0 &&
-      inputProductosQueSeCompran.length === 0 &&
-      inputEntregasADomicilio.length === 0
+      inputHorarioAtencion.length === 0
+      // inputProductosQueSeCompran.length === 0 &&
+      // inputEntregasADomicilio.length === 0
     )
-      return;
+    return;
 
     agregarNuevoProveedor(
       inputNombre,
@@ -76,8 +72,10 @@ export default function ManejoDeProveedores() {
       icon: "success",
       title: "Proveedor Agregado",
       showConfirmButton: false,
-      timer: 5000,
+      timer: 2000,
     });
+
+    router.push("/gerencia-de-compras/proveedores/VerProveedores");
 
     setTouched(false);
     setInputNombre("");
@@ -101,6 +99,7 @@ export default function ManejoDeProveedores() {
             </div>
 
             <div className="grid grid-cols-6 gap-6">
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"
@@ -119,7 +118,7 @@ export default function ManejoDeProveedores() {
                 />
               </div>
 
-              <div className="col-span-6">
+              <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtDireccion"
                   className="block text-sm font-medium text-gray-700"
@@ -173,7 +172,7 @@ export default function ManejoDeProveedores() {
                 />
               </div>
 
-              <div className="col-span-6">
+              <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtTiposDeProductosQueSeCompran"
                   className="block text-sm font-medium text-gray-700"
@@ -195,45 +194,27 @@ export default function ManejoDeProveedores() {
                 </select>
               </div>
 
-              <div className="col-span-6">
+              <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="RdbEntregasADomicilioSi"
+                  htmlFor="TxtTiposDeProductosQueSeCompran"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Entregas a domicilio
+                  ¿Entrega a domicilio?
                 </label>
-
-                <div className="mt-4 space-x-4 flex">
-                  <div className="flex items-center">
-                    <input
-                      id="RdbEntregasADomicilioSi"
-                      name="RdbEntregasADomicilio"
-                      type="radio"
-                      className="focus:ring-primary-yellow h-4 w-4 text-primary-yellow border-gray-300"
-                      onChange={onTextFieldChangedEntregasADomicilio}
-                      onBlur={() => setTouched(true)}
-                    />
-                    <label htmlFor="RdbEntregasADomicilioSi" className="ml-3">
-                      <span className="block text-sm font-medium text-gray-700">
-                        Sí
-                      </span>
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      id="RdbEntregasADomicilioNo"
-                      name="RdbEntregasADomicilio"
-                      type="radio"
-                      className="focus:ring-primary-yellow h-4 w-4 text-primary-yellow border-gray-300"
-                    />
-                    <label htmlFor="RdbEntregasADomicilioNo" className="ml-3">
-                      <span className="block text-sm font-medium text-gray-700">
-                        No
-                      </span>
-                    </label>
-                  </div>
-                </div>
+                <select
+                  id="CmbTiposDeProductosQueSeCompran"
+                  name="CmbTiposDeProductosQueSeCompran"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  onChange={onTextFieldChangedEntregasADomicilio}
+                  onBlur={() => setTouched(true)}
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option>Selecciona una opción...</option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
               </div>
+
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

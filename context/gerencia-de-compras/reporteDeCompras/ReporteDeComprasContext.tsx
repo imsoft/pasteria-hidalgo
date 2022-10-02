@@ -8,9 +8,8 @@ interface ContextProps {
   agregarReporteDeCompra: (
     idReporteDeCompra: string,
     codigoDeReporte: string,
-    fechaDeCompra: string,
     credito: string,
-    fechaDePago: string,
+    fechaDeCompra: string,
     idMateriaPrima: string,
     materiaPrima: string,
     cantidad: string,

@@ -57,8 +57,8 @@ export const ProveedoresProvider: FC<Props> = ({ children }) => {
     direccion: string,
     telefono: string,
     horarioAtencion: string,
-    productosQueSeCompran: string[],
-    entregasADomicilio: boolean,
+    productosQueSeCompran: string,
+    entregasADomicilio: string,
     showNotificacion = false
   ) => {
     try {

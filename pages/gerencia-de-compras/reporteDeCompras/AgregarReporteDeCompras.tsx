@@ -1,8 +1,10 @@
 import { ChangeEvent, useContext, useState } from "react";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
 import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export default function ReporteDeCompras() {
   const { agregarReporteDeCompra } = useContext(ReporteDeCompraContext);
@@ -11,18 +13,15 @@ export default function ReporteDeCompras() {
   const [inputCodigoDeReporte, setInputCodigoDeReporte] = useState("");
   const [inputFechaDeCompra, setInputFechaDeCompra] = useState("");
   const [inputCredito, setInputCredito] = useState("");
-  const [inputFechaDePago, setInputFechaDePago] = useState("");
-  const [inputIdMateriaPrima, setInputIdMateriaPrima] = useState("");
   const [inputMateriaPrima, setInputMateriaPrima] = useState("");
+  const [inputIdMateriaPrima, setInputIdMateriaPrima] = useState("");
   const [inputCantidad, setInputCantidad] = useState("");
   const [inputUnidades, setInputUnidades] = useState("");
   const [inputIdProveedor, setInputIdProveedor] = useState("");
   const [inputNombreProveedor, setInputNombreProveedor] = useState("");
   const [inputPrecioPorUnidad, setInputPrecioPorUnidad] = useState("");
-  const [inputPrecioTotalDelProducto, setInputPrecioTotalDelProducto] =
-    useState("");
-  const [inputPrecioTotalDelCompra, setInputPrecioTotalDelCompra] =
-    useState("");
+  const [inputPrecioTotalDelProducto, setInputPrecioTotalDelProducto] = useState("");
+  const [inputPrecioTotalDelCompra, setInputPrecioTotalDelCompra] = useState("");
   const [inputTempetatura, setInputTempetatura] = useState("");
   const [inputCaducidad, setInputCaducidad] = useState("");
   const [inputFactura, setInputFactura] = useState("");
@@ -49,14 +48,8 @@ export default function ReporteDeCompras() {
     setInputFechaDeCompra(event.target.value);
   };
 
-  const onTextFieldChangedCredito = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedCredito = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputCredito(event.target.value);
-  };
-
-  const onTextFieldChangedFechaDePago = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputFechaDePago(event.target.value);
   };
 
   const onTextFieldChangedIdMateriaPrima = (
@@ -75,7 +68,9 @@ export default function ReporteDeCompras() {
     setInputCantidad(event.target.value);
   };
 
-  const onTextFieldChangedUnidades = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedUnidades = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
     setInputUnidades(event.target.value);
   };
 
@@ -86,7 +81,7 @@ export default function ReporteDeCompras() {
   };
 
   const onTextFieldChangedNombreProveedor = (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLSelectElement>
   ) => {
     setInputNombreProveedor(event.target.value);
   };
@@ -121,7 +116,7 @@ export default function ReporteDeCompras() {
     setInputCaducidad(event.target.value);
   };
 
-  const onTextFieldChangedFactura = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedFactura = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputFactura(event.target.value);
   };
 
@@ -129,9 +124,8 @@ export default function ReporteDeCompras() {
     if (
       inputIdReporteDeCompra.length === 0 &&
       inputCodigoDeReporte.length === 0 &&
-      inputFechaDeCompra.length === 0 &&
       inputCredito.length === 0 &&
-      inputFechaDePago.length === 0 &&
+      inputFechaDeCompra.length === 0 &&
       inputIdMateriaPrima.length === 0 &&
       inputMateriaPrima.length === 0 &&
       inputCantidad.length === 0 &&
@@ -150,9 +144,8 @@ export default function ReporteDeCompras() {
     agregarReporteDeCompra(
       inputIdReporteDeCompra,
       inputCodigoDeReporte,
-      inputFechaDeCompra,
       inputCredito,
-      inputFechaDePago,
+      inputFechaDeCompra,
       inputIdMateriaPrima,
       inputMateriaPrima,
       inputCantidad,
@@ -181,7 +174,6 @@ export default function ReporteDeCompras() {
     setInputCodigoDeReporte("");
     setInputFechaDeCompra("");
     setInputCredito("");
-    setInputFechaDePago("");
     setInputIdMateriaPrima("");
     setInputMateriaPrima("");
     setInputCantidad("");
@@ -235,7 +227,7 @@ export default function ReporteDeCompras() {
                   Codigo De Reporte
                 </label>
                 <input
-                  type="date"
+                  type="text"
                   name="TxtCodigoDeReporte"
                   id="TxtCodigoDeReporte"
                   autoComplete="off"
@@ -247,58 +239,41 @@ export default function ReporteDeCompras() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="RdbEntregasADomicilioSi"
+                  htmlFor="TxtFechaDeCompra"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Crédito
+                  Fecha de Compra
                 </label>
-
-                <div className="mt-4 space-x-4 flex">
-                  <div className="flex items-center">
-                    <input
-                      id="RdbEntregasADomicilioSi"
-                      name="RdbEntregasADomicilio"
-                      type="radio"
-                      className="focus:ring-primary-yellow h-4 w-4 text-primary-yellow border-gray-300"
-                    />
-                    <label htmlFor="RdbEntregasADomicilioSi" className="ml-3">
-                      <span className="block text-sm font-medium text-gray-700">
-                        Sí
-                      </span>
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      id="RdbEntregasADomicilioNo"
-                      name="RdbEntregasADomicilio"
-                      type="radio"
-                      className="focus:ring-primary-yellow h-4 w-4 text-primary-yellow border-gray-300"
-                    />
-                    <label htmlFor="RdbEntregasADomicilioNo" className="ml-3">
-                      <span className="block text-sm font-medium text-gray-700">
-                        No
-                      </span>
-                    </label>
-                  </div>
-                </div>
+                <input
+                  type="date"
+                  name="TxtFechaDeCompra"
+                  id="TxtFechaDeCompra"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedFechaDeCompra}
+                  onBlur={() => setTouched(true)}
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtTelefono"
+                  htmlFor="TxtCredito"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Fecha de Pago
+                  Crédito
                 </label>
-                <input
-                  type="date"
-                  name="TxtTelefono"
-                  id="TxtTelefono"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedFechaDePago}
+                <select
+                  id="TxtCredito"
+                  name="TxtCredito"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  onChange={onTextFieldChangedCredito}
                   onBlur={() => setTouched(true)}
-                />
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option>Selecciona una opción...</option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -368,6 +343,8 @@ export default function ReporteDeCompras() {
                   name="TxtProveedor"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedUnidades}
+                  onBlur={() => setTouched(true)}
                 >
                   <option>Selecciona las unidades...</option>
                   <option>gramos</option>
@@ -376,6 +353,24 @@ export default function ReporteDeCompras() {
                   <option>litros</option>
                   <option>unidad</option>
                 </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtIdProveedor"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Id Proveedor
+                </label>
+                <input
+                  type="text"
+                  name="TxtIdProveedor"
+                  id="TxtIdProveedor"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedIdProveedor}
+                  onBlur={() => setTouched(true)}
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -390,6 +385,8 @@ export default function ReporteDeCompras() {
                   name="TxtProveedor"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedNombreProveedor}
+                  onBlur={() => setTouched(true)}
                 >
                   <option>Selecciona un proveedor...</option>
                   <option>Juan</option>
@@ -526,15 +523,15 @@ export default function ReporteDeCompras() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtApellidos"
+                  htmlFor="TxtCaducidad"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Caducidad
                 </label>
                 <input
                   type="date"
-                  name="TxtApellidos"
-                  id="TxtApellidos"
+                  name="TxtCaducidad"
+                  id="TxtCaducidad"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   onChange={onTextFieldChangedCaducidad}
@@ -542,44 +539,25 @@ export default function ReporteDeCompras() {
                 />
               </div>
 
-              <div className="col-span-6">
+              <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="RdbEntregasADomicilioSi"
+                  htmlFor="TxtFactura"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Factura
                 </label>
-
-                <div className="mt-4 space-x-4 flex">
-                  <div className="flex items-center">
-                    <input
-                      id="RdbEntregasADomicilioSi"
-                      name="RdbEntregasADomicilio"
-                      type="radio"
-                      className="focus:ring-primary-yellow h-4 w-4 text-primary-yellow border-gray-300"
-                      onChange={onTextFieldChangedFactura}
-                      onBlur={() => setTouched(true)}
-                    />
-                    <label htmlFor="RdbEntregasADomicilioSi" className="ml-3">
-                      <span className="block text-sm font-medium text-gray-700">
-                        Sí
-                      </span>
-                    </label>
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      id="RdbEntregasADomicilioNo"
-                      name="RdbEntregasADomicilio"
-                      type="radio"
-                      className="focus:ring-primary-yellow h-4 w-4 text-primary-yellow border-gray-300"
-                    />
-                    <label htmlFor="RdbEntregasADomicilioNo" className="ml-3">
-                      <span className="block text-sm font-medium text-gray-700">
-                        No
-                      </span>
-                    </label>
-                  </div>
-                </div>
+                <select
+                  id="TxtFactura"
+                  name="TxtFactura"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  onChange={onTextFieldChangedFactura}
+                  onBlur={() => setTouched(true)}
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option>Selecciona una opción...</option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
               </div>
             </div>
           </div>

@@ -11,8 +11,10 @@ import { ProductosYaCompradosProvider } from "../context/gerencia-de-compras/pro
 import { ProveedoresProvider } from "../context/gerencia-de-compras/manejoDeProveedores";
 import { ReportesDeComprasProvider } from "../context/gerencia-de-compras/reporteDeCompras";
 import { SucursalesYFranquiciasProvider } from "../context/gerencia-operativa/sucursalYFranquicia";
+import { AcondicionamientoDeSucursalesProvider } from "../context/gerencia-de-compras/acondicionamientoDeSucursales";
 
 import "../styles/globals.css";
+import { AsignarPreciosProvider } from "../context/gerencia-de-compras/asignarPrecios";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -34,7 +36,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                 <ProveedoresProvider>
                   <ReportesDeComprasProvider>
                     <SucursalesYFranquiciasProvider>
-                      <Component {...pageProps} />
+                      <AcondicionamientoDeSucursalesProvider>
+                        <AsignarPreciosProvider>
+                          <Component {...pageProps} />
+                        </AsignarPreciosProvider>
+                      </AcondicionamientoDeSucursalesProvider>
                     </SucursalesYFranquiciasProvider>
                   </ReportesDeComprasProvider>
                 </ProveedoresProvider>

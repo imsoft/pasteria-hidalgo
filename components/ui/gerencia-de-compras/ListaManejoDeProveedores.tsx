@@ -8,7 +8,7 @@ interface Props {
 
 const ListaProveedores: FC<Props> = ({ proveedor }) => {
   const onClick = () => {
-    router.push(`/recursos-humanos/proveedor/${proveedor._id}`);
+    router.push(`/gerencia-de-compras/proveedores/${proveedor._id}`);
   };
 
   return (
@@ -19,7 +19,11 @@ const ListaProveedores: FC<Props> = ({ proveedor }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="text-gray-900">{proveedor.direccion}</div>
-          <div className="text-gray-500">{proveedor.telefono}</div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {proveedor.telefono}
+          </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">

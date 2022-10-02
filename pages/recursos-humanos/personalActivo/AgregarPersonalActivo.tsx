@@ -1,17 +1,23 @@
 import { ChangeEvent, useContext, useState } from "react";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
+
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 export default function AgregarPersonalActivo() {
+
+  const router = useRouter();
+
   const { agregarPersonalActivo } = useContext(PersonalActivoContext);
 
   const [inputNombre, setInputNombre] = useState("");
   const [inputPuesto, setInputDescripcionDelPuesto] = useState("");
   const [inputFechaDeContratacion, setInputFechaDeNacimiento] = useState("");
-  const [inputNoContrato, setInputDomicilio] = useState("");
-  const [inputNoExpediente, setInputCurp] = useState("");
+  const [inputNoContrato, setInputNoContrato] = useState("");
+  const [inputNoExpediente, setInputNoExpediente] = useState("");
 
   const [touched, setTouched] = useState(false);
 
@@ -25,22 +31,16 @@ export default function AgregarPersonalActivo() {
     setInputDescripcionDelPuesto(event.target.value);
   };
 
-  const onTextFieldChangedFechaDeContratacion = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedFechaDeContratacion = (event: ChangeEvent<HTMLInputElement>) => {
     setInputFechaDeNacimiento(event.target.value);
   };
 
-  const onTextFieldChangedNoContrato = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputDomicilio(event.target.value);
+  const onTextFieldChangedNoContrato = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputNoContrato(event.target.value);
   };
 
-  const onTextFieldChangedNoExpediente = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCurp(event.target.value);
+  const onTextFieldChangedNoExpediente = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputNoExpediente(event.target.value);
   };
 
   const onSave = () => {
@@ -67,16 +67,17 @@ export default function AgregarPersonalActivo() {
       icon: "success",
       title: "Personal Activo Agregado",
       showConfirmButton: false,
-      timer: 5000,
+      timer: 2000,
     });
+
+    router.push("/recursos-humanos/personalActivo/VerPersonalActivo");
 
     setTouched(false);
     setInputNombre("");
     setInputDescripcionDelPuesto("");
     setInputFechaDeNacimiento("");
-    setInputDomicilio("");
-    setInputCurp("");
-    
+    setInputNoContrato("");
+    setInputNoExpediente("");
   };
 
   return (
@@ -135,7 +136,7 @@ export default function AgregarPersonalActivo() {
                   Fecha de contratación
                 </label>
                 <input
-                  type="datex"
+                  type="date"
                   name="TxtFechaDeContratacion"
                   id="TxtFechaDeContratacion"
                   autoComplete="off"
