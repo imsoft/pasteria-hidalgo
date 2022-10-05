@@ -21,26 +21,26 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
     CheckInPersonalContext
   );
 
-  const [inputIdFranquicia, setInputIdFranquicia] = useState(checkInDePersonal.idSucursal);
-  const [inputIdSucursal, setInputIdSucursal] = useState(checkInDePersonal.idSucursal);
+  const [inputFranquicias, setInputFranquicias] = useState(checkInDePersonal.franquicias);
+  const [inputSucursales, setInputSucursales] = useState(checkInDePersonal.sucursales);
   const [inputNombre, setInputNombre] = useState(checkInDePersonal.nombre);
   const [inputFecha, setInputFecha] = useState(checkInDePersonal.fecha);
-  const [inputIdPersonal, setInputIdPersonal] = useState(checkInDePersonal.idPersonal);
   const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState(checkInDePersonal.horaDeIngreso);
   const [inputHoraDeSalida, setInputHoraDeSalida] = useState(checkInDePersonal.horaDeSalida);
+  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState(checkInDePersonal.sucursalOFranquicia);
 
   const MySwal = withReactContent(Swal);
 
-  const onInputValueChangedIdFranquicia = (
-    event: ChangeEvent<HTMLInputElement>
+  const onInputValueChangedFranquicias = (
+    event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputIdFranquicia(event.target.value);
+    setInputFranquicias(event.target.value);
   };
 
-  const onInputValueChangedIdSucursal = (
-    event: ChangeEvent<HTMLInputElement>
+  const onInputValueChangedSucursales = (
+    event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputIdSucursal(event.target.value);
+    setInputSucursales(event.target.value);
   };
 
   const onInputValueChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,12 +49,6 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
 
   const onInputValueChangedFecha = (event: ChangeEvent<HTMLInputElement>) => {
     setInputFecha(event.target.value);
-  };
-
-  const onInputValueChangedIdPersonal = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputIdPersonal(event.target.value);
   };
 
   const onInputValueChangedHoraDeIngreso = (
@@ -69,15 +63,21 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
     setInputHoraDeSalida(event.target.value);
   };
 
+  const onInputValueChangedsInputSucursalOFranquicia = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursalOFranquicia(event.target.value);
+  };
+
   const onSave = () => {
     if (
-      inputIdFranquicia.trim().length === 0 &&
-      inputIdSucursal.trim().length === 0 &&
+      inputFranquicias.trim().length === 0 &&
+      inputSucursales.trim().length === 0 &&
       inputNombre.trim().length === 0 &&
       inputFecha.trim().length === 0 &&
-      inputIdPersonal.trim().length === 0 &&
       inputHoraDeIngreso.trim().length === 0 &&
-      inputHoraDeSalida.trim().length === 0
+      inputHoraDeSalida.trim().length === 0 &&
+      inputSucursalOFranquicia.trim().length === 0
     )
       return;
 
@@ -94,13 +94,13 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
       if (result.isConfirmed) {
         const actualizadoCheckInDePersonal: CheckInPersonal = {
           ...checkInDePersonal,
-          idFranquicia: inputIdFranquicia,
-          idSucursal: inputIdSucursal,
+          franquicias: inputFranquicias,
+          sucursales: inputSucursales,
           nombre: inputNombre,
           fecha: inputFecha,
-          idPersonal: inputIdPersonal,
           horaDeIngreso: inputHoraDeIngreso,
           horaDeSalida: inputHoraDeSalida,
+          sucursalOFranquicia: inputSucursalOFranquicia,
         };
 
         actualizarCheckInPersonal(actualizadoCheckInDePersonal, true);
@@ -138,43 +138,81 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
-            <div className="grid grid-cols-6 gap-6">
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtIdFranquicia"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  IdFranquicia
-                </label>
-                <input
-                  type="text"
-                  name="TxtIdFranquicia"
-                  id="TxtIdFranquicia"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputIdFranquicia}
-                  onChange={onInputValueChangedIdFranquicia}
-                  // onBlur={() => setTouched(true)}
-                />
-              </div>
+
+            <div>
+              <label className="text-base font-medium text-gray-900">
+                Seleccione una opción
+              </label>
+              <p className="text-sm leading-5 text-gray-500">
+                ¿Sucursal o Franquicia?
+              </p>
 
               <div className="col-span-6 sm:col-span-3">
+                <select
+                  id="CmbNombre"
+                  name="CmbNombre"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  value={inputSucursalOFranquicia}
+                  onChange={onInputValueChangedsInputSucursalOFranquicia}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione una opción...</option>
+                  <option>Sucursal</option>
+                  <option>Franquicia</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-6 gap-6">
+
+            <div className={` ${inputSucursalOFranquicia === "Franquicia" || 'hidden'} col-span-6`}>
                 <label
-                  htmlFor="TxtIdSucursal"
+                  htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Id Sucursal
+                  Franquicia
                 </label>
-                <input
-                  type="text"
-                  name="TxtIdSucursal"
-                  id="TxtIdSucursal"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputIdSucursal}
-                  onChange={onInputValueChangedIdSucursal}
+                <select
+                  id="CmbFranquicia"
+                  name="CmbFranquicia"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  value={inputFranquicias}
+                  onChange={onInputValueChangedFranquicias}
                   // onBlur={() => setTouched(true)}
-                />
+                >
+                  <option>Seleccione la franquicia...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
+
+                  
+
+              <div className={` ${inputSucursalOFranquicia === "Sucursal" || 'hidden'} col-span-6`}>
+                <label
+                  htmlFor="CmbSucursal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Sucursal
+                </label>
+                <select
+                  id="CmbSucursal"
+                  name="CmbSucursal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  value={inputSucursales}
+                  onChange={onInputValueChangedSucursales}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la sucursal...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                  
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -211,25 +249,6 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputFecha}
                   onChange={onInputValueChangedFecha}
-                  // onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtIdPersonal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Id Personal
-                </label>
-                <input
-                  type="text"
-                  name="TxtIdPersonal"
-                  id="TxtIdPersonal"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputIdPersonal}
-                  onChange={onInputValueChangedIdPersonal}
                   // onBlur={() => setTouched(true)}
                 />
               </div>

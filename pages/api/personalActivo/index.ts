@@ -40,6 +40,7 @@ const postPersonalActivo = async( req: NextApiRequest, res: NextApiResponse<Data
         fechaDeContratacion = '',
         noContrato = '',
         noExpediente = '',
+        bajaTemporal = '',
     } = req.body;
 
     const newPersonalActivo = new PersonalActivo({
@@ -48,6 +49,7 @@ const postPersonalActivo = async( req: NextApiRequest, res: NextApiResponse<Data
         fechaDeContratacion,
         noContrato,
         noExpediente,
+        bajaTemporal,
     });
 
     try {

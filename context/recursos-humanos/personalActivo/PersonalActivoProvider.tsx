@@ -55,6 +55,7 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
     fechaDeContratacion: string,
     noContrato: string,
     noExpediente: string,
+    bajaTemporal: string,
     showNotification = false
   ) => {
     try {
@@ -66,6 +67,7 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
           fechaDeContratacion,
           noContrato,
           noExpediente,
+          bajaTemporal,
         }
       );
       dispatch({
@@ -95,6 +97,7 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
       fechaDeContratacion,
       noContrato,
       noExpediente,
+      bajaTemporal,
     }: PersonalActivo,
     showNotificacion = false
   ) => {
@@ -107,6 +110,7 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
           fechaDeContratacion,
           noContrato,
           noExpediente,
+          bajaTemporal,
         }
       );
       dispatch({

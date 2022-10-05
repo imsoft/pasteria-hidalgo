@@ -1,0 +1,1 @@
+export type PuestosEmpresa = "Administrador" | "Chef" | "Operador";

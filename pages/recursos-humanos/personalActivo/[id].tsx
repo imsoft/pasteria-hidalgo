@@ -7,6 +7,7 @@ import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recurs
 import { PersonalActivo } from "../../../interfaces/personalActivo";
 import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 import { dbPersonalActivo } from "../../../database";
+import { PuestosEmpresa } from '../../../interfaces/puestoEmpresa';
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -15,6 +16,8 @@ interface Props {
   personalActivo: PersonalActivo;
 }
 
+const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
+
 export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
   
   const router = useRouter();
@@ -22,10 +25,11 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
   const { actualizarPersonalActivo, eliminarPersonalActivo } = useContext(PersonalActivoContext);
 
   const [inputNombre, setInputNombre] = useState(personalActivo.nombre);
-  const [inputPuesto, setInputDescripcionDelPuesto] = useState(personalActivo.puesto);
-  const [inputFechaDeContratacion, setInputFechaDeNacimiento] = useState(personalActivo.fechaDeContratacion);
-  const [inputNoContrato, setInputDomicilio] = useState(personalActivo.noContrato);
-  const [inputNoExpediente, setInputCurp] = useState(personalActivo.noExpediente);
+  const [inputPuesto, setInputPuesto] = useState(personalActivo.puesto);
+  const [inputFechaDeContratacion, setInputFechaDeContratacion] = useState(personalActivo.fechaDeContratacion);
+  const [inputNoContrato, setInputNoContrato] = useState(personalActivo.noContrato);
+  const [inputNoExpediente, setInputNoExpediente] = useState(personalActivo.noExpediente);
+  const [inputBajaTemporal, setInputBajaTemporal] = useState(personalActivo.bajaTemporal);
 
   const MySwal = withReactContent(Swal);
 
@@ -35,20 +39,24 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
     setInputNombre(event.target.value);
   };
 
-  const onInputValueChangedPuesto = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputDescripcionDelPuesto(event.target.value);
+  const onInputValueChangedPuesto = (event: ChangeEvent<HTMLSelectElement>) => {
+    setInputPuesto(event.target.value as PuestosEmpresa);
   };
 
   const onInputValueChangedFechaDeContratacion = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputFechaDeNacimiento(event.target.value);
+    setInputFechaDeContratacion(event.target.value);
   };
 
   const onInputValueChangedNoContrato = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputDomicilio(event.target.value);
+    setInputNoContrato(event.target.value);
   };
 
   const onInputValueChangedNoExpediente = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputCurp(event.target.value);
+    setInputNoExpediente(event.target.value);
+  };
+
+  const onInputValueChangedBajaTemporal = (event: ChangeEvent<HTMLSelectElement>) => {
+    setInputBajaTemporal(event.target.value);
   };
 
   const onSave = () => {
@@ -57,7 +65,8 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
       inputPuesto.trim().length === 0 &&
       inputFechaDeContratacion.trim().length === 0 &&
       inputNoContrato.trim().length === 0 &&
-      inputNoExpediente.trim().length === 0
+      inputNoExpediente.trim().length === 0 &&
+      inputBajaTemporal.trim().length === 0
     )
       return;
 
@@ -79,6 +88,7 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
           fechaDeContratacion: inputFechaDeContratacion,
           noContrato: inputNoContrato,
           noExpediente: inputNoExpediente,
+          bajaTemporal: inputBajaTemporal,
         };
 
         actualizarPersonalActivo(actualizadoPersonalActivo, true);
@@ -139,21 +149,26 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPuesto"
+                  htmlFor="TxtDPuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Puesto
                 </label>
-                <input
-                  type="text"
-                  name="TxtPuesto"
-                  id="TxtPuesto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputPuesto}
+                <select
+                  id="CmbPuesto"
+                  name="CmbPuesto"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
                   onChange={onInputValueChangedPuesto}
-                  // onBlur={() => setTouched(true)}
-                />
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione el puesto...</option>
+                  {puestosValidos.map((puesto) => (
+                    <option key={puesto} value={puesto}>
+                      {puesto}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -180,7 +195,7 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                   htmlFor="TxtNoContrato"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Fecha de nacimiento
+                  No. Contrato
                 </label>
                 <input
                   type="text"
@@ -199,7 +214,7 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                   htmlFor="TxtNoExpediente"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  NoExpediente
+                  No. Expediente
                 </label>
                 <input
                   type="text"
@@ -212,6 +227,29 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="CmbBajaTemporal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Baja Temporal
+                </label>
+                <select
+                  id="CmbBajaTemporal"
+                  name="CmbBajaTemporal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  value={inputBajaTemporal}
+                  onChange={onInputValueChangedBajaTemporal}
+                  onBlur={() => setTouched(true)}
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option>Selecciona una opción...</option>
+                  <option>Si</option>
+                  <option>No</option>
+                </select>
+              </div>
+
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

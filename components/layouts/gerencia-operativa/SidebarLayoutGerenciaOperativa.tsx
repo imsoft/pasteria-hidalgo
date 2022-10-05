@@ -16,6 +16,7 @@ import {
   BellIcon,
   MenuAlt2Icon,
   XIcon,
+  EyeIcon,
 } from "@heroicons/react/outline";
 
 type Props = {
@@ -37,8 +38,14 @@ const navigation = [
   },
   {
     name: "Manejo de personal",
-    href: "/gerencia-operativa/manejo-de-personal",
+    href: "/gerencia-operativa/manejoDePersonal/AgregarManejoDePersonal",
     icon: UserGroupIcon,
+    current: false,
+  },
+  {
+    name: "Ver Manejo de personal",
+    href: "/gerencia-operativa/manejoDePersonal/VerManejosDePersonal",
+    icon: EyeIcon,
     current: false,
   },
   {

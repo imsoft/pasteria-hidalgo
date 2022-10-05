@@ -31,6 +31,9 @@ const ListaPersonalesActivos: FC<Props> = ({ personalActivo }) => {
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">{personalActivo.noExpediente}</div>
         </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">{personalActivo.bajaTemporal}</div>
+        </td>
       </tr>
     </tbody>
   );

@@ -3,6 +3,7 @@ import {
   UserAddIcon,
   PlusCircleIcon,
   ClockIcon,
+  EyeIcon,
 } from "@heroicons/react/outline";
 import { SidebarLayoutRecursosHumanos } from "../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
@@ -10,24 +11,51 @@ import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 const actions = [
   {
     title: "Agregar candidato",
-    href: "/recursos-humanos/candidato",
+    href: "/recursos-humanos/candidato/AgregarCandidato",
     icon: UserAddIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
+    description: "Aqui podras agregar a los candidatos",
+  },
+  {
+    title: "Ver candidatos",
+    href: "/recursos-humanos/candidato/VerCandidatos",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+    description: "Aqui podras ver a los candidatos",
   },
   {
     title: "Agregar personal activo",
-    href: "/recursos-humanos/agregar-personal-activo",
+    href: "/recursos-humanos/personalActivo/AgregarPersonalActivo",
     icon: PlusCircleIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
+    description: "Aqui podras agregar a los personales activos",
+  },
+  {
+    title: "Ver personal activo",
+    href: "/recursos-humanos/personalActivo/VerPersonalActivo",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+    description: "Aqui podras ver a los personales activos",
   },
   {
     title: "Check-In de Personal",
-    href: "/recursos-humanos/check-in-de-personal",
+    href: "/recursos-humanos/checkInPersonal/CheckInDePersonal",
     icon: ClockIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
+    description: "Aqui podras realizar los check-in del personal",
+  },
+  {
+    title: "Ver check-in de personal",
+    href: "/recursos-humanos/checkInPersonal/VerCheckInPersonal",
+    icon: ClockIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+    description: "Aqui podras ver los check-in del personal",
   },
 ];
 
@@ -91,9 +119,7 @@ export default function IndexRecursosHumanos() {
                     </a>
                   </h3>
                   <p className="mt-2 text-sm text-gray-500">
-                    Doloribus dolores nostrum quia qui natus officia quod et
-                    dolorem. Sit repellendus qui ut at blanditiis et quo et
-                    molestiae.
+                    {action.description}
                   </p>
                 </div>
                 <span

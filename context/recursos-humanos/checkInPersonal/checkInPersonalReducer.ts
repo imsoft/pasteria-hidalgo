@@ -23,13 +23,13 @@ export const checksInPersonalReducer = (
         ...state,
         checksInPersonal: state.checksInPersonal.map((checkInPersonal) => {
           if (checkInPersonal._id === action.payload._id) {
-            checkInPersonal.idFranquicia = action.payload.idFranquicia;
-            checkInPersonal.idSucursal = action.payload.idSucursal;
+            checkInPersonal.franquicias = action.payload.franquicias;
+            checkInPersonal.sucursales = action.payload.sucursales;
             checkInPersonal.nombre = action.payload.nombre;
             checkInPersonal.fecha = action.payload.fecha;
-            checkInPersonal.idPersonal = action.payload.idPersonal;
             checkInPersonal.horaDeIngreso = action.payload.horaDeIngreso;
             checkInPersonal.horaDeSalida = action.payload.horaDeSalida;
+            checkInPersonal.sucursalOFranquicia = action.payload.sucursalOFranquicia;
           }
           return checkInPersonal;
         }),

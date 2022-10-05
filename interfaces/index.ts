@@ -9,3 +9,4 @@ export * from './proveedor';
 export * from './reporteDeCompra';
 export * from './sucursalYFranquicia';
 export * from './asignarPrecio';
+export * from './puestoEmpresa';

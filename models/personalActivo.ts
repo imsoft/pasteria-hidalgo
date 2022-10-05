@@ -9,6 +9,7 @@ const personalActivoSchema = new mongoose.Schema({
   fechaDeContratacion: { type: String, required: true },
   noContrato: { type: String, required: true },
   noExpediente: { type: String, required: true },
+  bajaTemporal: { type: String, required: true },
 });
 
 const PersonalActivoModel: mongoose.Model<IPersonalActivo> =

@@ -4,6 +4,9 @@ import { CandidatosContext } from "../../../context/recursos-humanos/candidatos"
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { PuestosEmpresa } from "../../../interfaces";
+
+const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
 
 export default function AgregarCandidato() {
   const { agregarNuevoCandidato } = useContext(CandidatosContext);
@@ -16,21 +19,30 @@ export default function AgregarCandidato() {
   const [inputCurp, setInputCurp] = useState("");
   const [inputNoImss, setInputNoImss] = useState("");
   const [inputNoCartaDePolicia, setInputNoCartaDePolicia] = useState("");
+  const [inputCelular, setInputCelular] = useState("");
+  const [inputContactoDeEmergencia, setInputContactoDeEmergencia] = useState("");
+  const [inputCorreoElectronico, setInputCorreoElectronico] = useState("");
+
+  const [inputReferencia1Nombre, setInputReferencia1Nombre] = useState("");
+  const [inputReferencia1Empresa, setInputReferencia1Empresa] = useState("");
+  const [inputReferencia1CorreoElectronico, setInputReferencia1CorreoElectronico] = useState("");
+  const [inputReferencia2Nombre, setInputReferencia2Nombre] = useState("");
+  const [inputReferencia2Empresa, setInputReferencia2Empresa] = useState("");
+  const [inputReferencia2CorreoElectronico, setInputReferencia2CorreoElectronico] = useState("");
+  const [inputReferencia3Nombre, setInputReferencia3Nombre] = useState("");
+  const [inputReferencia3Empresa, setInputReferencia3Empresa] = useState("");
+  const [inputReferencia3CorreoElectronico, setInputReferencia3CorreoElectronico] = useState("");
 
   const [touched, setTouched] = useState(false);
 
   const MySwal = withReactContent(Swal);
-
-  // const onTextFieldChanged = (event: ChangeEvent<HTMLInputElement>) => {
-  //   console.log( event.target.value );
-  // };
 
   const onTextFieldChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
   };
 
   const onTextFieldChangedPuesto = (event: ChangeEvent<HTMLSelectElement>) => {
-    setInputPuesto(event.target.value);
+    setInputPuesto(event.target.value as PuestosEmpresa);
   };
 
   const onTextFieldChangedDescripcionDelPuesto = (
@@ -65,6 +77,78 @@ export default function AgregarCandidato() {
     setInputNoCartaDePolicia(event.target.value);
   };
 
+  const onTextFieldChangedCelular = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputCelular(event.target.value);
+  };
+
+  const onTextFieldChangedContactoDeEmergencia = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputContactoDeEmergencia(event.target.value);
+  };
+
+  const onTextFieldChangedCorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputCorreoElectronico(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia1Nombre = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia1Nombre(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia1Empresa = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia1Empresa(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia1CorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia1CorreoElectronico(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia2Nombre = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia2Nombre(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia2Empresa = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia2Empresa(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia2CorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia2CorreoElectronico(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia3Nombre = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia3Nombre(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia3Empresa = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia3Empresa(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia3CorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia3CorreoElectronico(event.target.value);
+  };
+
   const onSave = () => {
     if (
       inputNombre.length === 0 &&
@@ -74,7 +158,19 @@ export default function AgregarCandidato() {
       inputDomicilio.length === 0 &&
       inputCurp.length === 0 &&
       inputNoImss.length === 0 &&
-      inputNoCartaDePolicia.length === 0
+      inputNoCartaDePolicia.length === 0 &&
+      inputCelular.length === 0 &&
+      inputContactoDeEmergencia.length === 0 &&
+      inputCorreoElectronico.length === 0 &&
+      inputReferencia1Nombre.length === 0 &&
+      inputReferencia1Empresa.length === 0 &&
+      inputReferencia1CorreoElectronico.length === 0 &&
+      inputReferencia2Nombre.length === 0 &&
+      inputReferencia2Empresa.length === 0 &&
+      inputReferencia2CorreoElectronico.length === 0 &&
+      inputReferencia3Nombre.length === 0 &&
+      inputReferencia3Empresa.length === 0 &&
+      inputReferencia3CorreoElectronico.length === 0
     )
       return;
 
@@ -87,6 +183,18 @@ export default function AgregarCandidato() {
       inputCurp,
       inputNoImss,
       inputNoCartaDePolicia,
+      inputCelular,
+      inputContactoDeEmergencia,
+      inputCorreoElectronico,
+      inputReferencia1Nombre,
+      inputReferencia1Empresa,
+      inputReferencia1CorreoElectronico,
+      inputReferencia2Nombre,
+      inputReferencia2Empresa,
+      inputReferencia2CorreoElectronico,
+      inputReferencia3Nombre,
+      inputReferencia3Empresa,
+      inputReferencia3CorreoElectronico,
       true
     );
 
@@ -107,6 +215,19 @@ export default function AgregarCandidato() {
     setInputCurp("");
     setInputNoImss("");
     setInputNoCartaDePolicia("");
+    setInputCelular("");
+    setInputContactoDeEmergencia("");
+    setInputCorreoElectronico("");
+
+    setInputReferencia1Nombre("");
+    setInputReferencia1Empresa("");
+    setInputReferencia1CorreoElectronico("");
+    setInputReferencia2Nombre("");
+    setInputReferencia2Empresa("");
+    setInputReferencia2CorreoElectronico("");
+    setInputReferencia3Nombre("");
+    setInputReferencia3Empresa("");
+    setInputReferencia3CorreoElectronico("");
   };
 
   return (
@@ -155,9 +276,11 @@ export default function AgregarCandidato() {
                   onBlur={() => setTouched(true)}
                 >
                   <option>Seleccione el puesto...</option>
-                  <option>Operador</option>
-                  <option>Chef</option>
-                  <option>Administrador</option>
+                  {puestosValidos.map((puesto) => (
+                    <option key={puesto} value={puesto}>
+                      {puesto}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -267,6 +390,257 @@ export default function AgregarCandidato() {
                   onChange={onTextFieldChangedNoCartaDePolicia}
                   onBlur={() => setTouched(true)}
                 />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtCelular"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Celular
+                </label>
+                <input
+                  type="tel"
+                  name="TxtCelular"
+                  id="TxtCelular"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedCelular}
+                  onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtContactoDeEmergencia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Contacto de emergencia
+                </label>
+                <input
+                  type="tel"
+                  name="TxtContactoDeEmergencia"
+                  id="TxtContactoDeEmergencia"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedContactoDeEmergencia}
+                  onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtCorreoElectronico"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Correo electrónico
+                </label>
+                <input
+                  type="email"
+                  name="TxtCorreoElectronico"
+                  id="TxtCorreoElectronico"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedCorreoElectronico}
+                  onBlur={() => setTouched(true)}
+                />
+              </div>
+            </div>
+
+            <div className="shadow sm:rounded-md sm:overflow-hidden">
+              <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
+                <div>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Referencias
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Nota: Obligatorio dos referencias y una opcional.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Referencia #1
+                  </h3>
+                </div>
+                <div className="grid grid-cols-6 gap-6">
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNombre"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Nombre
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtNombre"
+                      id="TxtNombre"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia1Nombre}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtEmpresa"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Empresa
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtEmpresa"
+                      id="TxtEmpresa"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia1Empresa}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNumeroTelefonico"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Número Teléfonico
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia1CorreoElectronico}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Referencia #2
+                  </h3>
+                </div>
+                <div className="grid grid-cols-6 gap-6">
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNombre"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Nombre
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtNombre"
+                      id="TxtNombre"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia2Nombre}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtEmpresa"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Empresa
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtEmpresa"
+                      id="TxtEmpresa"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia2Empresa}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNumeroTelefonico"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Número Teléfonico
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia2CorreoElectronico}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Referencia #3 (Opcional)
+                  </h3>
+                </div>
+                <div className="grid grid-cols-6 gap-6">
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNombre"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Nombre
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtNombre"
+                      id="TxtNombre"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia3Nombre}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtEmpresa"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Empresa
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtEmpresa"
+                      id="TxtEmpresa"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia3Empresa}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNumeroTelefonico"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Número Teléfonico
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia3CorreoElectronico}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

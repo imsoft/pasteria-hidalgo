@@ -53,26 +53,26 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
   };
 
   const agregarCheckInPersonal = async (
-    idFranquicia: string,
-    idSucursal: string,
+    franquicias: string,
+    sucursales: string,
     nombre: string,
     fecha: string,
-    idPersonal: string,
     horaDeIngreso: string,
     horaDeSalida: string,
+    sucursalOFranquicia: string,
     showNotificacion = false
   ) => {
     try {
       const { data } = await entriesApi.post<CheckInPersonal>(
         "/checksInPersonal",
         {
-          idFranquicia,
-          idSucursal,
+          franquicias,
+          sucursales,
           nombre,
           fecha,
-          idPersonal,
           horaDeIngreso,
           horaDeSalida,
+          sucursalOFranquicia,
         }
       );
       dispatch({
@@ -97,13 +97,13 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
   const actualizarCheckInPersonal = async (
     {
       _id,
-      idFranquicia,
-      idSucursal,
+      franquicias,
+      sucursales,
       nombre,
       fecha,
-      idPersonal,
       horaDeIngreso,
       horaDeSalida,
+      sucursalOFranquicia,
     }: CheckInPersonal,
     showNotificacion = false
   ) => {
@@ -111,13 +111,13 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
       const { data } = await entriesApi.put<CheckInPersonal>(
         `/checksInPersonal/${_id}`,
         {
-          idFranquicia,
-          idSucursal,
+          franquicias,
+          sucursales,
           nombre,
           fecha,
-          idPersonal,
           horaDeIngreso,
           horaDeSalida,
+          sucursalOFranquicia,
         }
       );
       dispatch({

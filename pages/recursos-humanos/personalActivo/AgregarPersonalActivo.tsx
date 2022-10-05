@@ -1,14 +1,18 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 
+import { CandidatosContext } from "../../../context/recursos-humanos/candidatos";
+import { PuestosEmpresa } from "../../../interfaces";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-export default function AgregarPersonalActivo() {
+const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
 
+export default function AgregarPersonalActivo() {
   const router = useRouter();
 
   const { agregarPersonalActivo } = useContext(PersonalActivoContext);
@@ -18,29 +22,45 @@ export default function AgregarPersonalActivo() {
   const [inputFechaDeContratacion, setInputFechaDeNacimiento] = useState("");
   const [inputNoContrato, setInputNoContrato] = useState("");
   const [inputNoExpediente, setInputNoExpediente] = useState("");
+  const [inputBajaTemporal, setInputBajaTemporal] = useState("No");
 
   const [touched, setTouched] = useState(false);
 
+  const { candidatos } = useContext(CandidatosContext);
+  const candidatosMemo = useMemo(() => candidatos, [candidatos]);
+
   const MySwal = withReactContent(Swal);
 
-  const onTextFieldChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedNombre = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputNombre(event.target.value);
   };
 
-  const onTextFieldChangedPuesto = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputDescripcionDelPuesto(event.target.value);
+  const onTextFieldChangedPuesto = (event: ChangeEvent<HTMLSelectElement>) => {
+    setInputDescripcionDelPuesto(event.target.value as PuestosEmpresa);
   };
 
-  const onTextFieldChangedFechaDeContratacion = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedFechaDeContratacion = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputFechaDeNacimiento(event.target.value);
   };
 
-  const onTextFieldChangedNoContrato = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedNoContrato = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputNoContrato(event.target.value);
   };
 
-  const onTextFieldChangedNoExpediente = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedNoExpediente = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputNoExpediente(event.target.value);
+  };
+
+  const onTextFieldChangedBajaTemporal = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputBajaTemporal(event.target.value);
   };
 
   const onSave = () => {
@@ -49,9 +69,12 @@ export default function AgregarPersonalActivo() {
       inputPuesto.length === 0 &&
       inputFechaDeContratacion.length === 0 &&
       inputNoContrato.length === 0 &&
-      inputNoExpediente.length === 0
+      inputNoExpediente.length === 0 &&
+      inputBajaTemporal.length === 0
     )
       return;
+
+    console.log(inputBajaTemporal);
 
     agregarPersonalActivo(
       inputNombre,
@@ -59,6 +82,7 @@ export default function AgregarPersonalActivo() {
       inputFechaDeContratacion,
       inputNoContrato,
       inputNoExpediente,
+      inputBajaTemporal,
       true
     );
 
@@ -78,6 +102,7 @@ export default function AgregarPersonalActivo() {
     setInputFechaDeNacimiento("");
     setInputNoContrato("");
     setInputNoExpediente("");
+    setInputBajaTemporal("");
   };
 
   return (
@@ -94,38 +119,48 @@ export default function AgregarPersonalActivo() {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtNombre"
+                  htmlFor="CmbNombre"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre
                 </label>
-                <input
-                  type="text"
-                  name="TxtNombre"
-                  id="TxtNombre"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                <select
+                  id="CmbNombre"
+                  name="CmbNombre"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
                   onChange={onTextFieldChangedNombre}
                   onBlur={() => setTouched(true)}
-                />
+                >
+                  <option>Seleccione el nombre...</option>
+                  {candidatosMemo.map((candidato) => (
+                    <option key={candidato._id}> {candidato.nombre} </option>
+                  ))}
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPuesto"
+                  htmlFor="TxtDPuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Puesto
                 </label>
-                <input
-                  type="text"
-                  name="TxtPuesto"
-                  id="TxtPuesto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                <select
+                  id="CmbPuesto"
+                  name="CmbPuesto"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
                   onChange={onTextFieldChangedPuesto}
                   onBlur={() => setTouched(true)}
-                />
+                >
+                  <option>Seleccione el puesto...</option>
+                  {puestosValidos.map((puesto) => (
+                    <option key={puesto} value={puesto}>
+                      {puesto}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -180,6 +215,26 @@ export default function AgregarPersonalActivo() {
                   onChange={onTextFieldChangedNoExpediente}
                   onBlur={() => setTouched(true)}
                 />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="CmbBajaTemporal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Baja Temporal
+                </label>
+                <select
+                  id="CmbBajaTemporal"
+                  name="CmbBajaTemporal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  onBlur={() => setTouched(true)}
+                  onChange={onTextFieldChangedBajaTemporal}
+                  defaultValue="Selecciona un producto..."
+                  // disabled={true}
+                >
+                  <option>No</option>
+                </select>
               </div>
             </div>
           </div>

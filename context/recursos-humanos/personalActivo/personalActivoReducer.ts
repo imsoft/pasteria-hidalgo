@@ -38,6 +38,7 @@ export const personalActivoReducer = (
               action.payload.fechaDeContratacion;
             personalActivo.noContrato = action.payload.noContrato;
             personalActivo.noExpediente = action.payload.noExpediente;
+            personalActivo.bajaTemporal = action.payload.bajaTemporal;
           }
           return personalActivo;
         }),

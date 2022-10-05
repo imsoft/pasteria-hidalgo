@@ -11,6 +11,7 @@ interface ContextProps {
     fechaDeContratacion: string,
     noContrato: string,
     noExpediente: string,
+    bajaTemporal: string,
     showNotification?: boolean
   ) => void;
 

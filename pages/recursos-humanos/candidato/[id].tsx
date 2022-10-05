@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-import { Candidato, PuestoCandidato } from "../../../interfaces";
+import { Candidato, PuestosEmpresa } from "../../../interfaces";
 import { CandidatosContext } from "../../../context/recursos-humanos/candidatos/CandidatosContext";
 import { dbCandidato } from "../../../database";
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
@@ -10,7 +10,7 @@ import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recurs
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const puestosValidos: PuestoCandidato[] = ["Administrador", "Chef", "Operador"];
+const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
 
 interface Props {
   candidato: Candidato;
@@ -35,8 +35,44 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
   const [inputNoCartaDePolicia, setInputNoCartaDePolicia] = useState(
     candidato.noCartaDePolicia
   );
-
-  const [puesto, setPuesto] = useState<PuestoCandidato>(candidato.puesto);
+  const [puesto, setPuesto] = useState<PuestosEmpresa>(candidato.puesto);
+  const [inputCelular, setInputCelular] = useState(candidato.celular);
+  const [inputContactoDeEmergencia, setInputContactoDeEmergencia] = useState(
+    candidato.contactoDeEmergencia
+  );
+  const [inputCorreoElectronico, setInputCorreoElectronico] = useState(
+    candidato.correoElectronico
+  );
+  const [inputReferencia1Nombre, setInputReferencia1Nombre] = useState(
+    candidato.referencia1Nombre
+  );
+  const [inputReferencia1Empresa, setInputReferencia1Empresa] = useState(
+    candidato.referencia1Empresa
+  );
+  const [
+    inputReferencia1CorreoElectronico,
+    setInputReferencia1CorreoElectronico,
+  ] = useState(candidato.referencia1CorreoElectronico);
+  const [inputReferencia2Nombre, setInputReferencia2Nombre] = useState(
+    candidato.referencia2Nombre
+  );
+  const [inputReferencia2Empresa, setInputReferencia2Empresa] = useState(
+    candidato.referencia2Empresa
+  );
+  const [
+    inputReferencia2CorreoElectronico,
+    setInputReferencia2CorreoElectronico,
+  ] = useState(candidato.referencia2CorreoElectronico);
+  const [inputReferencia3Nombre, setInputReferencia3Nombre] = useState(
+    candidato.referencia3Nombre
+  );
+  const [inputReferencia3Empresa, setInputReferencia3Empresa] = useState(
+    candidato.referencia3Empresa
+  );
+  const [
+    inputReferencia3CorreoElectronico,
+    setInputReferencia3CorreoElectronico,
+  ] = useState(candidato.referencia3CorreoElectronico);
 
   const MySwal = withReactContent(Swal);
 
@@ -87,7 +123,77 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
   };
 
   const onStatusChanged = (event: ChangeEvent<HTMLSelectElement>) => {
-    setPuesto(event.target.value as PuestoCandidato);
+    setPuesto(event.target.value as PuestosEmpresa);
+  };
+
+  const onInputValueChangedCelular = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputCelular(event.target.value);
+  };
+
+  const onInputValueChangedContactoDeEmergencia = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputContactoDeEmergencia(event.target.value);
+  };
+
+  const onInputValueChangedCorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputCorreoElectronico(event.target.value);
+  };
+
+  const onInputValueChangedReferencia1Nombre = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia1Nombre(event.target.value);
+  };
+
+  const onInputValueChangedReferencia1Empresa = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia1Empresa(event.target.value);
+  };
+
+  const onInputValueChangedReferencia1CorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia1CorreoElectronico(event.target.value);
+  };
+
+  const onInputValueChangedReferencia2Nombre = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia2Nombre(event.target.value);
+  };
+
+  const onInputValueChangedReferencia2Empresa = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia2Empresa(event.target.value);
+  };
+
+  const onInputValueChangedReferencia2CorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia2CorreoElectronico(event.target.value);
+  };
+
+  const onInputValueChangedReferencia3Nombre = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia3Nombre(event.target.value);
+  };
+
+  const onInputValueChangedReferencia3Empresa = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia3Empresa(event.target.value);
+  };
+
+  const onInputValueChangedReferencia3CorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia3CorreoElectronico(event.target.value);
   };
 
   const onSave = () => {
@@ -98,8 +204,20 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
       inputFechaDeNacimiento.trim().length === 0 &&
       inputDomicilio.trim().length === 0 &&
       inputCurp.trim().length === 0 &&
-      inputNoImss.trim().length === 0 &&
-      inputNoCartaDePolicia.trim().length === 0
+      inputNoImss?.trim().length === 0 &&
+      inputNoCartaDePolicia.trim().length === 0 &&
+      inputCelular.trim().length === 0 &&
+      inputContactoDeEmergencia.trim().length === 0 &&
+      inputCorreoElectronico.trim().length === 0 &&
+      inputReferencia1Nombre.trim().length === 0 &&
+      inputReferencia1Empresa.trim().length === 0 &&
+      inputReferencia1CorreoElectronico.trim().length === 0 &&
+      inputReferencia2Nombre.trim().length === 0 &&
+      inputReferencia2Empresa.trim().length === 0 &&
+      inputReferencia2CorreoElectronico.trim().length === 0 &&
+      inputReferencia3Nombre?.trim().length === 0 &&
+      inputReferencia3Empresa?.trim().length === 0 &&
+      inputReferencia3CorreoElectronico?.trim().length === 0
     )
       return;
 
@@ -124,6 +242,18 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
           curp: inputCurp,
           noImss: inputNoImss,
           noCartaDePolicia: inputNoCartaDePolicia,
+          celular: inputCelular,
+          contactoDeEmergencia: inputContactoDeEmergencia,
+          correoElectronico: inputCorreoElectronico,
+          referencia1Nombre: inputReferencia1Nombre,
+          referencia1Empresa: inputReferencia1Empresa,
+          referencia1CorreoElectronico: inputReferencia1CorreoElectronico,
+          referencia2Nombre: inputReferencia2Nombre,
+          referencia2Empresa: inputReferencia2Empresa,
+          referencia2CorreoElectronico: inputReferencia2CorreoElectronico,
+          referencia3Nombre: inputReferencia3Nombre,
+          referencia3Empresa: inputReferencia3Empresa,
+          referencia3CorreoElectronico: inputReferencia3CorreoElectronico,
         };
 
         actualizarCandidato(actualizadoCandidato, true);
@@ -317,6 +447,259 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                   onChange={onInputValueChangedNoCartaDePolicia}
                   // onBlur={() => setTouched(true)}
                 />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtCelular"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Celular
+                </label>
+                <input
+                  type="tel"
+                  name="TxtCelular"
+                  id="TxtCelular"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputCelular}
+                  onChange={onInputValueChangedCelular}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtContactoDeEmergencia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Contacto de emergencia
+                </label>
+                <input
+                  type="tel"
+                  name="TxtContactoDeEmergencia"
+                  id="TxtContactoDeEmergencia"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputContactoDeEmergencia}
+                  onChange={onInputValueChangedContactoDeEmergencia}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtCorreoElectronico"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Correo electrónico
+                </label>
+                <input
+                  type="email"
+                  name="TxtCorreoElectronico"
+                  id="TxtCorreoElectronico"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputCorreoElectronico}
+                  onChange={onInputValueChangedCorreoElectronico}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
+            </div>
+
+            <div className="shadow sm:rounded-md sm:overflow-hidden">
+              <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
+                <div>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Referencias
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Nota: Obligatorio dos referencias y una opcional.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Referencia #1
+                  </h3>
+                </div>
+                <div className="grid grid-cols-6 gap-6">
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNombre"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Nombre
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtNombre"
+                      id="TxtNombre"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia1Nombre}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtEmpresa"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Empresa
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtEmpresa"
+                      id="TxtEmpresa"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia1Empresa}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNumeroTelefonico"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Número Teléfonico
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia1CorreoElectronico}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Referencia #2
+                  </h3>
+                </div>
+                <div className="grid grid-cols-6 gap-6">
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNombre"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Nombre
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtNombre"
+                      id="TxtNombre"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia2Nombre}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtEmpresa"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Empresa
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtEmpresa"
+                      id="TxtEmpresa"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia2Empresa}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNumeroTelefonico"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Número Teléfonico
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia2CorreoElectronico}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Referencia #3 (Opcional)
+                  </h3>
+                </div>
+                <div className="grid grid-cols-6 gap-6">
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNombre"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Nombre
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtNombre"
+                      id="TxtNombre"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia3Nombre}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtEmpresa"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Empresa
+                    </label>
+                    <input
+                      type="text"
+                      name="TxtEmpresa"
+                      id="TxtEmpresa"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia3Empresa}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtNumeroTelefonico"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Número Teléfonico
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia3CorreoElectronico}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

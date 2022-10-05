@@ -1,43 +1,46 @@
-import React, { ChangeEvent, useContext, useState } from "react";
+import React, { ChangeEvent, useContext, useMemo, useState } from "react";
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkInPersonal";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
+import { PersonalActivoContext } from '../../../context/recursos-humanos/personalActivo/PersonalActivoContext';
 
 export default function CheckInDePersonal() {
-
   const router = useRouter();
 
-  const { agregarCheckInPersonal } =
-    useContext(CheckInPersonalContext);
+  const { agregarCheckInPersonal } = useContext(CheckInPersonalContext);
 
-  const [inputIdFranquicia, setInputIdFranquicia] = useState('');
-  const [inputIdSucursal, setInputIdSucursal] = useState('');
-  const [inputNombre, setInputNombre] = useState('');
-  const [inputFecha, setInputFecha] = useState('');
-  const [inputIdPersonal, setInputIdPersonal] = useState('');
-  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState('');
-  const [inputHoraDeSalida, setInputHoraDeSalida] = useState('');
+  const { personasActivas } = useContext(PersonalActivoContext);
+  const personasActivasMemo = useMemo(() => personasActivas, [personasActivas]);
+
+  const [inputFranquicias, setInputFranquicias] = useState("");
+  const [inputSucursales, setInputSucursales] = useState("");
+  const [inputNombre, setInputNombre] = useState("");
+  const [inputFecha, setInputFecha] = useState("");
+  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState("");
+  const [inputHoraDeSalida, setInputHoraDeSalida] = useState("");
+
+  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
 
   const [touched, setTouched] = useState(false);
 
   const MySwal = withReactContent(Swal);
 
-  const onTextFieldChangedIdFranquicia = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputIdFranquicia(event.target.value);
+  const onTextFieldChangedFranquicias = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputFranquicias(event.target.value);
   };
 
-  const onTextFieldChangedIdSucursal = (
-    event: ChangeEvent<HTMLInputElement>
+  const onTextFieldChangedSucursales = (
+    event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputIdSucursal(event.target.value);
+    setInputSucursales(event.target.value);
   };
 
-  const onTextFieldChangedNombre = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedNombre = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputNombre(event.target.value);
   };
 
@@ -45,12 +48,6 @@ export default function CheckInDePersonal() {
     setInputFecha(event.target.value);
   };
 
-  const onTextFieldChangedIdPersonal = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputIdPersonal(event.target.value);
-  };
-  
   const onTextFieldChangedHoraDeIngreso = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
@@ -63,26 +60,32 @@ export default function CheckInDePersonal() {
     setInputHoraDeSalida(event.target.value);
   };
 
+  const onTextFieldChangedSucursalOFranquicia = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursalOFranquicia(event.target.value);
+  };
+
   const onSave = () => {
     if (
-      inputIdFranquicia.length === 0 &&
-      inputIdSucursal.length === 0 &&
+      inputFranquicias.length === 0 &&
+      inputSucursales.length === 0 &&
       inputNombre.length === 0 &&
       inputFecha.length === 0 &&
-      inputIdPersonal.length === 0 &&
       inputHoraDeIngreso.length === 0 &&
-      inputHoraDeSalida.length === 0
+      inputHoraDeSalida.length === 0 &&
+      inputSucursalOFranquicia.length === 0
     )
       return;
 
-      agregarCheckInPersonal(
-      inputIdFranquicia,
-      inputIdSucursal,
+    agregarCheckInPersonal(
+      inputFranquicias,
+      inputSucursales,
       inputNombre,
       inputFecha,
-      inputIdPersonal,
       inputHoraDeIngreso,
       inputHoraDeSalida,
+      inputSucursalOFranquicia,
       true
     );
 
@@ -96,13 +99,13 @@ export default function CheckInDePersonal() {
 
     router.push("/recursos-humanos/checkInPersonal/VerCheckInPersonal");
 
-    setInputIdFranquicia("");
-    setInputIdSucursal("");
+    setInputFranquicias("");
+    setInputSucursales("");
     setInputNombre("");
     setInputFecha("");
-    setInputIdPersonal("");
     setInputHoraDeIngreso("");
     setInputHoraDeSalida("");
+    setInputSucursalOFranquicia("");
   };
 
   return (
@@ -116,60 +119,99 @@ export default function CheckInDePersonal() {
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
+
+            <div>
+              <label className="text-base font-medium text-gray-900">
+                Seleccione una opción
+              </label>
+              <p className="text-sm leading-5 text-gray-500">
+                ¿Sucursal o Franquicia?
+              </p>
+
+              <div className="col-span-6 sm:col-span-3">
+                <select
+                  id="CmbNombre"
+                  name="CmbNombre"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedSucursalOFranquicia}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione una opción...</option>
+                  <option>Sucursal</option>
+                  <option>Franquicia</option>
+                </select>
+              </div>
+            </div>
+
             <div className="grid grid-cols-6 gap-6">
-
-              <div className="col-span-6 sm:col-span-3">
+            <div className={` ${inputSucursalOFranquicia === "Franquicia" || 'hidden'} col-span-6`}>
                 <label
-                  htmlFor="TxtIdFranquicia"
+                  htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Id Franquicia
+                  Franquicia
                 </label>
-                <input
-                  type="text"
-                  name="TxtIdFranquicia"
-                  id="TxtIdFranquicia"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedIdFranquicia}
+                <select
+                  id="CmbFranquicia"
+                  name="CmbFranquicia"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedFranquicias}
                   onBlur={() => setTouched(true)}
-                />
+                >
+                  <option>Seleccione la franquicia...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
+
+                  
+
+              <div className={` ${inputSucursalOFranquicia === "Sucursal" || 'hidden'} col-span-6`}>
+                <label
+                  htmlFor="CmbSucursal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Sucursal
+                </label>
+                <select
+                  id="CmbSucursal"
+                  name="CmbSucursal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedSucursales}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la sucursal...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                  
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtIdSucursal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Id Sucursal
-                </label>
-                <input
-                  type="text"
-                  name="TxtIdSucursal"
-                  id="TxtIdSucursal"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedIdSucursal}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-              
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtNombre"
+                  htmlFor="CmbNombre"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre
                 </label>
-                <input
-                  type="text"
-                  name="TxtNombre"
-                  id="TxtNombre"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                <select
+                  id="CmbNombre"
+                  name="CmbNombre"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
                   onChange={onTextFieldChangedNombre}
                   onBlur={() => setTouched(true)}
-                />
+                >
+                  <option>Seleccione el nombre...</option>
+                  {personasActivasMemo.map((personaActiva) => (
+                    <option key={personaActiva._id}> {personaActiva.nombre} </option>
+                  ))}
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -192,24 +234,6 @@ export default function CheckInDePersonal() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtIdPersonal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Id Personal
-                </label>
-                <input
-                  type="text"
-                  name="TxtIdPersonal"
-                  id="TxtIdPersonal"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedIdPersonal}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
                   htmlFor="TxtHoraDeIngreso"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -225,7 +249,7 @@ export default function CheckInDePersonal() {
                   onBlur={() => setTouched(true)}
                 />
               </div>
-              
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtHoraDeSalida"
@@ -243,7 +267,6 @@ export default function CheckInDePersonal() {
                   onBlur={() => setTouched(true)}
                 />
               </div>
-            
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -259,4 +282,4 @@ export default function CheckInDePersonal() {
       </form>
     </SidebarLayoutRecursosHumanos>
   );
-};
+}

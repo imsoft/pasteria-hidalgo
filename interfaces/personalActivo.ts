@@ -1,8 +1,11 @@
+import { PuestosEmpresa } from '.';
+
 export interface PersonalActivo {
   _id: string;
   nombre: string;
-  puesto: string;
+  puesto: PuestosEmpresa;
   fechaDeContratacion: string;
   noContrato: string;
   noExpediente: string;
+  bajaTemporal: string;
 }
