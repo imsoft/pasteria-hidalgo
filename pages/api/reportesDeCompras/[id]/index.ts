@@ -62,44 +62,36 @@ const updateReporteDeCompra = async (
   }
 
   const {
-    idReporteDeCompra = reporteDeCompraToUpdate.idReporteDeCompra,
-    codigoDeReporte = reporteDeCompraToUpdate.codigoDeReporte,
     fechaDeCompra = reporteDeCompraToUpdate.fechaDeCompra,
     credito = reporteDeCompraToUpdate.credito,
-    idMateriaPrima = reporteDeCompraToUpdate.idMateriaPrima,
     materiaPrima = reporteDeCompraToUpdate.materiaPrima,
-    cantidad = reporteDeCompraToUpdate.cantidad,
     unidades = reporteDeCompraToUpdate.unidades,
-    idProveedor = reporteDeCompraToUpdate.idProveedor,
     nombreProveedor = reporteDeCompraToUpdate.nombreProveedor,
-    precioPorUnidad = reporteDeCompraToUpdate.precioPorUnidad,
-    precioTotalDelProducto = reporteDeCompraToUpdate.precioTotalDelProducto,
-    precioTotalDelCompra = reporteDeCompraToUpdate.precioTotalDelCompra,
     tempetatura = reporteDeCompraToUpdate.tempetatura,
     caducidad = reporteDeCompraToUpdate.caducidad,
     factura = reporteDeCompraToUpdate.factura,
+    cantidad = reporteDeCompraToUpdate.cantidad,
+    precioPorUnidad = reporteDeCompraToUpdate.precioPorUnidad,
+    precioTotalDelProducto = reporteDeCompraToUpdate.precioTotalDelProducto,
+    precioTotalDelCompra = reporteDeCompraToUpdate.precioTotalDelCompra,
   } = req.body;
 
   try {
     const updatedReporteDeCompra = await ReporteDeCompra.findByIdAndUpdate(
       id,
       {
-        idReporteDeCompra,
-        codigoDeReporte,
         fechaDeCompra,
         credito,
-        idMateriaPrima,
         materiaPrima,
-        cantidad,
         unidades,
-        idProveedor,
         nombreProveedor,
-        precioPorUnidad,
-        precioTotalDelProducto,
-        precioTotalDelCompra,
         tempetatura,
         caducidad,
         factura,
+        cantidad,
+        precioPorUnidad,
+        precioTotalDelProducto,
+        precioTotalDelCompra,
       },
       { runValidators: true, new: true }
     );

@@ -23,9 +23,11 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
   const [inputNombre, setInputNombre] = useState(proveedor.nombre);
   const [inputDireccion, setInputDireccion] = useState(proveedor.direccion);
   const [inputTelefono, setInputTelefono] = useState(proveedor.telefono);
-  const [inputHorarioAtencion, setInputHorarioAtencion] = useState(proveedor.horarioAtencion);
+  const [inputHorarioDeApertura, setInputHorarioDeApertura] = useState(proveedor.horarioDeApertura);
+  const [inputHorarioDeCierre, setInputHorarioDeCierre] = useState(proveedor.horarioDeCierre);
   const [inputProductosQueSeCompran, setInputProductosQueSeCompran] = useState(proveedor.productosQueSeCompran);
   const [inputEntregasADomicilio, setInputEntregasADomicilio] = useState(proveedor.entregasADomicilio);
+  const [inputRfc, setInputRfc] = useState(proveedor.rfc);
 
   const MySwal = withReactContent(Swal);
 
@@ -47,10 +49,16 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
     setInputTelefono(event.target.value);
   };
 
-  const onInputValueChangedHorarioAtencion = (
+  const onInputValueChangedHorarioDeApertura = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputHorarioAtencion(event.target.value);
+    setInputHorarioDeApertura(event.target.value);
+  };
+
+  const onInputValueChangedHorarioDeCierre = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputHorarioDeCierre(event.target.value);
   };
 
   const onInputValueChangedProductosQueSeCompran = (event: ChangeEvent<HTMLInputElement>) => {
@@ -61,14 +69,20 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
     setInputEntregasADomicilio(event.target.value);
   };
 
+  const onInputValueChangedRfc = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputRfc(event.target.value);
+  };
+
   const onSave = () => {
     if (
       inputNombre.trim().length === 0 &&
       inputDireccion.trim().length === 0 &&
       inputTelefono.trim().length === 0 &&
-      inputHorarioAtencion.trim().length === 0 &&
+      inputHorarioDeApertura.trim().length === 0 &&
+      inputHorarioDeCierre.trim().length === 0 &&
       inputProductosQueSeCompran.trim().length === 0 &&
-      inputEntregasADomicilio.trim().length === 0
+      inputEntregasADomicilio.trim().length === 0 &&
+      inputRfc.trim().length === 0
     )
       return;
 
@@ -88,9 +102,11 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
           nombre: inputNombre,
           direccion: inputDireccion,
           telefono: inputTelefono,
-          horarioAtencion: inputHorarioAtencion,
+          horarioDeApertura: inputHorarioDeApertura,
+          horarioDeCierre: inputHorarioDeCierre,
           productosQueSeCompran: inputProductosQueSeCompran,
           entregasADomicilio: inputEntregasADomicilio,
+          rfc: inputRfc,
         };
 
         actualizarProveedor(actualizadoProveedor, true);
@@ -188,19 +204,38 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
               
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtHorarioAtencion"
+                  htmlFor="TxtHorarioDeApertura"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Horario Atención
+                  Horario De Apertura
                 </label>
                 <input
                   type="time"
-                  name="TxtHorarioAtencion"
-                  id="TxtHorarioAtencion"
+                  name="TxtHorarioDeApertura"
+                  id="TxtHorarioDeApertura"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputHorarioAtencion}
-                  onChange={onInputValueChangedHorarioAtencion}
+                  value={inputHorarioDeApertura}
+                  onChange={onInputValueChangedHorarioDeApertura}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtHorarioDeCierre"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Horario De Cierre
+                </label>
+                <input
+                  type="time"
+                  name="TxtHorarioDeCierre"
+                  id="TxtHorarioDeCierre"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputHorarioDeCierre}
+                  onChange={onInputValueChangedHorarioDeCierre}
                   // onBlur={() => setTouched(true)}
                 />
               </div>
@@ -242,6 +277,26 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtRfc"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  RFC
+                </label>
+                <input
+                  type="text"
+                  name="TxtRfc"
+                  id="TxtRfc"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputRfc}
+                  onChange={onInputValueChangedRfc}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
+
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

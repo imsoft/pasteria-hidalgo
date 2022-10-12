@@ -27,7 +27,12 @@ const ListaProveedores: FC<Props> = ({ proveedor }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {proveedor.horarioAtencion}
+            {proveedor.horarioDeApertura}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {proveedor.horarioDeCierre}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -35,6 +40,9 @@ const ListaProveedores: FC<Props> = ({ proveedor }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">{proveedor.entregasADomicilio}</div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">{proveedor.rfc}</div>
         </td>
       </tr>
     </tbody>

@@ -6,22 +6,18 @@ interface ContextProps {
 
   //Métodos
   agregarReporteDeCompra: (
-    idReporteDeCompra: string,
-    codigoDeReporte: string,
-    credito: string,
     fechaDeCompra: string,
-    idMateriaPrima: string,
+    credito: string,
     materiaPrima: string,
-    cantidad: string,
     unidades: string,
-    idProveedor: string,
     nombreProveedor: string,
-    precioPorUnidad: string,
-    precioTotalDelProducto: string,
-    precioTotalDelCompra: string,
     tempetatura: string,
     caducidad: string,
     factura: string,
+    cantidad: number,
+    precioPorUnidad: number,
+    precioTotalDelProducto: number,
+    precioTotalDelCompra: number,
     showNotificacion?: boolean
   ) => void;
 

@@ -5,14 +5,18 @@ export interface IAcondicionamientoDeSucursal
   extends AcondicionamientoDeSucursal {}
 
 const acondicionamientoDeSucursalesSchema = new Schema({
+  sucursalOFranquicia: { type: String, required: true },
+  sucursales: { type: String, required: false },
+  franquicias: { type: String, required: false },
   producto: { type: String, required: true },
   fechaDeCompra: { type: String, required: true },
   descripcionDelProducto: { type: String, required: true },
-  precioDeCompra: { type: String, required: true },
   fechaEstimadaDeEntrega: { type: String, required: true },
   proveedor: { type: String, required: true },
   factura: { type: String, required: true },
-  totalAcomulado: { type: String, required: true },
+  precioDeCompra: { type: Number, required: true },
+  cantidad: { type: Number, required: true },
+  totalAcomulado: { type: Number, required: true },
 });
 
 const AcondicionamientoDeSucursalSchemaModel: Model<IAcondicionamientoDeSucursal> =

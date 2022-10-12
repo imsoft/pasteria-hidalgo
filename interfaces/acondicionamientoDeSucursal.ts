@@ -1,13 +1,17 @@
 export interface AcondicionamientoDeSucursal {
   _id: string;
+  sucursalOFranquicia: string;
+  sucursales?: string;
+  franquicias?: string;
   producto: string;
   fechaDeCompra: string;
   descripcionDelProducto: string;
-  precioDeCompra: string;
   fechaEstimadaDeEntrega: string;
   proveedor: string;
   factura: PuedeFacturar;
-  totalAcomulado: string;
+  precioDeCompra: number;
+  cantidad: number;
+  totalAcomulado: number;
 }
 
 export type PuedeFacturar = "Si" | "No";

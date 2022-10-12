@@ -1,19 +1,18 @@
 export interface ReporteDeCompra {
   _id: string;
-  idReporteDeCompra: string;
-  codigoDeReporte: string;
-  credito: string;
   fechaDeCompra: string;
-  idMateriaPrima: string;
+  credito: string;
   materiaPrima: string;
-  cantidad: string;
-  unidades: string;
-  idProveedor: string;
+  unidades: Unidades;
   nombreProveedor: string;
-  precioPorUnidad: string;
-  precioTotalDelProducto: string;
-  precioTotalDelCompra: string;
-  tempetatura: string;
+  tempetatura: Temperatura;
   caducidad: string;
   factura: string;
+  cantidad: number;
+  precioPorUnidad: number;
+  precioTotalDelProducto: number;
+  precioTotalDelCompra: number;
 }
+
+export type Temperatura = "Ambiente" | "Refrigerado" | "Congelado";
+export type Unidades = "Gramos" | "Kilogramos" | "Mililitros" | "Litros";

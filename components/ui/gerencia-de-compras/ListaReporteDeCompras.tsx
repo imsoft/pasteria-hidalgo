@@ -20,14 +20,6 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
       >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.idReporteDeCompra}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="text-gray-900">{reporteDeCompra.codigoDeReporte}</div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
             {reporteDeCompra.fechaDeCompra}
           </div>
         </td>
@@ -38,17 +30,7 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.idMateriaPrima}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
             {reporteDeCompra.materiaPrima}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.cantidad}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -58,27 +40,7 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.idProveedor}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
             {reporteDeCompra.nombreProveedor}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioPorUnidad}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioTotalDelProducto}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioTotalDelCompra}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -94,6 +56,26 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
             {reporteDeCompra.factura}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {reporteDeCompra.cantidad}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {reporteDeCompra.precioPorUnidad}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {reporteDeCompra.precioTotalDelProducto}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {reporteDeCompra.precioTotalDelCompra}
           </div>
         </td>
       </tr>

@@ -1,10 +1,10 @@
 export interface CheckInPersonal {
   _id: string;
-  franquicias: string;
-  sucursales: string;
+  sucursalOFranquicia: string;
   nombre: string;
   fecha: string;
   horaDeIngreso: string;
   horaDeSalida: string;
-  sucursalOFranquicia: string;
+  sucursales?: string;
+  franquicias?: string;
 }

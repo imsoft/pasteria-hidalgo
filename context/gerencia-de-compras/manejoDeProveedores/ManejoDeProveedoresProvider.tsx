@@ -56,9 +56,11 @@ export const ProveedoresProvider: FC<Props> = ({ children }) => {
     nombre: string,
     direccion: string,
     telefono: string,
-    horarioAtencion: string,
+    horarioDeApertura: string,
+    horarioDeCierre: string,
     productosQueSeCompran: string,
     entregasADomicilio: string,
+    rfc: string,
     showNotificacion = false
   ) => {
     try {
@@ -66,9 +68,11 @@ export const ProveedoresProvider: FC<Props> = ({ children }) => {
         nombre,
         direccion,
         telefono,
-        horarioAtencion,
+        horarioDeApertura,
+        horarioDeCierre,
         productosQueSeCompran,
         entregasADomicilio,
+        rfc,
       });
       dispatch({ type: "[Proveedor] Agregar-Proveedor", payload: data });
 
@@ -92,9 +96,11 @@ export const ProveedoresProvider: FC<Props> = ({ children }) => {
       nombre,
       direccion,
       telefono,
-      horarioAtencion,
+      horarioDeApertura,
+      horarioDeCierre,
       productosQueSeCompran,
       entregasADomicilio,
+      rfc,
     }: Proveedor,
     showNotificacion = false
   ) => {
@@ -103,9 +109,11 @@ export const ProveedoresProvider: FC<Props> = ({ children }) => {
         nombre,
         direccion,
         telefono,
-        horarioAtencion,
+        horarioDeApertura,
+        horarioDeCierre,
         productosQueSeCompran,
         entregasADomicilio,
+        rfc,
       });
       dispatch({ type: "[Proveedor] Actualizar-Proveedor", payload: data });
 

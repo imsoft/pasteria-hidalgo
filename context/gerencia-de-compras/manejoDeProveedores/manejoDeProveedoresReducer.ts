@@ -26,9 +26,11 @@ export const proveedoresReducer = (
             proveedor.nombre = action.payload.nombre;
             proveedor.direccion = action.payload.direccion;
             proveedor.telefono = action.payload.telefono;
-            proveedor.horarioAtencion = action.payload.horarioAtencion;
+            proveedor.horarioDeApertura = action.payload.horarioDeApertura;
+            proveedor.horarioDeCierre = action.payload.horarioDeCierre;
             proveedor.productosQueSeCompran = action.payload.productosQueSeCompran;
             proveedor.entregasADomicilio = action.payload.entregasADomicilio;
+            proveedor.rfc = action.payload.rfc;
           }
           return proveedor;
         }),

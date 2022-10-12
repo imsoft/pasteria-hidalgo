@@ -23,22 +23,18 @@ export const reportesDeComprasReducer = (
         ...state,
         reportesDeCompras: state.reportesDeCompras.map((reporteDeCompra) => {
           if (reporteDeCompra._id === action.payload._id) {
-            reporteDeCompra.idReporteDeCompra = action.payload.idReporteDeCompra;
-            reporteDeCompra.codigoDeReporte = action.payload.codigoDeReporte;
             reporteDeCompra.fechaDeCompra = action.payload.fechaDeCompra;
             reporteDeCompra.credito = action.payload.credito;
-            reporteDeCompra.idMateriaPrima = action.payload.idMateriaPrima;
             reporteDeCompra.materiaPrima = action.payload.materiaPrima;
-            reporteDeCompra.cantidad = action.payload.cantidad;
             reporteDeCompra.unidades = action.payload.unidades;
-            reporteDeCompra.idProveedor = action.payload.idProveedor;
             reporteDeCompra.nombreProveedor = action.payload.nombreProveedor;
-            reporteDeCompra.precioPorUnidad = action.payload.precioPorUnidad;
-            reporteDeCompra.precioTotalDelProducto = action.payload.precioTotalDelProducto;
-            reporteDeCompra.precioTotalDelCompra = action.payload.precioTotalDelCompra;
             reporteDeCompra.tempetatura = action.payload.tempetatura;
             reporteDeCompra.caducidad = action.payload.caducidad;
             reporteDeCompra.factura = action.payload.factura;
+            reporteDeCompra.cantidad = action.payload.cantidad;
+            reporteDeCompra.precioPorUnidad = action.payload.precioPorUnidad;
+            reporteDeCompra.precioTotalDelProducto = action.payload.precioTotalDelProducto;
+            reporteDeCompra.precioTotalDelCompra = action.payload.precioTotalDelCompra;
           }
           return reporteDeCompra;
         }),

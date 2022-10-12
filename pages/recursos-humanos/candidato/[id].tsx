@@ -287,7 +287,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Agregar Candidato
+                Actualizar / Eliminar Candidato
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
@@ -538,6 +538,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia1Nombre}
+                      value={inputReferencia1Nombre}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -556,24 +557,26 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia1Empresa}
+                      value={inputReferencia1Empresa}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtCorreoElectronico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Número Teléfonico
+                      Correo Electrónico
                     </label>
                     <input
-                      type="tel"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
+                      type="email"
+                      name="TxtCorreoElectronico"
+                      id="TxtCorreoElectronico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia1CorreoElectronico}
+                      value={inputReferencia1CorreoElectronico}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -599,6 +602,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia2Nombre}
+                      value={inputReferencia2Nombre}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -617,24 +621,26 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia2Empresa}
+                      value={inputReferencia2Empresa}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtCorreoElectronico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Número Teléfonico
+                      Correo Electrónico
                     </label>
                     <input
-                      type="tel"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
+                      type="email"
+                      name="TxtCorreoElectronico"
+                      id="TxtCorreoElectronico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia2CorreoElectronico}
+                      value={inputReferencia2CorreoElectronico}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -660,6 +666,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia3Nombre}
+                      value={inputReferencia3Nombre}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -678,24 +685,26 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia3Empresa}
+                      value={inputReferencia3Empresa}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtCorreoElectronico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Número Teléfonico
+                      Correo Electrónico
                     </label>
                     <input
-                      type="tel"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
+                      type="email"
+                      name="TxtCorreoElectronico"
+                      id="TxtCorreoElectronico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia3CorreoElectronico}
+                      value={inputReferencia3CorreoElectronico}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>

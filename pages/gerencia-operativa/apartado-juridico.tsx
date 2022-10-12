@@ -1,6 +1,6 @@
 import { SidebarLayoutGerenciaOperativa } from "../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
-export default function ApartadoJuridico() {
+const ApartadoJuridico = () => {
   return (
     <SidebarLayoutGerenciaOperativa>
       <form action="#" method="POST">
@@ -73,3 +73,5 @@ export default function ApartadoJuridico() {
     </SidebarLayoutGerenciaOperativa>
   );
 }
+
+export default ApartadoJuridico;

@@ -14,9 +14,11 @@ export default function ManejoDeProveedores() {
   const [inputNombre, setInputNombre] = useState("");
   const [inputDireccion, setInputDireccion] = useState("");
   const [inputTelefono, setInputTelefono] = useState("");
-  const [inputHorarioAtencion, setInputHorarioAtencion] = useState("");
+  const [inputHorarioDeApertura, setInputHorarioDeApertura] = useState("");
+  const [inputHorarioDeCierre, setInputHorarioDeCierre] = useState("");
   const [inputProductosQueSeCompran, setInputProductosQueSeCompran] = useState("");
   const [inputEntregasADomicilio, setInputEntregasADomicilio] = useState("");
+  const [inputRfc, setInputRfc] = useState("");
 
   const [touched, setTouched] = useState(false);
 
@@ -34,11 +36,15 @@ export default function ManejoDeProveedores() {
     setInputTelefono(event.target.value);
   };
 
-  const onTextFieldChangedHorarioAtencion = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputHorarioAtencion(event.target.value);
+  const onTextFieldChangedHorarioDeApertura = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputHorarioDeApertura(event.target.value);
   };
 
-  const onTextFieldChangedProductosQueSeCompran = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onTextFieldChangedHorarioDeCierre = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputHorarioDeCierre(event.target.value);
+  };
+
+  const onTextFieldChangedProductosQueSeCompran = (event: ChangeEvent<HTMLInputElement>) => {
     setInputProductosQueSeCompran(event.target.value);
   };
 
@@ -46,14 +52,20 @@ export default function ManejoDeProveedores() {
     setInputEntregasADomicilio(event.target.value);
   };
 
+  const onTextFieldChangedRfc = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputRfc(event.target.value);
+  };
+
   const onSave = () => {
     if (
       inputNombre.length === 0 &&
       inputDireccion.length === 0 &&
       inputTelefono.length === 0 &&
-      inputHorarioAtencion.length === 0
-      // inputProductosQueSeCompran.length === 0 &&
-      // inputEntregasADomicilio.length === 0
+      inputHorarioDeApertura.length === 0 &&
+      inputHorarioDeCierre.length === 0 &&
+      inputProductosQueSeCompran.length === 0 &&
+      inputEntregasADomicilio.length === 0 &&
+      inputRfc.length === 0
     )
     return;
 
@@ -61,9 +73,11 @@ export default function ManejoDeProveedores() {
       inputNombre,
       inputDireccion,
       inputTelefono,
-      inputHorarioAtencion,
+      inputHorarioDeApertura,
+      inputHorarioDeCierre,
       inputProductosQueSeCompran,
       inputEntregasADomicilio,
+      inputRfc,
       true
     );
 
@@ -81,9 +95,11 @@ export default function ManejoDeProveedores() {
     setInputNombre("");
     setInputDireccion("");
     setInputTelefono("");
-    setInputHorarioAtencion("");
+    setInputHorarioDeApertura("");
+    setInputHorarioDeCierre("");
     setInputProductosQueSeCompran("");
     setInputEntregasADomicilio("");
+    setInputRfc("");
   };
 
   return (
@@ -156,18 +172,36 @@ export default function ManejoDeProveedores() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtHorarioDeAtencion"
+                  htmlFor="TxtHorarioDeApertura"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Horario de atención
+                  Horario de apertura
                 </label>
                 <input
                   type="time"
-                  name="TxtHorarioDeAtencion"
-                  id="TxtHorarioDeAtencion"
+                  name="TxtHorarioDeApertura"
+                  id="TxtHorarioDeApertura"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedHorarioAtencion}
+                  onChange={onTextFieldChangedHorarioDeApertura}
+                  onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtHorarioDeCierre"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Horario de cierre
+                </label>
+                <input
+                  type="time"
+                  name="TxtHorarioDeCierre"
+                  id="TxtHorarioDeCierre"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedHorarioDeCierre}
                   onBlur={() => setTouched(true)}
                 />
               </div>
@@ -179,19 +213,15 @@ export default function ManejoDeProveedores() {
                 >
                   Tipos de productos que se compran
                 </label>
-                <select
-                  id="CmbTiposDeProductosQueSeCompran"
-                  name="CmbTiposDeProductosQueSeCompran"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                <input
+                  type="text"
+                  name="TxtTiposDeProductosQueSeCompran"
+                  id="TxtTiposDeProductosQueSeCompran"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   onChange={onTextFieldChangedProductosQueSeCompran}
                   onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
-                >
-                  <option>Selecciona un producto...</option>
-                  <option>Masa</option>
-                  <option>Fresas</option>
-                  <option>Leche</option>
-                </select>
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -213,6 +243,24 @@ export default function ManejoDeProveedores() {
                   <option>Si</option>
                   <option>No</option>
                 </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtRfc"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  RFC
+                </label>
+                <input
+                  type="text"
+                  name="TxtRfc"
+                  id="TxtRfc"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedRfc}
+                  onBlur={() => setTouched(true)}
+                />
               </div>
 
             </div>

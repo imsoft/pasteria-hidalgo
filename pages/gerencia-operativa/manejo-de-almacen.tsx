@@ -1,5 +1,4 @@
 import { SidebarLayoutGerenciaOperativa } from "../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import Image from "next/image";
 
 const producto = [
   {
@@ -9,8 +8,6 @@ const producto = [
     unidades: "10°",
     proveedor: "Banana S.A. de C.V.",
     estado: "Suficiente",
-    imagen:
-      "https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
   },
   {
     nombreProducto: "Piña",
@@ -19,8 +16,6 @@ const producto = [
     unidades: "20°",
     proveedor: "Piña S.A. de C.V.",
     estado: "Suficiente",
-    imagen:
-      "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGklQzMlQjFhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     nombreProducto: "Jamón",
@@ -29,8 +24,6 @@ const producto = [
     unidades: "22°",
     proveedor: "Jamón S.A. de C.V.",
     estado: "Suficiente",
-    imagen:
-      "https://images.unsplash.com/photo-1529016061486-d80ad8eea08b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1840&q=80",
   },
   {
     nombreProducto: "Queso",
@@ -39,8 +32,6 @@ const producto = [
     unidades: "44°",
     proveedor: "Queso S.A. de C.V.",
     estado: "Mitad del producto",
-    imagen:
-      "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2hlZXNlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     nombreProducto: "Queso Philadelphia",
@@ -49,8 +40,6 @@ const producto = [
     unidades: "54°",
     proveedor: "Queso Philadelphia S.A. de C.V.",
     estado: "Agotado",
-    imagen:
-      "https://images.unsplash.com/photo-1442604699113-7d805614c476?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y3JlYW0lMjBjaGVlc2V8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
   },
   {
     nombreProducto: "Frambuesa",
@@ -59,8 +48,6 @@ const producto = [
     unidades: "2°",
     proveedor: "Frambuesa S.A. de C.V.",
     estado: "Suficiente",
-    imagen:
-      "https://images.unsplash.com/photo-1540416465865-1f102746ce47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8ZnJhbWJ1ZXNhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     nombreProducto: "Nutella",
@@ -69,8 +56,6 @@ const producto = [
     unidades: "5°",
     proveedor: "Nutella S.A. de C.V.",
     estado: "Mitad del producto",
-    imagen:
-      "https://images.unsplash.com/photo-1519420573924-65fcd45245f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bnV0ZWxsYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     nombreProducto: "Cajeta",
@@ -79,8 +64,6 @@ const producto = [
     unidades: "4°",
     proveedor: "Cajeta S.A. de C.V.",
     estado: "Agotado",
-    imagen:
-      "https://images.unsplash.com/photo-1568657704598-602700bd9694?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2FyYW1lbHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     nombreProducto: "Arroz",
@@ -89,8 +72,6 @@ const producto = [
     unidades: "1°",
     proveedor: "Arroz S.A. de C.V.",
     estado: "Suficiente",
-    imagen:
-      "https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmljZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   },
   {
     nombreProducto: "Fresa",
@@ -99,12 +80,10 @@ const producto = [
     unidades: "2.2°",
     proveedor: "Fresa S.A. de C.V.",
     estado: "Suficiente",
-    imagen:
-      "https://images.unsplash.com/photo-1554118879-e459bb1fe1ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZnJlc2F8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
   },
 ];
 
-export default function ManejoAlmacen() {
+const ManejoAlmacen = () => {
   return (
     <SidebarLayoutGerenciaOperativa>
       <div className="px-4 sm:px-6 lg:px-8">
@@ -180,25 +159,10 @@ export default function ManejoAlmacen() {
                         unidades,
                         proveedor,
                         estado,
-                        imagen,
                       }) => (
                         <tr key={nombreProducto}>
                           <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                             <div className="flex items-center">
-                              <div className="h-10 w-10 flex-shrink-0">
-                                {/* <Image
-                                  className="h-10 w-10 rounded-full"
-                                  src={imagen}
-                                  alt={imagen}
-                                  width={10}
-                                  height={10}
-                                /> */}
-                                <Image
-                                  className="h-10 w-10 rounded-full"
-                                  src={imagen}
-                                  alt={imagen}
-                                />
-                              </div>
                               <div className="ml-4">
                                 <div className="font-medium text-gray-900">
                                   {nombreProducto}
@@ -258,3 +222,5 @@ export default function ManejoAlmacen() {
     </SidebarLayoutGerenciaOperativa>
   );
 }
+
+export default ManejoAlmacen;

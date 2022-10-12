@@ -67,6 +67,18 @@ const updateCandidato = async (
     curp = candidatoToUpdate.curp,
     noImss = candidatoToUpdate.noImss,
     noCartaDePolicia = candidatoToUpdate.noCartaDePolicia,
+    celular = candidatoToUpdate.celular,
+    contactoDeEmergencia = candidatoToUpdate.contactoDeEmergencia,
+    correoElectronico = candidatoToUpdate.correoElectronico,
+    referencia1Nombre = candidatoToUpdate.referencia1Nombre,
+    referencia1Empresa = candidatoToUpdate.referencia1Empresa,
+    referencia1CorreoElectronico = candidatoToUpdate.referencia1CorreoElectronico,
+    referencia2Nombre = candidatoToUpdate.referencia2Nombre,
+    referencia2Empresa = candidatoToUpdate.referencia2Empresa,
+    referencia2CorreoElectronico = candidatoToUpdate.referencia2CorreoElectronico,
+    referencia3Nombre = candidatoToUpdate.referencia3Nombre,
+    referencia3Empresa = candidatoToUpdate.referencia3Empresa,
+    referencia3CorreoElectronico = candidatoToUpdate.referencia3CorreoElectronico,
   } = req.body;
 
   try {
@@ -81,6 +93,18 @@ const updateCandidato = async (
         curp,
         noImss,
         noCartaDePolicia,
+        celular,
+        contactoDeEmergencia,
+        correoElectronico,
+        referencia1Nombre,
+        referencia1Empresa,
+        referencia1CorreoElectronico,
+        referencia2Nombre,
+        referencia2Empresa,
+        referencia2CorreoElectronico,
+        referencia3Nombre,
+        referencia3Empresa,
+        referencia3CorreoElectronico,
       },
       { runValidators: true, new: true }
     );

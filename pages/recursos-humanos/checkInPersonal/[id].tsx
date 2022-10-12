@@ -21,13 +21,23 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
     CheckInPersonalContext
   );
 
-  const [inputFranquicias, setInputFranquicias] = useState(checkInDePersonal.franquicias);
-  const [inputSucursales, setInputSucursales] = useState(checkInDePersonal.sucursales);
+  const [inputFranquicias, setInputFranquicias] = useState(
+    checkInDePersonal.franquicias
+  );
+  const [inputSucursales, setInputSucursales] = useState(
+    checkInDePersonal.sucursales
+  );
   const [inputNombre, setInputNombre] = useState(checkInDePersonal.nombre);
   const [inputFecha, setInputFecha] = useState(checkInDePersonal.fecha);
-  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState(checkInDePersonal.horaDeIngreso);
-  const [inputHoraDeSalida, setInputHoraDeSalida] = useState(checkInDePersonal.horaDeSalida);
-  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState(checkInDePersonal.sucursalOFranquicia);
+  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState(
+    checkInDePersonal.horaDeIngreso
+  );
+  const [inputHoraDeSalida, setInputHoraDeSalida] = useState(
+    checkInDePersonal.horaDeSalida
+  );
+  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState(
+    checkInDePersonal.sucursalOFranquicia
+  );
 
   const MySwal = withReactContent(Swal);
 
@@ -71,8 +81,8 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
 
   const onSave = () => {
     if (
-      inputFranquicias.trim().length === 0 &&
-      inputSucursales.trim().length === 0 &&
+      inputFranquicias?.trim().length === 0 &&
+      inputSucursales?.trim().length === 0 &&
       inputNombre.trim().length === 0 &&
       inputFecha.trim().length === 0 &&
       inputHoraDeIngreso.trim().length === 0 &&
@@ -94,13 +104,13 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
       if (result.isConfirmed) {
         const actualizadoCheckInDePersonal: CheckInPersonal = {
           ...checkInDePersonal,
-          franquicias: inputFranquicias,
-          sucursales: inputSucursales,
+          sucursalOFranquicia: inputSucursalOFranquicia,
           nombre: inputNombre,
           fecha: inputFecha,
           horaDeIngreso: inputHoraDeIngreso,
           horaDeSalida: inputHoraDeSalida,
-          sucursalOFranquicia: inputSucursalOFranquicia,
+          sucursales: inputSucursales,
+          franquicias: inputFranquicias,
         };
 
         actualizarCheckInPersonal(actualizadoCheckInDePersonal, true);
@@ -165,8 +175,11 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
             </div>
 
             <div className="grid grid-cols-6 gap-6">
-
-            <div className={` ${inputSucursalOFranquicia === "Franquicia" || 'hidden'} col-span-6`}>
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Franquicia" || "hidden"
+                } col-span-6`}
+              >
                 <label
                   htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
@@ -189,9 +202,11 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                 </select>
               </div>
 
-                  
-
-              <div className={` ${inputSucursalOFranquicia === "Sucursal" || 'hidden'} col-span-6`}>
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Sucursal" || "hidden"
+                } col-span-6`}
+              >
                 <label
                   htmlFor="CmbSucursal"
                   className="block text-sm font-medium text-gray-700"
@@ -211,7 +226,6 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   <option>Chapultepec</option>
                   <option>Chapalita</option>
                   <option>Chiapas</option>
-                  
                 </select>
               </div>
 

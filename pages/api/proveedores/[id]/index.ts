@@ -62,9 +62,11 @@ const updateProveedor = async (
     nombre = proveedorToUpdate.nombre,
     direccion = proveedorToUpdate.direccion,
     telefono = proveedorToUpdate.telefono,
-    horarioAtencion = proveedorToUpdate.horarioAtencion,
+    horarioDeApertura = proveedorToUpdate.horarioDeApertura,
+    horarioDeCierre = proveedorToUpdate.horarioDeCierre,
     productosQueSeCompran = proveedorToUpdate.productosQueSeCompran,
     entregasADomicilio = proveedorToUpdate.entregasADomicilio,
+    rfc = proveedorToUpdate.rfc,
   } = req.body;
 
   try {
@@ -74,9 +76,11 @@ const updateProveedor = async (
         nombre,
         direccion,
         telefono,
-        horarioAtencion,
+        horarioDeApertura,
+        horarioDeCierre,
         productosQueSeCompran,
         entregasADomicilio,
+        rfc,
       },
       { runValidators: true, new: true }
     );

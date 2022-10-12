@@ -59,26 +59,26 @@ const updateCheckInPersonal = async (
   }
 
   const {
-    idFranquicia = checkInPersonalToUpdate.idFranquicia,
-    idSucursal = checkInPersonalToUpdate.idSucursal,
+    sucursalOFranquicia = checkInPersonalToUpdate.sucursalOFranquicia,
     nombre = checkInPersonalToUpdate.nombre,
     fecha = checkInPersonalToUpdate.fecha,
-    idPersonal = checkInPersonalToUpdate.idPersonal,
     horaDeIngreso = checkInPersonalToUpdate.horaDeIngreso,
     horaDeSalida = checkInPersonalToUpdate.horaDeSalida,
+    sucursales = checkInPersonalToUpdate.sucursales,
+    franquicias = checkInPersonalToUpdate.franquicias,
   } = req.body;
 
   try {
     const updatedCheckInPersonal = await CheckInDePersonal.findByIdAndUpdate(
       id,
       {
-        idFranquicia,
-        idSucursal,
+        sucursalOFranquicia,
         nombre,
         fecha,
-        idPersonal,
         horaDeIngreso,
         horaDeSalida,
+        sucursales,
+        franquicias,
       },
       { runValidators: true, new: true }
     );

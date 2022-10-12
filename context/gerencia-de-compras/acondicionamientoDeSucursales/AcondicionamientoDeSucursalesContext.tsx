@@ -6,14 +6,18 @@ interface ContextProps {
 
   //Métodos
   agregarNuevoAcondicionamientoDeSucursal: (
+    sucursalOFranquicia: string,
     producto: string,
     fechaDeCompra: string,
     descripcionDelProducto: string,
-    precioDeCompra: string,
     fechaEstimadaDeEntrega: string,
     proveedor: string,
     factura: string,
-    totalAcomulado: string,
+    precioDeCompra: number,
+    cantidad: number,
+    totalAcomulado: number,
+    sucursales?: string,
+    franquicias?: string,
     showNotificacion?: boolean
   ) => void;
 

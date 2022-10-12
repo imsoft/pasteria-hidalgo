@@ -67,13 +67,17 @@ const updateAcondicionamientoDeSucursal = async (
   }
 
   const {
+    sucursalOFranquicia = acondicionamientoDeSucursalToUpdate.sucursalOFranquicia,
+    sucursales = acondicionamientoDeSucursalToUpdate.sucursales,
+    franquicias = acondicionamientoDeSucursalToUpdate.franquicias,
     producto = acondicionamientoDeSucursalToUpdate.producto,
     fechaDeCompra = acondicionamientoDeSucursalToUpdate.fechaDeCompra,
     descripcionDelProducto = acondicionamientoDeSucursalToUpdate.descripcionDelProducto,
-    precioDeCompra = acondicionamientoDeSucursalToUpdate.precioDeCompra,
     fechaEstimadaDeEntrega = acondicionamientoDeSucursalToUpdate.fechaEstimadaDeEntrega,
     proveedor = acondicionamientoDeSucursalToUpdate.proveedor,
     factura = acondicionamientoDeSucursalToUpdate.factura,
+    precioDeCompra = acondicionamientoDeSucursalToUpdate.precioDeCompra,
+    cantidad = acondicionamientoDeSucursalToUpdate.cantidad,
     totalAcomulado = acondicionamientoDeSucursalToUpdate.totalAcomulado,
   } = req.body;
 
@@ -82,13 +86,17 @@ const updateAcondicionamientoDeSucursal = async (
       await AcondicionamientoDeSucursal.findByIdAndUpdate(
         id,
         {
+          sucursalOFranquicia,
+          sucursales,
+          franquicias,
           producto,
           fechaDeCompra,
           descripcionDelProducto,
-          precioDeCompra,
           fechaEstimadaDeEntrega,
           proveedor,
           factura,
+          precioDeCompra,
+          cantidad,
           totalAcomulado,
         },
         { runValidators: true, new: true }

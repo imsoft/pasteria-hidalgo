@@ -42,24 +42,32 @@ const postAcondicionamientoDeSucursal = async (
   res: NextApiResponse<Data>
 ) => {
   const {
+    sucursalOFranquicia = "",
+    sucursales = "",
+    franquicias = "",
     producto = "",
     fechaDeCompra = "",
     descripcionDelProducto = "",
-    precioDeCompra = "",
     fechaEstimadaDeEntrega = "",
     proveedor = "",
     factura = "",
+    precioDeCompra = "",
+    cantidad = "",
     totalAcomulado = "",
   } = req.body;
 
   const newAcondicionamientoDeSucursal = new AcondicionamientoDeSucursal({
+    sucursalOFranquicia,
+    sucursales,
+    franquicias,
     producto,
     fechaDeCompra,
     descripcionDelProducto,
-    precioDeCompra,
     fechaEstimadaDeEntrega,
     proveedor,
     factura,
+    precioDeCompra,
+    cantidad,
     totalAcomulado,
   });
 

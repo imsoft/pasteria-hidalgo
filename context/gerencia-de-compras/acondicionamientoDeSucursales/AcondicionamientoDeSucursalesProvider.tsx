@@ -59,27 +59,35 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
   };
 
   const agregarNuevoAcondicionamientoDeSucursal = async (
+    sucursalOFranquicia: string,
     producto: string,
     fechaDeCompra: string,
     descripcionDelProducto: string,
-    precioDeCompra: string,
     fechaEstimadaDeEntrega: string,
     proveedor: string,
     factura: string,
-    totalAcomulado: string,
+    precioDeCompra: number,
+    cantidad: number,
+    totalAcomulado: number,
+    sucursales?: string,
+    franquicias?: string,
     showNotificacion = false
   ) => {
     try {
       const { data } = await entriesApi.post<AcondicionamientoDeSucursal>(
         "/acondicionamientoDeSucursales",
         {
+          sucursalOFranquicia,
+          sucursales,
+          franquicias,
           producto,
           fechaDeCompra,
           descripcionDelProducto,
-          precioDeCompra,
           fechaEstimadaDeEntrega,
           proveedor,
           factura,
+          precioDeCompra,
+          cantidad,
           totalAcomulado,
         }
       );
@@ -105,13 +113,17 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
   const actualizarAcondicionamientoDeSucursal = async (
     {
       _id,
+      sucursalOFranquicia,
+      sucursales,
+      franquicias,
       producto,
       fechaDeCompra,
       descripcionDelProducto,
-      precioDeCompra,
       fechaEstimadaDeEntrega,
       proveedor,
       factura,
+      precioDeCompra,
+      cantidad,
       totalAcomulado,
     }: AcondicionamientoDeSucursal,
     showNotificacion = false
@@ -120,13 +132,17 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
       const { data } = await entriesApi.put<AcondicionamientoDeSucursal>(
         `/acondicionamientoDeSucursales/${_id}`,
         {
+          sucursalOFranquicia,
+          sucursales,
+          franquicias,
           producto,
           fechaDeCompra,
           descripcionDelProducto,
-          precioDeCompra,
           fechaEstimadaDeEntrega,
           proveedor,
           factura,
+          precioDeCompra,
+          cantidad,
           totalAcomulado,
         }
       );

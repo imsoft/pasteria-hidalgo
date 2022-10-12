@@ -24,7 +24,7 @@ const VerCandidatos = () => {
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
             >
               <Link href={"/gerencia-de-compras/proveedores/AgregarProveedor"}>
-                <a>Agregar Candidato</a>
+                <a>Agregar Proveedor</a>
               </Link>
             </button>
           </div>
@@ -58,7 +58,13 @@ const VerCandidatos = () => {
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Horario Atención
+                        Horario De Apertura
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Horario De Cierre
                       </th>
                       <th
                         scope="col"
@@ -71,6 +77,12 @@ const VerCandidatos = () => {
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
                         Entregas A Domicilio
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        RFC
                       </th>
                     </tr>
                   </thead>

@@ -1,13 +1,17 @@
-import { ChangeEvent, FC, useContext, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useMemo, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { ReporteDeCompra } from '../../../interfaces/reporteDeCompra';
+import { ReporteDeCompra, Temperatura, Unidades } from '../../../interfaces/reporteDeCompra';
 import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
 import { SidebarLayoutGerenciaCompras } from '../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras';
 import { dbReporteDeCompra } from "../../../database";
+import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores";
+
+const validTemperature: Temperatura[] = ["Ambiente", "Refrigerado", "Congelado"];
+const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
 
 interface Props {
   reporteDeCompra: ReporteDeCompra;
@@ -19,32 +23,23 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
   const { actualizarReporteDeCompra, eliminarReporteDeCompra } =
     useContext(ReporteDeCompraContext);
 
-    const [inputIdReporteDeCompra, setInputIdReporteDeCompra] = useState(reporteDeCompra.idReporteDeCompra);
-    const [inputCodigoDeReporte, setInputCodigoDeReporte] = useState(reporteDeCompra.codigoDeReporte);
+  const { proveedores } = useContext(ProveedoresContext);
+  const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
+
     const [inputFechaDeCompra, setInputFechaDeCompra] = useState(reporteDeCompra.fechaDeCompra);
     const [inputCredito, setInputCredito] = useState(reporteDeCompra.credito);
-    const [inputIdMateriaPrima, setInputIdMateriaPrima] = useState(reporteDeCompra.idMateriaPrima);
     const [inputMateriaPrima, setInputMateriaPrima] = useState(reporteDeCompra.materiaPrima);
-    const [inputCantidad, setInputCantidad] = useState(reporteDeCompra.cantidad);
-    const [inputUnidades, setInputUnidades] = useState(reporteDeCompra.unidades);
-    const [inputIdProveedor, setInputIdProveedor] = useState(reporteDeCompra.idProveedor);
+    const [inputUnidades, setInputUnidades] = useState<Unidades>(reporteDeCompra.unidades);
     const [inputNombreProveedor, setInputNombreProveedor] = useState(reporteDeCompra.nombreProveedor);
+    const [inputTempetatura, setInputTempetatura] = useState<Temperatura>(reporteDeCompra.tempetatura);
+    const [inputCaducidad, setInputCaducidad] = useState(reporteDeCompra.caducidad);
+    const [inputFactura, setInputFactura] = useState(reporteDeCompra.factura);
+    const [inputCantidad, setInputCantidad] = useState(reporteDeCompra.cantidad);
     const [inputPrecioPorUnidad, setInputPrecioPorUnidad] = useState(reporteDeCompra.precioPorUnidad);
     const [inputPrecioTotalDelProducto, setInputPrecioTotalDelProducto] = useState(reporteDeCompra.precioTotalDelProducto);
     const [inputPrecioTotalDelCompra, setInputPrecioTotalDelCompra] = useState(reporteDeCompra.precioTotalDelCompra);
-    const [inputTempetatura, setInputTempetatura] = useState(reporteDeCompra.tempetatura);
-    const [inputCaducidad, setInputCaducidad] = useState(reporteDeCompra.caducidad);
-    const [inputFactura, setInputFactura] = useState(reporteDeCompra.factura);
     
     const MySwal = withReactContent(Swal);
-
-  const onInputValueChangedIdReporteDeCompra = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputIdReporteDeCompra(event.target.value);
-  };
-
-  const onInputValueChangedCodigoDeReporte = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputCodigoDeReporte(event.target.value);
-  };
 
   const onInputValueChangedFechaDeCompra = (event: ChangeEvent<HTMLInputElement>) => {
     setInputFechaDeCompra(event.target.value);
@@ -54,72 +49,74 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
     setInputCredito(event.target.value);
   };
   
-  const onInputValueChangedIdMateriaPrima = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputIdMateriaPrima(event.target.value);
-  };
-  
   const onInputValueChangedMateriaPrima = (event: ChangeEvent<HTMLInputElement>) => {
     setInputMateriaPrima(event.target.value);
   };
-  
-  const onInputValueChangedCantidad = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputCantidad(event.target.value);
-  };
-  
+
   const onInputValueChangedUnidades = (event: ChangeEvent<HTMLSelectElement>) => {
-    setInputUnidades(event.target.value);
+    setInputUnidades(event.target.value as Unidades);
   };
-  
-  const onInputValueChangedIdProveedor = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputIdProveedor(event.target.value);
-  };
-  
+
   const onInputValueChangedNombreProveedor = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputNombreProveedor(event.target.value);
   };
   
-  const onInputValueChangedPrecioPorUnidad = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputPrecioPorUnidad(event.target.value);
+  const onInputValueChangedTemperatura = (event: ChangeEvent<HTMLSelectElement>) => {
+    setInputTempetatura(event.target.value as Temperatura);
   };
-  
-  const onInputValueChangedPrecioTotalDelProducto = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputPrecioTotalDelProducto(event.target.value);
-  };
-  
-  const onInputValueChangedPrecioTotalDelCompra = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputPrecioTotalDelCompra(event.target.value);
-  };
-  
-  const onInputValueChangedTempetatura = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputTempetatura(event.target.value);
-  };
-  
+
   const onInputValueChangedCaducidad = (event: ChangeEvent<HTMLInputElement>) => {
     setInputCaducidad(event.target.value);
   };
-  
+
   const onInputValueChangedFactura = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputFactura(event.target.value);
   };
 
+  const onInputValueChangedCantidad = (event: ChangeEvent<HTMLInputElement>) => {
+    isNaN(inputCantidad)
+    ? setInputCantidad(parseInt(event.target.value))
+    : setInputCantidad(0)
+  };
+  
+  const onInputValueChangedPrecioPorUnidad = (event: ChangeEvent<HTMLInputElement>) => {
+    isNaN(inputPrecioPorUnidad)
+    ? setInputPrecioPorUnidad(parseInt(event.target.value))
+    : setInputPrecioPorUnidad(0)
+  };
+  
+  const onInputValueChangedPrecioTotalDelProducto = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputPrecioTotalDelProducto(parseInt(event.target.value));
+  };
+  
+  const onInputValueChangedPrecioTotalDelCompra = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputPrecioTotalDelCompra(parseInt(event.target.value));
+  };
+
+  const PrecioTotalDelProducto = () => setInputPrecioTotalDelProducto(inputCantidad * inputPrecioPorUnidad);
+
+  useEffect(() => {
+    PrecioTotalDelProducto();
+  }, [inputCantidad]);
+
+  useEffect(() => {
+    PrecioTotalDelProducto();
+  }, [inputPrecioPorUnidad]);
+  
   const onSave = () => {
-    if (inputIdReporteDeCompra.trim().length === 0 &&
-        inputCodigoDeReporte.trim().length === 0 &&
+    if (
         inputFechaDeCompra.trim().length === 0 &&
         inputCredito.trim().length === 0 &&
-        inputIdMateriaPrima.trim().length === 0 &&
         inputMateriaPrima.trim().length === 0 &&
-        inputCantidad.trim().length === 0 &&
         inputUnidades.trim().length === 0 &&
-        inputIdProveedor.trim().length === 0 &&
         inputNombreProveedor.trim().length === 0 &&
-        inputPrecioPorUnidad.trim().length === 0 &&
-        inputPrecioTotalDelProducto.trim().length === 0 &&
-        inputPrecioTotalDelCompra.trim().length === 0 &&
         inputTempetatura.trim().length === 0 &&
         inputCaducidad.trim().length === 0 &&
-        inputFactura.trim().length === 0
-
+        inputFactura.trim().length === 0 &&
+        inputCantidad === 0 &&
+        inputPrecioPorUnidad === 0 &&
+        inputPrecioTotalDelProducto === 0 &&
+        inputPrecioTotalDelCompra === 0
     )
       return;
 
@@ -136,22 +133,18 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
       if (result.isConfirmed) {
         const actualizadoReporteDeCompra: ReporteDeCompra = {
           ...reporteDeCompra,
-          idReporteDeCompra: inputIdReporteDeCompra,
-          codigoDeReporte: inputCodigoDeReporte,
           fechaDeCompra: inputFechaDeCompra,
           credito: inputCredito,
-          idMateriaPrima: inputIdMateriaPrima,
           materiaPrima: inputMateriaPrima,
-          cantidad: inputCantidad,
           unidades: inputUnidades,
-          idProveedor: inputIdProveedor,
           nombreProveedor: inputNombreProveedor,
-          precioPorUnidad: inputPrecioPorUnidad,
-          precioTotalDelProducto: inputPrecioTotalDelProducto,
-          precioTotalDelCompra: inputPrecioTotalDelCompra,
           tempetatura: inputTempetatura,
           caducidad: inputCaducidad,
           factura: inputFactura,
+          cantidad: inputCantidad,
+          precioPorUnidad: inputPrecioPorUnidad,
+          precioTotalDelProducto: inputPrecioTotalDelProducto,
+          precioTotalDelCompra: inputPrecioTotalDelCompra,
         };
 
         actualizarReporteDeCompra(actualizadoReporteDeCompra, true);
@@ -193,44 +186,6 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtIdReporteDeCompra"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Id Reporte De Compra
-                </label>
-                <input
-                  type="text"
-                  name="TxtIdReporteDeCompra"
-                  id="TxtIdReporteDeCompra"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputIdReporteDeCompra}
-                  onChange={onInputValueChangedIdReporteDeCompra}
-                  // onBlur={() => setTouched(true)}
-                />
-              </div>
-              
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtCodigoDeReporte"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Código De Reporte
-                </label>
-                <input
-                  type="text"
-                  name="TxtCodigoDeReporte"
-                  id="TxtCodigoDeReporte"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputCodigoDeReporte}
-                  onChange={onInputValueChangedCodigoDeReporte}
-                  // onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
                   htmlFor="TxtFechaDeCompra"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -268,25 +223,6 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   <option>Si</option>
                   <option>No</option>
                 </select>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtIdMateriaPrima"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Id Materia Prima
-                </label>
-                <input
-                  type="text"
-                  name="TxtIdMateriaPrima"
-                  id="TxtIdMateriaPrima"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputIdMateriaPrima}
-                  onChange={onInputValueChangedIdMateriaPrima}
-                  // onBlur={() => setTouched(true)}
-                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -338,37 +274,17 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   id="TxtUnidades"
                   name="TxtUnidades"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  value={inputUnidades}
                   onChange={onInputValueChangedUnidades}
                   // onBlur={() => setTouched(true)}
+                  defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona las unidades...</option>
-                  <option>gramos</option>
-                  <option>kilogramos</option>
-                  <option>mililitros</option>
-                  <option>litros</option>
-                  <option>unidad</option>
+                  <option>Selecciona una opción...</option>
+                  {
+                    validUnits.map( (unidades) => (
+                      <option key={unidades} >{unidades}</option>
+                    ) )
+                  }
                 </select>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtIdProveedor"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Id Proveedor
-                </label>
-                <input
-                  type="text"
-                  name="TxtIdProveedor"
-                  id="TxtIdProveedor"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputIdProveedor}
-                  onChange={onInputValueChangedIdProveedor}
-                  // onBlur={() => setTouched(true)}
-                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -388,9 +304,9 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   // onBlur={() => setTouched(true)}
                 >
                   <option>Selecciona un proveedor...</option>
-                  <option>Juan</option>
-                  <option>Pedro</option>
-                  <option>Luis</option>
+                  {proveedoresMemo.map((proveedor) => (
+                    <option key={proveedor._id}> {proveedor.nombre} </option>
+                  ))}
                 </select>
               </div>
 
@@ -495,33 +411,26 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPrecioCompra"
+                  htmlFor="TxtTemperatura"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Temperatura
                 </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"></div>
-                  <input
-                    type="text"
-                    name="price"
-                    id="price"
-                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                    value={inputTempetatura}
-                    onChange={onInputValueChangedTempetatura}
-                    // onBlur={() => setTouched(true)}
-                    placeholder=""
-                    aria-describedby="price-currency"
-                  />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <span
-                      className="text-gray-500 sm:text-sm"
-                      id="price-currency"
-                    >
-                      °C
-                    </span>
-                  </div>
-                </div>
+                <select
+                  id="TxtTemperatura"
+                  name="TxtTemperatura"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  onChange={onInputValueChangedTemperatura}
+                  // onBlur={() => setTouched(true)}
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option>Selecciona una opción...</option>
+                  {
+                    validTemperature.map( (temperatura) => (
+                      <option key={temperatura} >{temperatura}</option>
+                    ) )
+                  }
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">

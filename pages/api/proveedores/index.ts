@@ -38,18 +38,22 @@ const postProveedor = async( req: NextApiRequest, res: NextApiResponse<Data> ) =
         nombre = '',
         direccion = '',
         telefono = '',
-        horarioAtencion = '',
+        horarioDeApertura = '',
+        horarioDeCierre = '',
         productosQueSeCompran = '',
         entregasADomicilio = '',
+        rfc = '',
     } = req.body;
 
     const newProveedor = new Proveedor({
         nombre,
         direccion,
         telefono,
-        horarioAtencion,
+        horarioDeApertura,
+        horarioDeCierre,
         productosQueSeCompran,
         entregasADomicilio,
+        rfc,
     });
 
     try {

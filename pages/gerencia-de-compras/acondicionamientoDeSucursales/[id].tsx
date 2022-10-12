@@ -1,4 +1,11 @@
-import { ChangeEvent, FC, useContext, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
@@ -9,6 +16,7 @@ import {
 import { AcondicionamientoDeSucursalesContext } from "../../../context/gerencia-de-compras/acondicionamientoDeSucursales/AcondicionamientoDeSucursalesContext";
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
 import { dbAcondicionamientoDeSucursal } from "../../../database";
+import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -29,6 +37,9 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
     eliminarAcondicionamientoDeSucursal,
   } = useContext(AcondicionamientoDeSucursalesContext);
 
+  const { proveedores } = useContext(ProveedoresContext);
+  const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
+
   const [inputProducto, setInputProducto] = useState(
     acondicionamientoDeSucursal.producto
   );
@@ -37,9 +48,6 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
   );
   const [inputDescripcionDelProducto, setInputDescripcionDelProducto] =
     useState(acondicionamientoDeSucursal.descripcionDelProducto);
-  const [inputPrecioDeCompra, setInputPrecioDeCompra] = useState(
-    acondicionamientoDeSucursal.precioDeCompra
-  );
   const [inputFechaEstimadaDeEntrega, setInputFechaEstimadaDeEntrega] =
     useState(acondicionamientoDeSucursal.fechaEstimadaDeEntrega);
   const [inputProveedor, setInputProveedor] = useState(
@@ -48,14 +56,42 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
   const [inputFactura, setInputFactura] = useState<PuedeFacturar>(
     acondicionamientoDeSucursal.factura
   );
+  const [inputPrecioDeCompra, setInputPrecioDeCompra] = useState(
+    acondicionamientoDeSucursal.precioDeCompra
+  );
+  const [inputCantidad, setInputCantidad] = useState(
+    acondicionamientoDeSucursal.cantidad
+  );
   const [inputTotalAcomulado, setInputTotalAcomulado] = useState(
     acondicionamientoDeSucursal.totalAcomulado
   );
 
+  const [inputFranquicias, setInputFranquicias] = useState(
+    acondicionamientoDeSucursal.franquicias
+  );
+  const [inputSucursales, setInputSucursales] = useState(
+    acondicionamientoDeSucursal.sucursales
+  );
+  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState(
+    acondicionamientoDeSucursal.sucursalOFranquicia
+  );
+
   const MySwal = withReactContent(Swal);
 
-  const onInputValueChangedProducto = (
+  const onInputValueChangedFranquicias = (
     event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputFranquicias(event.target.value);
+  };
+
+  const onInputValueChangedSucursales = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursales(event.target.value);
+  };
+
+  const onInputValueChangedProducto = (
+    event: ChangeEvent<HTMLInputElement>
   ) => {
     setInputProducto(event.target.value);
   };
@@ -70,12 +106,6 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setInputDescripcionDelProducto(event.target.value);
-  };
-
-  const onInputValueChangedPrecioDeCompra = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputPrecioDeCompra(event.target.value);
   };
 
   const onInputValueChangedFechaEstimadaDeEntrega = (
@@ -96,22 +126,57 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
     setInputFactura(event.target.value as PuedeFacturar);
   };
 
+  const onInputValueChangedPrecioDeCompra = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputPrecioDeCompra(parseInt(event.target.value));
+  };
+
+  const onInputValueChangedCantidad = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputCantidad(parseInt(event.target.value));
+  };
+
   const onInputValueChangedTotalAcomulado = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputTotalAcomulado(event.target.value);
+    setInputTotalAcomulado(parseInt(event.target.value));
   };
+
+  const onInputValueChangedsInputSucursalOFranquicia = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursalOFranquicia(event.target.value);
+  };
+
+  const precioTotalDelProducto = () => {
+    console.log(inputCantidad * inputPrecioDeCompra);
+    setInputTotalAcomulado(inputCantidad * inputPrecioDeCompra);
+  };
+
+  useEffect(() => {
+    precioTotalDelProducto();
+  }, [inputCantidad]);
+
+  useEffect(() => {
+    precioTotalDelProducto();
+  }, [inputPrecioDeCompra]);
 
   const onSave = () => {
     if (
+      inputSucursalOFranquicia.trim().length === 0 &&
+      inputFranquicias?.trim().length === 0 &&
+      inputSucursales?.trim().length === 0 &&
       inputProducto.trim().length === 0 &&
       inputFechaDeCompra.trim().length === 0 &&
       inputDescripcionDelProducto.trim().length === 0 &&
-      inputPrecioDeCompra.trim().length === 0 &&
       inputFechaEstimadaDeEntrega.trim().length === 0 &&
       inputProveedor.trim().length === 0 &&
       inputFactura.trim().length === 0 &&
-      inputTotalAcomulado.trim().length === 0
+      inputPrecioDeCompra === 0 &&
+      inputCantidad === 0 &&
+      inputTotalAcomulado === 0
     )
       return;
 
@@ -130,13 +195,17 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
         const actualizadoAcondicionamientoDeSucursal: AcondicionamientoDeSucursal =
           {
             ...acondicionamientoDeSucursal,
+            sucursalOFranquicia: inputSucursalOFranquicia,
+            sucursales: inputSucursales,
+            franquicias: inputFranquicias,
             producto: inputProducto,
             fechaDeCompra: inputFechaDeCompra,
             descripcionDelProducto: inputDescripcionDelProducto,
-            precioDeCompra: inputPrecioDeCompra,
             fechaEstimadaDeEntrega: inputFechaEstimadaDeEntrega,
             proveedor: inputProveedor,
             factura: inputFactura,
+            precioDeCompra: inputPrecioDeCompra,
+            cantidad: inputCantidad,
             totalAcomulado: inputTotalAcomulado,
           };
 
@@ -183,7 +252,86 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
 
+            <div>
+              <label className="text-base font-medium text-gray-900">
+                Seleccione una opción
+              </label>
+              <p className="text-sm leading-5 text-gray-500">
+                ¿Sucursal o Franquicia?
+              </p>
+
+              <div className="col-span-6 sm:col-span-3">
+                <select
+                  id="CmbNombre"
+                  name="CmbNombre"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  value={inputSucursalOFranquicia}
+                  onChange={onInputValueChangedsInputSucursalOFranquicia}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione una opción...</option>
+                  <option>Sucursal</option>
+                  <option>Franquicia</option>
+                </select>
+              </div>
+            </div>
+
             <div className="grid grid-cols-6 gap-6">
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Franquicia" || "hidden"
+                } col-span-6`}
+              >
+                <label
+                  htmlFor="CmbFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Franquicia
+                </label>
+                <select
+                  id="CmbFranquicia"
+                  name="CmbFranquicia"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Seleccione la franquicia..."
+                  value={inputFranquicias}
+                  onChange={onInputValueChangedFranquicias}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la franquicia...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
+
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Sucursal" || "hidden"
+                } col-span-6`}
+              >
+                <label
+                  htmlFor="CmbSucursal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Sucursal
+                </label>
+                <select
+                  id="CmbSucursal"
+                  name="CmbSucursal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Seleccione la sucursal..."
+                  value={inputSucursales}
+                  onChange={onInputValueChangedSucursales}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la sucursal...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtProductos"
@@ -191,20 +339,16 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
                 >
                   Productos
                 </label>
-                <select
-                  id="TxtProductos"
+                <input
+                  type="text"
                   name="TxtProductos"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  id="TxtProductos"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   onChange={onInputValueChangedProducto}
-                  value={inputProducto}
+                  value={inputDescripcionDelProducto}
                   //   onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
-                >
-                  <option>Selecciona un producto...</option>
-                  <option>Masa</option>
-                  <option>Fresas</option>
-                  <option>Leche</option>
-                </select>
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -247,39 +391,6 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPrecioCompra"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Precio de la compra
-                </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 sm:text-sm">$</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="price"
-                    id="price"
-                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                    onChange={onInputValueChangedPrecioDeCompra}
-                    value={inputPrecioDeCompra}
-                    // onBlur={() => setTouched(true)}
-                    placeholder="0.00"
-                    aria-describedby="price-currency"
-                  />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <span
-                      className="text-gray-500 sm:text-sm"
-                      id="price-currency"
-                    >
-                      MXN
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
                   htmlFor="TxtFechaEstimadaDeEntrega"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -314,9 +425,9 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona un proveedor...</option>
-                  <option>Juan</option>
-                  <option>Pedro</option>
-                  <option>Luis</option>
+                  {proveedoresMemo.map((proveedor) => (
+                    <option key={proveedor._id}> {proveedor.nombre} </option>
+                  ))}
                 </select>
               </div>
 
@@ -344,6 +455,58 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
 
               <div className="col-span-6 sm:col-span-3">
                 <label
+                  htmlFor="TxtPrecioCompra"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Precio de la compra
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span className="text-gray-500 sm:text-sm">$</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="price"
+                    id="price"
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={isNaN(inputPrecioDeCompra) ? 0 : inputPrecioDeCompra}
+                    onChange={onInputValueChangedPrecioDeCompra}
+                    // onBlur={() => setTouched(true)}
+                    placeholder="0.00"
+                    aria-describedby="price-currency"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      MXN
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtCantidad"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Cantidad
+                </label>
+                <input
+                  type="text"
+                  name="TxtCantidad"
+                  id="TxtCantidad"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={isNaN(inputCantidad) ? 0 : inputCantidad}
+                  onChange={onInputValueChangedCantidad}
+                  //   onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
                   htmlFor="TxtTotalAcomulado"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -358,11 +521,12 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
                     name="TxtTotalAcomulado"
                     id="TxtTotalAcomulado"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={isNaN(inputTotalAcomulado) ? 0 : inputTotalAcomulado}
                     onChange={onInputValueChangedTotalAcomulado}
-                    value={inputTotalAcomulado}
                     // onBlur={() => setTouched(true)}
                     placeholder="0.00"
                     aria-describedby="price-currency"
+                    readOnly
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <span

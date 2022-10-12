@@ -35,41 +35,33 @@ const getReporteDeCompra = async( res: NextApiResponse<Data> ) => {
 const postReporteDeCompra = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
     
     const {
-        idReporteDeCompra = '',
-        codigoDeReporte = '',
         fechaDeCompra = '',
         credito = '',
-        idMateriaPrima = '',
         materiaPrima = '',
-        cantidad = '',
         unidades = '',
-        idProveedor = '',
         nombreProveedor = '',
-        precioPorUnidad = '',
-        precioTotalDelProducto = '',
-        precioTotalDelCompra = '',
         tempetatura = '',
         caducidad = '',
         factura = '',
+        cantidad = 0,
+        precioPorUnidad = 0,
+        precioTotalDelProducto = 0,
+        precioTotalDelCompra = 0,
     } = req.body;
 
     const newReporteDeCompra = new ReporteDeCompra({
-        idReporteDeCompra,
-        codigoDeReporte,
         fechaDeCompra,
         credito,
-        idMateriaPrima,
         materiaPrima,
-        cantidad,
         unidades,
-        idProveedor,
         nombreProveedor,
-        precioPorUnidad,
-        precioTotalDelProducto,
-        precioTotalDelCompra,
         tempetatura,
         caducidad,
         factura,
+        cantidad,
+        precioPorUnidad,
+        precioTotalDelProducto,
+        precioTotalDelCompra,
     });
 
     try {

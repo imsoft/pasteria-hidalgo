@@ -53,44 +53,36 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
   };
 
   const agregarReporteDeCompra = async (
-    idReporteDeCompra: string,
-    codigoDeReporte: string,
-    credito: string,
     fechaDeCompra: string,
-    idMateriaPrima: string,
+    credito: string,
     materiaPrima: string,
-    cantidad: string,
     unidades: string,
-    idProveedor: string,
     nombreProveedor: string,
-    precioPorUnidad: string,
-    precioTotalDelProducto: string,
-    precioTotalDelCompra: string,
     tempetatura: string,
     caducidad: string,
     factura: string,
+    cantidad: number,
+    precioPorUnidad: number,
+    precioTotalDelProducto: number,
+    precioTotalDelCompra: number,
     showNotificacion = false
   ) => {
     try {
       const { data } = await entriesApi.post<ReporteDeCompra>(
         "/reportesDeCompras",
         {
-          idReporteDeCompra,
-          codigoDeReporte,
-          credito,
           fechaDeCompra,
-          idMateriaPrima,
+          credito,
           materiaPrima,
-          cantidad,
           unidades,
-          idProveedor,
           nombreProveedor,
-          precioPorUnidad,
-          precioTotalDelProducto,
-          precioTotalDelCompra,
           tempetatura,
           caducidad,
           factura,
+          cantidad,
+          precioPorUnidad,
+          precioTotalDelProducto,
+          precioTotalDelCompra,
         }
       );
       dispatch({ type: "[Reporte De Compra] Agregar-Reporte De Compra", payload: data });
@@ -112,22 +104,18 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
   const actualizarReporteDeCompra = async (
     {
       _id,
-      idReporteDeCompra,
-      codigoDeReporte,
       fechaDeCompra,
       credito,
-      idMateriaPrima,
       materiaPrima,
-      cantidad,
       unidades,
-      idProveedor,
       nombreProveedor,
-      precioPorUnidad,
-      precioTotalDelProducto,
-      precioTotalDelCompra,
       tempetatura,
       caducidad,
       factura,
+      cantidad,
+      precioPorUnidad,
+      precioTotalDelProducto,
+      precioTotalDelCompra,
     }: ReporteDeCompra,
     showNotificacion = false
   ) => {
@@ -135,22 +123,18 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
       const { data } = await entriesApi.put<ReporteDeCompra>(
         `/reportesDeCompras/${_id}`,
         {
-          idReporteDeCompra,
-          codigoDeReporte,
           fechaDeCompra,
           credito,
-          idMateriaPrima,
           materiaPrima,
-          cantidad,
           unidades,
-          idProveedor,
           nombreProveedor,
-          precioPorUnidad,
-          precioTotalDelProducto,
-          precioTotalDelCompra,
           tempetatura,
           caducidad,
           factura,
+          cantidad,
+          precioPorUnidad,
+          precioTotalDelProducto,
+          precioTotalDelCompra,
         }
       );
       dispatch({ type: "[Reporte De Compra] Actualizar-Reporte De Compra", payload: data });

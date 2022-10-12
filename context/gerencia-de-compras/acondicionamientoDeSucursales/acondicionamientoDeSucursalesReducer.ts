@@ -39,17 +39,24 @@ export const acondicionamientoDeSucursalesReducer = (
         acondicionamientoDeSucursales: state.acondicionamientoDeSucursales.map(
           (acondicionamientoDeSucursal) => {
             if (acondicionamientoDeSucursal._id === action.payload._id) {
+              acondicionamientoDeSucursal.sucursalOFranquicia =
+                action.payload.sucursalOFranquicia;
+              acondicionamientoDeSucursal.sucursales =
+                action.payload.sucursales;
+              acondicionamientoDeSucursal.franquicias =
+                action.payload.franquicias;
               acondicionamientoDeSucursal.producto = action.payload.producto;
               acondicionamientoDeSucursal.fechaDeCompra =
                 action.payload.fechaDeCompra;
               acondicionamientoDeSucursal.descripcionDelProducto =
                 action.payload.descripcionDelProducto;
-              acondicionamientoDeSucursal.precioDeCompra =
-                action.payload.precioDeCompra;
               acondicionamientoDeSucursal.fechaEstimadaDeEntrega =
                 action.payload.fechaEstimadaDeEntrega;
               acondicionamientoDeSucursal.proveedor = action.payload.proveedor;
               acondicionamientoDeSucursal.factura = action.payload.factura;
+              acondicionamientoDeSucursal.precioDeCompra =
+                action.payload.precioDeCompra;
+              acondicionamientoDeSucursal.cantidad = action.payload.cantidad;
               acondicionamientoDeSucursal.totalAcomulado =
                 action.payload.totalAcomulado;
             }

@@ -43,6 +43,18 @@ const postCandidato = async( req: NextApiRequest, res: NextApiResponse<Data> ) =
         curp = '',
         noImss = '',
         noCartaDePolicia = '',
+        celular = '',
+        contactoDeEmergencia = '',
+        correoElectronico = '',
+        referencia1Nombre = '',
+        referencia1Empresa = '',
+        referencia1CorreoElectronico = '',
+        referencia2Nombre = '',
+        referencia2Empresa = '',
+        referencia2CorreoElectronico = '',
+        referencia3Nombre = '',
+        referencia3Empresa = '',
+        referencia3CorreoElectronico = '',
     } = req.body;
 
     const newCandidato = new Candidato({
@@ -54,6 +66,18 @@ const postCandidato = async( req: NextApiRequest, res: NextApiResponse<Data> ) =
         curp,
         noImss,
         noCartaDePolicia,
+        celular,
+        contactoDeEmergencia,
+        correoElectronico,
+        referencia1Nombre,
+        referencia1Empresa,
+        referencia1CorreoElectronico,
+        referencia2Nombre,
+        referencia2Empresa,
+        referencia2CorreoElectronico,
+        referencia3Nombre,
+        referencia3Empresa,
+        referencia3CorreoElectronico,
     });
 
     try {

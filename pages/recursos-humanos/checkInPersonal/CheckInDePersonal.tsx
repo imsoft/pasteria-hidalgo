@@ -5,7 +5,7 @@ import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkI
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
-import { PersonalActivoContext } from '../../../context/recursos-humanos/personalActivo/PersonalActivoContext';
+import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 
 export default function CheckInDePersonal() {
   const router = useRouter();
@@ -79,13 +79,13 @@ export default function CheckInDePersonal() {
       return;
 
     agregarCheckInPersonal(
-      inputFranquicias,
-      inputSucursales,
+      inputSucursalOFranquicia,
       inputNombre,
       inputFecha,
       inputHoraDeIngreso,
       inputHoraDeSalida,
-      inputSucursalOFranquicia,
+      inputSucursales,
+      inputFranquicias,
       true
     );
 
@@ -145,7 +145,11 @@ export default function CheckInDePersonal() {
             </div>
 
             <div className="grid grid-cols-6 gap-6">
-            <div className={` ${inputSucursalOFranquicia === "Franquicia" || 'hidden'} col-span-6`}>
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Franquicia" || "hidden"
+                } col-span-6`}
+              >
                 <label
                   htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
@@ -167,9 +171,11 @@ export default function CheckInDePersonal() {
                 </select>
               </div>
 
-                  
-
-              <div className={` ${inputSucursalOFranquicia === "Sucursal" || 'hidden'} col-span-6`}>
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Sucursal" || "hidden"
+                } col-span-6`}
+              >
                 <label
                   htmlFor="CmbSucursal"
                   className="block text-sm font-medium text-gray-700"
@@ -188,7 +194,6 @@ export default function CheckInDePersonal() {
                   <option>Chapultepec</option>
                   <option>Chapalita</option>
                   <option>Chiapas</option>
-                  
                 </select>
               </div>
 
@@ -209,7 +214,9 @@ export default function CheckInDePersonal() {
                 >
                   <option>Seleccione el nombre...</option>
                   {personasActivasMemo.map((personaActiva) => (
-                    <option key={personaActiva._id}> {personaActiva.nombre} </option>
+                    <option key={personaActiva._id}>
+                      {personaActiva.nombre}
+                    </option>
                   ))}
                 </select>
               </div>

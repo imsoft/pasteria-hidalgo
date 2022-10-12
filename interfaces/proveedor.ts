@@ -3,7 +3,9 @@ export interface Proveedor {
   nombre: string;
   direccion: string;
   telefono: string;
-  horarioAtencion: string;
+  horarioDeApertura: string;
+  horarioDeCierre: string;
   productosQueSeCompran: string;
   entregasADomicilio: string;
+  rfc: string;
 }

@@ -41,20 +41,6 @@ const VerReportesDeCompras = () => {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Id Reporte De Compra
-                      </th>
-                      
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Código De Reporte
-                      </th>
-                      
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
                         Fecha De Compra
                       </th>
                       
@@ -69,21 +55,7 @@ const VerReportesDeCompras = () => {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Id Materia Prima
-                      </th>
-                      
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
                         Materia Prima
-                      </th>
-                      
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Cantidad
                       </th>
                       
                       <th
@@ -92,19 +64,40 @@ const VerReportesDeCompras = () => {
                       >
                         Unidades
                       </th>
-                      
+
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Id Proveedor
+                        Nombre Proveedor
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Temperatura
                       </th>
                       
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Nombre Proveedor
+                        Caducidad
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Factura
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Cantidad
                       </th>
                       
                       <th
@@ -128,26 +121,6 @@ const VerReportesDeCompras = () => {
                         Precio Total De La Compra
                       </th>
 
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Temperatura
-                      </th>
-
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Caducidad
-                      </th>
-
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Factura
-                      </th>
                     </tr>
                   </thead>
                   {reportesDeComprasMemo.map((reporteDeCompra) => (

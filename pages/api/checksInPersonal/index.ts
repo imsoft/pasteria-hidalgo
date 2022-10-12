@@ -34,25 +34,27 @@ const getCheckInPersonal = async( res: NextApiResponse<Data> ) => {
 
 const postCheckInPersonal = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
     
-    const { 
-        idFranquicia = '',
-        idSucursal = '',
+    const {
+        sucursalOFranquicia = '',
         nombre = '',
         fecha = '',
-        idPersonal = '',
         horaDeIngreso = '',
         horaDeSalida = '',
+        sucursales = '',
+        franquicias = '',
     } = req.body;
 
     const newCheckInDePersonal = new CheckInDePersonal({
-        idFranquicia,
-        idSucursal,
+        sucursalOFranquicia,
         nombre,
         fecha,
-        idPersonal,
         horaDeIngreso,
         horaDeSalida,
+        sucursales,
+        franquicias,
     });
+
+    console.log(newCheckInDePersonal);
 
     try {
         

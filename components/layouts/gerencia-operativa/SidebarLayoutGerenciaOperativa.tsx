@@ -50,7 +50,7 @@ const navigation = [
   },
   {
     name: "Manejo de sucursales y franquicias",
-    href: "/gerencia-operativa/manejo-de-sucursales-y-franquicias",
+    href: "/gerencia-operativa/sucursalYFranquicia/AgregarSucursalesYFranquicias",
     icon: HomeIcon,
     current: false,
   },

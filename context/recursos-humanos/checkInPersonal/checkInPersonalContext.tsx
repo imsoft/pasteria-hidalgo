@@ -6,14 +6,14 @@ interface ContextProps {
 
   //Métodos
   agregarCheckInPersonal: (
-    franquicias: string,
-    sucursales: string,
+    sucursalOFranquicia: string,
     nombre: string,
     fecha: string,
     horaDeIngreso: string,
     horaDeSalida: string,
-    sucursalOFranquicia: string,
-    showNotificacion?: boolean
+    sucursales?: string,
+    franquicias?: string,
+    showNotificacion?: boolean,
   ) => void;
 
   actualizarCheckInPersonal: (
