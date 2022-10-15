@@ -53,16 +53,34 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
   };
 
   const agregarSucursalYFranquicia = async (
+    sucursalOFranquicia: string,
     direccion: string,
     distancia: string,
+    fechaDePago: string,
+    montoDePago: string,
+    cuentaBancaria: string,
+    banco: string,
+    nombreDelBeneficiario: string,
+    rfc: string,
+    sucursales?: string,
+    franquicias?: string,
     showNotificacion = false
   ) => {
     try {
       const { data } = await entriesApi.post<SucursalYFranquicia>(
         "/sucursalesYFranquicias",
         {
+          sucursalOFranquicia,
+          franquicias,
+          sucursales,
           direccion,
           distancia,
+          fechaDePago,
+          montoDePago,
+          cuentaBancaria,
+          banco,
+          nombreDelBeneficiario,
+          rfc,
         }
       );
       dispatch({
@@ -85,15 +103,37 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
   };
 
   const actualizarSucursalYFranquicia = async (
-    { _id, direccion, distancia }: SucursalYFranquicia,
+    {
+      _id,
+      sucursalOFranquicia,
+      franquicias,
+      sucursales,
+      direccion,
+      distancia,
+      fechaDePago,
+      montoDePago,
+      cuentaBancaria,
+      banco,
+      nombreDelBeneficiario,
+      rfc,
+    }: SucursalYFranquicia,
     showNotificacion = false
   ) => {
     try {
       const { data } = await entriesApi.put<SucursalYFranquicia>(
         `/sucursalesYFranquicias/${_id}`,
         {
+          sucursalOFranquicia,
+          franquicias,
+          sucursales,
           direccion,
           distancia,
+          fechaDePago,
+          montoDePago,
+          cuentaBancaria,
+          banco,
+          nombreDelBeneficiario,
+          rfc,
         }
       );
       dispatch({

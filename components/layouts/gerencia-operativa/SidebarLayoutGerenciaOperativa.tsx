@@ -26,26 +26,26 @@ type Props = {
 const navigation = [
   {
     name: "Apartado jurídico",
-    href: "/gerencia-operativa/apartado-juridico",
+    href: "/gerencia-operativa/apartadoJuridico/AgregarApartadoJuridico",
     icon: LibraryIcon,
     current: false,
   },
   {
+    name: "Ver Apartado jurídico",
+    href: "/gerencia-operativa/apartadoJuridico/VerApartadoJuridico",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Manejo de almacen",
-    href: "/gerencia-operativa/manejo-de-almacen",
+    href: "/gerencia-operativa/manejoDeAlmacen/VerManejoDeAlmacen",
     icon: ArchiveIcon,
     current: false,
   },
   {
     name: "Manejo de personal",
-    href: "/gerencia-operativa/manejoDePersonal/AgregarManejoDePersonal",
-    icon: UserGroupIcon,
-    current: false,
-  },
-  {
-    name: "Ver Manejo de personal",
     href: "/gerencia-operativa/manejoDePersonal/VerManejosDePersonal",
-    icon: EyeIcon,
+    icon: UserGroupIcon,
     current: false,
   },
   {
@@ -55,15 +55,33 @@ const navigation = [
     current: false,
   },
   {
+    name: "Ver sucursales y franquicias",
+    href: "/gerencia-operativa/sucursalYFranquicia/VerSucursalesYFranquicias",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Mantenimiento",
-    href: "/gerencia-operativa/mantenimiento",
+    href: "/gerencia-operativa/mantenimiento/AgregarMantenimiento",
     icon: CogIcon,
     current: false,
   },
   {
+    name: "Ver Mantenimiento",
+    href: "/gerencia-operativa/mantenimiento/VerMantenimiento",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Reportes de salida",
-    href: "/gerencia-operativa/reportes-de-salida",
+    href: "/gerencia-operativa/reporteDeSalida/AgregarReporteDeSalida",
     icon: DocumentReportIcon,
+    current: false,
+  },
+  {
+    name: "Ver Reportes de salida",
+    href: "/gerencia-operativa/reporteDeSalida/VerReportesDeSalida",
+    icon: EyeIcon,
     current: false,
   },
 ];

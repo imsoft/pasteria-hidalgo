@@ -15,6 +15,9 @@ import { AcondicionamientoDeSucursalesProvider } from "../context/gerencia-de-co
 
 import "../styles/globals.css";
 import { AsignarPreciosProvider } from "../context/gerencia-de-compras/asignarPrecios";
+import { ApartadosJuridicosProvider } from "../context/gerencia-operativa/apartadoJuridico";
+import { ReportesDeSalidaProvider } from "../context/gerencia-operativa/reporteDeSalida";
+import { MantenimientosProvider } from "../context/gerencia-operativa/mantenimiento";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -38,7 +41,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                     <SucursalesYFranquiciasProvider>
                       <AcondicionamientoDeSucursalesProvider>
                         <AsignarPreciosProvider>
-                          <Component {...pageProps} />
+                          <ApartadosJuridicosProvider>
+                            <ReportesDeSalidaProvider>
+                              <MantenimientosProvider>
+                                <Component {...pageProps} />
+                              </MantenimientosProvider>
+                            </ReportesDeSalidaProvider>
+                          </ApartadosJuridicosProvider>
                         </AsignarPreciosProvider>
                       </AcondicionamientoDeSucursalesProvider>
                     </SucursalesYFranquiciasProvider>

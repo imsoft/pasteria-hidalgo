@@ -23,8 +23,17 @@ export const sucursalYFranquiciaReducer = (
         ...state,
         sucursalesYFranquicias: state.sucursalesYFranquicias.map((sucursalYFranquicia) => {
           if (sucursalYFranquicia._id === action.payload._id) {
-            sucursalYFranquicia.direccion = action.payload.direccion;
-            sucursalYFranquicia.distancia = action.payload.distancia;
+            sucursalYFranquicia.sucursalOFranquicia = action.payload.sucursalOFranquicia; 
+            sucursalYFranquicia.franquicias = action.payload.franquicias; 
+            sucursalYFranquicia.sucursales = action.payload.sucursales; 
+            sucursalYFranquicia.direccion = action.payload.direccion; 
+            sucursalYFranquicia.distancia = action.payload.distancia; 
+            sucursalYFranquicia.fechaDePago = action.payload.fechaDePago; 
+            sucursalYFranquicia.montoDePago = action.payload.montoDePago; 
+            sucursalYFranquicia.cuentaBancaria = action.payload.cuentaBancaria; 
+            sucursalYFranquicia.banco = action.payload.banco; 
+            sucursalYFranquicia.nombreDelBeneficiario = action.payload.nombreDelBeneficiario; 
+            sucursalYFranquicia.rfc = action.payload.rfc; 
           }
           return sucursalYFranquicia;
         }),

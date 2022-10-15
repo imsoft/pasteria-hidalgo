@@ -1,8 +1,9 @@
 import { useContext, useMemo } from "react";
-import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
-import { CandidatosContext } from "../../../context/recursos-humanos/candidatos/CandidatosContext";
-import ListaCandidatos from "../../../components/ui/recursos-humanos/ListaCandidatos";
 import Link from "next/link";
+
+import { CandidatosContext } from "../../../context/recursos-humanos/candidatos/CandidatosContext";
+import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+import ListaCandidatos from "../../../components/ui/recursos-humanos/ListaCandidatos";
 
 const VerCandidatos = () => {
   const { candidatos } = useContext(CandidatosContext);

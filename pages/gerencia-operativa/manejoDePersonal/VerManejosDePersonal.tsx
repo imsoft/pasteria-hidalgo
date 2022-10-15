@@ -1,21 +1,21 @@
 import { useContext, useMemo } from "react";
 import Link from "next/link";
-import { ManejosDePersonalContext } from '../../../context/gerencia-operativa/manejoDePersonal/ManejoDePersonalContext';
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import ListaManejosDePersonal from '../../../components/ui/gerencia-operativa/ListaManejoDePersonal';
+import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo";
+import ListaPersonalesActivos from "../../../components/ui/recursos-humanos/ListaPersonalActivo";
 
 const VerCandidatos = () => {
-  const { manejosDePersonal } = useContext(ManejosDePersonalContext);
-  const manejosDePersonalMemo = useMemo(() => manejosDePersonal, [manejosDePersonal]);
+  const { personasActivas } = useContext(PersonalActivoContext);
+  const personalesActivosMemo = useMemo(() => personasActivas, [personasActivas]);
 
   return (
     <SidebarLayoutGerenciaOperativa>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Manejos de personal</h1>
+            <h1 className="text-xl font-semibold text-gray-900">Personal Activo</h1>
             <p className="mt-2 text-sm text-gray-700">
-              Aquí podras ver los manejos de personal para la empresa.
+              Aquí podras ver las personas activas para la empresa.
             </p>
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -23,8 +23,8 @@ const VerCandidatos = () => {
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
             >
-              <Link href={"/gerencia-operativa/manejoDePersonal/AgregarManejosDePersonal"}>
-                <a>Agregar Manejo de personal</a>
+              <Link href={"/recursos-humanos/personalActivo/AgregarPersonalActivo"}>
+                <a>Agregar Personal Activo</a>
               </Link>
             </button>
           </div>
@@ -46,14 +46,38 @@ const VerCandidatos = () => {
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Descripción Del Puesto
+                        Puesto
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Fecha De Contratación
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        No. Contrato
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        No. Expediente
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Baja Temporal
                       </th>
                     </tr>
                   </thead>
-                  {manejosDePersonalMemo.map((manejoDePersonal) => (
-                    <ListaManejosDePersonal
-                      key={manejoDePersonal._id}
-                      manejoDePersonal={manejoDePersonal}
+                  {personalesActivosMemo.map((personalActivo) => (
+                    <ListaPersonalesActivos
+                      key={personalActivo._id}
+                      personalActivo={personalActivo}
                     />
                   ))}
                 </table>

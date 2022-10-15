@@ -1,10 +1,10 @@
 import { ChangeEvent, useContext, useState } from "react";
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import { CandidatosContext } from "../../../context/recursos-humanos/candidatos";
+import { PuestosEmpresa } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { PuestosEmpresa } from "../../../interfaces";
 
 const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
 

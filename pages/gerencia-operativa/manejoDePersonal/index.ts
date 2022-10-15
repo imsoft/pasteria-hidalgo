@@ -1,1 +1,1 @@
-export { default } from './AgregarManejoDePersonal';
+export { default } from './VerManejosDePersonal';

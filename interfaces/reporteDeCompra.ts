@@ -1,3 +1,5 @@
+import { Unidades } from "./unidadDeMedida";
+
 export interface ReporteDeCompra {
   _id: string;
   fechaDeCompra: string;
@@ -15,4 +17,3 @@ export interface ReporteDeCompra {
 }
 
 export type Temperatura = "Ambiente" | "Refrigerado" | "Congelado";
-export type Unidades = "Gramos" | "Kilogramos" | "Mililitros" | "Litros";

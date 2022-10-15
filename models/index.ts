@@ -1,4 +1,5 @@
 export { default as AcondicionamientoDeSucursal, type IAcondicionamientoDeSucursal } from './acondicionamientoDeSucursal';
+export { default as ApartadoJuridico, type IApartadoJuridico } from './apartadoJuridico';
 export { default as AsignarPrecio, type IAsignarPrecio } from './asignarPrecio';
 export { default as Candidato, type ICandidato } from './candidato';
 export { default as CheckInDePersonal, type ICheckInPersonal } from './checkInPersonal';
@@ -9,3 +10,5 @@ export { default as ProductoYaComprado, type IProductoYaComprado } from './produ
 export { default as Proveedor, type IProveedor } from './proveedor';
 export { default as ReporteDeCompra, type IReporteDeCompra } from './reporteDeCompra';
 export { default as SucursalYFranquicia, type ISucursalYFranquicia } from './sucursalYFranquicia';
+export { default as ReporteDeSalida, type IReporteDeSalida } from './reporteDeSalida';
+export { default as Mantenimiento, type IMantenimiento } from './mantenimiento';

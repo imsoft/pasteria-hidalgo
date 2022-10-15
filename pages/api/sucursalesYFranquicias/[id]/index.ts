@@ -25,7 +25,10 @@ export default function handler(
   }
 }
 
-const getSucursalYFranquicia = async (req: NextApiRequest, res: NextApiResponse) => {
+const getSucursalYFranquicia = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   const { id } = req.query;
 
   await db.connect();
@@ -59,19 +62,38 @@ const updateSucursalYFranquicia = async (
   }
 
   const {
+    sucursalOFranquicia = sucursalYFranquiciaToUpdate.sucursalOFranquicia,
+    franquicias = sucursalYFranquiciaToUpdate.franquicias,
+    sucursales = sucursalYFranquiciaToUpdate.sucursales,
     direccion = sucursalYFranquiciaToUpdate.direccion,
     distancia = sucursalYFranquiciaToUpdate.distancia,
+    fechaDePago = sucursalYFranquiciaToUpdate.fechaDePago,
+    montoDePago = sucursalYFranquiciaToUpdate.montoDePago,
+    cuentaBancaria = sucursalYFranquiciaToUpdate.cuentaBancaria,
+    banco = sucursalYFranquiciaToUpdate.banco,
+    nombreDelBeneficiario = sucursalYFranquiciaToUpdate.nombreDelBeneficiario,
+    rfc = sucursalYFranquiciaToUpdate.rfc,
   } = req.body;
 
   try {
-    const updatedSucursalYFranquicia = await SucursalYFranquicia.findByIdAndUpdate(
-      id,
-      {
-        direccion,
-        distancia,
-      },
-      { runValidators: true, new: true }
-    );
+    const updatedSucursalYFranquicia =
+      await SucursalYFranquicia.findByIdAndUpdate(
+        id,
+        {
+          sucursalOFranquicia,
+          franquicias,
+          sucursales,
+          direccion,
+          distancia,
+          fechaDePago,
+          montoDePago,
+          cuentaBancaria,
+          banco,
+          nombreDelBeneficiario,
+          rfc,
+        },
+        { runValidators: true, new: true }
+      );
     await db.disconnect();
     res.status(200).json(updatedSucursalYFranquicia!);
   } catch (error: any) {
@@ -80,11 +102,15 @@ const updateSucursalYFranquicia = async (
   }
 };
 
-const deleteSucursalYFranquicia = async (req: NextApiRequest, res: NextApiResponse) => {
+const deleteSucursalYFranquicia = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   const { id } = req.query;
 
   await db.connect();
-  const sucursalYFranquiciaDBToDelete = await SucursalYFranquicia.findByIdAndDelete(id);
+  const sucursalYFranquiciaDBToDelete =
+    await SucursalYFranquicia.findByIdAndDelete(id);
   await db.disconnect();
 
   if (!sucursalYFranquiciaDBToDelete) {

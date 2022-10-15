@@ -10,3 +10,7 @@ export * from './reporteDeCompra';
 export * from './sucursalYFranquicia';
 export * from './asignarPrecio';
 export * from './puestoEmpresa';
+export * from './apartadoJuridico';
+export * from './unidadDeMedida';
+export * from './reporteDeSalida';
+export * from './mantenimiento';

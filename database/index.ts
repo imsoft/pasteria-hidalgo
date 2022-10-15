@@ -1,5 +1,6 @@
 export * as db from "./db";
 export * as dbAcondicionamientoDeSucursal from './dbAcondicionamientoDeSucursal';
+export * as dbApartadoJuridico from './dbApartadoJuridico';
 export * as dbCandidato from './dbCandidato';
 export * as dbCheckInPersonal from './dbCheckInPersonal';
 export * as dbClienteFrecuente from './dbClienteFrecuente';
@@ -10,4 +11,6 @@ export * as dbProveedor from './dbProveedor';
 export * as dbReporteDeCompra from './dbReporteDeCompra';
 export * as dbSucursalYFranquicia from './dbSucursalYFranquicia';
 export * as dbAsignarPrecio from './dbAsignarPrecio';
+export * as dbReporteDeSalida from './dbReporteDeSalida';
+export * as dbMantenimiento from './dbMantenimiento';
 export * from './seed-data';
