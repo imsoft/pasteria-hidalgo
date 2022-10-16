@@ -79,7 +79,8 @@ const updateReporteDeSalida = async (
     sucursalAEnviar = reporteDeSalidaToUpdate.sucursalAEnviar,
     datosDeRepartidor = reporteDeSalidaToUpdate.datosDeRepartidor,
     datosDeLaRuta = reporteDeSalidaToUpdate.datosDeLaRuta,
-    kilometrajeDeEntradaYSalida = reporteDeSalidaToUpdate.kilometrajeDeEntradaYSalida,
+    kilometrajeDeEntrada = reporteDeSalidaToUpdate.kilometrajeDeEntrada,
+    kilometrajeDeSalida = reporteDeSalidaToUpdate.kilometrajeDeSalida,
   } = req.body;
 
   try {
@@ -103,7 +104,8 @@ const updateReporteDeSalida = async (
         sucursalAEnviar,
         datosDeRepartidor,
         datosDeLaRuta,
-        kilometrajeDeEntradaYSalida,
+        kilometrajeDeEntrada,
+        kilometrajeDeSalida,
       },
       { runValidators: true, new: true }
     );

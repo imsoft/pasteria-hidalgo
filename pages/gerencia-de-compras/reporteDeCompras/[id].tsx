@@ -4,11 +4,12 @@ import { useRouter } from "next/router";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { ReporteDeCompra, Temperatura, Unidades } from '../../../interfaces/reporteDeCompra';
+import { ReporteDeCompra, Temperatura } from '../../../interfaces/reporteDeCompra';
 import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
 import { SidebarLayoutGerenciaCompras } from '../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras';
 import { dbReporteDeCompra } from "../../../database";
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores";
+import { Unidades } from "../../../interfaces";
 
 const validTemperature: Temperatura[] = ["Ambiente", "Refrigerado", "Congelado"];
 const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
@@ -76,13 +77,13 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
   const onInputValueChangedCantidad = (event: ChangeEvent<HTMLInputElement>) => {
     isNaN(inputCantidad)
     ? setInputCantidad(parseInt(event.target.value))
-    : setInputCantidad(0)
+    : setInputCantidad(parseInt(event.target.value))
   };
   
   const onInputValueChangedPrecioPorUnidad = (event: ChangeEvent<HTMLInputElement>) => {
     isNaN(inputPrecioPorUnidad)
     ? setInputPrecioPorUnidad(parseInt(event.target.value))
-    : setInputPrecioPorUnidad(0)
+    : setInputPrecioPorUnidad(parseInt(event.target.value))
   };
   
   const onInputValueChangedPrecioTotalDelProducto = (event: ChangeEvent<HTMLInputElement>) => {
@@ -364,6 +365,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                     // onBlur={() => setTouched(true)}
                     placeholder="0.00"
                     aria-describedby="price-currency"
+                    readOnly
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <span
@@ -397,6 +399,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                     // onBlur={() => setTouched(true)}
                     placeholder="0.00"
                     aria-describedby="price-currency"
+                    readOnly
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <span

@@ -14,3 +14,4 @@ export * from './apartadoJuridico';
 export * from './unidadDeMedida';
 export * from './reporteDeSalida';
 export * from './mantenimiento';
+export * from './personalMantenimiento';

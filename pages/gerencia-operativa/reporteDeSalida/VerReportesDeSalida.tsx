@@ -142,7 +142,13 @@ const VerReportesDeSalida = () => {
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Kilometraje de entrada y salida
+                        Kilometraje de entrada
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Kilometraje de salida
                       </th>
                     </tr>
                   </thead>

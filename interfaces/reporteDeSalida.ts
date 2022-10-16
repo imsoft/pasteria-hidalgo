@@ -19,5 +19,6 @@ export interface ReporteDeSalida {
   sucursalAEnviar: string;
   datosDeRepartidor: string;
   datosDeLaRuta: string;
-  kilometrajeDeEntradaYSalida: string;
+  kilometrajeDeEntrada: string;
+  kilometrajeDeSalida: string;
 }

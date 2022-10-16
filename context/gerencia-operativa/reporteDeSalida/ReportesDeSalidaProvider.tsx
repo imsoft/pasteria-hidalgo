@@ -72,7 +72,8 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
     sucursalAEnviar: string,
     datosDeRepartidor: string,
     datosDeLaRuta: string,
-    kilometrajeDeEntradaYSalida: string,
+    kilometrajeDeEntrada: string,
+    kilometrajeDeSalida: string,
     showNotificacion = false
   ) => {
     try {
@@ -96,7 +97,8 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
           sucursalAEnviar,
           datosDeRepartidor,
           datosDeLaRuta,
-          kilometrajeDeEntradaYSalida,
+          kilometrajeDeEntrada,
+          kilometrajeDeSalida,
         }
       );
       dispatch({
@@ -138,7 +140,8 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
       sucursalAEnviar,
       datosDeRepartidor,
       datosDeLaRuta,
-      kilometrajeDeEntradaYSalida,
+      kilometrajeDeEntrada,
+      kilometrajeDeSalida,
     }: ReporteDeSalida,
     showNotificacion = false
   ) => {
@@ -163,7 +166,8 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
           sucursalAEnviar,
           datosDeRepartidor,
           datosDeLaRuta,
-          kilometrajeDeEntradaYSalida,
+          kilometrajeDeEntrada,
+          kilometrajeDeSalida,
         }
       );
       dispatch({

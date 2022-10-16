@@ -8,6 +8,7 @@ import LogoPasteria from "../../../public/LogoPasteria.jpg";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   LibraryIcon,
+  UserCircleIcon,
   UserGroupIcon,
   ArchiveIcon,
   HomeIcon,
@@ -57,6 +58,18 @@ const navigation = [
   {
     name: "Ver sucursales y franquicias",
     href: "/gerencia-operativa/sucursalYFranquicia/VerSucursalesYFranquicias",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Personal de Mantenimiento",
+    href: "/gerencia-operativa/personalMantenimiento/AgregarPersonalMantenimiento",
+    icon: UserCircleIcon,
+    current: false,
+  },
+  {
+    name: "Ver Personal de Mantenimiento",
+    href: "/gerencia-operativa/personalMantenimiento/VerPersonalMantenimiento",
     icon: EyeIcon,
     current: false,
   },

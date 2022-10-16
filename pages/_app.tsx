@@ -12,12 +12,13 @@ import { ProveedoresProvider } from "../context/gerencia-de-compras/manejoDeProv
 import { ReportesDeComprasProvider } from "../context/gerencia-de-compras/reporteDeCompras";
 import { SucursalesYFranquiciasProvider } from "../context/gerencia-operativa/sucursalYFranquicia";
 import { AcondicionamientoDeSucursalesProvider } from "../context/gerencia-de-compras/acondicionamientoDeSucursales";
-
-import "../styles/globals.css";
 import { AsignarPreciosProvider } from "../context/gerencia-de-compras/asignarPrecios";
 import { ApartadosJuridicosProvider } from "../context/gerencia-operativa/apartadoJuridico";
 import { ReportesDeSalidaProvider } from "../context/gerencia-operativa/reporteDeSalida";
 import { MantenimientosProvider } from "../context/gerencia-operativa/mantenimiento";
+import { PersonalesDeMantenimientoProvider } from "../context/gerencia-operativa/personalDeMantenimiento/PersonalDeMantenimientoProvider";
+
+import "../styles/globals.css";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -44,7 +45,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                           <ApartadosJuridicosProvider>
                             <ReportesDeSalidaProvider>
                               <MantenimientosProvider>
-                                <Component {...pageProps} />
+                                <PersonalesDeMantenimientoProvider>
+                                  <Component {...pageProps} />
+                                </PersonalesDeMantenimientoProvider>
                               </MantenimientosProvider>
                             </ReportesDeSalidaProvider>
                           </ApartadosJuridicosProvider>

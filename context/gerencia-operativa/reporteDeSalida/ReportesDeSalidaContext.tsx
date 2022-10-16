@@ -23,7 +23,8 @@ interface ContextProps {
     sucursalAEnviar: string,
     datosDeRepartidor: string,
     datosDeLaRuta: string,
-    kilometrajeDeEntradaYSalida: string,
+    kilometrajeDeEntrada: string,
+    kilometrajeDeSalida: string,
     showNotificacion?: boolean
   ) => void;
 

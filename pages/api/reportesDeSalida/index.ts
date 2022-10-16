@@ -54,7 +54,8 @@ const postReporteDeSalida = async (
     sucursalAEnviar = "",
     datosDeRepartidor = "",
     datosDeLaRuta = "",
-    kilometrajeDeEntradaYSalida = "",
+    kilometrajeDeEntrada = "",
+    kilometrajeDeSalida = "",
   } = req.body;
 
   const newReporteDeSalida = new ReporteDeSalida({
@@ -75,7 +76,8 @@ const postReporteDeSalida = async (
     sucursalAEnviar,
     datosDeRepartidor,
     datosDeLaRuta,
-    kilometrajeDeEntradaYSalida,
+    kilometrajeDeEntrada,
+    kilometrajeDeSalida,
   });
 
   try {

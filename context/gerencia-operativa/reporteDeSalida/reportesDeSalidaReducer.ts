@@ -40,7 +40,8 @@ export const reportesDeSalidaReducer = (
             reporteDeSalida.sucursalAEnviar = action.payload.sucursalAEnviar;
             reporteDeSalida.datosDeRepartidor = action.payload.datosDeRepartidor;
             reporteDeSalida.datosDeLaRuta = action.payload.datosDeLaRuta;
-            reporteDeSalida.kilometrajeDeEntradaYSalida = action.payload.kilometrajeDeEntradaYSalida;
+            reporteDeSalida.kilometrajeDeEntrada = action.payload.kilometrajeDeEntrada;
+            reporteDeSalida.kilometrajeDeSalida = action.payload.kilometrajeDeSalida;
           }
           return reporteDeSalida;
         }),

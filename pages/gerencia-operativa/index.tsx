@@ -10,6 +10,7 @@ import {
   CogIcon,
   DocumentReportIcon,
   EyeIcon,
+  UserCircleIcon,
 } from "@heroicons/react/outline";
 
 const actions = [
@@ -51,6 +52,20 @@ const actions = [
   {
     title: "Ver Manejo de sucursales y franquicias",
     href: "/gerencia-operativa/sucursalYFranquicia/VerSucursalesYFranquicias",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Personal de Mantenimiento",
+    href: "/gerencia-operativa/personalMantenimiento/AgregarPersonalMantenimiento",
+    icon: UserCircleIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Personal de Mantenimiento",
+    href: "/gerencia-operativa/personalMantenimiento/VerPersonalMantenimiento",
     icon: EyeIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",

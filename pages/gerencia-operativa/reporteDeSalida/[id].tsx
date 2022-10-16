@@ -69,9 +69,13 @@ export const ReporteDeSalidaPage: FC<Props> = ({ reporteDeSalida }) => {
     reporteDeSalida.datosDeLaRuta
   );
   const [
-    inputKilometrajeDeEntradaYSalida,
-    setInputKilometrajeDeEntradaYSalida,
-  ] = useState(reporteDeSalida.kilometrajeDeEntradaYSalida);
+    inputKilometrajeDeEntrada,
+    setInputKilometrajeDeEntrada,
+  ] = useState(reporteDeSalida.kilometrajeDeEntrada);
+  const [
+    inputKilometrajeDeSalida,
+    setInputKilometrajeDeSalida,
+  ] = useState(reporteDeSalida.kilometrajeDeSalida);
 
   const MySwal = withReactContent(Swal);
 
@@ -173,10 +177,16 @@ export const ReporteDeSalidaPage: FC<Props> = ({ reporteDeSalida }) => {
     setInputDatosDeLaRuta(event.target.value);
   };
 
-  const onInputValueChangedKilometrajeDeEntradaYSalida = (
+  const onInputValueChangedKilometrajeDeEntrada = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputKilometrajeDeEntradaYSalida(event.target.value);
+    setInputKilometrajeDeEntrada(event.target.value);
+  };
+
+  const onInputValueChangedKilometrajeDeSalida = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputKilometrajeDeSalida(event.target.value);
   };
 
   const onSave = () => {
@@ -187,7 +197,7 @@ export const ReporteDeSalidaPage: FC<Props> = ({ reporteDeSalida }) => {
       inputCantidadDeProductoExtra.trim().length === 0 &&
       inputUnidadesDeProductoExtra.trim().length === 0 &&
       inputCodigoDeMasa.trim().length === 0 &&
-      inputMasa?.trim().length === 0 &&
+      inputMasa.trim().length === 0 &&
       inputCantidadDeMasa.trim().length === 0 &&
       inputUnidadesDeMasa.trim().length === 0 &&
       inputRellenos.trim().length === 0 &&
@@ -197,8 +207,9 @@ export const ReporteDeSalidaPage: FC<Props> = ({ reporteDeSalida }) => {
       inputTemperaturaDeRellenos.trim().length === 0 &&
       inputSucursalAEnviar.trim().length === 0 &&
       inputDatosDeRepartidor.trim().length === 0 &&
-      inputDatosDeLaRuta?.trim().length === 0 &&
-      inputKilometrajeDeEntradaYSalida?.trim().length === 0
+      inputDatosDeLaRuta.trim().length === 0 &&
+      inputKilometrajeDeEntrada.trim().length === 0 &&
+      inputKilometrajeDeSalida.trim().length === 0
     )
       return;
 
@@ -232,7 +243,8 @@ export const ReporteDeSalidaPage: FC<Props> = ({ reporteDeSalida }) => {
           sucursalAEnviar: inputSucursalAEnviar,
           datosDeRepartidor: inputDatosDeRepartidor,
           datosDeLaRuta: inputDatosDeLaRuta,
-          kilometrajeDeEntradaYSalida: inputKilometrajeDeEntradaYSalida,
+          kilometrajeDeEntrada: inputKilometrajeDeEntrada,
+          kilometrajeDeSalida: inputKilometrajeDeSalida,
         };
 
         actualizarReporteDeSalida(actualizadoReporteDeSalida, true);
@@ -266,7 +278,7 @@ export const ReporteDeSalidaPage: FC<Props> = ({ reporteDeSalida }) => {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Actualizar / Eliminar Candidato
+                Actualizar / Eliminar Reporte de salida
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
@@ -609,22 +621,64 @@ export const ReporteDeSalidaPage: FC<Props> = ({ reporteDeSalida }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtKilometrajeDeEntrada"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Kilometraje de entrada y salida
+                  Kilometraje de entrada
                 </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputKilometrajeDeEntradaYSalida}
-                  onChange={onInputValueChangedKilometrajeDeEntradaYSalida}
-                  //   onBlur={() => setTouched(true)}
-                />
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    name="TxtKilometrajeDeEntrada"
+                    id="TxtKilometrajeDeEntrada"
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputKilometrajeDeEntrada}
+                    onChange={onInputValueChangedKilometrajeDeEntrada}
+                    // onBlur={() => setTouched(true)}
+                    placeholder="0"
+                    aria-describedby="price-currency"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      KM
+                    </span>
+                  </div>
+                </div>
               </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtKilometrajeDeSalida"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Kilometraje de salida
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    name="TxtKilometrajeDeSalida"
+                    id="TxtKilometrajeDeSalida"
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputKilometrajeDeSalida}
+                    onChange={onInputValueChangedKilometrajeDeSalida}
+                    // onBlur={() => setTouched(true)}
+                    placeholder="0"
+                    aria-describedby="price-currency"
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      KM
+                    </span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

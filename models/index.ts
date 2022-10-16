@@ -12,3 +12,4 @@ export { default as ReporteDeCompra, type IReporteDeCompra } from './reporteDeCo
 export { default as SucursalYFranquicia, type ISucursalYFranquicia } from './sucursalYFranquicia';
 export { default as ReporteDeSalida, type IReporteDeSalida } from './reporteDeSalida';
 export { default as Mantenimiento, type IMantenimiento } from './mantenimiento';
+export { default as PersonalDeMantenimiento, type IPersonalDeMantenimiento } from './personalMantenimiento';

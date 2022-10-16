@@ -13,4 +13,5 @@ export * as dbSucursalYFranquicia from './dbSucursalYFranquicia';
 export * as dbAsignarPrecio from './dbAsignarPrecio';
 export * as dbReporteDeSalida from './dbReporteDeSalida';
 export * as dbMantenimiento from './dbMantenimiento';
+export * as dbPersonalMantenimiento from './dbPersonalMantenimiento';
 export * from './seed-data';

@@ -20,16 +20,6 @@ const ListaManejosDeAlmacen: FC<Props> = ({ reporteDeCompra }) => {
       >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.fechaDeCompra}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.credito}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
             {reporteDeCompra.materiaPrima}
           </div>
         </td>
@@ -37,25 +27,10 @@ const ListaManejosDeAlmacen: FC<Props> = ({ reporteDeCompra }) => {
           <div className="font-medium text-gray-900">
             {reporteDeCompra.unidades}
           </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.nombreProveedor}
-          </div>
-        </td>
+          </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
             {reporteDeCompra.tempetatura}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.caducidad}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.factura}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -79,21 +54,6 @@ const ListaManejosDeAlmacen: FC<Props> = ({ reporteDeCompra }) => {
               ? "Casi por terminar"
               : reporteDeCompra.cantidad < 50 && "Esta a punto de terminarse"}
           </span>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioPorUnidad}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioTotalDelProducto}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioTotalDelCompra}
-          </div>
         </td>
       </tr>
     </tbody>

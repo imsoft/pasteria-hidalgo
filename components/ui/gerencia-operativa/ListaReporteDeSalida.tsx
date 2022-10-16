@@ -122,7 +122,13 @@ const ListaReportesDeSalida: FC<Props> = ({ reporteDeSalida }) => {
 
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeSalida.kilometrajeDeEntradaYSalida}
+            {reporteDeSalida.kilometrajeDeEntrada}
+          </div>
+        </td>
+
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {reporteDeSalida.kilometrajeDeSalida}
           </div>
         </td>
 

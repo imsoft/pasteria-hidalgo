@@ -21,7 +21,8 @@ const reporteDeSalidaSchema = new Schema({
   sucursalAEnviar: { type: String, required: true },
   datosDeRepartidor: { type: String, required: true },
   datosDeLaRuta: { type: String, required: true },
-  kilometrajeDeEntradaYSalida: { type: String, required: true },
+  kilometrajeDeEntrada: { type: String, required: true },
+  kilometrajeDeSalida: { type: String, required: true },
 });
 
 const ReporteDeSalidaModel: Model<IReporteDeSalida> =
