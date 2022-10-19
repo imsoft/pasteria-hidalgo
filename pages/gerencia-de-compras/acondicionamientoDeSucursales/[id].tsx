@@ -16,15 +16,12 @@ import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerenc
 
 import { dbAcondicionamientoDeSucursal } from "../../../database";
 
-import {
-  AcondicionamientoDeSucursal,
-  YesNo,
-} from "../../../interfaces";
+import { AcondicionamientoDeSucursal, YesNo } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const factura: YesNo[] = ["Si", "No"];
+const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 interface Props {
   acondicionamientoDeSucursal: AcondicionamientoDeSucursal;
@@ -451,8 +448,9 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
                   defaultValue="Selecciona unq opción..."
                 >
                   <option>Selecciona una opción...</option>
-                  <option>Si</option>
-                  <option>No</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
                 </select>
               </div>
 

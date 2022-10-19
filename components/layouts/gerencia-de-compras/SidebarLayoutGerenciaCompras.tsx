@@ -29,7 +29,7 @@ const navigation = [
     current: false,
   },
   {
-    name: " Ver Acondicionamiento de sucursales",
+    name: "Ver Acondicionamiento de sucursales",
     href: "/gerencia-de-compras/acondicionamientoDeSucursales/VerAcondicinamientoDeSucursal",
     icon: EyeIcon,
     current: false,

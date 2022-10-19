@@ -3,10 +3,11 @@ import Image from "next/image";
 import { SidebarLayoutGerenciaCompras } from "../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
 
 import {
-  HomeIcon,
-  UserIcon,
-  DocumentReportIcon,
+  CollectionIcon,
   CurrencyDollarIcon,
+  DocumentTextIcon,
+  EyeIcon,
+  UserGroupIcon,
 } from "@heroicons/react/outline";
 
 import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
@@ -14,29 +15,57 @@ import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 const actions = [
   {
     title: "Acondicionamiento de sucursales",
-    href: "/gerencia-de-compras/acondicionamiento-de-sucursales",
-    icon: HomeIcon,
+    href: "/gerencia-de-compras/acondicionamientoDeSucursales/AgregarAcondicionamientoDeSucursal",
+    icon: CollectionIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Acondicionamiento de sucursales",
+    href: "/gerencia-de-compras/acondicionamientoDeSucursales/VerAcondicinamientoDeSucursal",
+    icon: EyeIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },
   {
     title: "Manejo de proveedores",
-    href: "/gerencia-de-compras/manejo-de-proveedores",
-    icon: UserIcon,
+    href: "/gerencia-de-compras/proveedores/AgregarProveedor",
+    icon: UserGroupIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Manejo de proveedores",
+    href: "/gerencia-de-compras/proveedores/VerProveedores",
+    icon: EyeIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },
   {
     title: "Reporte de compras",
-    href: "/gerencia-de-compras/reporte-de-compras",
-    icon: DocumentReportIcon,
+    href: "/gerencia-de-compras/reporteDeCompras/AgregarReporteDeCompras",
+    icon: DocumentTextIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },
   {
-    title: "Precio maximo",
-    href: "/gerencia-de-compras/precio-maximo",
+    title: "Ver Reporte de compras",
+    href: "/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Precio Máximo de los productos",
+    href: "/gerencia-de-compras/asignarPrecios/AgregarAsignarPrecio",
     icon: CurrencyDollarIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Precio Máximo de los productos",
+    href: "/gerencia-de-compras/asignarPrecios/VerAsignarPrecio",
+    icon: EyeIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },
@@ -49,19 +78,18 @@ function classNames(...classes: any[]) {
 export default function IndexGerenciaCompras() {
   return (
     <SidebarLayoutGerenciaCompras>
-    <div className="flex justify-center items-center">
-      <div>
-        <Image
-          className="h-8 w-auto"
-          src={LogoPasteria}
-          width={600}
-          height={600}
-          alt="Pasteleria La Hidalguense"
-        />
-      </div>
+      <div className="flex justify-center items-center">
+        <div>
+          <Image
+            className="h-8 w-auto"
+            src={LogoPasteria}
+            width={600}
+            height={600}
+            alt="Pasteleria La Hidalguense"
+          />
+        </div>
 
-      <div>
-        
+        <div>
           <div className="text-center my-5">
             <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
               <span className="block xl:inline">¿Con que trabajaremos? 🤔</span>
@@ -124,9 +152,8 @@ export default function IndexGerenciaCompras() {
               </div>
             ))}
           </div>
-        
+        </div>
       </div>
-    </div>
     </SidebarLayoutGerenciaCompras>
   );
 }

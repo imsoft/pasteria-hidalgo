@@ -8,10 +8,12 @@ import { ProveedoresContext } from '../../../context/gerencia-de-compras/manejoD
 
 import { dbProveedor } from "../../../database"
 
-import { Proveedor } from '../../../interfaces/proveedor';
+import { Proveedor, YesNo } from '../../../interfaces';
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+
+const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 interface Props {
     proveedor: Proveedor;
@@ -68,7 +70,7 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
     setInputProductosQueSeCompran(event.target.value);
   };
 
-  const onInputValueChangedEntregasADomicilio = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedEntregasADomicilio = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputEntregasADomicilio(event.target.value);
   };
 
@@ -143,7 +145,7 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Agregar Proveedor
+                Proveedores
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
@@ -264,21 +266,25 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtEntregasADomicilio"
+                  htmlFor="CmbEntregasADomicilio"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Entregas A Domicilio
+                  ¿Entrega a domicilio?
                 </label>
-                <input
-                  type="text"
-                  name="TxtEntregasADomicilio"
-                  id="TxtEntregasADomicilio"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                <select
+                  id="CmbEntregasADomicilio"
+                  name="CmbEntregasADomicilio"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   value={inputEntregasADomicilio}
                   onChange={onInputValueChangedEntregasADomicilio}
                   // onBlur={() => setTouched(true)}
-                />
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option>Selecciona una opción...</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">

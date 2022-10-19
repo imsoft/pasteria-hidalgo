@@ -105,7 +105,7 @@ export const PersonalDeMantenimientoPage: FC<Props> = ({ personalDeMantenimiento
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Actualizar / Eliminar Personal de Mantenimiento
+                Personal de Mantenimiento
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>

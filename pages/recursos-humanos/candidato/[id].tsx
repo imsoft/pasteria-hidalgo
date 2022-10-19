@@ -290,7 +290,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Actualizar / Eliminar Candidato
+                Candidato
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>

@@ -1,15 +1,18 @@
-import { ChangeEvent, useContext, useState } from 'react';
-import { useRouter } from 'next/router';
+import { ChangeEvent, useContext, useState } from "react";
+import { useRouter } from "next/router";
 
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
 
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores/ManejoDeProveedoresContext";
 
+import { YesNo } from "../../../interfaces";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-export default function ManejoDeProveedores() {
+const validYesNoOptions: YesNo[] = ["Si", "No"];
 
+export default function ManejoDeProveedores() {
   const router = useRouter();
 
   const { agregarNuevoProveedor } = useContext(ProveedoresContext);
@@ -19,7 +22,8 @@ export default function ManejoDeProveedores() {
   const [inputTelefono, setInputTelefono] = useState("");
   const [inputHorarioDeApertura, setInputHorarioDeApertura] = useState("");
   const [inputHorarioDeCierre, setInputHorarioDeCierre] = useState("");
-  const [inputProductosQueSeCompran, setInputProductosQueSeCompran] = useState("");
+  const [inputProductosQueSeCompran, setInputProductosQueSeCompran] =
+    useState("");
   const [inputEntregasADomicilio, setInputEntregasADomicilio] = useState("");
   const [inputRfc, setInputRfc] = useState("");
 
@@ -31,7 +35,9 @@ export default function ManejoDeProveedores() {
     setInputNombre(event.target.value);
   };
 
-  const onTextFieldChangedDireccion = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedDireccion = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputDireccion(event.target.value);
   };
 
@@ -39,19 +45,27 @@ export default function ManejoDeProveedores() {
     setInputTelefono(event.target.value);
   };
 
-  const onTextFieldChangedHorarioDeApertura = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedHorarioDeApertura = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputHorarioDeApertura(event.target.value);
   };
 
-  const onTextFieldChangedHorarioDeCierre = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedHorarioDeCierre = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputHorarioDeCierre(event.target.value);
   };
 
-  const onTextFieldChangedProductosQueSeCompran = (event: ChangeEvent<HTMLInputElement>) => {
+  const onTextFieldChangedProductosQueSeCompran = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputProductosQueSeCompran(event.target.value);
   };
 
-  const onTextFieldChangedEntregasADomicilio = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onTextFieldChangedEntregasADomicilio = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
     setInputEntregasADomicilio(event.target.value);
   };
 
@@ -70,7 +84,7 @@ export default function ManejoDeProveedores() {
       inputEntregasADomicilio.length === 0 &&
       inputRfc.length === 0
     )
-    return;
+      return;
 
     agregarNuevoProveedor(
       inputNombre,
@@ -112,13 +126,12 @@ export default function ManejoDeProveedores() {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Manejo de proveedores
+                Proveedores
               </h3>
               {/* <p className="mt-1 text-sm text-gray-500">¡Hola!</p> */}
             </div>
 
             <div className="grid grid-cols-6 gap-6">
-
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"
@@ -243,8 +256,9 @@ export default function ManejoDeProveedores() {
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
-                  <option>Si</option>
-                  <option>No</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
                 </select>
               </div>
 
@@ -265,7 +279,6 @@ export default function ManejoDeProveedores() {
                   onBlur={() => setTouched(true)}
                 />
               </div>
-
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

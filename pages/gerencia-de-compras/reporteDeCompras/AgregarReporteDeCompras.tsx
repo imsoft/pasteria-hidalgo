@@ -5,7 +5,7 @@ import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerenc
 import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext";
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores";
 
-import { Temperatura, Unidades } from "../../../interfaces";
+import { Temperatura, Unidades, YesNo } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -32,6 +32,8 @@ const validTemperature: Temperatura[] = [
 ];
 
 const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
+
+const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 export default function ReporteDeCompras() {
   const { agregarReporteDeCompra } = useContext(ReporteDeCompraContext);
@@ -168,7 +170,7 @@ export default function ReporteDeCompras() {
 
   const sumaTotal = () => {
     let sumatoria = inputPrecioTotalDelCompra;
-    setInputPrecioTotalDelCompra( sumatoria );
+    setInputPrecioTotalDelCompra(sumatoria);
   };
 
   const resetForm = () => {
@@ -278,8 +280,9 @@ export default function ReporteDeCompras() {
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
-                  <option>Si</option>
-                  <option>No</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
                 </select>
               </div>
 
@@ -401,8 +404,9 @@ export default function ReporteDeCompras() {
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
-                  <option>Si</option>
-                  <option>No</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
                 </select>
               </div>
 

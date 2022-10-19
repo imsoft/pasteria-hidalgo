@@ -1,12 +1,16 @@
 import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 
-import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
-
 import { AcondicionamientoDeSucursalesContext } from "../../../context/gerencia-de-compras/acondicionamientoDeSucursales/AcondicionamientoDeSucursalesContext";
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores/ManejoDeProveedoresContext";
 
+import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
+
+import { YesNo } from "../../../interfaces";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+
+const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 export default function AcondicionamientoDeSucursales() {
   const { agregarNuevoAcondicionamientoDeSucursal } = useContext(
@@ -104,7 +108,7 @@ export default function AcondicionamientoDeSucursales() {
 
   const precioTotalDelProducto = () => {
     setInputTotalAcomulado(inputCantidad * inputPrecioDeCompra);
-  }
+  };
 
   useEffect(() => {
     precioTotalDelProducto();
@@ -369,8 +373,9 @@ export default function AcondicionamientoDeSucursales() {
                   defaultValue="Selecciona unq opción..."
                 >
                   <option>Selecciona una opción...</option>
-                  <option>Si</option>
-                  <option>No</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
                 </select>
               </div>
 
@@ -443,11 +448,7 @@ export default function AcondicionamientoDeSucursales() {
                     name="price"
                     id="price"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                    value={
-                      isNaN(inputTotalAcomulado)
-                        ? 0
-                        : inputTotalAcomulado
-                    }
+                    value={isNaN(inputTotalAcomulado) ? 0 : inputTotalAcomulado}
                     onChange={onTextFieldChangedTotalAcomulado}
                     onBlur={() => setTouched(true)}
                     placeholder="0"

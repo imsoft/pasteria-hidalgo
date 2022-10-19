@@ -15,7 +15,7 @@ const VerReportesDeCompras = () => {
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Reporte de compra</h1>
+            <h1 className="text-xl font-semibold text-gray-900">Reporte de compras</h1>
             <p className="mt-2 text-sm text-gray-700">
               Aquí podras ver los reportes de compra para la empresa.
             </p>

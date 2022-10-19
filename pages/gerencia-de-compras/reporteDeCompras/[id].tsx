@@ -1,21 +1,38 @@
-import { ChangeEvent, FC, useContext, useEffect, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
+import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext";
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores";
 
-import { SidebarLayoutGerenciaCompras } from '../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras';
+import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
 
 import { dbReporteDeCompra } from "../../../database";
 
-import { ReporteDeCompra, Temperatura, Unidades } from '../../../interfaces';
+import {
+  ReporteDeCompra,
+  Temperatura,
+  Unidades,
+  YesNo,
+} from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const validTemperature: Temperatura[] = ["Ambiente", "Refrigerado", "Congelado"];
+const validTemperature: Temperatura[] = [
+  "Ambiente",
+  "Refrigerado",
+  "Congelado",
+];
 const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
+const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 interface Props {
   reporteDeCompra: ReporteDeCompra;
@@ -24,80 +41,123 @@ interface Props {
 export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
   const router = useRouter();
 
-  const { actualizarReporteDeCompra, eliminarReporteDeCompra } =
-    useContext(ReporteDeCompraContext);
+  const { actualizarReporteDeCompra, eliminarReporteDeCompra } = useContext(
+    ReporteDeCompraContext
+  );
 
   const { proveedores } = useContext(ProveedoresContext);
   const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
 
-    const [inputFechaDeCompra, setInputFechaDeCompra] = useState(reporteDeCompra.fechaDeCompra);
-    const [inputCredito, setInputCredito] = useState(reporteDeCompra.credito);
-    const [inputMateriaPrima, setInputMateriaPrima] = useState(reporteDeCompra.materiaPrima);
-    const [inputUnidades, setInputUnidades] = useState<Unidades>(reporteDeCompra.unidades);
-    const [inputNombreProveedor, setInputNombreProveedor] = useState(reporteDeCompra.nombreProveedor);
-    const [inputTempetatura, setInputTempetatura] = useState<Temperatura>(reporteDeCompra.tempetatura);
-    const [inputCaducidad, setInputCaducidad] = useState(reporteDeCompra.caducidad);
-    const [inputFactura, setInputFactura] = useState(reporteDeCompra.factura);
-    const [inputCantidad, setInputCantidad] = useState(reporteDeCompra.cantidad);
-    const [inputPrecioPorUnidad, setInputPrecioPorUnidad] = useState(reporteDeCompra.precioPorUnidad);
-    const [inputPrecioTotalDelProducto, setInputPrecioTotalDelProducto] = useState(reporteDeCompra.precioTotalDelProducto);
-    const [inputPrecioTotalDelCompra, setInputPrecioTotalDelCompra] = useState(reporteDeCompra.precioTotalDelCompra);
-    
-    const MySwal = withReactContent(Swal);
+  const [inputFechaDeCompra, setInputFechaDeCompra] = useState(
+    reporteDeCompra.fechaDeCompra
+  );
+  const [inputCredito, setInputCredito] = useState(reporteDeCompra.credito);
+  const [inputMateriaPrima, setInputMateriaPrima] = useState(
+    reporteDeCompra.materiaPrima
+  );
+  const [inputUnidades, setInputUnidades] = useState<Unidades>(
+    reporteDeCompra.unidades
+  );
+  const [inputNombreProveedor, setInputNombreProveedor] = useState(
+    reporteDeCompra.nombreProveedor
+  );
+  const [inputTempetatura, setInputTempetatura] = useState<Temperatura>(
+    reporteDeCompra.tempetatura
+  );
+  const [inputCaducidad, setInputCaducidad] = useState(
+    reporteDeCompra.caducidad
+  );
+  const [inputFactura, setInputFactura] = useState(reporteDeCompra.factura);
+  const [inputCantidad, setInputCantidad] = useState(reporteDeCompra.cantidad);
+  const [inputPrecioPorUnidad, setInputPrecioPorUnidad] = useState(
+    reporteDeCompra.precioPorUnidad
+  );
+  const [inputPrecioTotalDelProducto, setInputPrecioTotalDelProducto] =
+    useState(reporteDeCompra.precioTotalDelProducto);
+  const [inputPrecioTotalDelCompra, setInputPrecioTotalDelCompra] = useState(
+    reporteDeCompra.precioTotalDelCompra
+  );
 
-  const onInputValueChangedFechaDeCompra = (event: ChangeEvent<HTMLInputElement>) => {
+  const MySwal = withReactContent(Swal);
+
+  const onInputValueChangedFechaDeCompra = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputFechaDeCompra(event.target.value);
   };
 
-  const onInputValueChangedCredito = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onInputValueChangedCredito = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
     setInputCredito(event.target.value);
   };
-  
-  const onInputValueChangedMateriaPrima = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onInputValueChangedMateriaPrima = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputMateriaPrima(event.target.value);
   };
 
-  const onInputValueChangedUnidades = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onInputValueChangedUnidades = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
     setInputUnidades(event.target.value as Unidades);
   };
 
-  const onInputValueChangedNombreProveedor = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onInputValueChangedNombreProveedor = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
     setInputNombreProveedor(event.target.value);
   };
-  
-  const onInputValueChangedTemperatura = (event: ChangeEvent<HTMLSelectElement>) => {
+
+  const onInputValueChangedTemperatura = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
     setInputTempetatura(event.target.value as Temperatura);
   };
 
-  const onInputValueChangedCaducidad = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedCaducidad = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputCaducidad(event.target.value);
   };
 
-  const onInputValueChangedFactura = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onInputValueChangedFactura = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
     setInputFactura(event.target.value);
   };
 
-  const onInputValueChangedCantidad = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedCantidad = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     isNaN(inputCantidad)
-    ? setInputCantidad(parseInt(event.target.value))
-    : setInputCantidad(parseInt(event.target.value))
+      ? setInputCantidad(parseInt(event.target.value))
+      : setInputCantidad(parseInt(event.target.value));
   };
-  
-  const onInputValueChangedPrecioPorUnidad = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onInputValueChangedPrecioPorUnidad = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     isNaN(inputPrecioPorUnidad)
-    ? setInputPrecioPorUnidad(parseInt(event.target.value))
-    : setInputPrecioPorUnidad(parseInt(event.target.value))
+      ? setInputPrecioPorUnidad(parseInt(event.target.value))
+      : setInputPrecioPorUnidad(parseInt(event.target.value));
   };
-  
-  const onInputValueChangedPrecioTotalDelProducto = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onInputValueChangedPrecioTotalDelProducto = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputPrecioTotalDelProducto(parseInt(event.target.value));
   };
-  
-  const onInputValueChangedPrecioTotalDelCompra = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onInputValueChangedPrecioTotalDelCompra = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputPrecioTotalDelCompra(parseInt(event.target.value));
   };
 
-  const PrecioTotalDelProducto = () => setInputPrecioTotalDelProducto(inputCantidad * inputPrecioPorUnidad);
+  const PrecioTotalDelProducto = () =>
+    setInputPrecioTotalDelProducto(inputCantidad * inputPrecioPorUnidad);
 
   useEffect(() => {
     PrecioTotalDelProducto();
@@ -106,21 +166,21 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
   useEffect(() => {
     PrecioTotalDelProducto();
   }, [inputPrecioPorUnidad]);
-  
+
   const onSave = () => {
     if (
-        inputFechaDeCompra.trim().length === 0 &&
-        inputCredito.trim().length === 0 &&
-        inputMateriaPrima.trim().length === 0 &&
-        inputUnidades.trim().length === 0 &&
-        inputNombreProveedor.trim().length === 0 &&
-        inputTempetatura.trim().length === 0 &&
-        inputCaducidad.trim().length === 0 &&
-        inputFactura.trim().length === 0 &&
-        inputCantidad === 0 &&
-        inputPrecioPorUnidad === 0 &&
-        inputPrecioTotalDelProducto === 0 &&
-        inputPrecioTotalDelCompra === 0
+      inputFechaDeCompra.trim().length === 0 &&
+      inputCredito.trim().length === 0 &&
+      inputMateriaPrima.trim().length === 0 &&
+      inputUnidades.trim().length === 0 &&
+      inputNombreProveedor.trim().length === 0 &&
+      inputTempetatura.trim().length === 0 &&
+      inputCaducidad.trim().length === 0 &&
+      inputFactura.trim().length === 0 &&
+      inputCantidad === 0 &&
+      inputPrecioPorUnidad === 0 &&
+      inputPrecioTotalDelProducto === 0 &&
+      inputPrecioTotalDelCompra === 0
     )
       return;
 
@@ -152,7 +212,9 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
         };
 
         actualizarReporteDeCompra(actualizadoReporteDeCompra, true);
-        router.push("/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras");
+        router.push(
+          "/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras"
+        );
       }
     });
   };
@@ -170,7 +232,9 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         eliminarReporteDeCompra(reporteDeCompra, true);
-        router.push("/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras");
+        router.push(
+          "/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras"
+        );
       }
     });
   };
@@ -182,12 +246,11 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Actualizar / Eliminar Reporte de compra
+                Reporte de compras
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
-
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtFechaDeCompra"
@@ -224,8 +287,9 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
-                  <option>Si</option>
-                  <option>No</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
                 </select>
               </div>
 
@@ -283,11 +347,9 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
-                  {
-                    validUnits.map( (unidades) => (
-                      <option key={unidades} >{unidades}</option>
-                    ) )
-                  }
+                  {validUnits.map((unidades) => (
+                    <option key={unidades}>{unidades}</option>
+                  ))}
                 </select>
               </div>
 
@@ -431,11 +493,9 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
-                  {
-                    validTemperature.map( (temperatura) => (
-                      <option key={temperatura} >{temperatura}</option>
-                    ) )
-                  }
+                  {validTemperature.map((temperatura) => (
+                    <option key={temperatura}>{temperatura}</option>
+                  ))}
                 </select>
               </div>
 
@@ -475,11 +535,11 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
-                  <option>Si</option>
-                  <option>No</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
                 </select>
               </div>
-
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

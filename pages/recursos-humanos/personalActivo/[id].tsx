@@ -8,7 +8,7 @@ import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recurs
 
 import { dbPersonalActivo } from "../../../database";
 
-import { PersonalActivo, PuestosEmpresa } from '../../../interfaces';
+import { PersonalActivo, PuestosEmpresa, YesNo } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -19,18 +19,29 @@ interface Props {
 
 const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
 
+const validYesNoOptions: YesNo[] = ["Si", "No"];
+
 export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
-  
   const router = useRouter();
 
-  const { actualizarPersonalActivo, eliminarPersonalActivo } = useContext(PersonalActivoContext);
+  const { actualizarPersonalActivo, eliminarPersonalActivo } = useContext(
+    PersonalActivoContext
+  );
 
   const [inputNombre, setInputNombre] = useState(personalActivo.nombre);
   const [inputPuesto, setInputPuesto] = useState(personalActivo.puesto);
-  const [inputFechaDeContratacion, setInputFechaDeContratacion] = useState(personalActivo.fechaDeContratacion);
-  const [inputNoContrato, setInputNoContrato] = useState(personalActivo.noContrato);
-  const [inputNoExpediente, setInputNoExpediente] = useState(personalActivo.noExpediente);
-  const [inputBajaTemporal, setInputBajaTemporal] = useState(personalActivo.bajaTemporal);
+  const [inputFechaDeContratacion, setInputFechaDeContratacion] = useState(
+    personalActivo.fechaDeContratacion
+  );
+  const [inputNoContrato, setInputNoContrato] = useState(
+    personalActivo.noContrato
+  );
+  const [inputNoExpediente, setInputNoExpediente] = useState(
+    personalActivo.noExpediente
+  );
+  const [inputBajaTemporal, setInputBajaTemporal] = useState(
+    personalActivo.bajaTemporal
+  );
 
   const MySwal = withReactContent(Swal);
 
@@ -44,19 +55,27 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
     setInputPuesto(event.target.value as PuestosEmpresa);
   };
 
-  const onInputValueChangedFechaDeContratacion = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedFechaDeContratacion = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputFechaDeContratacion(event.target.value);
   };
 
-  const onInputValueChangedNoContrato = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedNoContrato = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputNoContrato(event.target.value);
   };
 
-  const onInputValueChangedNoExpediente = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedNoExpediente = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputNoExpediente(event.target.value);
   };
 
-  const onInputValueChangedBajaTemporal = (event: ChangeEvent<HTMLSelectElement>) => {
+  const onInputValueChangedBajaTemporal = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
     setInputBajaTemporal(event.target.value);
   };
 
@@ -123,7 +142,7 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Actualizar Personal Activo
+                Personal Activo
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
@@ -246,11 +265,11 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                   defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
-                  <option>Si</option>
-                  <option>No</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
                 </select>
               </div>
-
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
