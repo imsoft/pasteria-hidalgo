@@ -184,7 +184,7 @@ export const MantenimientoPage: FC<Props> = ({ mantenimiento }) => {
                   Fecha De Garantía
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="TxtFechaDeGarantia"
                   id="TxtFechaDeGarantia"
                   autoComplete="off"
@@ -203,7 +203,7 @@ export const MantenimientoPage: FC<Props> = ({ mantenimiento }) => {
                   Fecha De Mantenimiento
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="TxtFechaDeMantenimiento"
                   id="TxtFechaDeMantenimiento"
                   autoComplete="off"

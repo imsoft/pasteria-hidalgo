@@ -278,7 +278,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   HoraDeIngreso
                 </label>
                 <input
-                  type="text"
+                  type="time"
                   name="TxtHoraDeIngreso"
                   id="TxtHoraDeIngreso"
                   autoComplete="off"
@@ -297,7 +297,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
                   HoraDeSalida
                 </label>
                 <input
-                  type="text"
+                  type="time"
                   name="TxtHoraDeSalida"
                   id="TxtHoraDeSalida"
                   autoComplete="off"
