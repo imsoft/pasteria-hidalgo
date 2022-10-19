@@ -16,7 +16,10 @@ interface ContextProps {
     showNotificacion?: boolean
   ) => void;
 
-  eliminarAsignarPrecio: (asignarPrecio: AsignarPrecio, showNotificacion?: boolean) => void;
+  eliminarAsignarPrecio: (
+    asignarPrecio: AsignarPrecio,
+    showNotificacion?: boolean
+  ) => void;
 }
 
 export const AsignarPreciosContext = createContext({} as ContextProps);

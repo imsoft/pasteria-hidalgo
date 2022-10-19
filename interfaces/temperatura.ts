@@ -1,0 +1,1 @@
+export type Temperatura = "Ambiente" | "Refrigerado" | "Congelado";

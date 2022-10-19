@@ -1,6 +1,9 @@
 import { ChangeEvent, useContext, useState } from "react";
-import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+
 import { CandidatosContext } from "../../../context/recursos-humanos/candidatos";
+
+import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+
 import { PuestosEmpresa } from "../../../interfaces";
 
 import Swal from "sweetalert2";

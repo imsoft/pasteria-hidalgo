@@ -1,8 +1,10 @@
 import { useContext, useMemo } from "react";
 import Link from "next/link";
+
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import { ReportesDeSalidaContext } from '../../../context/gerencia-operativa/reporteDeSalida/ReportesDeSalidaContext';
 import ListaReportesDeSalida from '../../../components/ui/gerencia-operativa/ListaReporteDeSalida';
+
+import { ReportesDeSalidaContext } from '../../../context/gerencia-operativa/reporteDeSalida/ReportesDeSalidaContext';
 
 const VerReportesDeSalida = () => {
   const { reportesDeSalida } = useContext(ReportesDeSalidaContext);

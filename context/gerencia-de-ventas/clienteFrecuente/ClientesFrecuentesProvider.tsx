@@ -1,10 +1,10 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
+import { ClientesFrecuentesContext, clientesFrecuentesReducer } from ".";
 import { ClienteFrecuente } from "../../../interfaces";
 
 import Swal from "sweetalert2";
-import { ClientesFrecuentesContext, clientesFrecuentesReducer } from ".";
 
 export interface ClientesFrecuentesState {
   clientesFrecuentes: ClienteFrecuente[];

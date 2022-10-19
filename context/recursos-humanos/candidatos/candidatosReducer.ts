@@ -1,5 +1,5 @@
+import { CandidatosState } from ".";
 import { Candidato } from "../../../interfaces";
-import { CandidatosState } from "./CandidatosProvider";
 
 type CandidatosActionType =
   | { type: "[Candidato] Agregar-Candidato"; payload: Candidato }
@@ -25,24 +25,29 @@ export const candidatosReducer = (
           if (candidato._id === action.payload._id) {
             candidato.nombre = action.payload.nombre;
             candidato.puesto = action.payload.puesto;
-            candidato.descripcionDelPuesto = action.payload.descripcionDelPuesto;
+            candidato.descripcionDelPuesto =
+              action.payload.descripcionDelPuesto;
             candidato.fechaDeNacimiento = action.payload.fechaDeNacimiento;
             candidato.domicilio = action.payload.domicilio;
             candidato.curp = action.payload.curp;
             candidato.noImss = action.payload.noImss;
             candidato.noCartaDePolicia = action.payload.noCartaDePolicia;
             candidato.celular = action.payload.celular;
-            candidato.contactoDeEmergencia = action.payload.contactoDeEmergencia;
+            candidato.contactoDeEmergencia =
+              action.payload.contactoDeEmergencia;
             candidato.correoElectronico = action.payload.correoElectronico;
             candidato.referencia1Nombre = action.payload.referencia1Nombre;
             candidato.referencia1Empresa = action.payload.referencia1Empresa;
-            candidato.referencia1CorreoElectronico = action.payload.referencia1CorreoElectronico;
+            candidato.referencia1CorreoElectronico =
+              action.payload.referencia1CorreoElectronico;
             candidato.referencia2Nombre = action.payload.referencia2Nombre;
             candidato.referencia2Empresa = action.payload.referencia2Empresa;
-            candidato.referencia2CorreoElectronico = action.payload.referencia2CorreoElectronico;
+            candidato.referencia2CorreoElectronico =
+              action.payload.referencia2CorreoElectronico;
             candidato.referencia3Nombre = action.payload.referencia3Nombre;
             candidato.referencia3Empresa = action.payload.referencia3Empresa;
-            candidato.referencia3CorreoElectronico = action.payload.referencia3CorreoElectronico;
+            candidato.referencia3CorreoElectronico =
+              action.payload.referencia3CorreoElectronico;
           }
           return candidato;
         }),

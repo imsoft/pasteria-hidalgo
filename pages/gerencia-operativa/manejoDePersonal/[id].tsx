@@ -2,12 +2,16 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
+import { ManejosDePersonalContext } from '../../../context/gerencia-operativa/manejoDePersonal/ManejoDePersonalContext';
+
+import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
+
+import { dbManejoPersonal } from "../../../database";
+
+import { ManejoPersonal } from "../../../interfaces";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { ManejoPersonal } from "../../../interfaces";
-import { ManejosDePersonalContext } from '../../../context/gerencia-operativa/manejoDePersonal/ManejoDePersonalContext';
-import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
-import { dbManejoPersonal } from "../../../database";
 
 interface Props {
   manejoDePersonal: ManejoPersonal;

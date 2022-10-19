@@ -2,12 +2,16 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
+import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia/SucursalYFranquiciaContext";
+
+import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
+
+import { dbSucursalYFranquicia } from "../../../database";
+
+import { SucursalYFranquicia } from "../../../interfaces";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { SucursalYFranquicia } from "../../../interfaces";
-import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia/SucursalYFranquiciaContext";
-import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import { dbSucursalYFranquicia } from "../../../database";
 
 interface Props {
   sucursalYFranquicia: SucursalYFranquicia;

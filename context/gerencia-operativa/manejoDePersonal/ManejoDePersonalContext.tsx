@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ManejoPersonal } from '../../../interfaces';
+import { ManejoPersonal } from "../../../interfaces";
 
 interface ContextProps {
   manejosDePersonal: ManejoPersonal[];
@@ -15,8 +15,11 @@ interface ContextProps {
     manejoDePersonal: ManejoPersonal,
     showNotificacion?: boolean
   ) => void;
-  
-  eliminarManejoDePersonal: (manejoDePersonal: ManejoPersonal, showNotificacion?: boolean) => void;
+
+  eliminarManejoDePersonal: (
+    manejoDePersonal: ManejoPersonal,
+    showNotificacion?: boolean
+  ) => void;
 }
 
 export const ManejosDePersonalContext = createContext({} as ContextProps);

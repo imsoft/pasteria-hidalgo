@@ -1,7 +1,7 @@
 import { ChangeEvent, useContext, useState } from "react";
 
-import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia/SucursalYFranquiciaContext";
+import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";

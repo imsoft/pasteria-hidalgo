@@ -1,9 +1,10 @@
 import { useContext, useMemo } from "react";
-
 import Link from "next/link";
+
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
-import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
 import ListaReportesDeCompras from '../../../components/ui/gerencia-de-compras/ListaReporteDeCompras';
+
+import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
 
 const VerReportesDeCompras = () => {
   const { reportesDeCompras } = useContext(ReporteDeCompraContext);

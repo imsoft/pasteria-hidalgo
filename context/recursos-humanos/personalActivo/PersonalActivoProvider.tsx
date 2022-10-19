@@ -1,7 +1,9 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
+
 import { entriesApi } from "../../../apis";
-import { PersonalActivo } from "../../../interfaces";
 import { PersonalActivoContext, personalActivoReducer } from ".";
+import { PersonalActivo } from "../../../interfaces";
+
 import Swal from "sweetalert2";
 
 export interface PersonalActivoState {
@@ -144,17 +146,16 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
 
   return (
     <PersonalActivoContext.Provider
-        value={{
-            ...state,
+      value={{
+        ...state,
 
-            //Methods
-            agregarPersonalActivo,
-            actualizarPersonalActivo,
-            eliminarPersonalActivo,
-        }}
+        //Methods
+        agregarPersonalActivo,
+        actualizarPersonalActivo,
+        eliminarPersonalActivo,
+      }}
     >
-        {children}
+      {children}
     </PersonalActivoContext.Provider>
   );
-
 };

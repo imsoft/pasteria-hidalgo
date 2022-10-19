@@ -1,11 +1,20 @@
-import { CheckInPersonal } from '../../../interfaces';
-import { ChecksInPersonalState } from './checkInPersonalProvider';
+import { ChecksInPersonalState } from ".";
+import { CheckInPersonal } from "../../../interfaces";
 
 type ChecksInPersonalActionType =
-  | { type: "[Check In Personal] Agregar-Check In Personal"; payload: CheckInPersonal }
-  | { type: "[Check In Personal] Actualizar-Check In Personal"; payload: CheckInPersonal }
+  | {
+      type: "[Check In Personal] Agregar-Check In Personal";
+      payload: CheckInPersonal;
+    }
+  | {
+      type: "[Check In Personal] Actualizar-Check In Personal";
+      payload: CheckInPersonal;
+    }
   | { type: "[Check In Personal] Refrescar-Datos"; payload: CheckInPersonal[] }
-  | { type: "[Check In Personal] Eliminar-Checks In Personal"; payload: CheckInPersonal };
+  | {
+      type: "[Check In Personal] Eliminar-Checks In Personal";
+      payload: CheckInPersonal;
+    };
 
 export const checksInPersonalReducer = (
   state: ChecksInPersonalState,
@@ -23,7 +32,8 @@ export const checksInPersonalReducer = (
         ...state,
         checksInPersonal: state.checksInPersonal.map((checkInPersonal) => {
           if (checkInPersonal._id === action.payload._id) {
-            checkInPersonal.sucursalOFranquicia = action.payload.sucursalOFranquicia;
+            checkInPersonal.sucursalOFranquicia =
+              action.payload.sucursalOFranquicia;
             checkInPersonal.nombre = action.payload.nombre;
             checkInPersonal.fecha = action.payload.fecha;
             checkInPersonal.horaDeIngreso = action.payload.horaDeIngreso;

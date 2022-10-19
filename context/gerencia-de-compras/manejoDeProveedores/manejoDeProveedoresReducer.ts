@@ -1,5 +1,5 @@
-import { Proveedor } from '../../../interfaces';
-import { ProveedoresState } from './ManejoDeProveedoresProvider';
+import { ProveedoresState } from ".";
+import { Proveedor } from "../../../interfaces";
 
 type ProveedoresActionType =
   | { type: "[Proveedor] Agregar-Proveedor"; payload: Proveedor }
@@ -12,13 +12,13 @@ export const proveedoresReducer = (
   action: ProveedoresActionType
 ): ProveedoresState => {
   switch (action.type) {
-    case '[Proveedor] Agregar-Proveedor':
+    case "[Proveedor] Agregar-Proveedor":
       return {
         ...state,
         proveedores: [...state.proveedores, action.payload],
       };
 
-    case '[Proveedor] Actualizar-Proveedor':
+    case "[Proveedor] Actualizar-Proveedor":
       return {
         ...state,
         proveedores: state.proveedores.map((proveedor) => {
@@ -28,7 +28,8 @@ export const proveedoresReducer = (
             proveedor.telefono = action.payload.telefono;
             proveedor.horarioDeApertura = action.payload.horarioDeApertura;
             proveedor.horarioDeCierre = action.payload.horarioDeCierre;
-            proveedor.productosQueSeCompran = action.payload.productosQueSeCompran;
+            proveedor.productosQueSeCompran =
+              action.payload.productosQueSeCompran;
             proveedor.entregasADomicilio = action.payload.entregasADomicilio;
             proveedor.rfc = action.payload.rfc;
           }
@@ -36,13 +37,13 @@ export const proveedoresReducer = (
         }),
       };
 
-    case '[Proveedor] Refrescar-Datos':
+    case "[Proveedor] Refrescar-Datos":
       return {
         ...state,
         proveedores: [...action.payload],
       };
 
-    case '[Proveedor] Eliminar-Proveedor':
+    case "[Proveedor] Eliminar-Proveedor":
       return {
         ...state,
         proveedores: state.proveedores.filter(

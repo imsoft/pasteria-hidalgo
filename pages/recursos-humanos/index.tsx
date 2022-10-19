@@ -1,11 +1,14 @@
 import Image from "next/image";
+
+import { SidebarLayoutRecursosHumanos } from "../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+
 import {
   UserAddIcon,
   PlusCircleIcon,
   ClockIcon,
   EyeIcon,
 } from "@heroicons/react/outline";
-import { SidebarLayoutRecursosHumanos } from "../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+
 import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 const actions = [

@@ -1,8 +1,10 @@
 import { useContext, useMemo } from "react";
-import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
-import { CheckInPersonalContext } from '../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext';
-import ListaChecksInPersonal from '../../../components/ui/recursos-humanos/ListaCheckInPersonal';
 import Link from "next/link";
+
+import { CheckInPersonalContext } from '../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext';
+
+import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+import ListaChecksInPersonal from '../../../components/ui/recursos-humanos/ListaCheckInPersonal';
 
 const VerCheckInPersonal = () => {
   const { checksInPersonal } = useContext(CheckInPersonalContext);

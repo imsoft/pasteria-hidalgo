@@ -1,8 +1,10 @@
 import { useContext, useMemo } from "react";
 import Link from "next/link";
+
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo";
 import ListaPersonalesActivos from "../../../components/ui/recursos-humanos/ListaPersonalActivo";
+
+import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo";
 
 const VerCandidatos = () => {
   const { personasActivas } = useContext(PersonalActivoContext);

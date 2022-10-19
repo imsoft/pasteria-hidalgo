@@ -1,10 +1,12 @@
 import { ChangeEvent, useContext, useState } from "react";
 import { useRouter } from "next/router";
+
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
+
+import { ApartadosJuridicosContext } from "../../../context/gerencia-operativa/apartadoJuridico/ApartadosJuridicosContext";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { ApartadosJuridicosContext } from "../../../context/gerencia-operativa/apartadoJuridico/ApartadosJuridicosContext";
 
 const ApartadoJuridico = () => {
   const { agregarNuevoApartadoJuridico } = useContext(

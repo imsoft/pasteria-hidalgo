@@ -1,9 +1,12 @@
+import { ChangeEvent, useContext, useState } from 'react';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useContext, useState, useReducer } from 'react';
+
+import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
+
+import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores/ManejoDeProveedoresContext";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
-import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores/ManejoDeProveedoresContext";
 
 export default function ManejoDeProveedores() {
 

@@ -1,10 +1,8 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
-
+import { ReportesDeSalidaContext, reportesDeSalidaReducer } from ".";
 import { ReporteDeSalida } from "../../../interfaces";
-import { ReportesDeSalidaContext } from "./ReportesDeSalidaContext";
-import { reportesDeSalidaReducer } from "./reportesDeSalidaReducer";
 
 import Swal from "sweetalert2";
 

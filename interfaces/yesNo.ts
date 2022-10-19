@@ -1,0 +1,1 @@
+export type YesNo = "Si" | "No";

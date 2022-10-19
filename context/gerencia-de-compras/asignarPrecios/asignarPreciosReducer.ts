@@ -1,12 +1,20 @@
-import { AsignarPrecio } from '../../../interfaces';
-import { AsignarPreciosState } from './AsignarPreciosProvider';
-
+import { AsignarPreciosState } from ".";
+import { AsignarPrecio } from "../../../interfaces";
 
 type CandidatosActionType =
-  | { type: "[Asignar Precios] Agregar-Asignar Precios"; payload: AsignarPrecio }
-  | { type: "[Asignar Precios] Actualizar-Asignar Precios"; payload: AsignarPrecio }
+  | {
+      type: "[Asignar Precios] Agregar-Asignar Precios";
+      payload: AsignarPrecio;
+    }
+  | {
+      type: "[Asignar Precios] Actualizar-Asignar Precios";
+      payload: AsignarPrecio;
+    }
   | { type: "[Asignar Precios] Refrescar-Datos"; payload: AsignarPrecio[] }
-  | { type: "[Asignar Precios] Eliminar-Asignar Precio"; payload: AsignarPrecio };
+  | {
+      type: "[Asignar Precios] Eliminar-Asignar Precio";
+      payload: AsignarPrecio;
+    };
 
 export const asignarPreciosReducer = (
   state: AsignarPreciosState,

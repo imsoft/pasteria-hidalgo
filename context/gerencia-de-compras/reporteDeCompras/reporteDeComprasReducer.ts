@@ -1,24 +1,33 @@
-import { ReportesDeComprasState } from "./ReporteDeComprasProvider";
-import { ReporteDeCompra } from '../../../interfaces/reporteDeCompra';
+import { ReportesDeComprasState } from ".";
+import { ReporteDeCompra } from "../../../interfaces";
 
 type ReportesDeComprasActionType =
-  | { type: "[Reporte De Compra] Agregar-Reporte De Compra"; payload: ReporteDeCompra }
-  | { type: "[Reporte De Compra] Actualizar-Reporte De Compra"; payload: ReporteDeCompra }
+  | {
+      type: "[Reporte De Compra] Agregar-Reporte De Compra";
+      payload: ReporteDeCompra;
+    }
+  | {
+      type: "[Reporte De Compra] Actualizar-Reporte De Compra";
+      payload: ReporteDeCompra;
+    }
   | { type: "[Reporte De Compra] Refrescar-Datos"; payload: ReporteDeCompra[] }
-  | { type: "[Reporte De Compra] Eliminar-Reporte De Compra"; payload: ReporteDeCompra };
+  | {
+      type: "[Reporte De Compra] Eliminar-Reporte De Compra";
+      payload: ReporteDeCompra;
+    };
 
 export const reportesDeComprasReducer = (
   state: ReportesDeComprasState,
   action: ReportesDeComprasActionType
 ): ReportesDeComprasState => {
   switch (action.type) {
-    case '[Reporte De Compra] Agregar-Reporte De Compra':
+    case "[Reporte De Compra] Agregar-Reporte De Compra":
       return {
         ...state,
         reportesDeCompras: [...state.reportesDeCompras, action.payload],
       };
 
-    case '[Reporte De Compra] Actualizar-Reporte De Compra':
+    case "[Reporte De Compra] Actualizar-Reporte De Compra":
       return {
         ...state,
         reportesDeCompras: state.reportesDeCompras.map((reporteDeCompra) => {
@@ -33,20 +42,22 @@ export const reportesDeComprasReducer = (
             reporteDeCompra.factura = action.payload.factura;
             reporteDeCompra.cantidad = action.payload.cantidad;
             reporteDeCompra.precioPorUnidad = action.payload.precioPorUnidad;
-            reporteDeCompra.precioTotalDelProducto = action.payload.precioTotalDelProducto;
-            reporteDeCompra.precioTotalDelCompra = action.payload.precioTotalDelCompra;
+            reporteDeCompra.precioTotalDelProducto =
+              action.payload.precioTotalDelProducto;
+            reporteDeCompra.precioTotalDelCompra =
+              action.payload.precioTotalDelCompra;
           }
           return reporteDeCompra;
         }),
       };
 
-    case '[Reporte De Compra] Refrescar-Datos':
+    case "[Reporte De Compra] Refrescar-Datos":
       return {
         ...state,
         reportesDeCompras: [...action.payload],
       };
 
-    case '[Reporte De Compra] Eliminar-Reporte De Compra':
+    case "[Reporte De Compra] Eliminar-Reporte De Compra":
       return {
         ...state,
         reportesDeCompras: state.reportesDeCompras.filter(

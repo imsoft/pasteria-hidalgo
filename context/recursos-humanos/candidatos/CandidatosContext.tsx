@@ -34,10 +34,7 @@ interface ContextProps {
     showNotificacion?: boolean
   ) => void;
 
-  eliminarCandidato: (
-    candidato: Candidato,
-    showNotificacion?: boolean
-  ) => void;
+  eliminarCandidato: (candidato: Candidato, showNotificacion?: boolean) => void;
 }
 
 export const CandidatosContext = createContext({} as ContextProps);

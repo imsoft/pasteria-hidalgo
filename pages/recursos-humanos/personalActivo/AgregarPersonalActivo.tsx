@@ -1,10 +1,11 @@
 import { ChangeEvent, useContext, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
-import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
-
 import { CandidatosContext } from "../../../context/recursos-humanos/candidatos";
+
+import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+
 import { PuestosEmpresa } from "../../../interfaces";
 
 import Swal from "sweetalert2";

@@ -1,8 +1,8 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
-import { Candidato } from "../../../interfaces";
 import { CandidatosContext, candidatosReducer } from ".";
+import { Candidato } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 

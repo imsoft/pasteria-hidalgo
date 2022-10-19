@@ -13,7 +13,11 @@ const ListaProveedores: FC<Props> = ({ proveedor }) => {
 
   return (
     <tbody className="divide-y divide-gray-200 bg-white">
-      <tr key={proveedor._id} onClick={onClick} className="cursor-pointer hover:bg-yellow-100">
+      <tr
+        key={proveedor._id}
+        onClick={onClick}
+        className="cursor-pointer hover:bg-yellow-100"
+      >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">{proveedor.nombre}</div>
         </td>
@@ -21,9 +25,7 @@ const ListaProveedores: FC<Props> = ({ proveedor }) => {
           <div className="text-gray-900">{proveedor.direccion}</div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {proveedor.telefono}
-          </div>
+          <div className="font-medium text-gray-900">{proveedor.telefono}</div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
@@ -36,10 +38,14 @@ const ListaProveedores: FC<Props> = ({ proveedor }) => {
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">{proveedor.productosQueSeCompran}</div>
+          <div className="font-medium text-gray-900">
+            {proveedor.productosQueSeCompran}
+          </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">{proveedor.entregasADomicilio}</div>
+          <div className="font-medium text-gray-900">
+            {proveedor.entregasADomicilio}
+          </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">{proveedor.rfc}</div>

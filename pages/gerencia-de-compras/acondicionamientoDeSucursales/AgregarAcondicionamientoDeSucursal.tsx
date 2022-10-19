@@ -1,6 +1,7 @@
 import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
+
 import { AcondicionamientoDeSucursalesContext } from "../../../context/gerencia-de-compras/acondicionamientoDeSucursales/AcondicionamientoDeSucursalesContext";
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores/ManejoDeProveedoresContext";
 
@@ -102,7 +103,6 @@ export default function AcondicionamientoDeSucursales() {
   };
 
   const precioTotalDelProducto = () => {
-    console.log(inputCantidad * inputPrecioDeCompra);
     setInputTotalAcomulado(inputCantidad * inputPrecioDeCompra);
   }
 

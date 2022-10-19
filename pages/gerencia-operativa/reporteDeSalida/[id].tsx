@@ -3,13 +3,15 @@ import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
 import { ReportesDeSalidaContext } from "../../../context/gerencia-operativa/reporteDeSalida/ReportesDeSalidaContext";
-import { ReporteDeSalida } from "../../../interfaces/reporteDeSalida";
-import { Unidades } from "../../../interfaces";
+
+import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
+
+import { dbReporteDeSalida } from "../../../database";
+
+import { ReporteDeSalida, Unidades } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import { dbReporteDeSalida } from "../../../database";
 
 const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
 

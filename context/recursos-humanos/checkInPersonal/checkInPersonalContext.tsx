@@ -13,7 +13,7 @@ interface ContextProps {
     horaDeSalida: string,
     sucursales?: string,
     franquicias?: string,
-    showNotificacion?: boolean,
+    showNotificacion?: boolean
   ) => void;
 
   actualizarCheckInPersonal: (

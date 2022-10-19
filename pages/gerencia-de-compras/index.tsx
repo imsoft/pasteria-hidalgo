@@ -1,6 +1,6 @@
 import Image from "next/image";
+
 import { SidebarLayoutGerenciaCompras } from "../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
-import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 import {
   HomeIcon,
@@ -8,6 +8,8 @@ import {
   DocumentReportIcon,
   CurrencyDollarIcon,
 } from "@heroicons/react/outline";
+
+import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 const actions = [
   {

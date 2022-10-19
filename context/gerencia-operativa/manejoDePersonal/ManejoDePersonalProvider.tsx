@@ -1,17 +1,17 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
-import { ManejoPersonal } from '../../../interfaces';
-import { ManejosDePersonalContext, manejosDePersonalReducer } from '.';
+import { ManejosDePersonalContext, manejosDePersonalReducer } from ".";
+import { ManejoPersonal } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 
 export interface ManejosDePersonalState {
-    manejosDePersonal: ManejoPersonal[];
+  manejosDePersonal: ManejoPersonal[];
 }
 
 const ManejosDePersonal_INITIAL_STATE: ManejosDePersonalState = {
-    manejosDePersonal: [],
+  manejosDePersonal: [],
 };
 
 interface Props {
@@ -58,11 +58,17 @@ export const ManejosDePersonalProvider: FC<Props> = ({ children }) => {
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.post<ManejoPersonal>("/manejosDePersonal", {
-        nombre,
-        descripcionDelPuesto,
+      const { data } = await entriesApi.post<ManejoPersonal>(
+        "/manejosDePersonal",
+        {
+          nombre,
+          descripcionDelPuesto,
+        }
+      );
+      dispatch({
+        type: "[Manejo De Personal] Agregar-Manejo De Personal",
+        payload: data,
       });
-      dispatch({ type: "[Manejo De Personal] Agregar-Manejo De Personal", payload: data });
 
       if (showNotificacion) {
         Swal.fire({
@@ -79,19 +85,21 @@ export const ManejosDePersonalProvider: FC<Props> = ({ children }) => {
   };
 
   const actualizarManejoDePersonal = async (
-    {
-      _id,
-      nombre,
-      descripcionDelPuesto,
-    }: ManejoPersonal,
+    { _id, nombre, descripcionDelPuesto }: ManejoPersonal,
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.put<ManejoPersonal>(`/manejosDePersonal/${_id}`, {
-        nombre,
-        descripcionDelPuesto,
+      const { data } = await entriesApi.put<ManejoPersonal>(
+        `/manejosDePersonal/${_id}`,
+        {
+          nombre,
+          descripcionDelPuesto,
+        }
+      );
+      dispatch({
+        type: "[Manejo De Personal] Actualizar-Manejo De Personal",
+        payload: data,
       });
-      dispatch({ type: "[Manejo De Personal] Actualizar-Manejo De Personal", payload: data });
 
       if (showNotificacion) {
         Swal.fire({
@@ -102,14 +110,15 @@ export const ManejosDePersonalProvider: FC<Props> = ({ children }) => {
           timer: 2000,
         });
       }
-
     } catch (error) {
       console.log({ error });
     }
   };
 
   const refreshCandidatos = async () => {
-    const { data } = await entriesApi.get<ManejoPersonal[]>("/manejosDePersonal");
+    const { data } = await entriesApi.get<ManejoPersonal[]>(
+      "/manejosDePersonal"
+    );
     console.log(data);
     dispatch({ type: "[Manejo De Personal] Refrescar-Datos", payload: data });
   };

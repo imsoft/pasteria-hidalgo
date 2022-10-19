@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ClienteFrecuente } from "../../../interfaces/clienteFrecuente";
+import { ClienteFrecuente } from "../../../interfaces";
 
 interface ContextProps {
   clientesFrecuentes: ClienteFrecuente[];

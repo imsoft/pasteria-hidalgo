@@ -3,8 +3,6 @@ import { useState, Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import LogoPasteria from "../../../public/LogoPasteria.jpg";
-
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   LibraryIcon,
@@ -19,6 +17,8 @@ import {
   XIcon,
   EyeIcon,
 } from "@heroicons/react/outline";
+
+import LogoPasteria from "../../../public/LogoPasteria.jpg";
 
 type Props = {
   children?: React.ReactNode;

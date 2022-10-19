@@ -1,4 +1,5 @@
-import { Unidades } from "./unidadDeMedida";
+import { Temperatura } from ".";
+import { Unidades } from ".";
 
 export interface ReporteDeCompra {
   _id: string;
@@ -15,5 +16,3 @@ export interface ReporteDeCompra {
   precioTotalDelProducto: number;
   precioTotalDelCompra: number;
 }
-
-export type Temperatura = "Ambiente" | "Refrigerado" | "Congelado";

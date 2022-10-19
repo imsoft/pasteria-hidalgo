@@ -1,5 +1,5 @@
-import { AcondicionamientoDeSucursal } from "../../../interfaces/acondicionamientoDeSucursal";
-import { AcondicionamientoDeSucursalesState } from "./AcondicionamientoDeSucursalesProvider";
+import { AcondicionamientoDeSucursalesState } from ".";
+import { AcondicionamientoDeSucursal } from "../../../interfaces";
 
 type AcondicionamientoDeSucursalesActionType =
   | {

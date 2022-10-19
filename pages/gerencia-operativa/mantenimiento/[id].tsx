@@ -2,13 +2,16 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
+import { MantenimientosContext } from "../../../context/gerencia-operativa/mantenimiento/MantenimientoContext";
+
+import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
+
+import { dbMantenimiento } from "../../../database";
+
 import { Mantenimiento } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { MantenimientosContext } from "../../../context/gerencia-operativa/mantenimiento/MantenimientoContext";
-import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import { dbMantenimiento } from "../../../database";
 
 interface Props {
   mantenimiento: Mantenimiento;

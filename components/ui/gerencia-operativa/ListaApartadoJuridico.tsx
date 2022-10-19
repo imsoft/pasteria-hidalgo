@@ -13,26 +13,34 @@ const ListaApartadosJuridicos: FC<Props> = ({ apartadoJuridico }) => {
 
   return (
     <tbody className="divide-y divide-gray-200 bg-white">
-      <tr key={apartadoJuridico._id} onClick={onClick} className="cursor-pointer hover:bg-yellow-100">
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">{apartadoJuridico.sucursalOFranquicia}</div>
-        </td>
-
+      <tr
+        key={apartadoJuridico._id}
+        onClick={onClick}
+        className="cursor-pointer hover:bg-yellow-100"
+      >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {apartadoJuridico.sucursales || '-'}
+            {apartadoJuridico.sucursalOFranquicia}
           </div>
         </td>
 
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">{apartadoJuridico.franquicias || '-'}</div>
+          <div className="font-medium text-gray-900">
+            {apartadoJuridico.sucursales || "-"}
+          </div>
         </td>
 
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">{apartadoJuridico.documento}</div>
+          <div className="font-medium text-gray-900">
+            {apartadoJuridico.franquicias || "-"}
+          </div>
         </td>
-        
+
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {apartadoJuridico.documento}
+          </div>
+        </td>
       </tr>
     </tbody>
   );

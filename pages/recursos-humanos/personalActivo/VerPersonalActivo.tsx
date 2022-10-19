@@ -1,9 +1,10 @@
 import { useContext, useMemo } from "react";
-import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
-
 import Link from "next/link";
-import { PersonalActivoContext } from '../../../context/recursos-humanos/personalActivo/PersonalActivoContext';
+
+import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 import ListaPersonalesActivos from '../../../components/ui/recursos-humanos/ListaPersonalActivo';
+
+import { PersonalActivoContext } from '../../../context/recursos-humanos/personalActivo/PersonalActivoContext';
 
 const VerPersonalesActivos = () => {
   const { personasActivas } = useContext(PersonalActivoContext);

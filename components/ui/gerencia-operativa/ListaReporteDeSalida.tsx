@@ -131,7 +131,6 @@ const ListaReportesDeSalida: FC<Props> = ({ reporteDeSalida }) => {
             {reporteDeSalida.kilometrajeDeSalida}
           </div>
         </td>
-
       </tr>
     </tbody>
   );

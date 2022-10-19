@@ -1,9 +1,8 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
+import { MantenimientosContext, mantenimientosReducer } from ".";
 import { Mantenimiento } from "../../../interfaces";
-import { MantenimientosContext } from "./MantenimientoContext";
-import { mantenimientosReducer } from "./mantenimientoReducer";
 
 import Swal from "sweetalert2";
 

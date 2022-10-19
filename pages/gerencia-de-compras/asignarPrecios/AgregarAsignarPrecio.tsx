@@ -1,11 +1,12 @@
 import { ChangeEvent, useContext, useState } from "react";
+import { useRouter } from 'next/router';
 
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
+
 import { AsignarPreciosContext } from "../../../context/gerencia-de-compras/asignarPrecios/AsignarPreciosContext";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useRouter } from 'next/router';
 
 export default function AgregarCandidato() {
 

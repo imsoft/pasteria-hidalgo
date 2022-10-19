@@ -19,6 +19,7 @@ interface ContextProps {
     personalActivo: PersonalActivo,
     showNotification?: boolean
   ) => void;
+
   eliminarPersonalActivo: (
     personalActivo: PersonalActivo,
     showNotification?: boolean

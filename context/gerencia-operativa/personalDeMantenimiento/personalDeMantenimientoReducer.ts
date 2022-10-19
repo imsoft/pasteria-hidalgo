@@ -1,11 +1,23 @@
+import { PersonalesDeMantenimientoState } from ".";
 import { PersonalDeMantenimiento } from "../../../interfaces";
-import { PersonalesDeMantenimientoState } from "./PersonalDeMantenimientoProvider";
 
 type PersonalesDeMantenimientoActionType =
-  | { type: "[Personal De Mantenimiento] Agregar-Personal De Mantenimiento"; payload: PersonalDeMantenimiento }
-  | { type: "[Personal De Mantenimiento] Actualizar-Personal De Mantenimiento"; payload: PersonalDeMantenimiento }
-  | { type: "[Personal De Mantenimiento] Refrescar-Datos"; payload: PersonalDeMantenimiento[] }
-  | { type: "[Personal De Mantenimiento] Eliminar-Personal De Mantenimiento"; payload: PersonalDeMantenimiento };
+  | {
+      type: "[Personal De Mantenimiento] Agregar-Personal De Mantenimiento";
+      payload: PersonalDeMantenimiento;
+    }
+  | {
+      type: "[Personal De Mantenimiento] Actualizar-Personal De Mantenimiento";
+      payload: PersonalDeMantenimiento;
+    }
+  | {
+      type: "[Personal De Mantenimiento] Refrescar-Datos";
+      payload: PersonalDeMantenimiento[];
+    }
+  | {
+      type: "[Personal De Mantenimiento] Eliminar-Personal De Mantenimiento";
+      payload: PersonalDeMantenimiento;
+    };
 
 export const personalesDeMantenimientoReducer = (
   state: PersonalesDeMantenimientoState,
@@ -15,20 +27,25 @@ export const personalesDeMantenimientoReducer = (
     case "[Personal De Mantenimiento] Agregar-Personal De Mantenimiento":
       return {
         ...state,
-        personalesDeMantenimiento: [...state.personalesDeMantenimiento, action.payload],
+        personalesDeMantenimiento: [
+          ...state.personalesDeMantenimiento,
+          action.payload,
+        ],
       };
 
     case "[Personal De Mantenimiento] Actualizar-Personal De Mantenimiento":
       return {
         ...state,
-        personalesDeMantenimiento: state.personalesDeMantenimiento.map((personalDeMantenimiento) => {
-          if (personalDeMantenimiento._id === action.payload._id) {
-            personalDeMantenimiento.nombre = action.payload.nombre;
-            personalDeMantenimiento.oficio = action.payload.oficio;
-            personalDeMantenimiento.direccion = action.payload.direccion;
+        personalesDeMantenimiento: state.personalesDeMantenimiento.map(
+          (personalDeMantenimiento) => {
+            if (personalDeMantenimiento._id === action.payload._id) {
+              personalDeMantenimiento.nombre = action.payload.nombre;
+              personalDeMantenimiento.oficio = action.payload.oficio;
+              personalDeMantenimiento.direccion = action.payload.direccion;
+            }
+            return personalDeMantenimiento;
           }
-          return personalDeMantenimiento;
-        }),
+        ),
       };
 
     case "[Personal De Mantenimiento] Refrescar-Datos":
@@ -41,7 +58,8 @@ export const personalesDeMantenimientoReducer = (
       return {
         ...state,
         personalesDeMantenimiento: state.personalesDeMantenimiento.filter(
-          (personalDeMantenimiento) => personalDeMantenimiento._id !== action.payload._id
+          (personalDeMantenimiento) =>
+            personalDeMantenimiento._id !== action.payload._id
         ),
       };
 

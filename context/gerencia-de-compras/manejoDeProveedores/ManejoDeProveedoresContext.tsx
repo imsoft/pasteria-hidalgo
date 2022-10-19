@@ -1,5 +1,5 @@
-import { createContext } from 'react';
-import { Proveedor } from '../../../interfaces';
+import { createContext } from "react";
+import { Proveedor } from "../../../interfaces";
 
 interface ContextProps {
   proveedores: Proveedor[];
@@ -22,10 +22,7 @@ interface ContextProps {
     showNotificacion?: boolean
   ) => void;
 
-  eliminarProveedor: (
-    proveedor: Proveedor,
-    showNotificacion?: boolean
-  ) => void;
+  eliminarProveedor: (proveedor: Proveedor, showNotificacion?: boolean) => void;
 }
 
 export const ProveedoresContext = createContext({} as ContextProps);

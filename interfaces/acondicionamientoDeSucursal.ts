@@ -1,3 +1,5 @@
+import { YesNo } from ".";
+
 export interface AcondicionamientoDeSucursal {
   _id: string;
   sucursalOFranquicia: string;
@@ -8,10 +10,8 @@ export interface AcondicionamientoDeSucursal {
   descripcionDelProducto: string;
   fechaEstimadaDeEntrega: string;
   proveedor: string;
-  factura: PuedeFacturar;
+  factura: YesNo;
   precioDeCompra: number;
   cantidad: number;
   totalAcomulado: number;
 }
-
-export type PuedeFacturar = "Si" | "No";

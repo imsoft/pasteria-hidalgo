@@ -1,8 +1,10 @@
 import { useContext, useMemo } from "react";
 import Link from "next/link";
+
 import { AsignarPreciosContext } from '../../../context/gerencia-de-compras/asignarPrecios/AsignarPreciosContext';
-import ListaAsignarPrecio from '../../../components/ui/gerencia-de-compras/ListaAsignarPrecios';
+
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
+import ListaAsignarPrecio from '../../../components/ui/gerencia-de-compras/ListaAsignarPrecios';
 
 const VerAsignarPrecios = () => {
   const { asignarPrecios } = useContext(AsignarPreciosContext);

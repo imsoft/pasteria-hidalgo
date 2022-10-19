@@ -1,11 +1,13 @@
 import React, { ChangeEvent, useContext, useMemo, useState } from "react";
-import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+import { useRouter } from "next/router";
+
 import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkInPersonal";
+import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
+
+import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useRouter } from "next/router";
-import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 
 export default function CheckInDePersonal() {
   const router = useRouter();

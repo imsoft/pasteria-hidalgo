@@ -2,10 +2,13 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-import { CheckInPersonal } from "../../../interfaces";
 import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext";
-import { dbCheckInPersonal } from "../../../database";
+
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+
+import { dbCheckInPersonal } from "../../../database";
+
+import { CheckInPersonal } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";

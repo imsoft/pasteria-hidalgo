@@ -1,10 +1,8 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
-import { AsignarPrecio } from "../../../interfaces/asignarPrecio";
-
-import { AsignarPreciosContext } from "./AsignarPreciosContext";
-import { asignarPreciosReducer } from ".";
+import { AsignarPreciosContext, asignarPreciosReducer } from ".";
+import { AsignarPrecio } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 

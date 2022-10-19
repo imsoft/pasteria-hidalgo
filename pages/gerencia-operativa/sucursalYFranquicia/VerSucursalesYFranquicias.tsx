@@ -1,8 +1,10 @@
 import { useContext, useMemo } from "react";
 import Link from "next/link";
+
 import { SucursalesYFranquiciasContext } from '../../../context/gerencia-operativa/sucursalYFranquicia/SucursalYFranquiciaContext';
-import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
 import ListaSucursalesYFranquicias from '../../../components/ui/gerencia-operativa/ListaSucursalYFranquicia';
+
+import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
 
 const VerSucursalesYFranquicias = () => {
   const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);

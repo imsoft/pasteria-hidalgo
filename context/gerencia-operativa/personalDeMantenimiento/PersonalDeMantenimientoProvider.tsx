@@ -1,10 +1,11 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
+import {
+  PersonalesDeMantenimientoContext,
+  personalesDeMantenimientoReducer,
+} from ".";
 import { PersonalDeMantenimiento } from "../../../interfaces";
-
-import { PersonalesDeMantenimientoContext } from './PersonalDeMantenimientoContext';
-import { personalesDeMantenimientoReducer } from "./personalDeMantenimientoReducer";
 
 import Swal from "sweetalert2";
 
@@ -12,9 +13,10 @@ export interface PersonalesDeMantenimientoState {
   personalesDeMantenimiento: PersonalDeMantenimiento[];
 }
 
-const PersonalesDeMantenimiento_INITIAL_STATE: PersonalesDeMantenimientoState = {
+const PersonalesDeMantenimiento_INITIAL_STATE: PersonalesDeMantenimientoState =
+  {
     personalesDeMantenimiento: [],
-};
+  };
 
 interface Props {
   children: ReactNode;
@@ -61,12 +63,18 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.post<PersonalDeMantenimiento>("/personalesDeMantenimiento", {
-        nombre,
-        oficio,
-        direccion,
+      const { data } = await entriesApi.post<PersonalDeMantenimiento>(
+        "/personalesDeMantenimiento",
+        {
+          nombre,
+          oficio,
+          direccion,
+        }
+      );
+      dispatch({
+        type: "[Personal De Mantenimiento] Agregar-Personal De Mantenimiento",
+        payload: data,
       });
-      dispatch({ type: "[Personal De Mantenimiento] Agregar-Personal De Mantenimiento", payload: data });
 
       if (showNotificacion) {
         Swal.fire({
@@ -83,21 +91,22 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
   };
 
   const actualizarPersonalDeMantenimiento = async (
-    {
-      _id,
-      nombre,
-      oficio,
-      direccion,
-    }: PersonalDeMantenimiento,
+    { _id, nombre, oficio, direccion }: PersonalDeMantenimiento,
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.put<PersonalDeMantenimiento>(`/personalesDeMantenimiento/${_id}`, {
-        nombre,
-        oficio,
-        direccion,
+      const { data } = await entriesApi.put<PersonalDeMantenimiento>(
+        `/personalesDeMantenimiento/${_id}`,
+        {
+          nombre,
+          oficio,
+          direccion,
+        }
+      );
+      dispatch({
+        type: "[Personal De Mantenimiento] Actualizar-Personal De Mantenimiento",
+        payload: data,
       });
-      dispatch({ type: "[Personal De Mantenimiento] Actualizar-Personal De Mantenimiento", payload: data });
 
       if (showNotificacion) {
         Swal.fire({
@@ -114,9 +123,14 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
   };
 
   const refreshPersonalesDeMantenimiento = async () => {
-    const { data } = await entriesApi.get<PersonalDeMantenimiento[]>("/personalesDeMantenimiento");
+    const { data } = await entriesApi.get<PersonalDeMantenimiento[]>(
+      "/personalesDeMantenimiento"
+    );
     console.log(data);
-    dispatch({ type: "[Personal De Mantenimiento] Refrescar-Datos", payload: data });
+    dispatch({
+      type: "[Personal De Mantenimiento] Refrescar-Datos",
+      payload: data,
+    });
   };
 
   useEffect(() => {

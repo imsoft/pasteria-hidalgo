@@ -152,7 +152,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
         };
 
         actualizarReporteDeCompra(actualizadoReporteDeCompra, true);
-        router.push("/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras");
+        router.push("/gerencia-operativa/manejoDeAlmacen/VerManejoDeAlmacen");
       }
     });
   };
@@ -170,7 +170,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         eliminarReporteDeCompra(reporteDeCompra, true);
-        router.push("/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras");
+        router.push("/gerencia-operativa/manejoDeAlmacen/VerManejoDeAlmacen");
       }
     });
   };
@@ -188,7 +188,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
             </div>
             <div className="grid grid-cols-6 gap-6">
 
-              <div className="col-span-6 sm:col-span-3">
+              {/* <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtFechaDeCompra"
                   className="block text-sm font-medium text-gray-700"
@@ -246,7 +246,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   onChange={onInputValueChangedMateriaPrima}
                   // onBlur={() => setTouched(true)}
                 />
-              </div>
+              </div> */}
 
               <div className="col-span-6 sm:col-span-3">
                 <label
@@ -267,7 +267,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                 />
               </div>
 
-              <div className="col-span-6 sm:col-span-3">
+              {/* <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtUnidades"
                   className="block text-sm font-medium text-gray-700"
@@ -478,7 +478,7 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
                   <option>Si</option>
                   <option>No</option>
                 </select>
-              </div>
+              </div> */}
 
             </div>
           </div>

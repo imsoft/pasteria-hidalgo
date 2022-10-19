@@ -2,8 +2,9 @@ import { useContext, useMemo } from "react";
 import Link from "next/link";
 
 import { ApartadosJuridicosContext } from "../../../context/gerencia-operativa/apartadoJuridico/ApartadosJuridicosContext";
-import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 import ListaApartadosJuridicos from "../../../components/ui/gerencia-operativa/ListaApartadoJuridico";
+
+import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
 const VerApartadosJuridicos = () => {
   const { apartadosJuridicos } = useContext(ApartadosJuridicosContext);

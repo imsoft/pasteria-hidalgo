@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 
-import Link from "next/link";
 import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
+
 import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
 import ListaManejosDeAlmacen from "../../../components/ui/gerencia-operativa/ListaManejoDeAlmacen";
 

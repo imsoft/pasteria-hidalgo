@@ -1,7 +1,7 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
-import { Proveedor } from "../../../interfaces/proveedor";
+import { Proveedor } from "../../../interfaces";
 import { ProveedoresContext, proveedoresReducer } from ".";
 
 import Swal from "sweetalert2";

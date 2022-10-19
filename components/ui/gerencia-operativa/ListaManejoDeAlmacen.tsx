@@ -8,7 +8,7 @@ interface Props {
 
 const ListaManejosDeAlmacen: FC<Props> = ({ reporteDeCompra }) => {
   const onClick = () => {
-    router.push(`/gerencia-de-compras/reporteDeCompras/${reporteDeCompra._id}`);
+    router.push(`/gerencia-operativa/manejoDeAlmacen/${reporteDeCompra._id}`);
   };
 
   return (
@@ -27,7 +27,7 @@ const ListaManejosDeAlmacen: FC<Props> = ({ reporteDeCompra }) => {
           <div className="font-medium text-gray-900">
             {reporteDeCompra.unidades}
           </div>
-          </td>
+        </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
             {reporteDeCompra.tempetatura}

@@ -1,5 +1,5 @@
+import { PersonalActivoState } from ".";
 import { PersonalActivo } from "../../../interfaces";
-import { PersonalActivoState } from "./PersonalActivoProvider";
 
 type PersonalActivoActionType =
   | {
@@ -44,21 +44,21 @@ export const personalActivoReducer = (
         }),
       };
 
-    case '[Personal Activo] Refrescar-Datos':
-        return {
-            ...state,
-            personasActivas: [...action.payload],
-        };
+    case "[Personal Activo] Refrescar-Datos":
+      return {
+        ...state,
+        personasActivas: [...action.payload],
+      };
 
-    case '[Personal Activo] Eliminar-Personal Activo':
-        return {
-            ...state,
-            personasActivas: state.personasActivas.filter(
-                (personalActivo) => personalActivo._id !== action.payload._id 
-            ),
-        };
+    case "[Personal Activo] Eliminar-Personal Activo":
+      return {
+        ...state,
+        personasActivas: state.personasActivas.filter(
+          (personalActivo) => personalActivo._id !== action.payload._id
+        ),
+      };
 
     default:
-        return state;
+      return state;
   }
 };

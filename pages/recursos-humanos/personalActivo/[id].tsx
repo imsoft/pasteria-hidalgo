@@ -2,12 +2,13 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
+import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
+
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
-import { PersonalActivo } from "../../../interfaces/personalActivo";
-import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 import { dbPersonalActivo } from "../../../database";
-import { PuestosEmpresa } from '../../../interfaces/puestoEmpresa';
+
+import { PersonalActivo, PuestosEmpresa } from '../../../interfaces';
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";

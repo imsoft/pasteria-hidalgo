@@ -1,8 +1,8 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
-import { ReporteDeCompra } from "../../../interfaces/reporteDeCompra";
 import { ReporteDeCompraContext, reportesDeComprasReducer } from ".";
+import { ReporteDeCompra } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 
@@ -85,7 +85,10 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
           precioTotalDelCompra,
         }
       );
-      dispatch({ type: "[Reporte De Compra] Agregar-Reporte De Compra", payload: data });
+      dispatch({
+        type: "[Reporte De Compra] Agregar-Reporte De Compra",
+        payload: data,
+      });
 
       if (showNotificacion) {
         Swal.fire({
@@ -137,7 +140,10 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
           precioTotalDelCompra,
         }
       );
-      dispatch({ type: "[Reporte De Compra] Actualizar-Reporte De Compra", payload: data });
+      dispatch({
+        type: "[Reporte De Compra] Actualizar-Reporte De Compra",
+        payload: data,
+      });
 
       if (showNotificacion) {
         Swal.fire({

@@ -1,8 +1,11 @@
 import { ChangeEvent, useContext, useState } from 'react';
+
+import { ManejosDePersonalContext } from '../../../context/gerencia-operativa/manejoDePersonal/ManejoDePersonalContext';
+
+import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
+
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
-import { ManejosDePersonalContext } from '../../../context/gerencia-operativa/manejoDePersonal/ManejoDePersonalContext';
 
 export default function ManejoPersonal() {
 

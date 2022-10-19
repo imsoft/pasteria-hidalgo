@@ -23,4 +23,6 @@ interface ContextProps {
   ) => void;
 }
 
-export const PersonalesDeMantenimientoContext = createContext({} as ContextProps);
+export const PersonalesDeMantenimientoContext = createContext(
+  {} as ContextProps
+);

@@ -1,5 +1,5 @@
-import { SidebarLayout } from "../components/layouts/SidebarLayout";
 import Image from "next/image";
+import { SidebarLayout } from "../components/layouts/SidebarLayout";
 
 import LogoPasteriaBlanco from "../public/LCPLIGHTVERTICAL.jpg";
 
@@ -16,11 +16,6 @@ export default function Home() {
             alt="Pasteleria La Hidalguense"
           />
         </div>
-        {/* <ul>
-          <li>Recursos Humanos</li>
-          <li>Gerencia Operativa</li>
-          <li>Compras</li>
-        </ul> */}
       </SidebarLayout>
     </>
   );

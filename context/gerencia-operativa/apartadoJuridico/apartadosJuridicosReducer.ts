@@ -1,5 +1,5 @@
+import { ApartadosJuridicosState } from ".";
 import { ApartadoJuridico } from "../../../interfaces";
-import { ApartadosJuridicosState } from "./ApartadosJuridicosProvider";
 
 type ApartadosJuridicosActionType =
   | {

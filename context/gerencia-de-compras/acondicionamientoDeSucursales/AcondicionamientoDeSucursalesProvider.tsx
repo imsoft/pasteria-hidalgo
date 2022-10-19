@@ -1,11 +1,11 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
-import { AcondicionamientoDeSucursal } from "../../../interfaces";
 import {
   AcondicionamientoDeSucursalesContext,
   acondicionamientoDeSucursalesReducer,
 } from ".";
+import { AcondicionamientoDeSucursal } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 

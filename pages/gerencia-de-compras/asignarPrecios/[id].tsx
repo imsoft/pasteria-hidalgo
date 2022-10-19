@@ -2,12 +2,16 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
+import { AsignarPreciosContext } from "../../../context/gerencia-de-compras/asignarPrecios/AsignarPreciosContext";
+
+import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
+
+import { dbAsignarPrecio } from "../../../database";
+
+import { AsignarPrecio } from "../../../interfaces/asignarPrecio";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { AsignarPrecio } from "../../../interfaces/asignarPrecio";
-import { AsignarPreciosContext } from "../../../context/gerencia-de-compras/asignarPrecios/AsignarPreciosContext";
-import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
-import { dbAsignarPrecio } from "../../../database";
 
 interface Props {
   asignarPrecio: AsignarPrecio;

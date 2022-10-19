@@ -1,15 +1,20 @@
-import { ClienteFrecuente } from '../../../interfaces/clienteFrecuente';
-import { ClientesFrecuentesState } from './ClientesFrecuentesProvider';
-// _id: string;
-// nombre: string;
-// correoElectronico: string;
-// fechaDeNacimiento: string;
+import { ClientesFrecuentesState } from ".";
+import { ClienteFrecuente } from "../../../interfaces";
 
 type ClientesFrecuentesActionType =
-  | { type: "[Cliente Frecuente] Agregar-Cliente Frecuente"; payload: ClienteFrecuente }
-  | { type: "[Cliente Frecuente] Actualizar-Cliente Frecuente"; payload: ClienteFrecuente }
+  | {
+      type: "[Cliente Frecuente] Agregar-Cliente Frecuente";
+      payload: ClienteFrecuente;
+    }
+  | {
+      type: "[Cliente Frecuente] Actualizar-Cliente Frecuente";
+      payload: ClienteFrecuente;
+    }
   | { type: "[Cliente Frecuente] Refrescar-Datos"; payload: ClienteFrecuente[] }
-  | { type: "[Cliente Frecuente] Eliminar-Cliente Frecuente"; payload: ClienteFrecuente };
+  | {
+      type: "[Cliente Frecuente] Eliminar-Cliente Frecuente";
+      payload: ClienteFrecuente;
+    };
 
 export const clientesFrecuentesReducer = (
   state: ClientesFrecuentesState,
@@ -28,8 +33,10 @@ export const clientesFrecuentesReducer = (
         clientesFrecuentes: state.clientesFrecuentes.map((clienteFrecuente) => {
           if (clienteFrecuente._id === action.payload._id) {
             clienteFrecuente.nombre = action.payload.nombre;
-            clienteFrecuente.correoElectronico = action.payload.correoElectronico;
-            clienteFrecuente.fechaDeNacimiento = action.payload.fechaDeNacimiento;
+            clienteFrecuente.correoElectronico =
+              action.payload.correoElectronico;
+            clienteFrecuente.fechaDeNacimiento =
+              action.payload.fechaDeNacimiento;
           }
           return clienteFrecuente;
         }),

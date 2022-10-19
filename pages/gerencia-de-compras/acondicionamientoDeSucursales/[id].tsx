@@ -9,19 +9,22 @@ import {
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
+import { AcondicionamientoDeSucursalesContext } from "../../../context/gerencia-de-compras/acondicionamientoDeSucursales/AcondicionamientoDeSucursalesContext";
+import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores";
+
+import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
+
+import { dbAcondicionamientoDeSucursal } from "../../../database";
+
 import {
   AcondicionamientoDeSucursal,
-  PuedeFacturar,
-} from "../../../interfaces/acondicionamientoDeSucursal";
-import { AcondicionamientoDeSucursalesContext } from "../../../context/gerencia-de-compras/acondicionamientoDeSucursales/AcondicionamientoDeSucursalesContext";
-import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
-import { dbAcondicionamientoDeSucursal } from "../../../database";
-import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores";
+  YesNo,
+} from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const factura: PuedeFacturar[] = ["Si", "No"];
+const factura: YesNo[] = ["Si", "No"];
 
 interface Props {
   acondicionamientoDeSucursal: AcondicionamientoDeSucursal;
@@ -53,7 +56,7 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
   const [inputProveedor, setInputProveedor] = useState(
     acondicionamientoDeSucursal.proveedor
   );
-  const [inputFactura, setInputFactura] = useState<PuedeFacturar>(
+  const [inputFactura, setInputFactura] = useState<YesNo>(
     acondicionamientoDeSucursal.factura
   );
   const [inputPrecioDeCompra, setInputPrecioDeCompra] = useState(
@@ -123,7 +126,7 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
   const onInputValueChangedFactura = (
     event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputFactura(event.target.value as PuedeFacturar);
+    setInputFactura(event.target.value as YesNo);
   };
 
   const onInputValueChangedPrecioDeCompra = (

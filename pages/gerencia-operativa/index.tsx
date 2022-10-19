@@ -1,6 +1,6 @@
 import Image from "next/image";
+
 import { SidebarLayoutGerenciaOperativa } from "../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 import {
   LibraryIcon,
@@ -12,6 +12,8 @@ import {
   EyeIcon,
   UserCircleIcon,
 } from "@heroicons/react/outline";
+
+import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 const actions = [
   {

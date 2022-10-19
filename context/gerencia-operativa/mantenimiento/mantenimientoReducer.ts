@@ -1,6 +1,5 @@
+import { MantenimientosState } from ".";
 import { Mantenimiento } from "../../../interfaces";
-import { MantenimientosState } from "./MantenimientoProvider";
-
 
 type MantenimientosActionType =
   | { type: "[Mantenimiento] Agregar-Mantenimiento"; payload: Mantenimiento }

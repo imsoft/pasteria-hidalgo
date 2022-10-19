@@ -1,9 +1,8 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../apis";
+import { ApartadosJuridicosContext, apartadosJuridicosReducer } from ".";
 import { ApartadoJuridico } from "../../../interfaces";
-import { ApartadosJuridicosContext } from "./ApartadosJuridicosContext";
-import { apartadosJuridicosReducer } from ".";
 
 import Swal from "sweetalert2";
 

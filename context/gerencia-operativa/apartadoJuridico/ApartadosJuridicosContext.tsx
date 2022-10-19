@@ -22,7 +22,6 @@ interface ContextProps {
     apartadoJuridico: ApartadoJuridico,
     showNotificacion?: boolean
   ) => void;
-  
 }
 
 export const ApartadosJuridicosContext = createContext({} as ContextProps);
