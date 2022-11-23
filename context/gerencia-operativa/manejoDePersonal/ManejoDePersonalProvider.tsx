@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
-import { entriesApi } from "../../../api";
+import { entriesApi } from "../../../baseUrlApi";
 import { ManejosDePersonalContext, manejosDePersonalReducer } from ".";
 import { ManejoPersonal } from "../../../interfaces";
 

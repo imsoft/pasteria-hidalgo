@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
-import { entriesApi } from "../../../api";
+import { entriesApi } from "../../../baseUrlApi";
 import { AsignarPreciosContext, asignarPreciosReducer } from ".";
 import { AsignarPrecio } from "../../../interfaces";
 

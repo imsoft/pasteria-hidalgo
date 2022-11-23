@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
-import { entriesApi } from "../../../api";
+import { entriesApi } from "../../../baseUrlApi";
 import { SucursalYFranquicia } from "../../../interfaces";
 import { SucursalesYFranquiciasContext, sucursalYFranquiciaReducer } from ".";
 
