@@ -1,6 +1,6 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
 
-import { entriesApi } from "../../../apis";
+import { entriesApi } from "../../../api";
 import { CandidatosContext, candidatosReducer } from ".";
 import { Candidato } from "../../../interfaces";
 
