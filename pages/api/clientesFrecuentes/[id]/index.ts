@@ -35,7 +35,7 @@ const getClienteFrecuente = async (req: NextApiRequest, res: NextApiResponse) =>
   if (!clienteFrecuenteInDB) {
     return res
       .status(400)
-      .json({ message: "No hay candidato con ese ID: " + id });
+      .json({ message: "No hay cliente frecuente con ese ID: " + id });
   }
 
   return res.status(200).json(clienteFrecuenteInDB);
@@ -55,13 +55,14 @@ const updateClienteFrecuente = async (
     await db.disconnect();
     return res
       .status(400)
-      .json({ message: "No hay candidato con ese ID: " + id });
+      .json({ message: "No hay cliente frecuente con ese ID: " + id });
   }
 
   const {
     nombre = clienteFrecuenteToUpdate.nombre,
     correoElectronico = clienteFrecuenteToUpdate.correoElectronico,
     fechaDeNacimiento = clienteFrecuenteToUpdate.fechaDeNacimiento,
+    puntosDeCompra = clienteFrecuenteToUpdate.puntosDeCompra,
   } = req.body;
 
   try {
@@ -71,6 +72,7 @@ const updateClienteFrecuente = async (
         nombre,
         correoElectronico,
         fechaDeNacimiento,
+        puntosDeCompra,
       },
       { runValidators: true, new: true }
     );
@@ -92,7 +94,7 @@ const deleteClienteFrecuente = async (req: NextApiRequest, res: NextApiResponse)
   if (!ClienteFrecuenteDBToDelete) {
     return res
       .status(400)
-      .json({ message: "No hay candidato con ese ID: " + id });
+      .json({ message: "No hay cliente frecuente con ese ID: " + id });
   }
 
   return res.status(200).json(ClienteFrecuenteDBToDelete);

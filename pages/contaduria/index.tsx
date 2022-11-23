@@ -6,27 +6,49 @@ import {
   CashIcon,
   CurrencyDollarIcon,
   DocumentReportIcon,
+  EyeIcon,
 } from "@heroicons/react/outline";
 
 const actions = [
   {
     title: "Asignar comisiones",
-    href: "/contaduria/asignar-comisiones",
+    href: "/contaduria/asignarComisiones/AgregarAsignarComisiones",
     icon: CashIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },
   {
+    title: "Ver Asignar comisiones",
+    href: "/contaduria/asignarComisiones/VerAsignarComisiones",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
     title: "Asignar precios",
-    href: "/contaduria/asignar-precios",
+    href: "/contaduria/asignarPrecios/AgregarAsignarPrecios",
     icon: CurrencyDollarIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },
   {
+    title: "Ver Asignar precios",
+    href: "/contaduria/asignarPrecios/VerAsignarPrecios",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
     title: "Reporte de ganancias",
-    href: "/contaduria/reporte-de-ganancias",
+    href: "/contaduria/reporteDeGanancias/AgregarReporteDeGanancia",
     icon: DocumentReportIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Reporte de ganancias",
+    href: "/contaduria/reporteDeGanancias/VerReporteDeGanancia",
+    icon: EyeIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },

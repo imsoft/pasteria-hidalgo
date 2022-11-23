@@ -1,16 +1,20 @@
 import { ChangeEvent, useContext, useState } from "react";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
+
 export default function AgregarCandidato() {
+  const router = useRouter();
   const { agregarClienteFrecuente } = useContext(ClientesFrecuentesContext);
 
   const [inputNombre, setInputNombre] = useState('');
   const [inputCorreoElectronico, setInputCorreoElectronico] = useState('');
   const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState('');
+  const [inputPuntosDeCompra, setInputPuntosDeCompra] = useState(0);
   
   const [touched, setTouched] = useState(false);
 
@@ -32,11 +36,16 @@ export default function AgregarCandidato() {
     setInputFechaDeNacimiento(event.target.value);
   };
 
+  const onTextFieldChangedPuntosDeCompra = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputPuntosDeCompra(parseInt(event.target.value));
+  };
+
   const onSave = () => {
     if (
       inputNombre.length === 0 &&
       inputCorreoElectronico.length === 0 &&
-      inputFechaDeNacimiento.length === 0
+      inputFechaDeNacimiento.length === 0 &&
+      inputPuntosDeCompra === 0
     )
       return;
 
@@ -44,6 +53,7 @@ export default function AgregarCandidato() {
       inputNombre,
       inputCorreoElectronico,
       inputFechaDeNacimiento,
+      inputPuntosDeCompra,
       true
     );
 
@@ -55,10 +65,13 @@ export default function AgregarCandidato() {
       timer: 5000,
     });
 
+    router.push("/gerencia-de-ventas/clienteFrecuente/VerClientesFrecuentes");
+
     setTouched(false);
     setInputNombre("");
     setInputCorreoElectronico("");
     setInputFechaDeNacimiento("");
+    // setInputPuntosDeCompra(0);
   };
 
   return (
@@ -73,6 +86,7 @@ export default function AgregarCandidato() {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
+              
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"
@@ -126,6 +140,27 @@ export default function AgregarCandidato() {
                   onBlur={() => setTouched(true)}
                 />
               </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtPuntosDeCompra"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Puntos De Compra
+                </label>
+                <input
+                  type="number"
+                  name="TxtPuntosDeCompra"
+                  id="TxtPuntosDeCompra"
+                  autoComplete="off"
+                  min="0"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedPuntosDeCompra}
+                  value={inputPuntosDeCompra || 0}
+                  onBlur={() => setTouched(true)}
+                />
+              </div>
+
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

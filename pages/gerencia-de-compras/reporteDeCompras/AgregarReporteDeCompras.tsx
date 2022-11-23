@@ -9,6 +9,7 @@ import { Temperatura, Unidades, YesNo } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
 
 interface IReporteDeCompraProvisional {
   uuid: number;
@@ -36,6 +37,7 @@ const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 export default function ReporteDeCompras() {
+  const router = useRouter();
   const { agregarReporteDeCompra } = useContext(ReporteDeCompraContext);
 
   const { proveedores } = useContext(ProveedoresContext);
@@ -229,6 +231,8 @@ export default function ReporteDeCompras() {
       showConfirmButton: false,
       timer: 5000,
     });
+
+    router.push("/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras");
 
     resetForm();
   };

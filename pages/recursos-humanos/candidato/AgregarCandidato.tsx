@@ -8,10 +8,12 @@ import { PuestosEmpresa } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
 
 const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
 
 export default function AgregarCandidato() {
+  const router = useRouter();
   const { agregarNuevoCandidato } = useContext(CandidatosContext);
 
   const [inputNombre, setInputNombre] = useState("");
@@ -208,6 +210,8 @@ export default function AgregarCandidato() {
       showConfirmButton: false,
       timer: 5000,
     });
+
+    router.push("/recursos-humanos/candidato/VerCandidatos");
 
     setTouched(false);
     setInputNombre("");

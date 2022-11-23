@@ -3,4 +3,5 @@ export interface ClienteFrecuente {
   nombre: string;
   correoElectronico: string;
   fechaDeNacimiento: string;
+  puntosDeCompra: number;
 }

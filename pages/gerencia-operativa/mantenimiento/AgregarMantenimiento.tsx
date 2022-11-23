@@ -5,8 +5,10 @@ import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gere
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
 
 export default function AgregarMantenimiento() {
+  const router = useRouter();
   const { agregarNuevoMantenimiento } = useContext(MantenimientosContext);
 
   const [inputNombreMaquina, setInputNombreMaquina] = useState("");
@@ -79,6 +81,8 @@ export default function AgregarMantenimiento() {
       showConfirmButton: false,
       timer: 5000,
     });
+
+    router.push("/gerencia-operativa/mantenimiento/VerMantenimiento");
 
     setTouched(false);
     setInputNombreMaquina("");

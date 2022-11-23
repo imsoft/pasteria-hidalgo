@@ -23,6 +23,7 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
   const [inputNombre, setInputNombre] = useState(clienteFrecuente.nombre);
   const [inputCorreoElectronico, setInputCorreoElectronico] = useState(clienteFrecuente.correoElectronico);
   const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState(clienteFrecuente.fechaDeNacimiento);
+  const [inputPuntosDeCompra, setInputPuntosDeCompra] = useState(clienteFrecuente.puntosDeCompra);
   
   const MySwal = withReactContent(Swal);
 
@@ -40,11 +41,16 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
     setInputFechaDeNacimiento(event.target.value);
   };
 
+  const onInputValueChangedPuntosDeCompra = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputPuntosDeCompra(parseInt(event.target.value));
+  };
+
   const onSave = () => {
     if (
       inputNombre.trim().length === 0 &&
       inputCorreoElectronico.trim().length === 0 &&
-      inputFechaDeNacimiento.trim().length === 0
+      inputFechaDeNacimiento.trim().length === 0 &&
+      inputPuntosDeCompra === 0
     )
       return;
 
@@ -64,6 +70,7 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
           nombre: inputNombre,
           fechaDeNacimiento: inputFechaDeNacimiento,
           correoElectronico: inputCorreoElectronico,
+          puntosDeCompra: inputPuntosDeCompra,
         };
 
         actualizarClienteFrecuente(actualizadoClienteFrecuente, true);
@@ -155,6 +162,25 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputCorreoElectronico}
                   onChange={onInputValueChangedCorreoElectronico}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtPuntosDeCompra"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Puntos De Compra
+                </label>
+                <input
+                  type="number"
+                  name="TxtPuntosDeCompra"
+                  id="TxtPuntosDeCompra"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputPuntosDeCompra || ''}
+                  onChange={onInputValueChangedPuntosDeCompra}
                   // onBlur={() => setTouched(true)}
                 />
               </div>

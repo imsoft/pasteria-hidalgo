@@ -11,6 +11,7 @@ import {
   DocumentReportIcon,
   BellIcon,
   MenuAlt2Icon,
+  EyeIcon,
   XIcon,
 } from "@heroicons/react/outline";
 
@@ -23,20 +24,38 @@ type Props = {
 const navigation = [
   {
     name: "Asignar comisiones",
-    href: "/contaduria/asignar-comisiones",
+    href: "/contaduria/asignarComisiones/AgregarAsignarComisiones",
     icon: CashIcon,
     current: false,
   },
   {
+    name: "Ver Asignar comisiones",
+    href: "/contaduria/asignarComisiones/VerAsignarComisiones",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Asignar precios",
-    href: "/contaduria/asignar-precios",
+    href: "/contaduria/asignarPrecios/AgregarAsignarPrecios",
     icon: CurrencyDollarIcon,
     current: false,
   },
   {
+    name: "Ver Asignar precios",
+    href: "/contaduria/asignarPrecios/VerAsignarPrecios",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Reporte de ganancias",
-    href: "/contaduria/reporte-de-ganancias",
+    href: "/contaduria/reporteDeGanancias/AgregarReporteDeGanancia",
     icon: DocumentReportIcon,
+    current: false,
+  },
+  {
+    name: "Ver Reporte de ganancias",
+    href: "/contaduria/reporteDeGanancias/VerReporteDeGanancia",
+    icon: EyeIcon,
     current: false,
   },
 ];

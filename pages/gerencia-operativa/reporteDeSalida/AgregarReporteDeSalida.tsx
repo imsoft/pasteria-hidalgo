@@ -8,10 +8,12 @@ import { Unidades } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
 
 const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
 
 export default function ReportesSalida() {
+  const router = useRouter();
   const { agregarNuevoReporteDeSalida } = useContext(ReportesDeSalidaContext);
 
   const [inputFecha, setInputFecha] = useState("");
@@ -208,6 +210,8 @@ export default function ReportesSalida() {
       showConfirmButton: false,
       timer: 5000,
     });
+
+    router.push("/gerencia-operativa/reporteDeSalida/VerReportesDeSalida");
 
     setTouched(false);
     setInputFecha("");

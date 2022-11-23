@@ -13,6 +13,7 @@ export { default as ReporteDeCompra, type IReporteDeCompra } from './reporteDeCo
 // Gerencia de ventas
 
 export { default as ClienteFrecuente, type IClienteFrecuente } from './clienteFrecuente';
+export { default as ReporteVentasIndividual, type IReporteVentasIndividual } from './reporteVentasIndividual';
 
 // Gerencia operativa
 

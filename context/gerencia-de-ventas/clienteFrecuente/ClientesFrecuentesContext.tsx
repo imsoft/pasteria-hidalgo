@@ -9,16 +9,17 @@ interface ContextProps {
     nombre: string,
     correoElectronico: string,
     fechaDeNacimiento: string,
+    puntosDeCompra: number,
     showNotificacion?: boolean
   ) => void;
 
   actualizarClienteFrecuente: (
-    candidato: ClienteFrecuente,
+    clienteFrecuente: ClienteFrecuente,
     showNotificacion?: boolean
   ) => void;
 
   eliminarClienteFrecuente: (
-    candidato: ClienteFrecuente,
+    clienteFrecuente: ClienteFrecuente,
     showNotificacion?: boolean
   ) => void;
 }

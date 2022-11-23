@@ -10,6 +10,8 @@ import {
   DocumentTextIcon,
   BellIcon,
   MenuAlt2Icon,
+  StarIcon,
+  EyeIcon,
   XIcon,
 } from "@heroicons/react/outline";
 
@@ -21,21 +23,51 @@ type Props = {
 
 const navigation = [
   {
-    name: "Reporte de ventas ambulantes general",
-    href: "/gerencia-de-ventas/reporte-de-ventas-ambulantes-general",
+    name: "Clientes Frecuentes",
+    href: "/gerencia-de-ventas/clienteFrecuente/AgregarClienteFrecuente",
+    icon: StarIcon,
+    current: false,
+  },
+  {
+    name: "Ver Clientes Frecuentes",
+    href: "/gerencia-de-ventas/clienteFrecuente/VerClientesFrecuentes",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Reporte de ventas ambulantes generales",
+    href: "/gerencia-de-ventas/reporteDeVentasAmbulantesGeneral/AgregarReporteDeVentasAmbulantesGeneral",
     icon: DocumentDuplicateIcon,
     current: false,
   },
   {
+    name: "Ver Reporte de ventas ambulantes generales",
+    href: "/gerencia-de-ventas/reporteDeVentasAmbulantesGeneral/VerReporteDeVentasAmbulantesGeneral",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Reporte de ventas ambulantes individual",
-    href: "/gerencia-de-ventas/reporte-de-ventas-ambulantes-individual",
+    href: "/gerencia-de-ventas/reporteVentaAmbulantesIndividual/AgregarReporteVentaAmbulantesIndividual",
     icon: DocumentTextIcon,
     current: false,
   },
   {
+    name: "Ver Reporte de ventas ambulantes individual",
+    href: "/gerencia-de-ventas/reporteVentaAmbulantesIndividual/VerReporteVentaAmbulantesIndividual",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
     name: "Reporte de ventas individual",
-    href: "/gerencia-de-ventas/reporte-de-ventas-individual",
+    href: "/gerencia-de-ventas/reporteDeVentasIndividual/AgregarReporteDeVentasIndividual",
     icon: DocumentReportIcon,
+    current: false,
+  },
+  {
+    name: "Ver Reporte de ventas individual",
+    href: "/gerencia-de-ventas/reporteDeVentasIndividual/VerReporteDeVentasIndividual",
+    icon: EyeIcon,
     current: false,
   },
 ];

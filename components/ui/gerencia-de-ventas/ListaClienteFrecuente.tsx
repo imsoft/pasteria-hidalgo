@@ -8,7 +8,7 @@ interface Props {
 
 const ListaClientesFrecuentes: FC<Props> = ({ clienteFrecuente }) => {
   const onClick = () => {
-    router.push(`/recursos-humanos/clienteFrecuente/${clienteFrecuente._id}`);
+    router.push(`/gerencia-de-ventas/clienteFrecuente/${clienteFrecuente._id}`);
   };
 
   return (
@@ -31,6 +31,11 @@ const ListaClientesFrecuentes: FC<Props> = ({ clienteFrecuente }) => {
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
             {clienteFrecuente.fechaDeNacimiento}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className={`font-medium ${ clienteFrecuente.puntosDeCompra >= 25 ? 'text-green-500' : 'text-gray-900' }`}>
+            {clienteFrecuente.puntosDeCompra}
           </div>
         </td>
       </tr>

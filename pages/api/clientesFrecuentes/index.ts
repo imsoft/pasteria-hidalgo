@@ -38,12 +38,14 @@ const postClienteFrecuente = async( req: NextApiRequest, res: NextApiResponse<Da
         nombre = '',
         correoElectronico = '',
         fechaDeNacimiento = '',
+        puntosDeCompra = '',
     } = req.body;
 
     const newClienteFrecuente = new ClienteFrecuente({
         nombre,
         correoElectronico,
         fechaDeNacimiento,
+        puntosDeCompra,
     });
 
     try {

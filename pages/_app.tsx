@@ -4,8 +4,6 @@ import { AppProps } from "next/app";
 
 // Contaduria
 
-
-
 // Gerencia de compras
 
 import { AcondicionamientoDeSucursalesProvider } from "../context/gerencia-de-compras/acondicionamientoDeSucursales";
@@ -35,9 +33,8 @@ import { PersonalActivoProvider } from "../context/recursos-humanos/personalActi
 
 // Miscelaneos
 
-
-
 import "../styles/globals.css";
+import { ReportesVentasIndividualProvider } from "../context/gerencia-de-ventas/reporteVentasIndividual";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -65,7 +62,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                             <ReportesDeSalidaProvider>
                               <MantenimientosProvider>
                                 <PersonalesDeMantenimientoProvider>
-                                  <Component {...pageProps} />
+                                  <ReportesVentasIndividualProvider>
+                                    <Component {...pageProps} />
+                                  </ReportesVentasIndividualProvider>
                                 </PersonalesDeMantenimientoProvider>
                               </MantenimientosProvider>
                             </ReportesDeSalidaProvider>

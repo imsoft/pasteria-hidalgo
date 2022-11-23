@@ -5,8 +5,10 @@ import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gere
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
 
 export default function ManejoSucursalesFranquicias() {
+  const router = useRouter();
   const { agregarSucursalYFranquicia } = useContext(
     SucursalesYFranquiciasContext
   );
@@ -131,6 +133,8 @@ export default function ManejoSucursalesFranquicias() {
       timer: 5000,
     });
 
+    router.push("/gerencia-operativa/sucursalYFranquicia/VerSucursalesYFranquicias");
+
     setTouched(false);
     setInputSucursalOFranquicia("");
     setInputFranquicias("");
@@ -232,6 +236,24 @@ export default function ManejoSucursalesFranquicias() {
                   <option>Chapalita</option>
                   <option>Chiapas</option>
                 </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtNombre"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Nombre de la sucursal o franquicia
+                </label>
+                <input
+                  type="text"
+                  name="TxtNombre"
+                  id="TxtNombre"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedDireccion}
+                  onBlur={() => setTouched(true)}
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">

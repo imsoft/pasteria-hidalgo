@@ -73,6 +73,8 @@ const ApartadoJuridico = () => {
       timer: 5000,
     });
 
+    router.push("/gerencia-operativa/apartadoJuridico/VerApartadoJuridico");
+
     setTouched(false);
     setInputSucursalOFranquicia("");
     setInputSucursales("");

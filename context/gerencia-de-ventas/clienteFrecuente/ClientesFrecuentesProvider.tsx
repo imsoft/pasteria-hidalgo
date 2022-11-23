@@ -30,7 +30,7 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
   ) => {
     try {
       const { data } = await entriesApi.delete<ClienteFrecuente>(
-        `/clienteFrecuente/${clienteFrecuente._id}`
+        `/clientesFrecuentes/${clienteFrecuente._id}`
       );
 
       dispatch({
@@ -56,6 +56,7 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
     nombre: string,
     correoElectronico: string,
     fechaDeNacimiento: string,
+    puntosDeCompra: number,
     showNotificacion = false
   ) => {
     try {
@@ -65,6 +66,7 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
           nombre,
           correoElectronico,
           fechaDeNacimiento,
+          puntosDeCompra,
         }
       );
       dispatch({
@@ -87,7 +89,13 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
   };
 
   const actualizarClienteFrecuente = async (
-    { _id, nombre, correoElectronico, fechaDeNacimiento }: ClienteFrecuente,
+    {
+      _id,
+      nombre,
+      correoElectronico,
+      fechaDeNacimiento,
+      puntosDeCompra,
+    }: ClienteFrecuente,
     showNotificacion = false
   ) => {
     try {
@@ -97,6 +105,7 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
           nombre,
           correoElectronico,
           fechaDeNacimiento,
+          puntosDeCompra,
         }
       );
       dispatch({
@@ -118,7 +127,7 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const refreshCandidatos = async () => {
+  const refreshClientesFrecuentes = async () => {
     const { data } = await entriesApi.get<ClienteFrecuente[]>(
       "/clientesFrecuentes"
     );
@@ -127,7 +136,7 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
   };
 
   useEffect(() => {
-    refreshCandidatos();
+    refreshClientesFrecuentes();
   }, []);
 
   return (

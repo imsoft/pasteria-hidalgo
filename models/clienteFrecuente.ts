@@ -6,7 +6,8 @@ export interface IClienteFrecuente extends ClienteFrecuente {}
 const clienteFrecuenteSchema = new Schema({
   nombre: { type: String, required: true },
   correoElectronico: { type: String, required: true },
-  fechaDeNacimiento: { type: Date, required: true },
+  fechaDeNacimiento: { type: String, required: true },
+  puntosDeCompra: { type: Number, required: true },
 });
 
 const ClienteFrecuenteModel: Model<ClienteFrecuente> =

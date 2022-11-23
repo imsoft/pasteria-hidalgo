@@ -13,6 +13,7 @@ export * from './reporteDeCompra';
 // Gerencia de ventas
 
 export * from './clienteFrecuente';
+export * from './reporteVentasIndividual';
 
 // Gerencia operativa
 
@@ -35,3 +36,7 @@ export * from './puestoEmpresa';
 export * from './temperatura';
 export * from './unidadDeMedida';
 export * from './yesNo';
+export * from './tipoDeProducto';
+export * from './lugarDeVenta';
+export * from './paste';
+export * from './listadoDeProductos';

@@ -9,10 +9,12 @@ import { YesNo } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useRouter } from "next/router";
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 export default function AcondicionamientoDeSucursales() {
+  const router = useRouter();
   const { agregarNuevoAcondicionamientoDeSucursal } = useContext(
     AcondicionamientoDeSucursalesContext
   );
@@ -158,6 +160,8 @@ export default function AcondicionamientoDeSucursales() {
       showConfirmButton: false,
       timer: 5000,
     });
+
+    router.push("/gerencia-operativa/acondicionamientoDeSucursales/VerAcondicinamientoDeSucursal");
 
     setTouched(false);
     setInputProducto("");

@@ -3,7 +3,7 @@ import { useContext, useMemo } from "react";
 import Link from "next/link";
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente";
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
-import ListaClientesFrecuentes from '../../../components/ui/gerencia-de-ventas/ListaClienteFreciente';
+import ListaClientesFrecuentes from '../../../components/ui/gerencia-de-ventas/ListaClienteFrecuente';
 
 const VerClientesFrecuentes = () => {
   const { clientesFrecuentes } = useContext(ClientesFrecuentesContext);
@@ -24,7 +24,7 @@ const VerClientesFrecuentes = () => {
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
             >
-              <Link href={"/recursos-humanos/candidato/AgregarCandidato"}>
+              <Link href={"/gerencia-de-ventas/clienteFrecuente/AgregarClienteFrecuente"}>
                 <a>Agregar Clientes Frecuentes</a>
               </Link>
             </button>
@@ -47,13 +47,19 @@ const VerClientesFrecuentes = () => {
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Puesto
+                        Correo Electrónico
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
                         Fecha de Nacimiento
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Puntos De Compra
                       </th>
                     </tr>
                   </thead>
