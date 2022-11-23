@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import { SidebarLayoutRecursosHumanos } from "../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
-
 import {
   UserAddIcon,
   PlusCircleIcon,
@@ -9,7 +7,7 @@ import {
   EyeIcon,
 } from "@heroicons/react/outline";
 
-import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
+import { SidebarLayoutRecursosHumanos } from "../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
 const actions = [
   {
@@ -73,7 +71,7 @@ export default function IndexRecursosHumanos() {
         <div>
           <Image
             className="h-8 w-auto"
-            src={LogoPasteria}
+            src={"/static/LCPLIGHTVERTICAL.jpg"}
             width={600}
             height={600}
             alt="Pasteleria La Hidalguense"
@@ -145,4 +143,4 @@ export default function IndexRecursosHumanos() {
       </div>
     </SidebarLayoutRecursosHumanos>
   );
-}
+};

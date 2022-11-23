@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { SidebarLayoutContaduria } from "../../components/layouts/contaduria/SidebarLayoutContaduria";
-import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 import {
   CashIcon,
@@ -8,6 +6,8 @@ import {
   DocumentReportIcon,
   EyeIcon,
 } from "@heroicons/react/outline";
+
+import { SidebarLayoutContaduria } from "../../components/layouts/contaduria/SidebarLayoutContaduria";
 
 const actions = [
   {
@@ -65,7 +65,7 @@ export default function IndexContaduria() {
         <div>
           <Image
             className="h-8 w-auto"
-            src={LogoPasteria}
+            src={"/static/LCPLIGHTVERTICAL.jpg"}
             width={600}
             height={600}
             alt="Pasteleria La Hidalguense"

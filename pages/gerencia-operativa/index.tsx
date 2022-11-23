@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import { SidebarLayoutGerenciaOperativa } from "../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-
 import {
   LibraryIcon,
   ArchiveIcon,
@@ -12,8 +10,8 @@ import {
   EyeIcon,
   UserCircleIcon,
 } from "@heroicons/react/outline";
+import { SidebarLayoutGerenciaOperativa } from "../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
-import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 const actions = [
   {
@@ -113,7 +111,7 @@ export default function IndexGerenciaOperativa() {
         <div>
           <Image
             className="h-8 w-auto"
-            src={LogoPasteria}
+            src={"/static/LCPLIGHTVERTICAL.jpg"}
             width={600}
             height={600}
             alt="Pasteleria La Hidalguense"

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { SidebarLayoutGerenciaVentas } from "../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
-import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
 
 import {
   DocumentDuplicateIcon,
@@ -80,7 +79,7 @@ export default function IndexGerenciaVentas() {
         <div>
           <Image
             className="h-8 w-auto"
-            src={LogoPasteria}
+            src={"/static/LCPLIGHTVERTICAL.jpg"}
             width={600}
             height={600}
             alt="Pasteleria La Hidalguense"

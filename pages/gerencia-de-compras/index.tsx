@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import { SidebarLayoutGerenciaCompras } from "../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
-
 import {
   CollectionIcon,
   CurrencyDollarIcon,
@@ -10,7 +8,7 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/outline";
 
-import LogoPasteria from "../../public/LCPLIGHTVERTICAL.jpg";
+import { SidebarLayoutGerenciaCompras } from "../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
 
 const actions = [
   {
@@ -82,7 +80,7 @@ export default function IndexGerenciaCompras() {
         <div>
           <Image
             className="h-8 w-auto"
-            src={LogoPasteria}
+            src={"/static/LCPLIGHTVERTICAL.jpg"}
             width={600}
             height={600}
             alt="Pasteleria La Hidalguense"

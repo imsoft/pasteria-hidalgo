@@ -1,11 +1,9 @@
-import { SidebarLayoutContaduria } from '../../../components/layouts/contaduria/SidebarLayoutContaduria';
+import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 
-const AgregarAsignarComisiones = () => {
+export default function VerAsignarComisiones() {
   return (
     <SidebarLayoutContaduria>
-        <div>AgregarAsignarComisiones</div>
+      <div>AgregarAsignarComisiones</div>
     </SidebarLayoutContaduria>
-  )
+  );
 }
-
-export default AgregarAsignarComisiones;

@@ -3,7 +3,8 @@ import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const AgregarAsignarComisiones = () => {
+export default function AgregarAsignarComisiones() {
+  
   const MySwal = withReactContent(Swal);
 
   const onSave = () => {
@@ -129,6 +130,4 @@ const AgregarAsignarComisiones = () => {
       </form>
     </SidebarLayoutContaduria>
   );
-};
-
-export default AgregarAsignarComisiones;
+}

@@ -15,6 +15,7 @@ import { ReportesDeComprasProvider } from "../context/gerencia-de-compras/report
 // Gerencia de ventas
 
 import { ClientesFrecuentesProvider } from "../context/gerencia-de-ventas/clienteFrecuente";
+import { ReportesVentasIndividualProvider } from "../context/gerencia-de-ventas/reporteVentasIndividual";
 
 // Gerencia operativa
 
@@ -34,7 +35,6 @@ import { PersonalActivoProvider } from "../context/recursos-humanos/personalActi
 // Miscelaneos
 
 import "../styles/globals.css";
-import { ReportesVentasIndividualProvider } from "../context/gerencia-de-ventas/reporteVentasIndividual";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;

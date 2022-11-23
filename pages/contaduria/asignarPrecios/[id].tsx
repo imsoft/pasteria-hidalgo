@@ -1,6 +1,13 @@
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 
-const AgregarAsignarPrecios = () => {
+import { FC } from 'react';
+import { AsignarPrecio } from '../../../interfaces';
+
+interface Props {
+  asignarPrecio: AsignarPrecio;
+}
+
+export const AsignarPreciosPage: FC<Props> = () => {
   return (
     <SidebarLayoutContaduria>
       <div>AgregarAsignarPrecios</div>
@@ -8,4 +15,4 @@ const AgregarAsignarPrecios = () => {
   );
 };
 
-export default AgregarAsignarPrecios;
+export default AsignarPreciosPage;

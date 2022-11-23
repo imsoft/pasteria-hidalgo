@@ -1,11 +1,16 @@
-import { SidebarLayoutContaduria } from '../../../components/layouts/contaduria/SidebarLayoutContaduria';
+import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
+import { FC, ReactNode } from 'react';
 
-const AgregarAsignarComisiones = () => {
-  return (
-    <SidebarLayoutContaduria>
-        <div>AgregarAsignarComisiones</div>
-    </SidebarLayoutContaduria>
-  )
+interface Props {
+  children: ReactNode;
 }
 
-export default AgregarAsignarComisiones;
+export const AsignarComisionesPage: FC<Props> = () => {
+  return (
+    <SidebarLayoutContaduria>
+      <div>AgregarAsignarComisiones</div>
+    </SidebarLayoutContaduria>
+  );
+}
+
+export default AsignarComisionesPage;

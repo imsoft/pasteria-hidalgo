@@ -18,8 +18,6 @@ import {
   EyeIcon,
 } from "@heroicons/react/outline";
 
-import LogoPasteria from "../../../public/LogoPasteria.jpg";
-
 type Props = {
   children?: React.ReactNode;
 };
@@ -179,7 +177,7 @@ export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) =>
                     <a>
                       <Image
                         className="h-8 w-auto"
-                        src={LogoPasteria}
+                        src={"/static/LogoPasteria.jpg"}
                         alt="Logo Pasteria"
                       />
                     </a>
@@ -231,7 +229,7 @@ export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) =>
               <a>
                 <Image
                   className="h-8 w-auto"
-                  src={LogoPasteria}
+                  src={"/static/LogoPasteria.jpg"}
                   width={32}
                   height={32}
                   alt="Workflow"
@@ -296,7 +294,7 @@ export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) =>
                     <Image
                       className="h-8 w-8 rounded-full"
                       // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      src={LogoPasteria}
+                      src={"/static/LogoPasteria.jpg"}
                       alt=""
                       width={24}
                       height={24}

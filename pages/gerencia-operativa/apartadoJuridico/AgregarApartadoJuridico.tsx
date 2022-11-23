@@ -176,7 +176,7 @@ const ApartadoJuridico = () => {
                   Seleccione un documento...
                 </label>
                 <p className="text-sm leading-5 text-gray-500">
-                  Solo archivos con extensión '.pdf'
+                  Solo archivos con extensión &apos;.pdf&apos;
                 </p>
                 <input
                   type="file"
