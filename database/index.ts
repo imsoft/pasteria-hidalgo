@@ -22,6 +22,7 @@ export * as dbMantenimiento from './dbMantenimiento';
 export * as dbPersonalMantenimiento from './dbPersonalMantenimiento';
 export * as dbReporteDeSalida from './dbReporteDeSalida';
 export * as dbSucursalYFranquicia from './dbSucursalYFranquicia';
+export * as dbMateriaPrima from './dbMateriaPrima';
 
 // Recursos Humanos
 

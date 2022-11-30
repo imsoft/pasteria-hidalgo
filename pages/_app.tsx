@@ -25,6 +25,7 @@ import { MantenimientosProvider } from "../context/gerencia-operativa/mantenimie
 import { PersonalesDeMantenimientoProvider } from "../context/gerencia-operativa/personalDeMantenimiento/PersonalDeMantenimientoProvider";
 import { ReportesDeSalidaProvider } from "../context/gerencia-operativa/reporteDeSalida";
 import { SucursalesYFranquiciasProvider } from "../context/gerencia-operativa/sucursalYFranquicia";
+import { MateriasPrimasProvider } from "../context/gerencia-operativa/materiaPrima";
 
 // Recursos Humanos
 
@@ -63,7 +64,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                               <MantenimientosProvider>
                                 <PersonalesDeMantenimientoProvider>
                                   <ReportesVentasIndividualProvider>
-                                    <Component {...pageProps} />
+                                    <MateriasPrimasProvider>
+                                      <Component {...pageProps} />
+                                    </MateriasPrimasProvider>
                                   </ReportesVentasIndividualProvider>
                                 </PersonalesDeMantenimientoProvider>
                               </MantenimientosProvider>

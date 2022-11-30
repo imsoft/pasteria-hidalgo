@@ -52,6 +52,20 @@ const actions = [
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },
+  {
+    title: "Ver Reporte de compras",
+    href: "/contaduria/reporteDeEntrada/VerReporteDeCompras",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Reporte de salida",
+    href: "/contaduria/reporteDeSalida/VerReportesDeSalida",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
 ];
 
 function classNames(...classes: any[]) {

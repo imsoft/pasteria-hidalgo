@@ -16,6 +16,7 @@ import {
   MenuAlt2Icon,
   XIcon,
   EyeIcon,
+  ColorSwatchIcon,
 } from "@heroicons/react/outline";
 
 type Props = {
@@ -92,6 +93,18 @@ const navigation = [
   {
     name: "Ver Reportes de salida",
     href: "/gerencia-operativa/reporteDeSalida/VerReportesDeSalida",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Materia Prima",
+    href: "/gerencia-operativa/materiaPrima/AgregarMateriaPrima",
+    icon: ColorSwatchIcon,
+    current: false,
+  },
+  {
+    name: "Ver Materia Prima",
+    href: "/gerencia-operativa/materiaPrima/VerMateriaPrima",
     icon: EyeIcon,
     current: false,
   },

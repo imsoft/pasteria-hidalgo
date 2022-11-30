@@ -9,6 +9,7 @@ import {
   DocumentReportIcon,
   EyeIcon,
   UserCircleIcon,
+  ColorSwatchIcon,
 } from "@heroicons/react/outline";
 import { SidebarLayoutGerenciaOperativa } from "../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
@@ -94,6 +95,20 @@ const actions = [
   {
     title: "Ver Reportes de salida",
     href: "/gerencia-operativa/reporteDeSalida/VerReportesDeSalida",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Materia Prima",
+    href: "/gerencia-operativa/materiaPrima/AgregarMateriaPrima",
+    icon: ColorSwatchIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Materia Prima",
+    href: "/gerencia-operativa/materiaPrima/VerMateriaPrima",
     icon: EyeIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",

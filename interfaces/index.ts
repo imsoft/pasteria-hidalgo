@@ -23,6 +23,7 @@ export * from './mantenimiento';
 export * from './personalMantenimiento';
 export * from './reporteDeSalida';
 export * from './sucursalYFranquicia';
+export * from './materiaPrima';
 
 // Recursos Humanos
 

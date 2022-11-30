@@ -57,6 +57,18 @@ const navigation = [
     icon: EyeIcon,
     current: false,
   },
+  {
+    name: "Ver Reporte de compras",
+    href: "/contaduria/reporteDeEntrada/VerReporteDeCompras",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Ver Reporte de salida",
+    href: "/contaduria/reporteDeSalida/VerReportesDeSalida",
+    icon: EyeIcon,
+    current: false,
+  },
 ];
 
 const userNavigation = [

@@ -10,6 +10,8 @@ import { Temperatura, Unidades, YesNo } from "../../../interfaces";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
+import { MateriasPrimasContext } from '../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext';
+import { MateriaPrima } from '../../../interfaces/materiaPrima';
 
 interface IReporteDeCompraProvisional {
   uuid: number;
@@ -42,6 +44,9 @@ export default function ReporteDeCompras() {
 
   const { proveedores } = useContext(ProveedoresContext);
   const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
+
+  const { materiasPrimas } = useContext(MateriasPrimasContext);
+  const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
 
   const [inputUuid, setInputUuid] = useState(1);
   const [inputFechaDeCompra, setInputFechaDeCompra] = useState("");
@@ -77,7 +82,7 @@ export default function ReporteDeCompras() {
   };
 
   const onTextFieldChangedMateriaPrima = (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLSelectElement>
   ) => {
     setInputMateriaPrima(event.target.value);
   };
@@ -292,41 +297,52 @@ export default function ReporteDeCompras() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtHorarioDeAtencion"
+                  htmlFor="CmbMateriaPrima"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Materia Prima (Descripción)
+                  Materia Prima
                 </label>
-                <input
-                  type="text"
-                  name="TxtHorarioDeAtencion"
-                  id="TxtHorarioDeAtencion"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                <select
+                  id="CmbMateriaPrima"
+                  name="CmbMateriaPrima"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
                   onChange={onTextFieldChangedMateriaPrima}
                   onBlur={() => setTouched(true)}
-                />
+                >
+                  <option hidden>Selecciona un proveedor...</option>
+                  {materiasPrimasMemo.map((materiaPrima) => (
+                    <option key={materiaPrima._id}> {materiaPrima.materiaPrima} </option>
+                  ))}
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtUnidades"
+                  htmlFor="CmbUnidades"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Unidades
                 </label>
                 <select
-                  id="TxtUnidades"
-                  name="TxtUnidades"
+                  id="CmbUnidades"
+                  name="CmbUnidades"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   onChange={onTextFieldChangedUnidades}
                   onBlur={() => setTouched(true)}
                   defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona una opción...</option>
-                  {validUnits.map((unidades) => (
-                    <option key={unidades}>{unidades}</option>
-                  ))}
+                  <option hidden>Selecciona una opción...</option>
+                  {materiasPrimasMemo
+                    .filter(
+                      (units) =>
+                      units.materiaPrima === inputMateriaPrima
+                    )
+                    .map((units) => (
+                      <option key={units.unidades}>
+                        {units.unidades}
+                      </option>
+                    ))}
                 </select>
               </div>
 
@@ -345,7 +361,7 @@ export default function ReporteDeCompras() {
                   onChange={onTextFieldChangedNombreProveedor}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Selecciona un proveedor...</option>
+                  <option hidden>Selecciona un proveedor...</option>
                   {proveedoresMemo.map((proveedor) => (
                     <option key={proveedor._id}> {proveedor.nombre} </option>
                   ))}
@@ -367,10 +383,17 @@ export default function ReporteDeCompras() {
                   onBlur={() => setTouched(true)}
                   defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona una opción...</option>
-                  {validTemperature.map((temperatura) => (
-                    <option key={temperatura}>{temperatura}</option>
-                  ))}
+                  <option hidden>Selecciona una opción...</option>
+                  {materiasPrimasMemo
+                    .filter(
+                      (temperature) =>
+                      temperature.materiaPrima === inputMateriaPrima
+                    )
+                    .map((temperature) => (
+                      <option key={temperature.temperatura}>
+                        {temperature.temperatura}
+                      </option>
+                    ))}
                 </select>
               </div>
 
