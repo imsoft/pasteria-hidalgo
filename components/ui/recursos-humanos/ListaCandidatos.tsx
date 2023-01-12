@@ -69,7 +69,12 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {candidato.referencia1CorreoElectronico}
+            {candidato.referencia1NumeroTelefonico}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {candidato.referencia1Observaciones}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -84,7 +89,12 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {candidato.referencia2CorreoElectronico}
+            {candidato.referencia2NumeroTelefonico}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {candidato.referencia2Observaciones}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -99,7 +109,7 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {candidato.referencia3CorreoElectronico}
+            {candidato.referencia3Observaciones}
           </div>
         </td>
       </tr>

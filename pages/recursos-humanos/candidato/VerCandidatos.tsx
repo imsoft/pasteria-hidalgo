@@ -114,43 +114,61 @@ const VerCandidatos = () => {
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Referencia #1 Correo Electrónico
+                        Referencia #1 Número Teléfonico
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Referencia 2 Nombre
+                        Referencia #1 Observaciones
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Referencia 2 Empresa
+                        Referencia #2 Nombre
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Referencia 2 Correo Electrónico
+                        Referencia #2 Empresa
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Referencia 3 Nombre
+                        Referencia #2 Número Teléfonico
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Referencia 3 Empresa
+                        Referencia #2 Observaciones
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Referencia 3 Correo Electrónico
+                        Referencia #3 Nombre
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Referencia #3 Empresa
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Referencia #3 Número Teléfonico
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Referencia #3 Observaciones
                       </th>
                     </tr>
                   </thead>

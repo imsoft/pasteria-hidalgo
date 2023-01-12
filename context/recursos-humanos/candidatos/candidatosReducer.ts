@@ -38,16 +38,22 @@ export const candidatosReducer = (
             candidato.correoElectronico = action.payload.correoElectronico;
             candidato.referencia1Nombre = action.payload.referencia1Nombre;
             candidato.referencia1Empresa = action.payload.referencia1Empresa;
-            candidato.referencia1CorreoElectronico =
-              action.payload.referencia1CorreoElectronico;
+            candidato.referencia1NumeroTelefonico =
+              action.payload.referencia1NumeroTelefonico;
+            candidato.referencia1Observaciones =
+              action.payload.referencia1Observaciones;
             candidato.referencia2Nombre = action.payload.referencia2Nombre;
             candidato.referencia2Empresa = action.payload.referencia2Empresa;
-            candidato.referencia2CorreoElectronico =
-              action.payload.referencia2CorreoElectronico;
+            candidato.referencia2NumeroTelefonico =
+              action.payload.referencia2NumeroTelefonico;
+            candidato.referencia2Observaciones =
+              action.payload.referencia2Observaciones;
             candidato.referencia3Nombre = action.payload.referencia3Nombre;
             candidato.referencia3Empresa = action.payload.referencia3Empresa;
-            candidato.referencia3CorreoElectronico =
-              action.payload.referencia3CorreoElectronico;
+            candidato.referencia3NumeroTelefonico =
+              action.payload.referencia3NumeroTelefonico;
+            candidato.referencia3Observaciones =
+              action.payload.referencia3Observaciones;
           }
           return candidato;
         }),

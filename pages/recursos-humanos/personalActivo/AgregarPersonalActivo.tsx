@@ -24,6 +24,7 @@ export default function AgregarPersonalActivo() {
   const [inputNoContrato, setInputNoContrato] = useState("");
   const [inputNoExpediente, setInputNoExpediente] = useState("");
   const [inputBajaTemporal, setInputBajaTemporal] = useState("No");
+  const [inputComentarios, setInputComentarios] = useState("");
 
   const [touched, setTouched] = useState(false);
 
@@ -64,6 +65,12 @@ export default function AgregarPersonalActivo() {
     setInputBajaTemporal(event.target.value);
   };
 
+  const onTextFieldChangedComentarios = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputComentarios(event.target.value);
+  };
+
   const onSave = () => {
     if (
       inputNombre.length === 0 &&
@@ -71,6 +78,7 @@ export default function AgregarPersonalActivo() {
       inputFechaDeContratacion.length === 0 &&
       inputNoContrato.length === 0 &&
       inputNoExpediente.length === 0 &&
+      inputComentarios.length === 0 &&
       inputBajaTemporal.length === 0
     )
       return;
@@ -84,6 +92,7 @@ export default function AgregarPersonalActivo() {
       inputNoContrato,
       inputNoExpediente,
       inputBajaTemporal,
+      inputComentarios,
       true
     );
 
@@ -104,6 +113,7 @@ export default function AgregarPersonalActivo() {
     setInputNoContrato("");
     setInputNoExpediente("");
     setInputBajaTemporal("");
+    setInputComentarios("");
   };
 
   return (
@@ -236,6 +246,24 @@ export default function AgregarPersonalActivo() {
                 >
                   <option>No</option>
                 </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtComentarios"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Comentarios
+                </label>
+                <input
+                  type="text"
+                  name="TxtComentarios"
+                  id="TxtComentarios"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedComentarios}
+                  onBlur={() => setTouched(true)}
+                />
               </div>
             </div>
           </div>

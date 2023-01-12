@@ -65,6 +65,7 @@ const updatePersonalActivo = async (
     noContrato = personalActivoToUpdate.noContrato,
     noExpediente = personalActivoToUpdate.noExpediente,
     bajaTemporal = personalActivoToUpdate.bajaTemporal,
+    comentarios = personalActivoToUpdate.comentarios,
   } = req.body;
 
   try {
@@ -77,6 +78,7 @@ const updatePersonalActivo = async (
         noContrato,
         noExpediente,
         bajaTemporal,
+        comentarios,
       },
       { runValidators: true, new: true }
     );

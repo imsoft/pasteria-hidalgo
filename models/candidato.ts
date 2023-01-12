@@ -17,13 +17,16 @@ const candidatoSchema = new Schema({
   correoElectronico: { type: String, required: true },
   referencia1Nombre: { type: String, required: true },
   referencia1Empresa: { type: String, required: true },
-  referencia1CorreoElectronico: { type: String, required: true },
+  referencia1NumeroTelefonico: { type: String, required: true },
+  referencia1Observaciones: { type: String, required: true },
   referencia2Nombre: { type: String, required: true },
   referencia2Empresa: { type: String, required: true },
-  referencia2CorreoElectronico: { type: String, required: true },
+  referencia2NumeroTelefonico: { type: String, required: true },
+  referencia2Observaciones: { type: String, required: true },
   referencia3Nombre: { type: String, required: false },
   referencia3Empresa: { type: String, required: false },
-  referencia3CorreoElectronico: { type: String, required: false },
+  referencia3NumeroTelefonico: { type: String, required: false },
+  referencia3Observaciones: { type: String, required: false },
 });
 
 const CandidatoModel: Model<ICandidato> =

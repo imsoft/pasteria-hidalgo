@@ -18,25 +18,42 @@ export default function AgregarCandidato() {
 
   const [inputNombre, setInputNombre] = useState("");
   const [inputPuesto, setInputPuesto] = useState("");
-  const [inputDescripcionDelPuesto, setInputDescripcionDelPuesto] = useState("");
+  const [inputDescripcionDelPuesto, setInputDescripcionDelPuesto] =
+    useState("");
   const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState("");
   const [inputDomicilio, setInputDomicilio] = useState("");
   const [inputCurp, setInputCurp] = useState("");
   const [inputNoImss, setInputNoImss] = useState("");
   const [inputNoCartaDePolicia, setInputNoCartaDePolicia] = useState("");
   const [inputCelular, setInputCelular] = useState("");
-  const [inputContactoDeEmergencia, setInputContactoDeEmergencia] = useState("");
+  const [inputContactoDeEmergencia, setInputContactoDeEmergencia] =
+    useState("");
   const [inputCorreoElectronico, setInputCorreoElectronico] = useState("");
 
   const [inputReferencia1Nombre, setInputReferencia1Nombre] = useState("");
   const [inputReferencia1Empresa, setInputReferencia1Empresa] = useState("");
-  const [inputReferencia1CorreoElectronico, setInputReferencia1CorreoElectronico] = useState("");
+  const [
+    inputReferencia1NumeroTelefonico,
+    setInputReferencia1NumeroTelefonico,
+  ] = useState("");
+  const [inputReferencia1Observaciones, setInputReferencia1Observaciones] =
+    useState("");
   const [inputReferencia2Nombre, setInputReferencia2Nombre] = useState("");
   const [inputReferencia2Empresa, setInputReferencia2Empresa] = useState("");
-  const [inputReferencia2CorreoElectronico, setInputReferencia2CorreoElectronico] = useState("");
+  const [
+    inputReferencia2NumeroTelefonico,
+    setInputReferencia2NumeroTelefonico,
+  ] = useState("");
+  const [inputReferencia2Observaciones, setInputReferencia2Observaciones] =
+    useState("");
   const [inputReferencia3Nombre, setInputReferencia3Nombre] = useState("");
   const [inputReferencia3Empresa, setInputReferencia3Empresa] = useState("");
-  const [inputReferencia3CorreoElectronico, setInputReferencia3CorreoElectronico] = useState("");
+  const [
+    inputReferencia3NumeroTelefonico,
+    setInputReferencia3NumeroTelefonico,
+  ] = useState("");
+  const [inputReferencia3Observaciones, setInputReferencia3Observaciones] =
+    useState("");
 
   const [touched, setTouched] = useState(false);
 
@@ -82,9 +99,7 @@ export default function AgregarCandidato() {
     setInputNoCartaDePolicia(event.target.value);
   };
 
-  const onTextFieldChangedCelular = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedCelular = (event: ChangeEvent<HTMLInputElement>) => {
     setInputCelular(event.target.value);
   };
 
@@ -112,10 +127,16 @@ export default function AgregarCandidato() {
     setInputReferencia1Empresa(event.target.value);
   };
 
-  const onTextFieldChangedReferencia1CorreoElectronico = (
+  const onTextFieldChangedReferencia1NumeroTelefonico = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputReferencia1CorreoElectronico(event.target.value);
+    setInputReferencia1NumeroTelefonico(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia1Observaciones = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia1Observaciones(event.target.value);
   };
 
   const onTextFieldChangedReferencia2Nombre = (
@@ -130,10 +151,16 @@ export default function AgregarCandidato() {
     setInputReferencia2Empresa(event.target.value);
   };
 
-  const onTextFieldChangedReferencia2CorreoElectronico = (
+  const onTextFieldChangedReferencia2NumeroTelefonico = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputReferencia2CorreoElectronico(event.target.value);
+    setInputReferencia2NumeroTelefonico(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia2Observaciones = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia2Observaciones(event.target.value);
   };
 
   const onTextFieldChangedReferencia3Nombre = (
@@ -148,10 +175,16 @@ export default function AgregarCandidato() {
     setInputReferencia3Empresa(event.target.value);
   };
 
-  const onTextFieldChangedReferencia3CorreoElectronico = (
+  const onTextFieldChangedReferencia3NumeroTelefonico = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputReferencia3CorreoElectronico(event.target.value);
+    setInputReferencia3NumeroTelefonico(event.target.value);
+  };
+
+  const onTextFieldChangedReferencia3Observaciones = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia3Observaciones(event.target.value);
   };
 
   const onSave = () => {
@@ -169,13 +202,16 @@ export default function AgregarCandidato() {
       inputCorreoElectronico.length === 0 &&
       inputReferencia1Nombre.length === 0 &&
       inputReferencia1Empresa.length === 0 &&
-      inputReferencia1CorreoElectronico.length === 0 &&
+      inputReferencia1NumeroTelefonico.length === 0 &&
+      inputReferencia1Observaciones.length === 0 &&
       inputReferencia2Nombre.length === 0 &&
       inputReferencia2Empresa.length === 0 &&
-      inputReferencia2CorreoElectronico.length === 0 &&
+      inputReferencia2NumeroTelefonico.length === 0 &&
+      inputReferencia2Observaciones.length === 0 &&
       inputReferencia3Nombre.length === 0 &&
       inputReferencia3Empresa.length === 0 &&
-      inputReferencia3CorreoElectronico.length === 0
+      inputReferencia3NumeroTelefonico.length === 0 &&
+      inputReferencia3Observaciones.length === 0
     )
       return;
 
@@ -193,13 +229,16 @@ export default function AgregarCandidato() {
       inputCorreoElectronico,
       inputReferencia1Nombre,
       inputReferencia1Empresa,
-      inputReferencia1CorreoElectronico,
+      inputReferencia1NumeroTelefonico,
+      inputReferencia1Observaciones,
       inputReferencia2Nombre,
       inputReferencia2Empresa,
-      inputReferencia2CorreoElectronico,
+      inputReferencia2NumeroTelefonico,
+      inputReferencia2Observaciones,
       inputReferencia3Nombre,
       inputReferencia3Empresa,
-      inputReferencia3CorreoElectronico,
+      inputReferencia3NumeroTelefonico,
+      inputReferencia3Observaciones,
       true
     );
 
@@ -228,13 +267,16 @@ export default function AgregarCandidato() {
 
     setInputReferencia1Nombre("");
     setInputReferencia1Empresa("");
-    setInputReferencia1CorreoElectronico("");
+    setInputReferencia1NumeroTelefonico("");
+    setInputReferencia1Observaciones("");
     setInputReferencia2Nombre("");
     setInputReferencia2Empresa("");
-    setInputReferencia2CorreoElectronico("");
+    setInputReferencia2NumeroTelefonico("");
+    setInputReferencia2Observaciones("");
     setInputReferencia3Nombre("");
     setInputReferencia3Empresa("");
-    setInputReferencia3CorreoElectronico("");
+    setInputReferencia3NumeroTelefonico("");
+    setInputReferencia3Observaciones("");
   };
 
   return (
@@ -520,7 +562,25 @@ export default function AgregarCandidato() {
                       id="TxtNumeroTelefonico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia1CorreoElectronico}
+                      onChange={onTextFieldChangedReferencia1NumeroTelefonico}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtObservaciones"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Observaciones
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtObservaciones"
+                      id="TxtObservaciones"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia1Observaciones}
                       onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -581,7 +641,25 @@ export default function AgregarCandidato() {
                       id="TxtNumeroTelefonico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia2CorreoElectronico}
+                      onChange={onTextFieldChangedReferencia2NumeroTelefonico}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtObservaciones"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Observaciones
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtObservaciones"
+                      id="TxtObservaciones"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia2Observaciones}
                       onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -642,12 +720,29 @@ export default function AgregarCandidato() {
                       id="TxtNumeroTelefonico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia3CorreoElectronico}
+                      onChange={onTextFieldChangedReferencia3NumeroTelefonico}
+                      onBlur={() => setTouched(true)}
+                    />
+                  </div>
+                  
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtObservaciones"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Observaciones
+                    </label>
+                    <input
+                      type="tel"
+                      name="TxtObservaciones"
+                      id="TxtObservaciones"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedReferencia3Observaciones}
                       onBlur={() => setTouched(true)}
                     />
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

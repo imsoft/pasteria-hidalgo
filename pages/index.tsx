@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { SidebarLayout } from "../components/layouts/SidebarLayout";
 
-export default function Home () {
+export default function Home() {
   return (
     <SidebarLayout>
       <div className="flex justify-center">
@@ -15,4 +15,4 @@ export default function Home () {
       </div>
     </SidebarLayout>
   );
-};
+}

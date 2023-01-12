@@ -48,13 +48,16 @@ const postCandidato = async (
     correoElectronico = "",
     referencia1Nombre = "",
     referencia1Empresa = "",
-    referencia1CorreoElectronico = "",
+    referencia1NumeroTelefonico = "",
+    referencia1Observaciones = "",
     referencia2Nombre = "",
     referencia2Empresa = "",
-    referencia2CorreoElectronico = "",
+    referencia2NumeroTelefonico = "",
+    referencia2Observaciones = "",
     referencia3Nombre = "",
     referencia3Empresa = "",
-    referencia3CorreoElectronico = "",
+    referencia3NumeroTelefonico = "",
+    referencia3Observaciones = "",
   } = req.body;
 
   const newCandidato = new Candidato({
@@ -71,13 +74,16 @@ const postCandidato = async (
     correoElectronico,
     referencia1Nombre,
     referencia1Empresa,
-    referencia1CorreoElectronico,
+    referencia1NumeroTelefonico,
+    referencia1Observaciones,
     referencia2Nombre,
     referencia2Empresa,
-    referencia2CorreoElectronico,
+    referencia2NumeroTelefonico,
+    referencia2Observaciones,
     referencia3Nombre,
     referencia3Empresa,
-    referencia3CorreoElectronico,
+    referencia3NumeroTelefonico,
+    referencia3Observaciones,
   });
 
   try {

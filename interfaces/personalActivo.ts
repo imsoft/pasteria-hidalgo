@@ -8,4 +8,5 @@ export interface PersonalActivo {
   noContrato: string;
   noExpediente: string;
   bajaTemporal: string;
+  comentarios: string;
 }

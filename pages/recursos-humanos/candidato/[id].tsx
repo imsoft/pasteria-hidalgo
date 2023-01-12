@@ -53,9 +53,13 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     candidato.referencia1Empresa
   );
   const [
-    inputReferencia1CorreoElectronico,
-    setInputReferencia1CorreoElectronico,
-  ] = useState(candidato.referencia1CorreoElectronico);
+    inputReferencia1NumeroTelefonico,
+    setInputReferencia1NumeroTelefonico,
+  ] = useState(candidato.referencia1NumeroTelefonico);
+  const [
+    inputReferencia1Observaciones,
+    setInputReferencia1Observaciones,
+  ] = useState(candidato.referencia1Observaciones);
   const [inputReferencia2Nombre, setInputReferencia2Nombre] = useState(
     candidato.referencia2Nombre
   );
@@ -63,9 +67,13 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     candidato.referencia2Empresa
   );
   const [
-    inputReferencia2CorreoElectronico,
-    setInputReferencia2CorreoElectronico,
-  ] = useState(candidato.referencia2CorreoElectronico);
+    inputReferencia2NumeroTelefonico,
+    setInputReferencia2NumeroTelefonico,
+  ] = useState(candidato.referencia2NumeroTelefonico);
+  const [
+    inputReferencia2Observaciones,
+    setInputReferencia2Observaciones,
+  ] = useState(candidato.referencia2Observaciones);
   const [inputReferencia3Nombre, setInputReferencia3Nombre] = useState(
     candidato.referencia3Nombre
   );
@@ -73,9 +81,13 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     candidato.referencia3Empresa
   );
   const [
-    inputReferencia3CorreoElectronico,
-    setInputReferencia3CorreoElectronico,
-  ] = useState(candidato.referencia3CorreoElectronico);
+    inputReferencia3NumeroTelefonico,
+    setInputReferencia3NumeroTelefonico,
+  ] = useState(candidato.referencia3NumeroTelefonico);
+  const [
+    inputReferencia3Observaciones,
+    setInputReferencia3Observaciones,
+  ] = useState(candidato.referencia3Observaciones);
 
   const MySwal = withReactContent(Swal);
 
@@ -157,10 +169,16 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     setInputReferencia1Empresa(event.target.value);
   };
 
-  const onInputValueChangedReferencia1CorreoElectronico = (
+  const onInputValueChangedReferencia1NumeroTelefonico = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputReferencia1CorreoElectronico(event.target.value);
+    setInputReferencia1NumeroTelefonico(event.target.value);
+  };
+
+  const onInputValueChangedReferencia1Observaciones = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia1Observaciones(event.target.value);
   };
 
   const onInputValueChangedReferencia2Nombre = (
@@ -175,10 +193,16 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     setInputReferencia2Empresa(event.target.value);
   };
 
-  const onInputValueChangedReferencia2CorreoElectronico = (
+  const onInputValueChangedReferencia2NumeroTelefonico = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputReferencia2CorreoElectronico(event.target.value);
+    setInputReferencia2NumeroTelefonico(event.target.value);
+  };
+
+  const onInputValueChangedReferencia2Observaciones = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia2Observaciones(event.target.value);
   };
 
   const onInputValueChangedReferencia3Nombre = (
@@ -193,10 +217,16 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     setInputReferencia3Empresa(event.target.value);
   };
 
-  const onInputValueChangedReferencia3CorreoElectronico = (
+  const onInputValueChangedReferencia3NumeroTelefonico = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputReferencia3CorreoElectronico(event.target.value);
+    setInputReferencia3NumeroTelefonico(event.target.value);
+  };
+
+  const onInputValueChangedReferencia3Observaciones = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputReferencia3Observaciones(event.target.value);
   };
 
   const onSave = () => {
@@ -214,13 +244,16 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
       inputCorreoElectronico.trim().length === 0 &&
       inputReferencia1Nombre.trim().length === 0 &&
       inputReferencia1Empresa.trim().length === 0 &&
-      inputReferencia1CorreoElectronico.trim().length === 0 &&
+      inputReferencia1NumeroTelefonico.trim().length === 0 &&
+      inputReferencia1Observaciones.trim().length === 0 &&
       inputReferencia2Nombre.trim().length === 0 &&
       inputReferencia2Empresa.trim().length === 0 &&
-      inputReferencia2CorreoElectronico.trim().length === 0 &&
+      inputReferencia2NumeroTelefonico.trim().length === 0 &&
+      inputReferencia2Observaciones.trim().length === 0 &&
       inputReferencia3Nombre?.trim().length === 0 &&
       inputReferencia3Empresa?.trim().length === 0 &&
-      inputReferencia3CorreoElectronico?.trim().length === 0
+      inputReferencia3NumeroTelefonico?.trim().length === 0 &&
+      inputReferencia3Observaciones?.trim().length === 0
     )
       return;
 
@@ -250,13 +283,16 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
           correoElectronico: inputCorreoElectronico,
           referencia1Nombre: inputReferencia1Nombre,
           referencia1Empresa: inputReferencia1Empresa,
-          referencia1CorreoElectronico: inputReferencia1CorreoElectronico,
+          referencia1NumeroTelefonico: inputReferencia1NumeroTelefonico,
+          referencia1Observaciones: inputReferencia1Observaciones,
           referencia2Nombre: inputReferencia2Nombre,
           referencia2Empresa: inputReferencia2Empresa,
-          referencia2CorreoElectronico: inputReferencia2CorreoElectronico,
+          referencia2NumeroTelefonico: inputReferencia2NumeroTelefonico,
+          referencia2Observaciones: inputReferencia2Observaciones,
           referencia3Nombre: inputReferencia3Nombre,
           referencia3Empresa: inputReferencia3Empresa,
-          referencia3CorreoElectronico: inputReferencia3CorreoElectronico,
+          referencia3NumeroTelefonico: inputReferencia3NumeroTelefonico,
+          referencia3Observaciones: inputReferencia3Observaciones,
         };
 
         actualizarCandidato(actualizadoCandidato, true);
@@ -567,19 +603,38 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtCorreoElectronico"
+                      htmlFor="TxtNumeroTelefonico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Correo Electrónico
+                      Número Télefonico
                     </label>
                     <input
                       type="email"
-                      name="TxtCorreoElectronico"
-                      id="TxtCorreoElectronico"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onInputValueChangedReferencia1CorreoElectronico}
-                      value={inputReferencia1CorreoElectronico}
+                      onChange={onInputValueChangedReferencia1NumeroTelefonico}
+                      value={inputReferencia1NumeroTelefonico}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtObservaciones"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Observaciones
+                    </label>
+                    <input
+                      type="email"
+                      name="TxtObservaciones"
+                      id="TxtObservaciones"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia1Observaciones}
+                      value={inputReferencia1Observaciones}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -631,19 +686,38 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtCorreoElectronico"
+                      htmlFor="TxtNumeroTelefonico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Correo Electrónico
+                      Número Télefonico
                     </label>
                     <input
                       type="email"
-                      name="TxtCorreoElectronico"
-                      id="TxtCorreoElectronico"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onInputValueChangedReferencia2CorreoElectronico}
-                      value={inputReferencia2CorreoElectronico}
+                      onChange={onInputValueChangedReferencia2NumeroTelefonico}
+                      value={inputReferencia2NumeroTelefonico}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtObservaciones"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Observaciones
+                    </label>
+                    <input
+                      type="email"
+                      name="TxtObservaciones"
+                      id="TxtObservaciones"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia2Observaciones}
+                      value={inputReferencia2Observaciones}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>
@@ -695,19 +769,38 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtCorreoElectronico"
+                      htmlFor="TxtNumeroTelefonico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Correo Electrónico
+                      Número Télefonico
                     </label>
                     <input
                       type="email"
-                      name="TxtCorreoElectronico"
-                      id="TxtCorreoElectronico"
+                      name="TxtNumeroTelefonico"
+                      id="TxtNumeroTelefonico"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onInputValueChangedReferencia3CorreoElectronico}
-                      value={inputReferencia3CorreoElectronico}
+                      onChange={onInputValueChangedReferencia3NumeroTelefonico}
+                      value={inputReferencia3NumeroTelefonico}
+                      // onBlur={() => setTouched(true)}
+                    />
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <label
+                      htmlFor="TxtObservaciones"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Observaciones
+                    </label>
+                    <input
+                      type="email"
+                      name="TxtObservaciones"
+                      id="TxtObservaciones"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onInputValueChangedReferencia3Observaciones}
+                      value={inputReferencia3Observaciones}
                       // onBlur={() => setTouched(true)}
                     />
                   </div>

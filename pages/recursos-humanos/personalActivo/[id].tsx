@@ -42,6 +42,9 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
   const [inputBajaTemporal, setInputBajaTemporal] = useState(
     personalActivo.bajaTemporal
   );
+  const [inputComentarios, setInputComentarios] = useState(
+    personalActivo.comentarios
+  );
 
   const MySwal = withReactContent(Swal);
 
@@ -79,6 +82,12 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
     setInputBajaTemporal(event.target.value);
   };
 
+  const onInputValueChangedComentarios = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputComentarios(event.target.value);
+  };
+
   const onSave = () => {
     if (
       inputNombre.trim().length === 0 &&
@@ -86,7 +95,8 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
       inputFechaDeContratacion.trim().length === 0 &&
       inputNoContrato.trim().length === 0 &&
       inputNoExpediente.trim().length === 0 &&
-      inputBajaTemporal.trim().length === 0
+      inputBajaTemporal.trim().length === 0 &&
+      inputComentarios.trim().length === 0
     )
       return;
 
@@ -109,6 +119,7 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
           noContrato: inputNoContrato,
           noExpediente: inputNoExpediente,
           bajaTemporal: inputBajaTemporal,
+          comentarios: inputComentarios,
         };
 
         actualizarPersonalActivo(actualizadoPersonalActivo, true);
@@ -269,6 +280,25 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                     <option key={yesNoOptions}>{yesNoOptions}</option>
                   ))}
                 </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtComentarios"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Comentarios
+                </label>
+                <input
+                  type="text"
+                  name="TxtComentarios"
+                  id="TxtComentarios"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputComentarios}
+                  onChange={onInputValueChangedComentarios}
+                  // onBlur={() => setTouched(true)}
+                />
               </div>
             </div>
           </div>

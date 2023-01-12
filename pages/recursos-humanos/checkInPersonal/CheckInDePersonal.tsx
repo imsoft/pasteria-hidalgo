@@ -9,6 +9,9 @@ import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recurs
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+const tiempoTranscurrido = Date.now();
+const hoy = new Date(tiempoTranscurrido);
+
 export default function CheckInDePersonal() {
   const router = useRouter();
 
@@ -20,8 +23,8 @@ export default function CheckInDePersonal() {
   const [inputFranquicias, setInputFranquicias] = useState("");
   const [inputSucursales, setInputSucursales] = useState("");
   const [inputNombre, setInputNombre] = useState("");
-  const [inputFecha, setInputFecha] = useState("");
-  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState("");
+  const [inputFecha, setInputFecha] = useState(hoy.toLocaleDateString());
+  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState(hoy.toLocaleTimeString());
   const [inputHoraDeSalida, setInputHoraDeSalida] = useState("");
 
   const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
@@ -231,13 +234,14 @@ export default function CheckInDePersonal() {
                   Fecha
                 </label>
                 <input
-                  type="date"
+                  type="text"
                   name="TxtFecha"
                   id="TxtFecha"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedFecha}
+                  value={inputFecha}
                   onBlur={() => setTouched(true)}
+                  readOnly
                 />
               </div>
 
@@ -249,12 +253,12 @@ export default function CheckInDePersonal() {
                   Hora De Ingreso
                 </label>
                 <input
-                  type="time"
+                  type="text"
                   name="TxtHoraDeIngreso"
                   id="TxtHoraDeIngreso"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedHoraDeIngreso}
+                  value={inputHoraDeIngreso}
                   onBlur={() => setTouched(true)}
                 />
               </div>
