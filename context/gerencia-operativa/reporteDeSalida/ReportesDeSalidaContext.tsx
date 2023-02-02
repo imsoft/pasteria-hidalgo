@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ReporteDeSalida, Unidades } from "../../../interfaces";
+import { ListadoDeProductos, ReporteDeSalida, Unidades } from "../../../interfaces";
 
 interface ContextProps {
   reportesDeSalida: ReporteDeSalida[];
@@ -11,15 +11,7 @@ interface ContextProps {
     codigoDeProductoExtra: string,
     cantidadDeProductoExtra: string,
     unidadesDeProductoExtra: string,
-    codigoDeMasa: string,
-    masa: string,
-    cantidadDeMasa: string,
-    unidadesDeMasa: string,
-    rellenos: string,
-    codigosDeRelleno: string,
-    cantidadDeProductoExtraRelleno: string,
-    unidadesDeRelleno: string,
-    temperaturaDeRellenos: string,
+    listadoDeProductos: ListadoDeProductos[],
     sucursalAEnviar: string,
     datosDeRepartidor: string,
     datosDeLaRuta: string,

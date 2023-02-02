@@ -54,6 +54,7 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
 
   const agregarSucursalYFranquicia = async (
     sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     direccion: string,
     distancia: string,
     fechaDePago: string,
@@ -62,8 +63,6 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
     banco: string,
     nombreDelBeneficiario: string,
     rfc: string,
-    sucursales?: string,
-    franquicias?: string,
     showNotificacion = false
   ) => {
     try {
@@ -71,8 +70,7 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
         "/sucursalesYFranquicias",
         {
           sucursalOFranquicia,
-          franquicias,
-          sucursales,
+          nombreSucursalOFranquicia,
           direccion,
           distancia,
           fechaDePago,
@@ -106,8 +104,7 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
     {
       _id,
       sucursalOFranquicia,
-      franquicias,
-      sucursales,
+      nombreSucursalOFranquicia,
       direccion,
       distancia,
       fechaDePago,
@@ -124,8 +121,7 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
         `/sucursalesYFranquicias/${_id}`,
         {
           sucursalOFranquicia,
-          franquicias,
-          sucursales,
+          nombreSucursalOFranquicia,
           direccion,
           distancia,
           fechaDePago,

@@ -20,6 +20,9 @@ export default function AgregarMantenimiento() {
     inputModificacionDeMantenimiento,
     setInputModificacionDeMantenimiento,
   ] = useState("");
+  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
+  const [inputFranquicias, setInputFranquicias] = useState("");
+  const [inputSucursales, setInputSucursales] = useState("");
 
   const [touched, setTouched] = useState(false);
 
@@ -55,8 +58,29 @@ export default function AgregarMantenimiento() {
     setInputModificacionDeMantenimiento(event.target.value);
   };
 
+  const onTextFieldChangedSucursalOFranquicia = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursalOFranquicia(event.target.value);
+  };
+
+  const onTextFieldChangedFranquicias = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputFranquicias(event.target.value);
+  };
+
+  const onTextFieldChangedSucursales = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursales(event.target.value);
+  };
+
   const onSave = () => {
     if (
+      inputSucursalOFranquicia.length === 0 &&
+      inputSucursales.length === 0 &&
+      inputFranquicias.length === 0 &&
       inputNombreMaquina.length === 0 &&
       inputProveedor.length === 0 &&
       inputFechaDeGarantia.length === 0 &&
@@ -66,6 +90,9 @@ export default function AgregarMantenimiento() {
       return;
 
     agregarNuevoMantenimiento(
+      inputSucursalOFranquicia,
+      inputSucursales,
+      inputFranquicias,
       inputNombreMaquina,
       inputProveedor,
       inputFechaDeGarantia,
@@ -85,6 +112,9 @@ export default function AgregarMantenimiento() {
     router.push("/gerencia-operativa/mantenimiento/VerMantenimiento");
 
     setTouched(false);
+    setInputSucursalOFranquicia("");
+    setInputSucursales("");
+    setInputFranquicias("");
     setInputNombreMaquina("");
     setInputProveedor("");
     setInputFechaDeGarantia("");
@@ -103,7 +133,82 @@ export default function AgregarMantenimiento() {
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
+
+            <div>
+              <label className="text-base font-medium text-gray-900">
+                Seleccione una opción
+              </label>
+              <p className="text-sm leading-5 text-gray-500">
+                ¿Sucursal o Franquicia?
+              </p>
+              <div className="col-span-6 sm:col-span-12">
+                <select
+                  id="CmbNombre"
+                  name="CmbNombre"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedSucursalOFranquicia}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione una opción...</option>
+                  <option>Sucursal</option>
+                  <option>Franquicia</option>
+                </select>
+              </div>
+            </div>
+
             <div className="grid grid-cols-6 gap-6">
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Franquicia" || "hidden"
+                } col-span-6`}
+              >
+                <label
+                  htmlFor="CmbFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Franquicia
+                </label>
+                <select
+                  id="CmbFranquicia"
+                  name="CmbFranquicia"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedFranquicias}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la franquicia...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
+
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Sucursal" || "hidden"
+                } col-span-6`}
+              >
+                <label
+                  htmlFor="CmbSucursal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Sucursal
+                </label>
+                <select
+                  id="CmbSucursal"
+                  name="CmbSucursal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedSucursales}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la sucursal...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
@@ -194,7 +299,6 @@ export default function AgregarMantenimiento() {
                   onBlur={() => setTouched(true)}
                 />
               </div>
-
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

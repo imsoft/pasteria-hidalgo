@@ -2,9 +2,9 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-import { ClienteFrecuente } from '../../../interfaces/clienteFrecuente';
+import { ClienteFrecuente } from "../../../interfaces/clienteFrecuente";
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente";
-import { SidebarLayoutGerenciaVentas } from '../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas';
+import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
 import { dbClienteFrecuente } from "../../../database";
 
 import Swal from "sweetalert2";
@@ -17,14 +17,28 @@ interface Props {
 export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
   const router = useRouter();
 
-  const { actualizarClienteFrecuente, eliminarClienteFrecuente } =
-    useContext(ClientesFrecuentesContext);
+  const { actualizarClienteFrecuente, eliminarClienteFrecuente } = useContext(
+    ClientesFrecuentesContext
+  );
 
   const [inputNombre, setInputNombre] = useState(clienteFrecuente.nombre);
-  const [inputCorreoElectronico, setInputCorreoElectronico] = useState(clienteFrecuente.correoElectronico);
-  const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState(clienteFrecuente.fechaDeNacimiento);
-  const [inputPuntosDeCompra, setInputPuntosDeCompra] = useState(clienteFrecuente.puntosDeCompra);
-  
+  const [inputCorreoElectronico, setInputCorreoElectronico] = useState(
+    clienteFrecuente.correoElectronico
+  );
+  const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState(
+    clienteFrecuente.fechaDeNacimiento
+  );
+  const [inputPuntosDeCompra, setInputPuntosDeCompra] = useState(
+    clienteFrecuente.puntosDeCompra
+  );
+  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
+  const [inputSucursales, setInputSucursales] = useState(
+    clienteFrecuente.sucursal
+  );
+  const [inputFranquicias, setInputFranquicias] = useState(
+    clienteFrecuente.franquicia
+  );
+
   const MySwal = withReactContent(Swal);
 
   const [touched, setTouched] = useState(false);
@@ -33,16 +47,40 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
     setInputNombre(event.target.value);
   };
 
-  const onInputValueChangedCorreoElectronico = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedCorreoElectronico = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputCorreoElectronico(event.target.value);
   };
 
-  const onInputValueChangedFechaDeNacimiento = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedFechaDeNacimiento = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputFechaDeNacimiento(event.target.value);
   };
 
-  const onInputValueChangedPuntosDeCompra = (event: ChangeEvent<HTMLInputElement>) => {
+  const onInputValueChangedPuntosDeCompra = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     setInputPuntosDeCompra(parseInt(event.target.value));
+  };
+
+  const onInputValueChangedSucursalOFranquicia = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursalOFranquicia(event.target.value);
+  };
+
+  const onInputValueChangedSucursales = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursales(event.target.value);
+  };
+
+  const onInputValueChangedFranquicias = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputFranquicias(event.target.value);
   };
 
   const onSave = () => {
@@ -50,7 +88,9 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
       inputNombre.trim().length === 0 &&
       inputCorreoElectronico.trim().length === 0 &&
       inputFechaDeNacimiento.trim().length === 0 &&
-      inputPuntosDeCompra === 0
+      inputPuntosDeCompra === 0 &&
+      inputSucursales.trim().length === 0 &&
+      inputFranquicias.trim().length === 0
     )
       return;
 
@@ -71,10 +111,14 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
           fechaDeNacimiento: inputFechaDeNacimiento,
           correoElectronico: inputCorreoElectronico,
           puntosDeCompra: inputPuntosDeCompra,
+          sucursal: inputSucursales,
+          franquicia: inputFranquicias,
         };
 
         actualizarClienteFrecuente(actualizadoClienteFrecuente, true);
-        router.push("/gerencia-de-ventas/clienteFrecuente/VerClientesFrecuentes");
+        router.push(
+          "/gerencia-de-ventas/clienteFrecuente/VerClientesFrecuentes"
+        );
       }
     });
   };
@@ -92,7 +136,9 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         eliminarClienteFrecuente(clienteFrecuente, true);
-        router.push("/gerencia-de-ventas/clienteFrecuente/VerClientesFrecuentes");
+        router.push(
+          "/gerencia-de-ventas/clienteFrecuente/VerClientesFrecuentes"
+        );
       }
     });
   };
@@ -108,7 +154,84 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
+
+            <div>
+              <label className="text-base font-medium text-gray-900">
+                Seleccione una opción
+              </label>
+              <p className="text-sm leading-5 text-gray-500">
+                ¿Sucursal o Franquicia?
+              </p>
+
+              <div className="col-span-6 sm:col-span-12">
+                <select
+                  id="CmbNombre"
+                  name="CmbNombre"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onInputValueChangedSucursalOFranquicia}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione una opción...</option>
+                  <option>Sucursal</option>
+                  <option>Franquicia</option>
+                </select>
+              </div>
+            </div>
+
             <div className="grid grid-cols-6 gap-6">
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Franquicia" || "hidden"
+                } col-span-6`}
+              >
+                <label
+                  htmlFor="CmbFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Franquicia
+                </label>
+                <select
+                  id="CmbFranquicia"
+                  name="CmbFranquicia"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onInputValueChangedFranquicias}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la franquicia...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
+
+              <div
+                className={` ${
+                  inputSucursalOFranquicia === "Sucursal" || "hidden"
+                } col-span-6`}
+              >
+                <label
+                  htmlFor="CmbSucursal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Sucursal
+                </label>
+                <select
+                  id="CmbSucursal"
+                  name="CmbSucursal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onInputValueChangedSucursales}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la sucursal...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"
@@ -179,7 +302,7 @@ export const ClienteFrecuentePage: FC<Props> = ({ clienteFrecuente }) => {
                   id="TxtPuntosDeCompra"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputPuntosDeCompra || ''}
+                  value={inputPuntosDeCompra || ""}
                   onChange={onInputValueChangedPuntosDeCompra}
                   // onBlur={() => setTouched(true)}
                 />

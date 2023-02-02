@@ -42,6 +42,7 @@ export const personalesDeMantenimientoReducer = (
               personalDeMantenimiento.nombre = action.payload.nombre;
               personalDeMantenimiento.oficio = action.payload.oficio;
               personalDeMantenimiento.direccion = action.payload.direccion;
+              personalDeMantenimiento.telefono = action.payload.telefono;
             }
             return personalDeMantenimiento;
           }

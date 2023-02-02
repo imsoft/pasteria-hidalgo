@@ -14,7 +14,7 @@ export default function AgregarPersonalDeMantenimiento() {
   const [inputNombre, setInputNombre] = useState("");
   const [inputOficio, setInputOficio] = useState("");
   const [inputDireccion, setInputDireccion] = useState("");
-  
+  const [inputTelefono, setInputTelefono] = useState("");
 
   const [touched, setTouched] = useState(false);
 
@@ -38,11 +38,18 @@ export default function AgregarPersonalDeMantenimiento() {
     setInputDireccion(event.target.value);
   };
 
+  const onTextFieldChangedTelefono = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputTelefono(event.target.value);
+  };
+
   const onSave = () => {
     if (
       inputNombre.length === 0 &&
       inputOficio.length === 0 &&
-      inputDireccion.length === 0
+      inputDireccion.length === 0 &&
+      inputTelefono.length === 0
     )
       return;
 
@@ -50,6 +57,7 @@ export default function AgregarPersonalDeMantenimiento() {
       inputNombre,
       inputOficio,
       inputDireccion,
+      inputTelefono,
       true
     );
 
@@ -67,6 +75,7 @@ export default function AgregarPersonalDeMantenimiento() {
     setInputNombre("");
     setInputOficio("");
     setInputDireccion("");
+    setInputTelefono("");
   };
 
   return (
@@ -132,6 +141,24 @@ export default function AgregarPersonalDeMantenimiento() {
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   onChange={onTextFieldChangedDireccion}
+                  onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtModificacionDeMantenimiento"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Número de Télefono
+                </label>
+                <input
+                  type="tel"
+                  name="TxtModificacionDeMantenimiento"
+                  id="TxtModificacionDeMantenimiento"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  onChange={onTextFieldChangedTelefono}
                   onBlur={() => setTouched(true)}
                 />
               </div>

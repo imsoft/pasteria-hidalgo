@@ -4,13 +4,196 @@ import { ReportesDeSalidaContext } from "../../../context/gerencia-operativa/rep
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
-import { Unidades } from "../../../interfaces";
+import { ListadoDeProductos, Paste, TipoDeProducto, Unidades } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 
 const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
+
+const validProductType: TipoDeProducto[] = [
+  "Paste Dulce",
+  "Paste Salado",
+  "Otros",
+];
+
+const validCakeFlavors: Paste[] = [
+  {
+    _id: "PD_ACL",
+    saborDelPaste: "Arroz con leche",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_CP",
+    saborDelPaste: "Crema pastelera",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_FCP",
+    saborDelPaste: "Frambuesa con philadelphia",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_FRCP",
+    saborDelPaste: "Frutos rojos con philadelphia",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_GCP",
+    saborDelPaste: "Guayaba con philadelphia",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_H",
+    saborDelPaste: "Hawaiano",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_MCP",
+    saborDelPaste: "Manzana con philadelphia",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_NCP",
+    saborDelPaste: "Nutella con philadelphia",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_PCP",
+    saborDelPaste: "Piña con philadelphia",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PS_A",
+    saborDelPaste: "Atun",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_FCC",
+    saborDelPaste: "Frijol con chorizo",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_H",
+    saborDelPaste: "Hidalguense",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_M",
+    saborDelPaste: "Marlin",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_MR",
+    saborDelPaste: "Mole rojo",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_MV",
+    saborDelPaste: "Mole Verde",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_PCC",
+    saborDelPaste: "Papa con carne",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_P",
+    saborDelPaste: "Pepperoni",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_RCC",
+    saborDelPaste: "Rajas con champiñon",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_RCE",
+    saborDelPaste: "Requeson con espinacas",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_S",
+    saborDelPaste: "Salchicha",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_TCP",
+    saborDelPaste: "Tocino con papas",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "O_A",
+    saborDelPaste: "Agua",
+    precio: 10,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_CC",
+    saborDelPaste: "Café chico",
+    precio: 25,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_C12O",
+    saborDelPaste: "Café 12 Onz",
+    precio: 30,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_C16O",
+    saborDelPaste: "Café 16 Onz",
+    precio: 35,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_G",
+    saborDelPaste: "Galletas",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_R",
+    saborDelPaste: "Refresco",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_SR",
+    saborDelPaste: "Salsa roja",
+    precio: 4,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_SV",
+    saborDelPaste: "Salsa verde",
+    precio: 4,
+    tipoDeProducto: "Otros",
+  },
+];
 
 export default function ReportesSalida() {
   const router = useRouter();
@@ -24,19 +207,14 @@ export default function ReportesSalida() {
     useState("");
   const [inputUnidadesDeProductoExtra, setInputUnidadesDeProductoExtra] =
     useState("");
-  const [inputCodigoDeMasa, setInputCodigoDeMasa] = useState("");
-  const [inputMasa, setInputMasa] = useState("");
-  const [inputCantidadDeMasa, setInputCantidadDeMasa] = useState("");
-  const [inputUnidadesDeMasa, setInputUnidadesDeMasa] = useState("");
-  const [inputRellenos, setInputRellenos] = useState("");
-  const [inputCodigosDeRelleno, setInputCodigosDeRelleno] = useState("");
-  const [
-    inputCantidadDeProductoExtraRelleno,
-    setInputCantidadDeProductoExtraRelleno,
-  ] = useState("");
-  const [inputUnidadesDeRelleno, setInputUnidadesDeRelleno] = useState("");
-  const [inputTemperaturaDeRellenos, setInputTemperaturaDeRellenos] =
-    useState("");
+    const [inputCodigoProducto, setInputCodigoProducto] = useState("");
+    const [inputListaDeProductos, setInputListaDeProductos] = useState<
+    ListadoDeProductos[]
+  >([]);
+  const [inputTipoDeProducto, setInputTipoDeProducto] = useState("");
+  const [inputSaborProducto, setInputSaborProducto] = useState("");
+  const [inputCantidad, setInputCantidad] = useState(0);
+  const [inputPrecioProducto, setInputPrecioProducto] = useState(0);
   const [inputSucursalAEnviar, setInputSucursalAEnviar] = useState("");
   const [inputDatosDeRepartidor, setInputDatosDeRepartidor] = useState("");
   const [inputDatosDeLaRuta, setInputDatosDeLaRuta] = useState("");
@@ -76,54 +254,26 @@ export default function ReportesSalida() {
     setInputUnidadesDeProductoExtra(event.target.value as Unidades);
   };
 
-  const onTextFieldChangedCodigoDeMasa = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCodigoDeMasa(event.target.value);
-  };
-
-  const onTextFieldChangedMasa = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputMasa(event.target.value);
-  };
-
-  const onTextFieldChangedCantidadDeMasa = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCantidadDeMasa(event.target.value);
-  };
-
-  const onTextFieldChangedUnidadesDeMasa = (
+  const onTextFieldChangedTipoDeProducto = (
     event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputUnidadesDeMasa(event.target.value as Unidades);
+    setInputTipoDeProducto(event.target.value as TipoDeProducto);
   };
 
-  const onTextFieldChangedRellenos = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputRellenos(event.target.value);
-  };
-
-  const onTextFieldChangedCodigosDeRelleno = (
+  const onTextFieldChangedCodigoProducto = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputCodigosDeRelleno(event.target.value);
+    setInputCodigoProducto(event.target.value);
   };
 
-  const onTextFieldChangedCantidadDeProductoExtraRelleno = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCantidadDeProductoExtraRelleno(event.target.value);
-  };
-
-  const onTextFieldChangedUnidadesDeRelleno = (
+  const onTextFieldChangedSaborProducto = (
     event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputUnidadesDeRelleno(event.target.value as Unidades);
+    setInputSaborProducto(event.target.value);
   };
 
-  const onTextFieldChangedTemperaturaDeRellenos = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputTemperaturaDeRellenos(event.target.value);
+  const onTextFieldChangedCantidad = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputCantidad(parseInt(event.target.value));
   };
 
   const onTextFieldChangedSucursalAEnviar = (
@@ -163,15 +313,7 @@ export default function ReportesSalida() {
       inputCodigoDeProductoExtra.length === 0 &&
       inputCantidadDeProductoExtra.length === 0 &&
       inputUnidadesDeProductoExtra.length === 0 &&
-      inputCodigoDeMasa.length === 0 &&
-      inputMasa.length === 0 &&
-      inputCantidadDeMasa.length === 0 &&
-      inputUnidadesDeMasa.length === 0 &&
-      inputRellenos.length === 0 &&
-      inputCodigosDeRelleno.length === 0 &&
-      inputCantidadDeProductoExtraRelleno.length === 0 &&
-      inputUnidadesDeRelleno.length === 0 &&
-      inputTemperaturaDeRellenos.length === 0 &&
+      inputListaDeProductos.length === 0 &&
       inputSucursalAEnviar.length === 0 &&
       inputDatosDeRepartidor.length === 0 &&
       inputDatosDeLaRuta.length === 0 &&
@@ -186,15 +328,7 @@ export default function ReportesSalida() {
       inputCodigoDeProductoExtra,
       inputCantidadDeProductoExtra,
       inputUnidadesDeProductoExtra,
-      inputCodigoDeMasa,
-      inputMasa,
-      inputCantidadDeMasa,
-      inputUnidadesDeMasa,
-      inputRellenos,
-      inputCodigosDeRelleno,
-      inputCantidadDeProductoExtraRelleno,
-      inputUnidadesDeRelleno,
-      inputTemperaturaDeRellenos,
+      inputListaDeProductos,
       inputSucursalAEnviar,
       inputDatosDeRepartidor,
       inputDatosDeLaRuta,
@@ -219,15 +353,7 @@ export default function ReportesSalida() {
     setInputCodigoDeProductoExtra("");
     setInputCantidadDeProductoExtra("");
     setInputUnidadesDeProductoExtra("");
-    setInputCodigoDeMasa("");
-    setInputMasa("");
-    setInputCantidadDeMasa("");
-    setInputUnidadesDeMasa("");
-    setInputRellenos("");
-    setInputCodigosDeRelleno("");
-    setInputCantidadDeProductoExtraRelleno("");
-    setInputUnidadesDeRelleno("");
-    setInputTemperaturaDeRellenos("");
+
     setInputSucursalAEnviar("");
     setInputDatosDeRepartidor("");
     setInputDatosDeLaRuta("");
@@ -343,95 +469,74 @@ export default function ReportesSalida() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtTipoDeProducto"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Código de masa
-                </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCodigoDeMasa}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtDescripcionProducto"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Masa
-                </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedMasa}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtDescripcionProducto"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Cantidad de masa
-                </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCantidadDeMasa}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtProductos"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Unidades de masa
+                  Tipo de producto
                 </label>
                 <select
-                  id="TxtProductos"
-                  name="TxtProductos"
+                  id="TxtTipoDeProducto"
+                  name="TxtTipoDeProducto"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  onChange={onTextFieldChangedUnidadesDeMasa}
+                  value={inputTipoDeProducto || ""}
+                  onChange={onTextFieldChangedTipoDeProducto}
                   onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona una opción...</option>
-                  {validUnits.map((unidades) => (
-                    <option key={unidades}>{unidades}</option>
+                  {/* <option disabled selected>Selecciona una opción</option>
+                  <option value="">Selecciona una opción</option> */}
+                  <option hidden>Selecciona un producto...</option>
+                  {validProductType.map((productType) => (
+                    <option key={productType}>{productType}</option>
                   ))}
+                </select>
+              </div>
+
+              <div className={"col-span-6 sm:col-span-3"}>
+                <label
+                  htmlFor="CmbSaboresDulces"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Producto
+                </label>
+                <select
+                  id="CmbSaboresDulces"
+                  name="CmbSaboresDulces"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  value={inputSaborProducto || ""}
+                  onChange={onTextFieldChangedSaborProducto}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option hidden>Selecciona un producto...</option>
+                  {validCakeFlavors
+                    .filter(
+                      (cakeFlavors) =>
+                        cakeFlavors.tipoDeProducto === inputTipoDeProducto
+                    )
+                    .map((cakeFlavors) => (
+                      <option key={cakeFlavors.saborDelPaste}>
+                        {cakeFlavors.saborDelPaste}
+                      </option>
+                    ))}
                 </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtCodigoProducto"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Rellenos
+                  Código de producto
                 </label>
                 <input
                   type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
+                  name="TxtCodigoProducto"
+                  id="TxtCodigoProducto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedRellenos}
+                  value={inputCodigoProducto || ""}
+                  onChange={onTextFieldChangedCodigoProducto}
                   onBlur={() => setTouched(true)}
+                  readOnly
                 />
               </div>
 
@@ -440,73 +545,17 @@ export default function ReportesSalida() {
                   htmlFor="TxtDescripcionProducto"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Códigos de relleno
+                  Cantidad de producto
                 </label>
                 <input
-                  type="text"
+                  type="number"
+                  min={1}
                   name="TxtDescripcionProducto"
                   id="TxtDescripcionProducto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCodigosDeRelleno}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtDescripcionProducto"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Cantidad de producto extra
-                </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCantidadDeProductoExtraRelleno}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtProductos"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Unidades de relleno
-                </label>
-                <select
-                  id="TxtProductos"
-                  name="TxtProductos"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  onChange={onTextFieldChangedUnidadesDeRelleno}
-                  onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
-                >
-                  <option>Selecciona una opción...</option>
-                  {validUnits.map((unidades) => (
-                    <option key={unidades}>{unidades}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtDescripcionProducto"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Temperatura de rellenos
-                </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedTemperaturaDeRellenos}
+                  value={inputCantidad || ""}
+                  onChange={onTextFieldChangedCantidad}
                   onBlur={() => setTouched(true)}
                 />
               </div>

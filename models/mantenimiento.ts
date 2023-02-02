@@ -4,6 +4,9 @@ import { Mantenimiento } from "../interfaces";
 export interface IMantenimiento extends Mantenimiento {}
 
 const mantenimientoSchema = new Schema({
+  sucursalOFranquicia: { type: String, required: true },
+  sucursal: { type: String, required: true },
+  franquicia: { type: String, required: true },
   nombreMaquina: { type: String, required: true },
   proveedor: { type: String, required: true },
   fechaDeGarantia: { type: String, required: true },

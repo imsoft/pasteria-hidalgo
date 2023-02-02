@@ -69,6 +69,30 @@ const navigation = [
     icon: EyeIcon,
     current: false,
   },
+  {
+    name: "Ver Precio Maximo",
+    href: "/contaduria/precioMaximo/VerPrecioMaximo",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Ver Reporte Ventas Individual",
+    href: "/contaduria/reporteVentasIndividual/VerReporteVentasIndividual",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Ver Reporte de venta ambulantes individual",
+    href: "/contaduria/reporteVentaAmbulantesIndividual/VerReporteVentaAmbulantesIndividual",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Ver Check In",
+    href: "/contaduria/checkIn/VerCheckInPersonal",
+    icon: EyeIcon,
+    current: false,
+  },
 ];
 
 const userNavigation = [

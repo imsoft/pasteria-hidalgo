@@ -60,6 +60,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
     nombre: string,
     oficio: string,
     direccion: string,
+    telefono: string,
     showNotificacion = false
   ) => {
     try {
@@ -69,6 +70,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
           nombre,
           oficio,
           direccion,
+          telefono,
         }
       );
       dispatch({
@@ -91,7 +93,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
   };
 
   const actualizarPersonalDeMantenimiento = async (
-    { _id, nombre, oficio, direccion }: PersonalDeMantenimiento,
+    { _id, nombre, oficio, direccion, telefono }: PersonalDeMantenimiento,
     showNotificacion = false
   ) => {
     try {
@@ -101,6 +103,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
           nombre,
           oficio,
           direccion,
+          telefono,
         }
       );
       dispatch({

@@ -1,8 +1,7 @@
 export interface SucursalYFranquicia {
   _id: string;
   sucursalOFranquicia: string;
-  franquicias?: string;
-  sucursales?: string;
+  nombreSucursalOFranquicia: string;
   direccion: string;
   distancia: string;
   fechaDePago: string;

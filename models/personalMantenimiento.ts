@@ -7,6 +7,7 @@ const personalDeMantenimientoSchema = new Schema({
   nombre: { type: String, required: true },
   oficio: { type: String, required: true },
   direccion: { type: String, required: true },
+  telefono: { type: String, required: true },
 });
 
 const PersonalDeMantenimientoModel: Model<IPersonalDeMantenimiento> =

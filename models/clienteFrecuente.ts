@@ -8,6 +8,8 @@ const clienteFrecuenteSchema = new Schema({
   correoElectronico: { type: String, required: true },
   fechaDeNacimiento: { type: String, required: true },
   puntosDeCompra: { type: Number, required: true },
+  sucursal: { type: String, required: true },
+  franquicia: { type: String, required: true },
 });
 
 const ClienteFrecuenteModel: Model<ClienteFrecuente> =

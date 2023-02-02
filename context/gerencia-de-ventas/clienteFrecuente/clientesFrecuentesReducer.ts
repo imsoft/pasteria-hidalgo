@@ -37,8 +37,9 @@ export const clientesFrecuentesReducer = (
               action.payload.correoElectronico;
             clienteFrecuente.fechaDeNacimiento =
               action.payload.fechaDeNacimiento;
-            clienteFrecuente.puntosDeCompra =
-              action.payload.puntosDeCompra;
+            clienteFrecuente.puntosDeCompra = action.payload.puntosDeCompra;
+            clienteFrecuente.sucursal = action.payload.sucursal;
+            clienteFrecuente.franquicia = action.payload.franquicia;
           }
           return clienteFrecuente;
         }),

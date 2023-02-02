@@ -50,55 +50,31 @@ const ListaReportesDeSalida: FC<Props> = ({ reporteDeSalida }) => {
 
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeSalida.codigoDeMasa}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.masa}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.cantidadDeMasa}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.unidadesDeMasa}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.rellenos}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.codigosDeRelleno}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.cantidadDeProductoExtraRelleno}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.unidadesDeRelleno}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.temperaturaDeRellenos}
+            {reporteDeSalida.listadoDeProductos.map((listado) => (
+              <div
+                key={listado.idProducto}
+                className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+              >
+                <div className="font-medium text-gray-900">
+                  <strong>idProducto:</strong> {listado.idProducto}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Tipo de producto:</strong> {listado.tipoDeProducto}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Sabor del producto:</strong> {listado.saborProducto}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Precio:</strong> ${listado.precioProducto}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Cantidad:</strong> {listado.cantidad}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Monto:</strong> ${listado.monto}
+                </div>
+              </div>
+            ))}
           </div>
         </td>
 

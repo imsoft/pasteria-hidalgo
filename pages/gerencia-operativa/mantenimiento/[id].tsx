@@ -24,6 +24,15 @@ export const MantenimientoPage: FC<Props> = ({ mantenimiento }) => {
     MantenimientosContext
   );
 
+  const [inputSucursalesOFranquicias, setInputSucursalesOFranquicias] = useState(
+    mantenimiento.sucursalOFranquicia
+  );
+  const [inputSucursal, setInputSucursal] = useState(
+    mantenimiento.sucursal
+  );
+  const [inputFranquicia, setInputFranquicia] = useState(
+    mantenimiento.franquicia
+  );
   const [inputNombreMaquina, setInputNombreMaquina] = useState(
     mantenimiento.nombreMaquina
   );
@@ -40,6 +49,24 @@ export const MantenimientoPage: FC<Props> = ({ mantenimiento }) => {
   ] = useState(mantenimiento.modificacionDeMantenimiento);
 
   const MySwal = withReactContent(Swal);
+
+  const onInputValueChangedSucursalOFranquicia = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursalesOFranquicias(event.target.value);
+  };
+
+  const onInputValueChangedSucursal = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputSucursal(event.target.value);
+  };
+
+  const onInputValueChangedFranquicia = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputFranquicia(event.target.value);
+  };
 
   const onInputValueChangedNombreMaquina = (
     event: ChangeEvent<HTMLInputElement>
@@ -73,6 +100,9 @@ export const MantenimientoPage: FC<Props> = ({ mantenimiento }) => {
 
   const onSave = () => {
     if (
+      inputSucursalesOFranquicias.trim().length === 0 &&
+      inputSucursal.trim().length === 0 &&
+      inputFranquicia.trim().length === 0 &&
       inputNombreMaquina.trim().length === 0 &&
       inputProveedor.trim().length === 0 &&
       inputFechaDeGarantia.trim().length === 0 &&
@@ -94,6 +124,9 @@ export const MantenimientoPage: FC<Props> = ({ mantenimiento }) => {
       if (result.isConfirmed) {
         const actualizadoMantenimiento: Mantenimiento = {
           ...mantenimiento,
+          sucursalOFranquicia: inputSucursalesOFranquicias,
+          sucursal: inputSucursal,
+          franquicia: inputFranquicia,
           nombreMaquina: inputNombreMaquina,
           proveedor: inputProveedor,
           fechaDeGarantia: inputFechaDeGarantia,
@@ -136,7 +169,83 @@ export const MantenimientoPage: FC<Props> = ({ mantenimiento }) => {
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
+
+            <div>
+              <label className="text-base font-medium text-gray-900">
+                Seleccione una opción
+              </label>
+              <p className="text-sm leading-5 text-gray-500">
+                ¿Sucursal o Franquicia?
+              </p>
+              <div className="col-span-6 sm:col-span-12">
+                <select
+                  id="CmbNombre"
+                  name="CmbNombre"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onInputValueChangedSucursalOFranquicia}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione una opción...</option>
+                  <option>Sucursal</option>
+                  <option>Franquicia</option>
+                </select>
+              </div>
+            </div>
+
             <div className="grid grid-cols-6 gap-6">
+
+            <div
+                className={` ${
+                  inputSucursalesOFranquicias === "Franquicia" || "hidden"
+                } col-span-6`}
+              >
+                <label
+                  htmlFor="CmbFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Franquicia
+                </label>
+                <select
+                  id="CmbFranquicia"
+                  name="CmbFranquicia"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onInputValueChangedFranquicia}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la franquicia...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
+
+              <div
+                className={` ${
+                  inputSucursalesOFranquicias === "Sucursal" || "hidden"
+                } col-span-6`}
+              >
+                <label
+                  htmlFor="CmbSucursal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Sucursal
+                </label>
+                <select
+                  id="CmbSucursal"
+                  name="CmbSucursal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onInputValueChangedSucursal}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione la sucursal...</option>
+                  <option>Chapultepec</option>
+                  <option>Chapalita</option>
+                  <option>Chiapas</option>
+                </select>
+              </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label

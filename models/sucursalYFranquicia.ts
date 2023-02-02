@@ -5,8 +5,7 @@ export interface ISucursalYFranquicia extends SucursalYFranquicia {}
 
 const sucursalesYFranquiciasSchema = new Schema({
   sucursalOFranquicia: { type: String, required: true },
-  franquicias: { type: String, required: false },
-  sucursales: { type: String, required: false },
+  nombreSucursalOFranquicia: { type: String, required: true },
   direccion: { type: String, required: true },
   distancia: { type: String, required: true },
   fechaDePago: { type: String, required: true },

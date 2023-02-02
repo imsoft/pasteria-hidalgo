@@ -1,21 +1,26 @@
 import { useContext, useMemo } from "react";
 import Link from "next/link";
 
-import { CheckInPersonalContext } from '../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext';
+import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext";
 
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
-import ListaChecksInPersonal from '../../../components/ui/recursos-humanos/ListaCheckInPersonal';
+import ListaChecksInPersonal from "../../../components/ui/recursos-humanos/ListaCheckInPersonal";
 
 const VerCheckInPersonal = () => {
   const { checksInPersonal } = useContext(CheckInPersonalContext);
-  const checksInPersonalMemo = useMemo(() => checksInPersonal, [checksInPersonal]);
+  const checksInPersonalMemo = useMemo(
+    () => checksInPersonal,
+    [checksInPersonal]
+  );
 
   return (
     <SidebarLayoutRecursosHumanos>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Checks In Personal</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Checks In Personal
+            </h1>
             <p className="mt-2 text-sm text-gray-700">
               Aquí podras ver los checks in de la empresa para la empresa.
             </p>
@@ -25,7 +30,9 @@ const VerCheckInPersonal = () => {
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
             >
-              <Link href={"/recursos-humanos/checkInPersonal/CheckInDePersonal"}>
+              <Link
+                href={"/recursos-humanos/checkInPersonal/CheckInDePersonal"}
+              >
                 <a>Agregar Check In Personal</a>
               </Link>
             </button>

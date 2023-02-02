@@ -38,8 +38,7 @@ const postSucursalYFranquicia = async (
 ) => {
   const {
     sucursalOFranquicia = "",
-    franquicias = "",
-    sucursales = "",
+    nombreSucursalOFranquicia = "",
     direccion = "",
     distancia = "",
     fechaDePago = "",
@@ -52,8 +51,7 @@ const postSucursalYFranquicia = async (
 
   const newSucursalYFranquicia = new SucursalYFranquicia({
     sucursalOFranquicia,
-    franquicias,
-    sucursales,
+    nombreSucursalOFranquicia,
     direccion,
     distancia,
     fechaDePago,

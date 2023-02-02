@@ -25,7 +25,10 @@ export default function handler(
   }
 }
 
-const getClienteFrecuente = async (req: NextApiRequest, res: NextApiResponse) => {
+const getClienteFrecuente = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   const { id } = req.query;
 
   await db.connect();
@@ -63,6 +66,8 @@ const updateClienteFrecuente = async (
     correoElectronico = clienteFrecuenteToUpdate.correoElectronico,
     fechaDeNacimiento = clienteFrecuenteToUpdate.fechaDeNacimiento,
     puntosDeCompra = clienteFrecuenteToUpdate.puntosDeCompra,
+    sucursal = clienteFrecuenteToUpdate.sucursal,
+    franquicia = clienteFrecuenteToUpdate.franquicia,
   } = req.body;
 
   try {
@@ -73,6 +78,8 @@ const updateClienteFrecuente = async (
         correoElectronico,
         fechaDeNacimiento,
         puntosDeCompra,
+        sucursal,
+        franquicia,
       },
       { runValidators: true, new: true }
     );
@@ -84,11 +91,16 @@ const updateClienteFrecuente = async (
   }
 };
 
-const deleteClienteFrecuente = async (req: NextApiRequest, res: NextApiResponse) => {
+const deleteClienteFrecuente = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   const { id } = req.query;
 
   await db.connect();
-  const ClienteFrecuenteDBToDelete = await ClienteFrecuente.findByIdAndDelete(id);
+  const ClienteFrecuenteDBToDelete = await ClienteFrecuente.findByIdAndDelete(
+    id
+  );
   await db.disconnect();
 
   if (!ClienteFrecuenteDBToDelete) {

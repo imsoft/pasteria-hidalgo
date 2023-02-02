@@ -26,6 +26,11 @@ const validProductType: TipoDeProducto[] = [
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
 
+const useClientPoints = [
+  { id: "si", title: "Si" },
+  { id: "no", title: "No" },
+];
+
 const validCakeFlavors: Paste[] = [
   {
     _id: "PD_ACL",
@@ -236,6 +241,8 @@ const AgregarReporteDeVentasIndividual = () => {
     ListadoDeProductos[]
   >([]);
 
+  const [inputUsarPuntos, setInputUsarPuntos] = useState("");
+
   const [touched, setTouched] = useState(false);
 
   const MySwal = withReactContent(Swal);
@@ -306,6 +313,12 @@ const AgregarReporteDeVentasIndividual = () => {
     event: ChangeEvent<HTMLSelectElement>
   ) => {
     setInputPuntosClienteFrecuente(parseInt(event.target.value));
+  };
+
+  const onTextFieldChangedUsarPuntos = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputUsarPuntos(event.target.value);
   };
 
   const lookUpProductPrice = () => {
@@ -428,7 +441,9 @@ const AgregarReporteDeVentasIndividual = () => {
       timer: 5000,
     });
 
-    router.push("/gerencia-de-ventas/reporteDeVentasIndividual/VerReporteDeVentasIndividual");
+    router.push(
+      "/gerencia-de-ventas/reporteDeVentasIndividual/VerReporteDeVentasIndividual"
+    );
 
     setTouched(false);
     setInputCodigoProducto("");
@@ -765,81 +780,127 @@ const AgregarReporteDeVentasIndividual = () => {
               </div>
 
               <div className="col-span-6 sm:col-span-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Clientes frecuentes
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  Recuerda preguntar si ya esta registrado con nosotros.
+                <label className="text-base font-medium text-gray-900">
+                  ¿Quieres usar tus puntos?
+                </label>
+                <p className="text-sm leading-5 text-gray-500">
+                  Recuera preguntarle al cliente si quiere usar sus puntos
                 </p>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <div className="flex items-center">
-                  <label
-                    htmlFor="TxtCorreoElectronicoClienteFrecuente"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Correo electrónico
-                  </label>
-                  <div className="text-xs text-gray-500">
-                    &nbsp;&#40;Opcional&#41;
-                  </div>
-                </div>
-                <input
-                  type="text"
-                  name="TxtCorreoElectronicoClienteFrecuente"
-                  id="TxtCorreoElectronicoClienteFrecuente"
-                  list="correosElectronicos_ClientesFrecuentes"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCorreoClienteFrecuente}
-                  onBlur={() => setTouched(true)}
-                />
-                <datalist id="correosElectronicos_ClientesFrecuentes">
-                  {clientesFrecuentesMemo.map((clienteFrecuente) => (
-                    <option
-                      key={clienteFrecuente._id}
-                      value={clienteFrecuente.correoElectronico}
-                    >
-                      {clienteFrecuente.nombre}
-                    </option>
-                  ))}
-                </datalist>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <div className="flex items-center">
-                  <label
-                    htmlFor="TxtPuntosDeCompraActualesClienteFrecuente"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Puntos de compra actuales
-                  </label>
-                  <div className="text-xs text-gray-500">
-                    &nbsp;&#40;Opcional&#41;
-                  </div>
-                </div>
-
-                <select
-                  id="TxtPuntosDeCompraActualesClienteFrecuente"
-                  name="TxtPuntosDeCompraActualesClienteFrecuente"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  onChange={onTextFieldChangedPuntosClienteFrecuente}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Selecciona los puntos...</option>
-                  {clientesFrecuentesMemo
-                    .filter(
-                      (clientesFrecuentes) =>
-                        clientesFrecuentes.correoElectronico ===
-                        inputCorreoClienteFrecuente
-                    )
-                    .map((clientesFrecuentes) => (
-                      <option key={clientesFrecuentes.correoElectronico}>
-                        {clientesFrecuentes.puntosDeCompra}
-                      </option>
+                <fieldset className="mt-4">
+                  <legend className="sr-only">
+                    Usar puntos de cliente frecuente
+                  </legend>
+                  <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                    {useClientPoints.map((useClientPoint) => (
+                      <div
+                        key={useClientPoint.id}
+                        className="flex items-center"
+                      >
+                        <input
+                          id={useClientPoint.id}
+                          name="notification-method"
+                          type="radio"
+                          defaultChecked={useClientPoint.id === "no"}
+                          onChange={onTextFieldChangedUsarPuntos}
+                          value={useClientPoint.title}
+                          className="h-4 w-4 border-gray-300 text-primary-yellow focus:ring-primary-yellow"
+                        />
+                        <label
+                          htmlFor={useClientPoint.id}
+                          className="ml-3 block text-sm font-medium text-gray-700"
+                        >
+                          {useClientPoint.title}
+                        </label>
+                      </div>
                     ))}
-                </select>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div
+                className={` ${
+                  inputUsarPuntos === "Si" || "hidden"
+                } col-span-6 sm:col-span-6`}
+              >
+                <div className="grid grid-cols-6 gap-6">
+                  <div className="col-span-6 sm:col-span-6">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                      Clientes frecuentes
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      Recuerda preguntar si ya esta registrado con nosotros.
+                    </p>
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <div className="flex items-center">
+                      <label
+                        htmlFor="TxtCorreoElectronicoClienteFrecuente"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Correo electrónico
+                      </label>
+                      <div className="text-xs text-gray-500">
+                        &nbsp;&#40;Opcional&#41;
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      name="TxtCorreoElectronicoClienteFrecuente"
+                      id="TxtCorreoElectronicoClienteFrecuente"
+                      list="correosElectronicos_ClientesFrecuentes"
+                      autoComplete="off"
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                      onChange={onTextFieldChangedCorreoClienteFrecuente}
+                      onBlur={() => setTouched(true)}
+                    />
+                    <datalist id="correosElectronicos_ClientesFrecuentes">
+                      {clientesFrecuentesMemo.map((clienteFrecuente) => (
+                        <option
+                          key={clienteFrecuente._id}
+                          value={clienteFrecuente.correoElectronico}
+                        >
+                          {clienteFrecuente.nombre}
+                        </option>
+                      ))}
+                    </datalist>
+                  </div>
+
+                  <div className="col-span-6 sm:col-span-3">
+                    <div className="flex items-center">
+                      <label
+                        htmlFor="TxtPuntosDeCompraActualesClienteFrecuente"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Puntos de compra actuales
+                      </label>
+                      <div className="text-xs text-gray-500">
+                        &nbsp;&#40;Opcional&#41;
+                      </div>
+                    </div>
+
+                    <select
+                      id="TxtPuntosDeCompraActualesClienteFrecuente"
+                      name="TxtPuntosDeCompraActualesClienteFrecuente"
+                      className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                      onChange={onTextFieldChangedPuntosClienteFrecuente}
+                      onBlur={() => setTouched(true)}
+                    >
+                      <option hidden>Selecciona los puntos...</option>
+                      {clientesFrecuentesMemo
+                        .filter(
+                          (clientesFrecuentes) =>
+                            clientesFrecuentes.correoElectronico ===
+                            inputCorreoClienteFrecuente
+                        )
+                        .map((clientesFrecuentes) => (
+                          <option key={clientesFrecuentes.correoElectronico}>
+                            {clientesFrecuentes.puntosDeCompra}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

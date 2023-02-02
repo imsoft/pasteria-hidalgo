@@ -6,6 +6,9 @@ interface ContextProps {
 
   //Métodos
   agregarNuevoMantenimiento: (
+    sucursalOFranquicia: string,
+    sucursal: string,
+    franquicia: string,
     nombreMaquina: string,
     proveedor: string,
     fechaDeGarantia: string,

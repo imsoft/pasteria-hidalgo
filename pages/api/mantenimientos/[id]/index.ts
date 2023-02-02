@@ -59,6 +59,9 @@ const updateMantenimiento = async (
   }
 
   const {
+    sucursalOFranquicia = mantenimientoToUpdate.sucursalOFranquicia,
+    sucursal = mantenimientoToUpdate.sucursal,
+    franquicia = mantenimientoToUpdate.franquicia,
     nombreMaquina = mantenimientoToUpdate.nombreMaquina,
     proveedor = mantenimientoToUpdate.proveedor,
     fechaDeGarantia = mantenimientoToUpdate.fechaDeGarantia,
@@ -70,6 +73,9 @@ const updateMantenimiento = async (
     const updatedMantenimiento = await Mantenimiento.findByIdAndUpdate(
       id,
       {
+        sucursalOFranquicia,
+        sucursal,
+        franquicia,
         nombreMaquina,
         proveedor,
         fechaDeGarantia,

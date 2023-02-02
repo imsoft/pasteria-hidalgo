@@ -46,15 +46,9 @@ const VerSucursalesYFranquicias = () => {
                       </th>
                       <th
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Franquicias
-                      </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                      >
-                        Sucursales
+                        Nombre de la Sucursal O Franquicia
                       </th>
                       <th
                         scope="col"

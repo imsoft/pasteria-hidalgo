@@ -3,4 +3,5 @@ export interface PersonalDeMantenimiento {
   nombre: string;
   oficio: string;
   direccion: string;
+  telefono: string;
 }

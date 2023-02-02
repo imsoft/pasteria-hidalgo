@@ -7,6 +7,7 @@ interface ContextProps {
   //Métodos
   agregarSucursalYFranquicia: (
     sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     direccion: string,
     distancia: string,
     fechaDePago: string,
@@ -15,8 +16,6 @@ interface ContextProps {
     banco: string,
     nombreDelBeneficiario: string,
     rfc: string,
-    sucursales?: string,
-    franquicias?: string,
     showNotificacion?: boolean
   ) => void;
 

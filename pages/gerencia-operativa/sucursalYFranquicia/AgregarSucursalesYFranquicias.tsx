@@ -14,17 +14,17 @@ export default function ManejoSucursalesFranquicias() {
   );
 
   const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputFranquicias, setInputFranquicias] = useState("");
-  const [inputSucursales, setInputSucursales] = useState("");
+  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] = useState("");
   const [inputDireccion, setInputDireccion] = useState("");
   const [inputDistancia, setInputDistancia] = useState("");
   const [inputFechaDePago, setInputFechaDePago] = useState("");
   const [inputMontoDePago, setInputMontoDePago] = useState("");
   const [inputCuentaBancaria, setInputCuentaBancaria] = useState("");
   const [inputBanco, setInputBanco] = useState("");
-  const [inputNombreDelBeneficiario, setInputNombreDelBeneficiario] = useState("");
+  const [inputNombreDelBeneficiario, setInputNombreDelBeneficiario] =
+    useState("");
   const [inputRfc, setInputRfc] = useState("");
-  
+
   const [touched, setTouched] = useState(false);
 
   const MySwal = withReactContent(Swal);
@@ -35,16 +35,10 @@ export default function ManejoSucursalesFranquicias() {
     setInputSucursalOFranquicia(event.target.value);
   };
 
-  const onTextFieldChangedFranquicias = (
-    event: ChangeEvent<HTMLSelectElement>
+  const onTextFieldChangedNombreSucursalOFranquicia = (
+    event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputFranquicias(event.target.value);
-  };
-
-  const onTextFieldChangedSucursales = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursales(event.target.value);
+    setInputNombreSucursalOFranquicia(event.target.value);
   };
 
   const onTextFieldChangedDireccion = (
@@ -77,9 +71,7 @@ export default function ManejoSucursalesFranquicias() {
     setInputCuentaBancaria(event.target.value);
   };
 
-  const onTextFieldChangedBanco = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedBanco = (event: ChangeEvent<HTMLInputElement>) => {
     setInputBanco(event.target.value);
   };
 
@@ -89,17 +81,14 @@ export default function ManejoSucursalesFranquicias() {
     setInputNombreDelBeneficiario(event.target.value);
   };
 
-  const onTextFieldChangedRfc = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedRfc = (event: ChangeEvent<HTMLInputElement>) => {
     setInputRfc(event.target.value);
   };
 
   const onSave = () => {
     if (
       inputSucursalOFranquicia.length === 0 &&
-      inputFranquicias.length === 0 &&
-      inputSucursales.length === 0 &&
+      inputNombreSucursalOFranquicia.length === 0 &&
       inputDireccion.length === 0 &&
       inputDistancia.length === 0 &&
       inputFechaDePago.length === 0 &&
@@ -108,10 +97,12 @@ export default function ManejoSucursalesFranquicias() {
       inputBanco.length === 0 &&
       inputNombreDelBeneficiario.length === 0 &&
       inputRfc.length === 0
-    ) return;
+    )
+      return;
 
     agregarSucursalYFranquicia(
       inputSucursalOFranquicia,
+      inputNombreSucursalOFranquicia,
       inputDireccion,
       inputDistancia,
       inputFechaDePago,
@@ -120,8 +111,6 @@ export default function ManejoSucursalesFranquicias() {
       inputBanco,
       inputNombreDelBeneficiario,
       inputRfc,
-      inputSucursales,
-      inputFranquicias,
       true
     );
 
@@ -133,12 +122,13 @@ export default function ManejoSucursalesFranquicias() {
       timer: 5000,
     });
 
-    router.push("/gerencia-operativa/sucursalYFranquicia/VerSucursalesYFranquicias");
+    router.push(
+      "/gerencia-operativa/sucursalYFranquicia/VerSucursalesYFranquicias"
+    );
 
     setTouched(false);
     setInputSucursalOFranquicia("");
-    setInputFranquicias("");
-    setInputSucursales("");
+    setInputNombreSucursalOFranquicia("");
     setInputDireccion("");
     setInputDistancia("");
     setInputFechaDePago("");
@@ -186,58 +176,6 @@ export default function ManejoSucursalesFranquicias() {
             </div>
 
             <div className="grid grid-cols-6 gap-6">
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Franquicia" || "hidden"
-                } col-span-6`}
-              >
-                <label
-                  htmlFor="CmbFranquicia"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Franquicia
-                </label>
-                <select
-                  id="CmbFranquicia"
-                  name="CmbFranquicia"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedFranquicias}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la franquicia...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
-              </div>
-
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Sucursal" || "hidden"
-                } col-span-6`}
-              >
-                <label
-                  htmlFor="CmbSucursal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Sucursal
-                </label>
-                <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedSucursales}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la sucursal...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
-              </div>
-
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"
@@ -251,7 +189,7 @@ export default function ManejoSucursalesFranquicias() {
                   id="TxtNombre"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedDireccion}
+                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
                   onBlur={() => setTouched(true)}
                 />
               </div>

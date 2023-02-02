@@ -33,25 +33,13 @@ const navigation = [
     current: false,
   },
   {
-    name: "Reporte de ventas ambulantes generales",
-    href: "/gerencia-de-ventas/reporteDeVentasAmbulantesGeneral/AgregarReporteDeVentasAmbulantesGeneral",
-    icon: DocumentDuplicateIcon,
-    current: false,
-  },
-  {
-    name: "Ver Reporte de ventas ambulantes generales",
-    href: "/gerencia-de-ventas/reporteDeVentasAmbulantesGeneral/VerReporteDeVentasAmbulantesGeneral",
-    icon: EyeIcon,
-    current: false,
-  },
-  {
-    name: "Reporte de ventas ambulantes individual",
+    name: "Reporte de ventas ambulantes",
     href: "/gerencia-de-ventas/reporteVentaAmbulantesIndividual/AgregarReporteVentaAmbulantesIndividual",
     icon: DocumentTextIcon,
     current: false,
   },
   {
-    name: "Ver Reporte de ventas ambulantes individual",
+    name: "Ver Reporte de ventas ambulantes",
     href: "/gerencia-de-ventas/reporteVentaAmbulantesIndividual/VerReporteVentaAmbulantesIndividual",
     icon: EyeIcon,
     current: false,

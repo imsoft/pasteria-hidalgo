@@ -38,12 +38,14 @@ const postPersonalDeMantenimiento = async( req: NextApiRequest, res: NextApiResp
         nombre = '',
         oficio = '',
         direccion = '',
+        telefono = '',
     } = req.body;
 
     const newPersonalDeMantenimiento = new PersonalDeMantenimiento({
         nombre,
         oficio,
         direccion,
+        telefono,
     });
 
     try {

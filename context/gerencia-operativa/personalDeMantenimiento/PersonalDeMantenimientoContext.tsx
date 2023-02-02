@@ -9,6 +9,7 @@ interface ContextProps {
     nombre: string,
     oficio: string,
     direccion: string,
+    telefono: string,
     showNotificacion?: boolean
   ) => void;
 

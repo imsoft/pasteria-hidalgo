@@ -4,4 +4,6 @@ export interface ClienteFrecuente {
   correoElectronico: string;
   fechaDeNacimiento: string;
   puntosDeCompra: number;
+  sucursal: string;
+  franquicia: string;
 }

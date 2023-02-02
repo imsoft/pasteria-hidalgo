@@ -44,60 +44,6 @@ const ListaReportesDeSalidaContaduria: FC<Props> = ({ reporteDeSalida }) => {
 
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeSalida.codigoDeMasa}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.masa}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.cantidadDeMasa}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.unidadesDeMasa}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.rellenos}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.codigosDeRelleno}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.cantidadDeProductoExtraRelleno}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.unidadesDeRelleno}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.temperaturaDeRellenos}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
             {reporteDeSalida.sucursalAEnviar}
           </div>
         </td>

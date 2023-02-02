@@ -65,7 +65,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                                 <PersonalesDeMantenimientoProvider>
                                   <ReportesVentasIndividualProvider>
                                     <MateriasPrimasProvider>
-                                      <Component {...pageProps} />
+                                      <ReportesVentasIndividualProvider>
+                                        <Component {...pageProps} />
+                                      </ReportesVentasIndividualProvider>
                                     </MateriasPrimasProvider>
                                   </ReportesVentasIndividualProvider>
                                 </PersonalesDeMantenimientoProvider>

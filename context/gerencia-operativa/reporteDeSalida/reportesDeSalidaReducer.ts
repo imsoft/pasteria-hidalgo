@@ -40,18 +40,8 @@ export const reportesDeSalidaReducer = (
               action.payload.cantidadDeProductoExtra;
             reporteDeSalida.unidadesDeProductoExtra =
               action.payload.unidadesDeProductoExtra;
-            reporteDeSalida.codigoDeMasa = action.payload.codigoDeMasa;
-            reporteDeSalida.masa = action.payload.masa;
-            reporteDeSalida.cantidadDeMasa = action.payload.cantidadDeMasa;
-            reporteDeSalida.unidadesDeMasa = action.payload.unidadesDeMasa;
-            reporteDeSalida.rellenos = action.payload.rellenos;
-            reporteDeSalida.codigosDeRelleno = action.payload.codigosDeRelleno;
-            reporteDeSalida.cantidadDeProductoExtraRelleno =
-              action.payload.cantidadDeProductoExtraRelleno;
-            reporteDeSalida.unidadesDeRelleno =
-              action.payload.unidadesDeRelleno;
-            reporteDeSalida.temperaturaDeRellenos =
-              action.payload.temperaturaDeRellenos;
+            reporteDeSalida.listadoDeProductos =
+              action.payload.listadoDeProductos;
             reporteDeSalida.sucursalAEnviar = action.payload.sucursalAEnviar;
             reporteDeSalida.datosDeRepartidor =
               action.payload.datosDeRepartidor;

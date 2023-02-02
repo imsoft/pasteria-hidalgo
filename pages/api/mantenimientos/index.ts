@@ -35,6 +35,9 @@ const getMantenimientos = async( res: NextApiResponse<Data> ) => {
 const postMantenimiento = async( req: NextApiRequest, res: NextApiResponse<Data> ) => {
     
     const { 
+        sucursalOFranquicia = '',
+        sucursal = '',
+        franquicia = '',
         nombreMaquina = '',
         proveedor = '',
         fechaDeGarantia = '',
@@ -43,6 +46,9 @@ const postMantenimiento = async( req: NextApiRequest, res: NextApiResponse<Data>
     } = req.body;
 
     const newMantenimiento = new Mantenimiento({
+        sucursalOFranquicia,
+        sucursal,
+        franquicia,
         nombreMaquina,
         proveedor,
         fechaDeGarantia,

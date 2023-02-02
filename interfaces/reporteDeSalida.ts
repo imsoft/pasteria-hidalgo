@@ -1,4 +1,4 @@
-import { Unidades } from '.';
+import { ListadoDeProductos, Unidades } from '.';
 
 export interface ReporteDeSalida {
   _id: string;
@@ -7,15 +7,7 @@ export interface ReporteDeSalida {
   codigoDeProductoExtra: string;
   cantidadDeProductoExtra: string;
   unidadesDeProductoExtra: Unidades;
-  codigoDeMasa: string;
-  masa: string;
-  cantidadDeMasa: string;
-  unidadesDeMasa: Unidades;
-  rellenos: string;
-  codigosDeRelleno: string;
-  cantidadDeProductoExtraRelleno: string;
-  unidadesDeRelleno: Unidades;
-  temperaturaDeRellenos: string;
+  listadoDeProductos: ListadoDeProductos[];
   sucursalAEnviar: string;
   datosDeRepartidor: string;
   datosDeLaRuta: string;

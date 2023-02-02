@@ -2,7 +2,7 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-import { PersonalesDeMantenimientoContext } from '../../../context/gerencia-operativa/personalDeMantenimiento/PersonalDeMantenimientoContext';
+import { PersonalesDeMantenimientoContext } from "../../../context/gerencia-operativa/personalDeMantenimiento/PersonalDeMantenimientoContext";
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
@@ -17,28 +17,34 @@ interface Props {
   personalDeMantenimiento: PersonalDeMantenimiento;
 }
 
-export const PersonalDeMantenimientoPage: FC<Props> = ({ personalDeMantenimiento }) => {
+export const PersonalDeMantenimientoPage: FC<Props> = ({
+  personalDeMantenimiento,
+}) => {
   const router = useRouter();
 
-  const { actualizarPersonalDeMantenimiento, eliminarPersonalDeMantenimiento } = useContext(
-    PersonalesDeMantenimientoContext
-  );
+  const { actualizarPersonalDeMantenimiento, eliminarPersonalDeMantenimiento } =
+    useContext(PersonalesDeMantenimientoContext);
 
-  const [inputNombre, setInputNombre] = useState(personalDeMantenimiento.nombre);
-  const [inputOficio, setInputOficio] = useState(personalDeMantenimiento.oficio);
-  const [inputDireccion, setInputDireccion] = useState(personalDeMantenimiento.direccion);
+  const [inputNombre, setInputNombre] = useState(
+    personalDeMantenimiento.nombre
+  );
+  const [inputOficio, setInputOficio] = useState(
+    personalDeMantenimiento.oficio
+  );
+  const [inputDireccion, setInputDireccion] = useState(
+    personalDeMantenimiento.direccion
+  );
+  const [inputTelefono, setInputTelefono] = useState(
+    personalDeMantenimiento.telefono
+  );
 
   const MySwal = withReactContent(Swal);
 
-  const onInputValueChangedNombre = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onInputValueChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
   };
 
-  const onInputValueChangedOficio = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onInputValueChangedOficio = (event: ChangeEvent<HTMLInputElement>) => {
     setInputOficio(event.target.value);
   };
 
@@ -48,16 +54,24 @@ export const PersonalDeMantenimientoPage: FC<Props> = ({ personalDeMantenimiento
     setInputDireccion(event.target.value);
   };
 
+  const onInputValueChangedTelefono = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputTelefono(event.target.value);
+  };
+
   const onSave = () => {
     if (
       inputNombre.trim().length === 0 &&
       inputOficio.trim().length === 0 &&
-      inputDireccion.trim().length === 0
+      inputDireccion.trim().length === 0 &&
+      inputTelefono.trim().length === 0
     )
       return;
 
     MySwal.fire({
-      title: "¿Quieres actualizar la información a este personal de mantenimiento?",
+      title:
+        "¿Quieres actualizar la información a este personal de mantenimiento?",
       text: "Verifica los datos antes de la operación",
       icon: "warning",
       showCancelButton: true,
@@ -72,10 +86,16 @@ export const PersonalDeMantenimientoPage: FC<Props> = ({ personalDeMantenimiento
           nombre: inputNombre,
           oficio: inputOficio,
           direccion: inputDireccion,
+          telefono: inputTelefono,
         };
 
-        actualizarPersonalDeMantenimiento(actualizadoPersonalDeMantenimiento, true);
-        router.push("/gerencia-operativa/personalMantenimiento/VerPersonalMantenimiento");
+        actualizarPersonalDeMantenimiento(
+          actualizadoPersonalDeMantenimiento,
+          true
+        );
+        router.push(
+          "/gerencia-operativa/personalMantenimiento/VerPersonalMantenimiento"
+        );
       }
     });
   };
@@ -93,7 +113,9 @@ export const PersonalDeMantenimientoPage: FC<Props> = ({ personalDeMantenimiento
     }).then(async (result) => {
       if (result.isConfirmed) {
         eliminarPersonalDeMantenimiento(personalDeMantenimiento, true);
-        router.push("/gerencia-operativa/personalMantenimiento/VerPersonalMantenimiento");
+        router.push(
+          "/gerencia-operativa/personalMantenimiento/VerPersonalMantenimiento"
+        );
       }
     });
   };
@@ -110,7 +132,6 @@ export const PersonalDeMantenimientoPage: FC<Props> = ({ personalDeMantenimiento
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
-
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"
@@ -168,6 +189,24 @@ export const PersonalDeMantenimientoPage: FC<Props> = ({ personalDeMantenimiento
                 />
               </div>
 
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtTelefono"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Teléfono
+                </label>
+                <input
+                  type="text"
+                  name="TxtTelefono"
+                  id="TxtTelefono"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputTelefono}
+                  onChange={onInputValueChangedTelefono}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -197,7 +236,8 @@ export const PersonalDeMantenimientoPage: FC<Props> = ({ personalDeMantenimiento
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params as { id: string };
 
-  const personalDeMantenimiento = await dbPersonalMantenimiento.getPersonalDeMantenimientoById(id);
+  const personalDeMantenimiento =
+    await dbPersonalMantenimiento.getPersonalDeMantenimientoById(id);
 
   if (!personalDeMantenimiento) {
     return {

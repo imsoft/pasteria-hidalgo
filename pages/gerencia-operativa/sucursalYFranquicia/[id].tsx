@@ -26,11 +26,8 @@ export const SucursalYFranquiciaPage: FC<Props> = ({ sucursalYFranquicia }) => {
   const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState(
     sucursalYFranquicia.sucursalOFranquicia
   );
-  const [inputFranquicias, setInputFranquicias] = useState(
-    sucursalYFranquicia.franquicias
-  );
-  const [inputSucursales, setInputSucursales] = useState(
-    sucursalYFranquicia.sucursales
+  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] = useState(
+    sucursalYFranquicia.nombreSucursalOFranquicia
   );
   const [inputDireccion, setInputDireccion] = useState(
     sucursalYFranquicia.direccion
@@ -63,16 +60,10 @@ export const SucursalYFranquiciaPage: FC<Props> = ({ sucursalYFranquicia }) => {
     setInputSucursalOFranquicia(event.target.value);
   };
 
-  const onInputValueChangedFranquicias = (
-    event: ChangeEvent<HTMLSelectElement>
+  const onInputValueChangedNombreSucursalOFranquicia = (
+    event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputFranquicias(event.target.value);
-  };
-
-  const onInputValueChangedSucursales = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursales(event.target.value);
+    setInputNombreSucursalOFranquicia(event.target.value);
   };
 
   const onInputValueChangedDireccion = (
@@ -122,8 +113,7 @@ export const SucursalYFranquiciaPage: FC<Props> = ({ sucursalYFranquicia }) => {
   const onSave = () => {
     if (
       inputSucursalOFranquicia.trim().length === 0 &&
-      inputFranquicias?.trim().length === 0 &&
-      inputSucursales?.trim().length === 0 &&
+      inputNombreSucursalOFranquicia.trim().length === 0 &&
       inputDireccion.trim().length === 0 &&
       inputDistancia.trim().length === 0 &&
       inputFechaDePago.trim().length === 0 &&
@@ -149,8 +139,7 @@ export const SucursalYFranquiciaPage: FC<Props> = ({ sucursalYFranquicia }) => {
         const actualizadoSucursalYFranquicia: SucursalYFranquicia = {
           ...sucursalYFranquicia,
           sucursalOFranquicia: inputSucursalOFranquicia,
-          franquicias: inputFranquicias,
-          sucursales: inputSucursales,
+          nombreSucursalOFranquicia: inputNombreSucursalOFranquicia,
           direccion: inputDireccion,
           distancia: inputDistancia,
           fechaDePago: inputFechaDePago,
@@ -227,58 +216,23 @@ export const SucursalYFranquiciaPage: FC<Props> = ({ sucursalYFranquicia }) => {
             </div>
 
             <div className="grid grid-cols-6 gap-6">
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Franquicia" || "hidden"
-                } col-span-6`}
-              >
+              <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="TxtDireccion"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Franquicia
+                  Nombre de la sucursal o franquicia
                 </label>
-                <select
-                  id="CmbFranquicia"
-                  name="CmbFranquicia"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  value={inputFranquicias}
-                  onChange={onInputValueChangedFranquicias}
+                <input
+                  type="text"
+                  name="TxtDireccion"
+                  id="TxtDireccion"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputDireccion}
+                  onChange={onInputValueChangedNombreSucursalOFranquicia}
                   onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la franquicia...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
-              </div>
-
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Sucursal" || "hidden"
-                } col-span-6`}
-              >
-                <label
-                  htmlFor="CmbSucursal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Sucursal
-                </label>
-                <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  value={inputSucursales}
-                  onChange={onInputValueChangedSucursales}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la sucursal...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
+                />
               </div>
 
               <div className="col-span-6 sm:col-span-3">

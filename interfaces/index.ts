@@ -14,6 +14,7 @@ export * from './reporteDeCompra';
 
 export * from './clienteFrecuente';
 export * from './reporteVentasIndividual';
+export * from './reporteVentasAmbulantesIndividual';
 
 // Gerencia operativa
 

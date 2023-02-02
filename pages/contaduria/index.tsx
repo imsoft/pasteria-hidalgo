@@ -66,6 +66,34 @@ const actions = [
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",
   },
+  {
+    title: "Ver Precio maximo",
+    href: "/contaduria/precioMaximo/VerPrecioMaximo",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Reporte Ventas Individual",
+    href: "/contaduria/reporteVentasIndividual/VerReporteVentasIndividual",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Reporte de venta ambulantes individual",
+    href: "/contaduria/reporteVentaAmbulantesIndividual/VerReporteVentaAmbulantesIndividual",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Check In",
+    href: "/contaduria/checkIn/VerCheckInPersonal",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
 ];
 
 function classNames(...classes: any[]) {

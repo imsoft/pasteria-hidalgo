@@ -62,6 +62,7 @@ const updatePersonalDeMantenimiento = async (
     nombre = personalDeMantenimientoToUpdate.nombre,
     oficio = personalDeMantenimientoToUpdate.oficio,
     direccion = personalDeMantenimientoToUpdate.direccion,
+    telefono = personalDeMantenimientoToUpdate.telefono,
   } = req.body;
 
   try {
@@ -71,6 +72,7 @@ const updatePersonalDeMantenimiento = async (
         nombre,
         oficio,
         direccion,
+        telefono,
       },
       { runValidators: true, new: true }
     );

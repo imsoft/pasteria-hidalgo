@@ -27,12 +27,7 @@ const ListaSucursalesYFranquicias: FC<Props> = ({ sucursalYFranquicia }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {sucursalYFranquicia.franquicias || "-"}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {sucursalYFranquicia.sucursales || "-"}
+            {sucursalYFranquicia.nombreSucursalOFranquicia}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

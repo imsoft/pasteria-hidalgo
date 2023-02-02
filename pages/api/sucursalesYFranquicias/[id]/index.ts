@@ -63,8 +63,7 @@ const updateSucursalYFranquicia = async (
 
   const {
     sucursalOFranquicia = sucursalYFranquiciaToUpdate.sucursalOFranquicia,
-    franquicias = sucursalYFranquiciaToUpdate.franquicias,
-    sucursales = sucursalYFranquiciaToUpdate.sucursales,
+    nombreSucursalOFranquicia = sucursalYFranquiciaToUpdate.nombreSucursalOFranquicia,
     direccion = sucursalYFranquiciaToUpdate.direccion,
     distancia = sucursalYFranquiciaToUpdate.distancia,
     fechaDePago = sucursalYFranquiciaToUpdate.fechaDePago,
@@ -81,8 +80,7 @@ const updateSucursalYFranquicia = async (
         id,
         {
           sucursalOFranquicia,
-          franquicias,
-          sucursales,
+          nombreSucursalOFranquicia,
           direccion,
           distancia,
           fechaDePago,

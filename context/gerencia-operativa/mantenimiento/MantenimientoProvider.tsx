@@ -53,6 +53,9 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
   };
 
   const agregarNuevoMantenimiento = async (
+    sucursalOFranquicia: string,
+    sucursal: string,
+    franquicia: string,
     nombreMaquina: string,
     proveedor: string,
     fechaDeGarantia: string,
@@ -62,6 +65,9 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
   ) => {
     try {
       const { data } = await entriesApi.post<Mantenimiento>("/mantenimientos", {
+        sucursalOFranquicia,
+        sucursal,
+        franquicia,
         nombreMaquina,
         proveedor,
         fechaDeGarantia,
@@ -90,6 +96,9 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
   const actualizarMantenimiento = async (
     {
       _id,
+      sucursalOFranquicia,
+      sucursal,
+      franquicia,
       nombreMaquina,
       proveedor,
       fechaDeGarantia,
@@ -102,6 +111,9 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
       const { data } = await entriesApi.put<Mantenimiento>(
         `/mantenimientos/${_id}`,
         {
+          sucursalOFranquicia,
+          sucursal,
+          franquicia,
           nombreMaquina,
           proveedor,
           fechaDeGarantia,

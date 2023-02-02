@@ -41,8 +41,8 @@ export const sucursalYFranquiciaReducer = (
             if (sucursalYFranquicia._id === action.payload._id) {
               sucursalYFranquicia.sucursalOFranquicia =
                 action.payload.sucursalOFranquicia;
-              sucursalYFranquicia.franquicias = action.payload.franquicias;
-              sucursalYFranquicia.sucursales = action.payload.sucursales;
+              sucursalYFranquicia.nombreSucursalOFranquicia =
+                action.payload.nombreSucursalOFranquicia;
               sucursalYFranquicia.direccion = action.payload.direccion;
               sucursalYFranquicia.distancia = action.payload.distancia;
               sucursalYFranquicia.fechaDePago = action.payload.fechaDePago;
