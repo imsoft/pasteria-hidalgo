@@ -1,249 +1,174 @@
 import React from "react";
+import { Disclosure } from "@headlessui/react";
 import { SidebarLayout } from "../components/layouts/SidebarLayout";
+
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
+
+const tasksList = [
+  {
+    topic: "🛍️ Gerencia de compras",
+    subtopics: [
+      {
+        title: "Reporte de compra",
+        tasks: [
+          "✅ Sumatoria en reporte de compra.",
+          "🤔 Arreglar diseño al ver reporte de compra. (Traer materia prima, unidades, temperatura, caducidad, cantidad, PUP, PTP)",
+        ],
+      },
+
+      {
+        title: "Acondicionamiento de sucursales",
+        tasks: ["✅ Corregir las sucursales y franquicias."],
+      },
+    ],
+  },
+  {
+    topic: "💰 Gerencia de ventas",
+    subtopics: [
+      {
+        title: "Cliente frecuente",
+        tasks: ["✅ Agregar sucursal o franquicia."],
+      },
+      {
+        title: "Reporte de ventas ambulantes",
+        tasks: [
+          "🤔 Clonar reporte de ventas individual en reporte de ventas ambulantes individual y quitar especificación del lugar de evento del clon.",
+          "- Quitar parte de clientes frecuentes.",
+        ],
+      },
+      {
+        title: "Reporte de ventas ambulantes general",
+        tasks: ["✅ Eliminarlo"],
+      },
+      {
+        title: "Reporte de ventas individual",
+        tasks: [
+          "✅ Preguntar al cliente frecuente si quiere usar sus puntos o no.",
+          "- Al momento de preguntar si quiere usar los puntos o no, solo ocultar los puntos para que pueda seleccionar el correo electrónico.",
+        ],
+      },
+    ],
+  },
+  {
+    topic: "👷 Gerencia operativa",
+    subtopics: [
+      {
+        title: "Sucursal o franquicia",
+        tasks: [
+          "✅ Quitar la lista y solo dejar el cuadro de texto.",
+          "🤔 Agregar pestaña del pago según el presupuesto.",
+        ],
+      },
+      {
+        title: "Personal de mantenimiento",
+        tasks: ["✅ Agregar número de teléfono"],
+      },
+      {
+        title: "Mantenimiento",
+        tasks: ["✅ Agregar la sucursal o franquicia."],
+      },
+      {
+        title: "Reporte de salida",
+        tasks: [
+          "✅ Quitar desde masa hasta temperatura de relleno.",
+          "✅ Agregar lista de paste de salado, dulce y otros, junto con la cantidad.",
+          "✅ Quitar todo lo de producto extra",
+          "✅ Agregar otra opción a tipo de producto que diga 'Extra'",
+          "✅ Si se seleccionar 'Extra' que aparezca una caja de texto",
+          "✅ Agregar una lista como en ventas individual (Quitar de la lista, sucursal a enviar, datos del repartidor, datos de la ruta, Kilometraje de entrada y kilometraje de salida)",
+          "🤔 ¿Datos del repartidor?",
+          "🤔 ¿Datos del la ruta?",
+        ],
+      },
+    ],
+  },
+  {
+    topic: "🔢 Contaduria",
+    subtopics: [
+      {
+        title: "Asignar comisiones",
+        tasks: [
+          "⚒️ Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no.",
+        ],
+      },
+      { title: "Inventario", tasks: ["🤔 Ver inventarios. (Solo ver Acondicionamiendo de sucursales)"] },
+      { title: "Asignar precios", tasks: ["✅ Solo ver el precio máximo."] },
+      {
+        title: "Reporte de ganancias",
+        tasks: [
+          "⚒️ Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales.",
+        ],
+      },
+      { title: "Reportes de ventas", tasks: ["✅ Ver reportes de ventas."] },
+      { title: "Check In", tasks: ["✅ Ver la lista."] },
+      { title: "Asignar precios", tasks: ["🤔 CRUD de precio máximo, (Quitar la asignacion de precios y solo dejar precio maximo)"] },
+      { title: "Asignar precios", tasks: ["- Traer la materia prima de la BD en productos"] },
+    ],
+  },
+  {
+    topic: "💻 Miscelaneos",
+    subtopics: [
+      { title: "Caja registradora", tasks: ["⚒️ Ver caja registradora"] },
+    ],
+  },
+];
 
 const Tareas = () => {
   return (
     <>
       <SidebarLayout>
-        <div className="container mx-auto">
-          {/* Gerencia de compras */}
-          <h2 className="text-2xl text-green-600 font-bold mt-5">
-            —Gerencia de compras—
-          </h2>
-          <h3 className="text-xl font-bold mt-5">Reporte de compra</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Sumatoria
-              en reporte de compra.
-            </label>
-            <br />
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Arreglar
-              diseño al ver reporte de compra.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">
-            Acondicionamiento de sucursales
-          </h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Corregir las sucursales y franquicias.
-            </label>
-            <br />
-          </ul>
-
-          {/* Gerencia de ventas */}
-          <h2 className="text-2xl text-green-600 font-bold mt-5">
-            —Gerencia de compras—
-          </h2>
-          <h3 className="text-xl font-bold mt-5">Cliente frecuente</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Agregar sucursal o franquicia.
-            </label>
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">
-            Reporte de ventas ambulantes
-          </h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" /> ✅ - Clonar
-              reporte de ventas individual en reporte de ventas ambulantes
-              individual y quitar especificación del lugar de evento del clon.
-              (Corregir bugs)
-            </label>
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">
-            Reporte de ventas ambulantes general
-          </h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Eliminarlo
-            </label>
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">
-            Reporte de ventas individual
-          </h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Preguntar al cliente frecuente si quiere usar sus puntos o no.
-            </label>
-          </ul>
-
-          {/* Gerencia operativa */}
-          <h2 className="text-2xl text-green-600 font-bold mt-5">
-            —Gerencia operativa—
-          </h2>
-
-          <h3 className="text-xl font-bold mt-5">Sucursal o franquicia</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Quitar la lista y solo dejar el cuadro de texto.
-            </label>
-            <br />
-
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Agregar
-              pestaña del pago según el presupuesto.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Personal de mantenimiento</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Quitar la lista y solo dejar el cuadro de texto.
-            </label>
-            <br />
-
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Agregar
-              pestaña del pago según el presupuesto.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Mantenimiento</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Agregar la sucursal o franquicia.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Reporte de salida</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" /> ✅ - Quitar
-              desde masa hasta temperatura de relleno.
-            </label>
-            <br />
-
-            <label>
-              <input type="checkbox" className="accent-green-200" /> ✅ -
-              Agregar lista de paste de salado, dulce y otros, junto con la
-              cantidad.
-            </label>
-            <br />
-
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Quitar
-              todo lo de producto extra
-            </label>
-            <br />
-
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Agregar
-              otra opción a tipo de producto que diga "Extra"
-            </label>
-            <br />
-
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Si se
-              seleccionar "Extra" que aparezca una caja de texto
-            </label>
-            <br />
-
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Agregar
-              una lista como en ventas individual
-            </label>
-            <br />
-          </ul>
-
-          {/* Contaduria */}
-          <h2 className="text-2xl text-green-600 font-bold mt-5">
-            —Contaduria—
-          </h2>
-
-          <h3 className="text-xl font-bold mt-5">Asignar comisiones</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Por
-              sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Inventario</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Ver
-              inventarios.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Asignar precios</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Solo ver el precio máximo.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Reporte de ganancias</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Se
-              comprara con el reporte de entrada con las ventas del mes, según
-              las sucursales y franquicias y de todas las sucursales.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Reportes de ventas</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Ver reportes de ventas.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Check In</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" checked /> -
-              Ver la lista.
-            </label>
-            <br />
-          </ul>
-
-          <h3 className="text-xl font-bold mt-5">Asignar precios</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" /> -
-              CRUD de precio máximo
-            </label>
-            <br />
-          </ul>
-
-          {/* Miscelaneos */}
-          <h2 className="text-2xl text-green-600 font-bold mt-5">
-            -Miscelaneos—
-          </h2>
-          <h3 className="text-xl font-bold mt-5">Caja registradora</h3>
-          <ul className="list-disc mt-5">
-            <label>
-              <input type="checkbox" className="accent-green-200" /> - Ver caja
-              registradora
-            </label>
-            <br />
-          </ul>
+        <div className="bg-white">
+          <div className="mx-auto max-w-7xl px-12 py-6 sm:py-8 lg:py-10 lg:px-8">
+            <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
+              <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
+                Lista de tareas 📝
+              </h2>
+              <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
+                {tasksList.map((taskList) => (
+                  <Disclosure as="div" key={taskList.topic} className="pt-6">
+                    {({ open }) => (
+                      <>
+                        <dt>
+                          <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
+                            <span className="text-xl font-semibold leading-7">
+                              {taskList.topic}
+                            </span>
+                            <span className="ml-6 flex h-7 items-center">
+                              {open ? (
+                                <ChevronUpIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <ChevronDownIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </span>
+                          </Disclosure.Button>
+                        </dt>
+                        <Disclosure.Panel as="dd" className="mt-2 pr-12">
+                          {taskList.subtopics.map((subtopic) => (
+                            <div className="py-3">
+                              <p className="text-lg leading-7 text-gray-600">
+                                {subtopic.title}
+                                {subtopic.tasks.map((task) => (
+                                  <p className="text-base leading-7 text-gray-500">
+                                    {task}
+                                  </p>
+                                ))}
+                              </p>
+                            </div>
+                          ))}
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                ))}
+              </dl>
+            </div>
+          </div>
         </div>
       </SidebarLayout>
     </>

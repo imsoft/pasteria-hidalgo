@@ -10,8 +10,7 @@ import { Temperatura, Unidades, YesNo } from "../../../interfaces";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
-import { MateriasPrimasContext } from '../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext';
-import { MateriaPrima } from '../../../interfaces/materiaPrima';
+import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
 
 interface IReporteDeCompraProvisional {
   uuid: number;
@@ -27,14 +26,6 @@ interface IReporteDeCompraProvisional {
   precioPorUnidad: number;
   precioTotalDelProducto: number;
 }
-
-const validTemperature: Temperatura[] = [
-  "Ambiente",
-  "Refrigerado",
-  "Congelado",
-];
-
-const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
@@ -137,6 +128,18 @@ export default function ReporteDeCompras() {
     setInputPrecioTotalDelCompra(parseInt(event.target.value));
   };
 
+  const precioTotalDelProducto = () => {
+    setInputPrecioTotalDelProducto(inputCantidad * inputPrecioPorUnidad);
+  };
+
+  useEffect(() => {
+    precioTotalDelProducto();
+  }, [inputCantidad]);
+
+  useEffect(() => {
+    precioTotalDelProducto();
+  }, [inputPrecioPorUnidad]);
+
   const agregarALaLista = () => {
     setInputUuid(inputUuid + 1);
 
@@ -160,24 +163,43 @@ export default function ReporteDeCompras() {
       nuevaListaReporteDeCompras,
     ]);
 
-    sumaTotal();
+    setInputPrecioTotalDelCompra(
+      inputPrecioTotalDelCompra + inputPrecioTotalDelProducto
+    );
+
     resetForm();
   };
 
-  const precioTotalDelProducto = () =>
-    setInputPrecioTotalDelProducto(inputCantidad * inputPrecioPorUnidad);
+  const eliminarDeLaLista = (idProducto: number) => {
+    setInputListaReporteDeCompras(
+      inputListaReporteDeCompras.filter((producto) => {
+        setInputPrecioTotalDelCompra(
+          inputPrecioTotalDelCompra - producto.precioTotalDelProducto
+        );
+        return producto.uuid !== idProducto;
+      })
+    );
+  };
 
-  useEffect(() => {
-    precioTotalDelProducto();
-  }, [inputCantidad]);
+  const updateProduct = (idProducto: number) => {
+    const productoAEditar = inputListaReporteDeCompras.find(
+      (producto) => producto.uuid === idProducto
+    );
 
-  useEffect(() => {
-    precioTotalDelProducto();
-  }, [inputPrecioPorUnidad]);
+    setInputUuid(productoAEditar?.uuid!);
+    setInputFechaDeCompra(productoAEditar?.fechaDeCompra!);
+    setInputCredito(productoAEditar?.credito!);
+    setInputMateriaPrima(productoAEditar?.materiaPrima!);
+    setInputUnidades(productoAEditar?.unidades!);
+    setInputNombreProveedor(productoAEditar?.nombreProveedor!);
+    setInputTempetatura(productoAEditar?.tempetatura!);
+    setInputCaducidad(productoAEditar?.caducidad!);
+    setInputFactura(productoAEditar?.factura!);
+    setInputCantidad(productoAEditar?.cantidad!);
+    setInputPrecioPorUnidad(productoAEditar?.precioPorUnidad!);
+    setInputPrecioTotalDelProducto(productoAEditar?.precioTotalDelProducto!);
 
-  const sumaTotal = () => {
-    let sumatoria = inputPrecioTotalDelCompra;
-    setInputPrecioTotalDelCompra(sumatoria);
+    eliminarDeLaLista(idProducto);
   };
 
   const resetForm = () => {
@@ -193,7 +215,6 @@ export default function ReporteDeCompras() {
     setInputCantidad(0);
     setInputPrecioPorUnidad(0);
     setInputPrecioTotalDelProducto(0);
-    setInputPrecioTotalDelCompra(0);
   };
 
   const onSave = () => {
@@ -310,9 +331,12 @@ export default function ReporteDeCompras() {
                   onChange={onTextFieldChangedMateriaPrima}
                   onBlur={() => setTouched(true)}
                 >
-                  <option hidden>Selecciona un proveedor...</option>
+                  <option hidden>Selecciona un producto...</option>
                   {materiasPrimasMemo.map((materiaPrima) => (
-                    <option key={materiaPrima._id}> {materiaPrima.materiaPrima} </option>
+                    <option key={materiaPrima._id}>
+                      {" "}
+                      {materiaPrima.materiaPrima}{" "}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -334,14 +358,9 @@ export default function ReporteDeCompras() {
                 >
                   <option hidden>Selecciona una opción...</option>
                   {materiasPrimasMemo
-                    .filter(
-                      (units) =>
-                      units.materiaPrima === inputMateriaPrima
-                    )
+                    .filter((units) => units.materiaPrima === inputMateriaPrima)
                     .map((units) => (
-                      <option key={units.unidades}>
-                        {units.unidades}
-                      </option>
+                      <option key={units.unidades}>{units.unidades}</option>
                     ))}
                 </select>
               </div>
@@ -387,7 +406,7 @@ export default function ReporteDeCompras() {
                   {materiasPrimasMemo
                     .filter(
                       (temperature) =>
-                      temperature.materiaPrima === inputMateriaPrima
+                        temperature.materiaPrima === inputMateriaPrima
                     )
                     .map((temperature) => (
                       <option key={temperature.temperatura}>
@@ -503,8 +522,8 @@ export default function ReporteDeCompras() {
                   </div>
                   <input
                     type="text"
-                    name="price"
-                    id="price"
+                    name="TxtPrecioTotalDelProducto"
+                    id="TxtPrecioTotalDelProducto"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                     value={
                       isNaN(inputPrecioTotalDelProducto)
@@ -513,7 +532,7 @@ export default function ReporteDeCompras() {
                     }
                     onChange={onTextFieldChangedPrecioTotalDelProducto}
                     onBlur={() => setTouched(true)}
-                    placeholder="0.00"
+                    placeholder="0"
                     aria-describedby="price-currency"
                     readOnly
                   />
@@ -541,9 +560,10 @@ export default function ReporteDeCompras() {
                   </div>
                   <input
                     type="text"
-                    name="price"
-                    id="price"
+                    name="TxtPrecioTotalDeLaCompra"
+                    id="TxtPrecioTotalDeLaCompra"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputPrecioTotalDelCompra}
                     onChange={onTextFieldChangedPrecioTotalDelCompra}
                     onBlur={() => setTouched(true)}
                     placeholder="0"
@@ -675,6 +695,14 @@ export default function ReporteDeCompras() {
                           >
                             Precio Total Del Producto
                           </th>
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          ></th>
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          ></th>
                         </tr>
                       </thead>
                       {inputListaReporteDeCompras.map((listadoReporte) => (
@@ -735,13 +763,36 @@ export default function ReporteDeCompras() {
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <div className="font-medium text-gray-900">
-                                {listadoReporte.precioPorUnidad}
+                                $ {listadoReporte.precioPorUnidad}
                               </div>
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <div className="font-medium text-gray-900">
-                                {listadoReporte.precioTotalDelProducto}
+                                $ {listadoReporte.precioTotalDelProducto}
                               </div>
+                            </td>
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <button
+                                type="button"
+                                className="bg-primary-yellow border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-blue hover:text-primary-yellow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+                                onClick={() =>
+                                  updateProduct(listadoReporte.uuid)
+                                }
+                              >
+                                Editar
+                              </button>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <button
+                                type="button"
+                                className="bg-primary-yellow border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-blue hover:text-primary-yellow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+                                onClick={() =>
+                                  eliminarDeLaLista(listadoReporte.uuid)
+                                }
+                              >
+                                Eliminar
+                              </button>
                             </td>
                           </tr>
                         </tbody>

@@ -825,11 +825,10 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
             <div className="sm:flex sm:items-center">
               <div className="sm:flex-auto">
                 <h1 className="text-xl font-semibold text-gray-900">
-                  Reporte de ventas individual
+                Reporte De Ventas Ambulantes Individual
                 </h1>
                 <p className="mt-2 text-sm text-gray-700">
-                  Aquí podras ver los productos que vayas agregando a tu reporte
-                  de venta individual.
+                  Aquí podras ver los productos que vayas agregando a tu reporte De Ventas Ambulantes Individual.
                 </p>
               </div>
               <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none"></div>

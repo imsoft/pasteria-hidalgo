@@ -3,6 +3,7 @@ import { FC, ReactNode, useEffect, useReducer } from "react";
 import { entriesApi } from "../../../baseUrlApi";
 
 import {
+  ReportesVentasAmbulantesIndividualContext,
   reporteVentasAmbulantesIndividualReducer,
 } from ".";
 import {
@@ -11,21 +12,23 @@ import {
 } from "../../../interfaces";
 
 import Swal from "sweetalert2";
-import { ReporteVentasAmbulantesIndividualContext } from "./ReporteVentasAmbulantesIndividualContext";
 
 export interface ReporteVentasAmbulantesIndividualState {
   reporteVentasAmbulantesIndividual: ReporteVentasAmbulantesIndividual[];
 }
 
-const ReporteVentasAmbulantesIndividual_INITIAL_STATE: ReporteVentasAmbulantesIndividualState = {
-  reporteVentasAmbulantesIndividual: [],
-};
+const ReporteVentasAmbulantesIndividual_INITIAL_STATE: ReporteVentasAmbulantesIndividualState =
+  {
+    reporteVentasAmbulantesIndividual: [],
+  };
 
 interface Props {
   children: ReactNode;
 }
 
-export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({ children }) => {
+export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
+  children,
+}) => {
   const [state, dispatch] = useReducer(
     reporteVentasAmbulantesIndividualReducer,
     ReporteVentasAmbulantesIndividual_INITIAL_STATE
@@ -36,9 +39,10 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({ children 
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.delete<ReporteVentasAmbulantesIndividual>(
-        `/reportesVentasAmbulantesIndividual/${reporteVentasAmbulantesIndividual._id}`
-      );
+      const { data } =
+        await entriesApi.delete<ReporteVentasAmbulantesIndividual>(
+          `/reportesVentasAmbulantesIndividual/${reporteVentasAmbulantesIndividual._id}`
+        );
 
       dispatch({
         type: "[Reporte De Ventas Ambulantes Individual] Eliminar-Reporte De Ventas Ambulantes Individual",
@@ -162,17 +166,17 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({ children 
   }, []);
 
   return (
-    <ReporteVentasAmbulantesIndividualContext.Provider
+    <ReportesVentasAmbulantesIndividualContext.Provider
       value={{
         ...state,
 
         //Methods
-        eliminarReporteVentasAmbulantesIndividual,
         agregarNuevoReporteVentasAmbulantesIndividual,
         actualizarReporteVentasAmbulantesIndividual,
+        eliminarReporteVentasAmbulantesIndividual,
       }}
     >
       {children}
-    </ReporteVentasAmbulantesIndividualContext.Provider>
+    </ReportesVentasAmbulantesIndividualContext.Provider>
   );
 };

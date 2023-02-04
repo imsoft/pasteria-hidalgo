@@ -525,7 +525,7 @@ const AgregarReporteDeVentasIndividual = () => {
                   onChange={onTextFieldChangedLugarDeLaVenta}
                   onBlur={() => setTouched(true)}
                 >
-                  <option hidden>Selecciona un producto...</option>
+                  <option hidden>Selecciona un lugar de venta...</option>
                   {validSalesPlace.map((salesPlace) => (
                     <option key={salesPlace}>{salesPlace}</option>
                   ))}
@@ -1068,7 +1068,6 @@ const AgregarReporteDeVentasIndividual = () => {
               type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
               onClick={onSave}
-              // onClick={aVer}
             >
               Guardar
             </button>

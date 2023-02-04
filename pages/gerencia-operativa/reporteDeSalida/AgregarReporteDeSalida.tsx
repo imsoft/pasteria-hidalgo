@@ -4,18 +4,31 @@ import { ReportesDeSalidaContext } from "../../../context/gerencia-operativa/rep
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
-import { ListadoDeProductos, Paste, TipoDeProducto, Unidades } from "../../../interfaces";
+import { ListadoDeProductos, Paste, TipoDeProducto } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 
-const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
+interface ListaDeProductosDeSalida {
+  id: number;
+  fecha: string;
+  tipoDeProducto: string;
+  producto: string;
+  codigoDeProducto: string;
+  cantidadDelProducto: number;
+  sucursalAEnviar: string;
+  datosDelRepartidor: string;
+  datosDeLaRuta: string;
+  kilometrajeDeEntrada: string;
+  kilometrajeDeSalida: string;
+}
 
 const validProductType: TipoDeProducto[] = [
   "Paste Dulce",
   "Paste Salado",
   "Otros",
+  "Extra",
 ];
 
 const validCakeFlavors: Paste[] = [
@@ -200,21 +213,14 @@ export default function ReportesSalida() {
   const { agregarNuevoReporteDeSalida } = useContext(ReportesDeSalidaContext);
 
   const [inputFecha, setInputFecha] = useState("");
-  const [inputProductoExtra, setInputProductoExtra] = useState("");
-  const [inputCodigoDeProductoExtra, setInputCodigoDeProductoExtra] =
-    useState("");
-  const [inputCantidadDeProductoExtra, setInputCantidadDeProductoExtra] =
-    useState("");
-  const [inputUnidadesDeProductoExtra, setInputUnidadesDeProductoExtra] =
-    useState("");
-    const [inputCodigoProducto, setInputCodigoProducto] = useState("");
-    const [inputListaDeProductos, setInputListaDeProductos] = useState<
-    ListadoDeProductos[]
+  const [inputCodigoProducto, setInputCodigoProducto] = useState("");
+  const [inputListaDeProductos, setInputListaDeProductos] = useState<
+    ListaDeProductosDeSalida[]
   >([]);
   const [inputTipoDeProducto, setInputTipoDeProducto] = useState("");
   const [inputSaborProducto, setInputSaborProducto] = useState("");
   const [inputCantidad, setInputCantidad] = useState(0);
-  const [inputPrecioProducto, setInputPrecioProducto] = useState(0);
+  const [inputUuid, setInputUuid] = useState(0);
   const [inputSucursalAEnviar, setInputSucursalAEnviar] = useState("");
   const [inputDatosDeRepartidor, setInputDatosDeRepartidor] = useState("");
   const [inputDatosDeLaRuta, setInputDatosDeLaRuta] = useState("");
@@ -230,30 +236,6 @@ export default function ReportesSalida() {
     setInputFecha(event.target.value);
   };
 
-  const onTextFieldChangedProductoExtra = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputProductoExtra(event.target.value);
-  };
-
-  const onTextFieldChangedCodigoDeProductoExtra = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCodigoDeProductoExtra(event.target.value);
-  };
-
-  const onTextFieldChangedCantidadDeProductoExtra = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCantidadDeProductoExtra(event.target.value);
-  };
-
-  const onTextFieldChangedUnidadesDeProductoExtra = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputUnidadesDeProductoExtra(event.target.value as Unidades);
-  };
-
   const onTextFieldChangedTipoDeProducto = (
     event: ChangeEvent<HTMLSelectElement>
   ) => {
@@ -267,7 +249,7 @@ export default function ReportesSalida() {
   };
 
   const onTextFieldChangedSaborProducto = (
-    event: ChangeEvent<HTMLSelectElement>
+    event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
   ) => {
     setInputSaborProducto(event.target.value);
   };
@@ -306,13 +288,69 @@ export default function ReportesSalida() {
     setInputKilometrajeDeSalida(event.target.value);
   };
 
+  const agregarALaLista = () => {
+    setInputUuid(inputUuid + 1);
+
+    const nuevaListaProductos = {
+      id: inputUuid,
+      fecha: inputFecha,
+      tipoDeProducto: inputTipoDeProducto as TipoDeProducto,
+      producto: inputSaborProducto,
+      codigoDeProducto: inputCodigoProducto,
+      cantidadDelProducto: inputCantidad,
+      sucursalAEnviar: inputSucursalAEnviar,
+      datosDelRepartidor: inputDatosDeRepartidor,
+      datosDeLaRuta: inputDatosDeLaRuta,
+      kilometrajeDeEntrada: inputKilometrajeDeEntrada,
+      kilometrajeDeSalida: inputKilometrajeDeSalida,
+    };
+
+    setInputListaDeProductos([...inputListaDeProductos, nuevaListaProductos]);
+
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setInputFecha("");
+    setInputTipoDeProducto("");
+    setInputSaborProducto("");
+    setInputCodigoProducto("");
+    setInputCantidad(0);
+    setInputSucursalAEnviar("");
+    setInputDatosDeRepartidor("");
+    setInputDatosDeLaRuta("");
+    setInputKilometrajeDeEntrada("");
+    setInputKilometrajeDeSalida("");
+  };
+
+  const eliminarDeLaLista = (idProducto: number) => {
+    setInputListaDeProductos(
+      inputListaDeProductos.filter((producto) => {
+        return producto.id !== idProducto;
+      })
+    );
+  };
+
+  const updateProduct = (idProducto: number) => {
+    const productoAEditar = inputListaDeProductos.find(
+      (producto) => producto.id === idProducto
+    );
+    setInputUuid(productoAEditar?.id!);
+    setInputFecha(productoAEditar?.fecha!);
+    setInputTipoDeProducto(productoAEditar?.tipoDeProducto!);
+    setInputSaborProducto(productoAEditar?.producto!);
+    setInputCodigoProducto(productoAEditar?.codigoDeProducto!);
+    setInputCantidad(productoAEditar?.cantidadDelProducto!);
+    setInputSucursalAEnviar(productoAEditar?.sucursalAEnviar!);
+    setInputDatosDeRepartidor(productoAEditar?.datosDelRepartidor!);
+    setInputDatosDeLaRuta(productoAEditar?.datosDeLaRuta!);
+    setInputKilometrajeDeEntrada(productoAEditar?.kilometrajeDeEntrada!);
+    setInputKilometrajeDeSalida(productoAEditar?.kilometrajeDeSalida!);
+  };
+
   const onSave = () => {
     if (
       inputFecha.length === 0 &&
-      inputProductoExtra.length === 0 &&
-      inputCodigoDeProductoExtra.length === 0 &&
-      inputCantidadDeProductoExtra.length === 0 &&
-      inputUnidadesDeProductoExtra.length === 0 &&
       inputListaDeProductos.length === 0 &&
       inputSucursalAEnviar.length === 0 &&
       inputDatosDeRepartidor.length === 0 &&
@@ -322,20 +360,16 @@ export default function ReportesSalida() {
     )
       return;
 
-    agregarNuevoReporteDeSalida(
-      inputFecha,
-      inputProductoExtra,
-      inputCodigoDeProductoExtra,
-      inputCantidadDeProductoExtra,
-      inputUnidadesDeProductoExtra,
-      inputListaDeProductos,
-      inputSucursalAEnviar,
-      inputDatosDeRepartidor,
-      inputDatosDeLaRuta,
-      inputKilometrajeDeEntrada,
-      inputKilometrajeDeSalida,
-      true
-    );
+    // agregarNuevoReporteDeSalida(
+    //   inputFecha,
+    //   inputListaDeProductos,
+    //   inputSucursalAEnviar,
+    //   inputDatosDeRepartidor,
+    //   inputDatosDeLaRuta,
+    //   inputKilometrajeDeEntrada,
+    //   inputKilometrajeDeSalida,
+    //   true
+    // );
 
     MySwal.fire({
       position: "top-end",
@@ -349,11 +383,6 @@ export default function ReportesSalida() {
 
     setTouched(false);
     setInputFecha("");
-    setInputProductoExtra("");
-    setInputCodigoDeProductoExtra("");
-    setInputCantidadDeProductoExtra("");
-    setInputUnidadesDeProductoExtra("");
-
     setInputSucursalAEnviar("");
     setInputDatosDeRepartidor("");
     setInputDatosDeLaRuta("");
@@ -386,85 +415,10 @@ export default function ReportesSalida() {
                   id="TxtDescripcionProducto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputFecha || ""}
                   onChange={onTextFieldChangedFecha}
                   onBlur={() => setTouched(true)}
                 />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtDescripcionProducto"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Producto Extra
-                </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedProductoExtra}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtDescripcionProducto"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Código de producto extra
-                </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCodigoDeProductoExtra}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtDescripcionProducto"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Cantidad de producto extra
-                </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCantidadDeProductoExtra}
-                  onBlur={() => setTouched(true)}
-                />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtProductos"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Unidades de producto extra
-                </label>
-                <select
-                  id="TxtProductos"
-                  name="TxtProductos"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  onChange={onTextFieldChangedUnidadesDeProductoExtra}
-                  onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
-                >
-                  <option>Selecciona una opción...</option>
-                  {validUnits.map((unidades) => (
-                    <option key={unidades}>{unidades}</option>
-                  ))}
-                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -498,26 +452,39 @@ export default function ReportesSalida() {
                 >
                   Producto
                 </label>
-                <select
-                  id="CmbSaboresDulces"
-                  name="CmbSaboresDulces"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  value={inputSaborProducto || ""}
-                  onChange={onTextFieldChangedSaborProducto}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Selecciona un producto...</option>
-                  {validCakeFlavors
-                    .filter(
-                      (cakeFlavors) =>
-                        cakeFlavors.tipoDeProducto === inputTipoDeProducto
-                    )
-                    .map((cakeFlavors) => (
-                      <option key={cakeFlavors.saborDelPaste}>
-                        {cakeFlavors.saborDelPaste}
-                      </option>
-                    ))}
-                </select>
+                {inputTipoDeProducto !== "Extra" ? (
+                  <select
+                    id="CmbSaboresDulces"
+                    name="CmbSaboresDulces"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    value={inputSaborProducto || ""}
+                    onChange={onTextFieldChangedSaborProducto}
+                    onBlur={() => setTouched(true)}
+                  >
+                    <option hidden>Selecciona un producto...</option>
+                    {validCakeFlavors
+                      .filter(
+                        (cakeFlavors) =>
+                          cakeFlavors.tipoDeProducto === inputTipoDeProducto
+                      )
+                      .map((cakeFlavors) => (
+                        <option key={cakeFlavors.saborDelPaste}>
+                          {cakeFlavors.saborDelPaste}
+                        </option>
+                      ))}
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    name="TxtSaboresDulces"
+                    id="TxtSaboresDulces"
+                    autoComplete="off"
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    value={inputSaborProducto || ""}
+                    onChange={onTextFieldChangedSaborProducto}
+                    onBlur={() => setTouched(true)}
+                  />
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -536,7 +503,6 @@ export default function ReportesSalida() {
                   value={inputCodigoProducto || ""}
                   onChange={onTextFieldChangedCodigoProducto}
                   onBlur={() => setTouched(true)}
-                  readOnly
                 />
               </div>
 
@@ -573,6 +539,7 @@ export default function ReportesSalida() {
                   id="TxtDescripcionProducto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputSucursalAEnviar || ""}
                   onChange={onTextFieldChangedSucursalAEnviar}
                   onBlur={() => setTouched(true)}
                 />
@@ -591,6 +558,7 @@ export default function ReportesSalida() {
                   id="TxtDescripcionProducto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputDatosDeRepartidor || ""}
                   onChange={onTextFieldChangedDatosDeRepartidor}
                   onBlur={() => setTouched(true)}
                 />
@@ -609,6 +577,7 @@ export default function ReportesSalida() {
                   id="TxtDescripcionProducto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputDatosDeLaRuta || ""}
                   onChange={onTextFieldChangedDatosDeLaRuta}
                   onBlur={() => setTouched(true)}
                 />
@@ -627,6 +596,7 @@ export default function ReportesSalida() {
                     name="TxtKilometrajeDeEntrada"
                     id="TxtKilometrajeDeEntrada"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputKilometrajeDeEntrada || ""}
                     onChange={onTextFieldChangedKilometrajeDeEntrada}
                     onBlur={() => setTouched(true)}
                     placeholder="0"
@@ -656,6 +626,7 @@ export default function ReportesSalida() {
                     name="TxtKilometrajeDeSalida"
                     id="TxtKilometrajeDeSalida"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    value={inputKilometrajeDeSalida || ""}
                     onChange={onTextFieldChangedKilometrajeDeSalida}
                     onBlur={() => setTouched(true)}
                     placeholder="0"
@@ -671,9 +642,232 @@ export default function ReportesSalida() {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
+
+          <div className="px-4 py-3 mt-4 text-right sm:px-6">
+            <button
+              type="button"
+              className="bg-primary-yellow border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-primary-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+              onClick={agregarALaLista}
+            >
+              Añadir a la lista
+            </button>
+          </div>
+
+          <div className="px-4 sm:px-6 lg:px-8">
+            <div className="sm:flex sm:items-center">
+              <div className="sm:flex-auto">
+                <h1 className="text-xl font-semibold text-gray-900">
+                  Reporte de salida
+                </h1>
+                <p className="mt-2 text-sm text-gray-700">
+                  Aquí podras ver los productos que vayas agregando a tu reporte
+                  de salida.
+                </p>
+              </div>
+              <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none"></div>
+            </div>
+            <div className="mt-8 flex flex-col">
+              <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                  <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                    <table className="min-w-full divide-y divide-gray-300">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            ID
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Fecha
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Tipo de producto
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Producto
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Código de producto
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Cantidad del producto
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Sucursal a enviar
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Datos del repartidor
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Datos de la ruta
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Kilometraje de entrada
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          >
+                            Kilometraje de salida
+                          </th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          ></th>
+
+                          <th
+                            scope="col"
+                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                          ></th>
+                        </tr>
+                      </thead>
+                      {inputListaDeProductos.map((listadoProductos) => (
+                        <tbody
+                          key={listadoProductos.id}
+                          className="divide-y divide-gray-200 bg-white"
+                        >
+                          <tr className="cursor-pointer hover:bg-yellow-100">
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.id || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.fecha || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.tipoDeProducto || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.producto || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.codigoDeProducto || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.cantidadDelProducto || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.sucursalAEnviar || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.datosDelRepartidor || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.datosDeLaRuta || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.kilometrajeDeEntrada || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <div className="font-medium text-gray-900">
+                                {listadoProductos.kilometrajeDeSalida || ""}
+                              </div>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <button
+                                type="button"
+                                className="bg-primary-yellow border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-blue hover:text-primary-yellow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+                                onClick={() =>
+                                  updateProduct(listadoProductos.id)
+                                }
+                              >
+                                Editar
+                              </button>
+                            </td>
+
+                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                              <button
+                                type="button"
+                                className="bg-primary-yellow border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-blue hover:text-primary-yellow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+                                onClick={() =>
+                                  eliminarDeLaLista(listadoProductos.id)
+                                }
+                              >
+                                Eliminar
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      ))}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
               type="submit"
