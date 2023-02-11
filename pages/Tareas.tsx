@@ -12,7 +12,7 @@ const tasksList = [
         title: "Reporte de compra",
         tasks: [
           "✅ Sumatoria en reporte de compra.",
-          "🤔 Arreglar diseño al ver reporte de compra. (Traer materia prima, unidades, temperatura, caducidad, cantidad, PUP, PTP)",
+          "🔵 Arreglar diseño al ver reporte de compra. (Traer materia prima, unidades, temperatura, caducidad, cantidad, PPU, PTP)",
         ],
       },
 
@@ -91,7 +91,12 @@ const tasksList = [
           "⚒️ Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no.",
         ],
       },
-      { title: "Inventario", tasks: ["🤔 Ver inventarios. (Solo ver Acondicionamiendo de sucursales)"] },
+      {
+        title: "Inventario",
+        tasks: [
+          "🤔 Ver inventarios. (Solo ver Acondicionamiendo de sucursales)",
+        ],
+      },
       { title: "Asignar precios", tasks: ["✅ Solo ver el precio máximo."] },
       {
         title: "Reporte de ganancias",
@@ -101,8 +106,16 @@ const tasksList = [
       },
       { title: "Reportes de ventas", tasks: ["✅ Ver reportes de ventas."] },
       { title: "Check In", tasks: ["✅ Ver la lista."] },
-      { title: "Asignar precios", tasks: ["🤔 CRUD de precio máximo, (Quitar la asignacion de precios y solo dejar precio maximo)"] },
-      { title: "Asignar precios", tasks: ["- Traer la materia prima de la BD en productos"] },
+      {
+        title: "Asignar precios",
+        tasks: [
+          "🤔 CRUD de precio máximo, (Quitar la asignacion de precios y solo dejar precio maximo)",
+        ],
+      },
+      {
+        title: "Asignar precios",
+        tasks: ["- Traer la materia prima de la BD en productos"],
+      },
     ],
   },
   {

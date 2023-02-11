@@ -64,15 +64,9 @@ const updateReporteDeCompra = async (
   const {
     fechaDeCompra = reporteDeCompraToUpdate.fechaDeCompra,
     credito = reporteDeCompraToUpdate.credito,
-    materiaPrima = reporteDeCompraToUpdate.materiaPrima,
-    unidades = reporteDeCompraToUpdate.unidades,
     nombreProveedor = reporteDeCompraToUpdate.nombreProveedor,
-    tempetatura = reporteDeCompraToUpdate.tempetatura,
-    caducidad = reporteDeCompraToUpdate.caducidad,
     factura = reporteDeCompraToUpdate.factura,
-    cantidad = reporteDeCompraToUpdate.cantidad,
-    precioPorUnidad = reporteDeCompraToUpdate.precioPorUnidad,
-    precioTotalDelProducto = reporteDeCompraToUpdate.precioTotalDelProducto,
+    listadoDeReporteDeCompra = reporteDeCompraToUpdate.listadoDeReporteDeCompra,
     precioTotalDelCompra = reporteDeCompraToUpdate.precioTotalDelCompra,
   } = req.body;
 
@@ -82,15 +76,9 @@ const updateReporteDeCompra = async (
       {
         fechaDeCompra,
         credito,
-        materiaPrima,
-        unidades,
         nombreProveedor,
-        tempetatura,
-        caducidad,
         factura,
-        cantidad,
-        precioPorUnidad,
-        precioTotalDelProducto,
+        listadoDeReporteDeCompra,
         precioTotalDelCompra,
       },
       { runValidators: true, new: true }

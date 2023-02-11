@@ -1,5 +1,8 @@
 import { createContext } from "react";
-import { ReporteDeCompra } from "../../../interfaces";
+import {
+  IListadoDeReporteDeCompra,
+  ReporteDeCompra,
+} from "../../../interfaces";
 
 interface ContextProps {
   reportesDeCompras: ReporteDeCompra[];
@@ -8,15 +11,9 @@ interface ContextProps {
   agregarReporteDeCompra: (
     fechaDeCompra: string,
     credito: string,
-    materiaPrima: string,
-    unidades: string,
     nombreProveedor: string,
-    tempetatura: string,
-    caducidad: string,
     factura: string,
-    cantidad: number,
-    precioPorUnidad: number,
-    precioTotalDelProducto: number,
+    listadoDeReporteDeCompra: IListadoDeReporteDeCompra[],
     precioTotalDelCompra: number,
     showNotificacion?: boolean
   ) => void;

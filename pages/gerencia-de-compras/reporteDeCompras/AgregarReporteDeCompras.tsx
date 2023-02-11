@@ -5,27 +5,17 @@ import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerenc
 import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext";
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores";
 
-import { Temperatura, Unidades, YesNo } from "../../../interfaces";
+import {
+  IListadoDeReporteDeCompra,
+  Temperatura,
+  Unidades,
+  YesNo,
+} from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
-
-interface IReporteDeCompraProvisional {
-  uuid: number;
-  fechaDeCompra: string;
-  credito: string;
-  materiaPrima: string;
-  unidades: Unidades;
-  nombreProveedor: string;
-  tempetatura: Temperatura;
-  caducidad: string;
-  factura: string;
-  cantidad: number;
-  precioPorUnidad: number;
-  precioTotalDelProducto: number;
-}
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
@@ -55,7 +45,7 @@ export default function ReporteDeCompras() {
   const [inputPrecioTotalDelCompra, setInputPrecioTotalDelCompra] = useState(0);
 
   const [inputListaReporteDeCompras, setInputListaReporteDeCompras] = useState<
-    IReporteDeCompraProvisional[]
+    IListadoDeReporteDeCompra[]
   >([]);
 
   const [touched, setTouched] = useState(false);
@@ -187,14 +177,10 @@ export default function ReporteDeCompras() {
     );
 
     setInputUuid(productoAEditar?.uuid!);
-    setInputFechaDeCompra(productoAEditar?.fechaDeCompra!);
-    setInputCredito(productoAEditar?.credito!);
     setInputMateriaPrima(productoAEditar?.materiaPrima!);
     setInputUnidades(productoAEditar?.unidades!);
-    setInputNombreProveedor(productoAEditar?.nombreProveedor!);
     setInputTempetatura(productoAEditar?.tempetatura!);
     setInputCaducidad(productoAEditar?.caducidad!);
-    setInputFactura(productoAEditar?.factura!);
     setInputCantidad(productoAEditar?.cantidad!);
     setInputPrecioPorUnidad(productoAEditar?.precioPorUnidad!);
     setInputPrecioTotalDelProducto(productoAEditar?.precioTotalDelProducto!);
@@ -237,15 +223,9 @@ export default function ReporteDeCompras() {
     agregarReporteDeCompra(
       inputFechaDeCompra,
       inputCredito,
-      inputMateriaPrima,
-      inputUnidades,
       inputNombreProveedor,
-      inputTempetatura,
-      inputCaducidad,
       inputFactura,
-      inputCantidad,
-      inputPrecioPorUnidad,
-      inputPrecioTotalDelProducto,
+      inputListaReporteDeCompras,
       inputPrecioTotalDelCompra,
       true
     );
@@ -623,20 +603,6 @@ export default function ReporteDeCompras() {
                             scope="col"
                             className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                           >
-                            Fecha De Compra
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
-                            Crédito
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
                             Materia Prima
                           </th>
 
@@ -651,13 +617,6 @@ export default function ReporteDeCompras() {
                             scope="col"
                             className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                           >
-                            Nombre Proveedor
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
                             Temperatura
                           </th>
 
@@ -666,13 +625,6 @@ export default function ReporteDeCompras() {
                             className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                           >
                             Caducidad
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
-                            Factura
                           </th>
 
                           <th
@@ -718,16 +670,6 @@ export default function ReporteDeCompras() {
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <div className="font-medium text-gray-900">
-                                {listadoReporte.fechaDeCompra}
-                              </div>
-                            </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
-                                {listadoReporte.credito}
-                              </div>
-                            </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
                                 {listadoReporte.materiaPrima}
                               </div>
                             </td>
@@ -738,22 +680,12 @@ export default function ReporteDeCompras() {
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <div className="font-medium text-gray-900">
-                                {listadoReporte.nombreProveedor}
-                              </div>
-                            </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
                                 {listadoReporte.tempetatura}
                               </div>
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <div className="font-medium text-gray-900">
                                 {listadoReporte.caducidad}
-                              </div>
-                            </td>
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
-                                {listadoReporte.factura}
                               </div>
                             </td>
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

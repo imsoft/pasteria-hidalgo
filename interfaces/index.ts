@@ -9,6 +9,7 @@ export * from './asignarPrecio';
 export * from './productoYaComprado';
 export * from './proveedor';
 export * from './reporteDeCompra';
+export * from './listadoDeReporteDeCompra';
 
 // Gerencia de ventas
 

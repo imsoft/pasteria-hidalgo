@@ -34,16 +34,10 @@ export const reportesDeComprasReducer = (
           if (reporteDeCompra._id === action.payload._id) {
             reporteDeCompra.fechaDeCompra = action.payload.fechaDeCompra;
             reporteDeCompra.credito = action.payload.credito;
-            reporteDeCompra.materiaPrima = action.payload.materiaPrima;
-            reporteDeCompra.unidades = action.payload.unidades;
             reporteDeCompra.nombreProveedor = action.payload.nombreProveedor;
-            reporteDeCompra.tempetatura = action.payload.tempetatura;
-            reporteDeCompra.caducidad = action.payload.caducidad;
             reporteDeCompra.factura = action.payload.factura;
-            reporteDeCompra.cantidad = action.payload.cantidad;
-            reporteDeCompra.precioPorUnidad = action.payload.precioPorUnidad;
-            reporteDeCompra.precioTotalDelProducto =
-              action.payload.precioTotalDelProducto;
+            reporteDeCompra.listadoDeReporteDeCompra =
+              action.payload.listadoDeReporteDeCompra;
             reporteDeCompra.precioTotalDelCompra =
               action.payload.precioTotalDelCompra;
           }

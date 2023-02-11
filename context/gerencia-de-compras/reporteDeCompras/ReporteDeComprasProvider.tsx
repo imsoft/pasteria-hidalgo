@@ -2,7 +2,7 @@ import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../baseUrlApi";
 import { ReporteDeCompraContext, reportesDeComprasReducer } from ".";
-import { ReporteDeCompra } from "../../../interfaces";
+import { IListadoDeReporteDeCompra, ReporteDeCompra } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 
@@ -55,15 +55,9 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
   const agregarReporteDeCompra = async (
     fechaDeCompra: string,
     credito: string,
-    materiaPrima: string,
-    unidades: string,
     nombreProveedor: string,
-    tempetatura: string,
-    caducidad: string,
     factura: string,
-    cantidad: number,
-    precioPorUnidad: number,
-    precioTotalDelProducto: number,
+    listadoDeReporteDeCompra: IListadoDeReporteDeCompra[],
     precioTotalDelCompra: number,
     showNotificacion = false
   ) => {
@@ -73,15 +67,9 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
         {
           fechaDeCompra,
           credito,
-          materiaPrima,
-          unidades,
           nombreProveedor,
-          tempetatura,
-          caducidad,
           factura,
-          cantidad,
-          precioPorUnidad,
-          precioTotalDelProducto,
+          listadoDeReporteDeCompra,
           precioTotalDelCompra,
         }
       );
@@ -109,15 +97,9 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
       _id,
       fechaDeCompra,
       credito,
-      materiaPrima,
-      unidades,
       nombreProveedor,
-      tempetatura,
-      caducidad,
       factura,
-      cantidad,
-      precioPorUnidad,
-      precioTotalDelProducto,
+      listadoDeReporteDeCompra,
       precioTotalDelCompra,
     }: ReporteDeCompra,
     showNotificacion = false
@@ -128,15 +110,9 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
         {
           fechaDeCompra,
           credito,
-          materiaPrima,
-          unidades,
           nombreProveedor,
-          tempetatura,
-          caducidad,
           factura,
-          cantidad,
-          precioPorUnidad,
-          precioTotalDelProducto,
+          listadoDeReporteDeCompra,
           precioTotalDelCompra,
         }
       );
