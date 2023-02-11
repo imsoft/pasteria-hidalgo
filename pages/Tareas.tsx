@@ -12,7 +12,7 @@ const tasksList = [
         title: "Reporte de compra",
         tasks: [
           "✅ Sumatoria en reporte de compra.",
-          "🔵 Arreglar diseño al ver reporte de compra. (Traer materia prima, unidades, temperatura, caducidad, cantidad, PPU, PTP)",
+          "✅ Arreglar diseño al ver reporte de compra. (Traer materia prima, unidades, temperatura, caducidad, cantidad, PPU, PTP)",
         ],
       },
 
@@ -32,8 +32,8 @@ const tasksList = [
       {
         title: "Reporte de ventas ambulantes",
         tasks: [
-          "🔵 Clonar reporte de ventas individual en reporte de ventas ambulantes individual y quitar especificación del lugar de evento del clon.",
-          "🔵 Quitar parte de clientes frecuentes.",
+          "✅ Clonar reporte de ventas individual en reporte de ventas ambulantes individual y quitar especificación del lugar de evento del clon.",
+          "✅ Quitar parte de clientes frecuentes.",
         ],
       },
       {
@@ -76,7 +76,7 @@ const tasksList = [
           "✅ Agregar otra opción a tipo de producto que diga 'Extra'",
           "✅ Si se seleccionar 'Extra' que aparezca una caja de texto",
           "✅ Agregar una lista como en ventas individual (Quitar de la lista, sucursal a enviar, datos del repartidor, datos de la ruta, Kilometraje de entrada y kilometraje de salida)",
-          "🔵 ¿Datos del repartidor?",
+          "✅ ¿Datos del repartidor?",
           "🤔 ¿Datos del la ruta?",
         ],
       },
@@ -88,20 +88,20 @@ const tasksList = [
       {
         title: "Asignar comisiones",
         tasks: [
-          "🤔 Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no.",
+          "🤔 Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no. (Ir sumando del Reporte Ventas Individual y de los ambulantes, agregar mes y año (del sistema) y filtrarlos al momento de ver, el filtrado de mes y año)",
         ],
       },
       {
         title: "Inventario",
         tasks: [
-          "🔵 Ver inventarios. (Solo ver Acondicionamiendo de sucursales)",
+          "✅ Ver inventarios. (Solo ver Acondicionamiendo de sucursales)",
         ],
       },
       { title: "Asignar precios", tasks: ["✅ Solo ver el precio máximo."] },
       {
         title: "Reporte de ganancias",
         tasks: [
-          "⚒️ Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales.",
+          "⚒️ Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales. (Tabla similar a la de asignar comisiones, solo agregandole los datos del balance y las compras)",
         ],
       },
       { title: "Reportes de ventas", tasks: ["✅ Ver reportes de ventas."] },
@@ -109,12 +109,12 @@ const tasksList = [
       {
         title: "Asignar precios",
         tasks: [
-          "🔵 CRUD de precio máximo, (Quitar la asignacion de precios y solo dejar precio maximo)",
+          "✅ CRUD de precio máximo, (Quitar la asignacion de precios y solo dejar precio maximo)",
         ],
       },
       {
         title: "Asignar precios",
-        tasks: ["🔵 Traer la materia prima de la BD"],
+        tasks: ["✅ Traer la materia prima de la BD"],
       },
     ],
   },

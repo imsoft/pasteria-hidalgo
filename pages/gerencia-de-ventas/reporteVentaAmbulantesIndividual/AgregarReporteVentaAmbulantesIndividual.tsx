@@ -387,7 +387,7 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
     MySwal.fire({
       position: "top-end",
       icon: "success",
-      title: "Candidato Agregado",
+      title: "Reporte de ventas ambulantes Agregado",
       showConfirmButton: false,
       timer: 5000,
     });

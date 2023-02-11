@@ -20,22 +20,22 @@ const ListaAsignarComision: FC<Props> = ({ asignarComision }) => {
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.franquicias}
+              {asignarComision.franquicias || '-'}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.sucursales}
+              {asignarComision.sucursales || '-'}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.minimoDeLaMeta}
+              $ {asignarComision.minimoDeLaMeta}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              Meta actual
+              $ 0
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

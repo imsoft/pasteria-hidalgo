@@ -276,6 +276,28 @@ export default function ReporteDeCompras() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
+                  htmlFor="TxtProveedor"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Proveedor
+                </label>
+                <select
+                  id="TxtProveedor"
+                  name="TxtProveedor"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedNombreProveedor}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option hidden>Selecciona un proveedor...</option>
+                  {proveedoresMemo.map((proveedor) => (
+                    <option key={proveedor._id}> {proveedor.nombre} </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
                   htmlFor="TxtCredito"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -286,6 +308,28 @@ export default function ReporteDeCompras() {
                   name="TxtCredito"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   onChange={onTextFieldChangedCredito}
+                  onBlur={() => setTouched(true)}
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option>Selecciona una opción...</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtFactura"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Factura
+                </label>
+                <select
+                  id="TxtFactura"
+                  name="TxtFactura"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  onChange={onTextFieldChangedFactura}
                   onBlur={() => setTouched(true)}
                   defaultValue="Selecciona un producto..."
                 >
@@ -347,28 +391,6 @@ export default function ReporteDeCompras() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtProveedor"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Proveedor
-                </label>
-                <select
-                  id="TxtProveedor"
-                  name="TxtProveedor"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreProveedor}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Selecciona un proveedor...</option>
-                  {proveedoresMemo.map((proveedor) => (
-                    <option key={proveedor._id}> {proveedor.nombre} </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
                   htmlFor="TxtTemperatura"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -412,28 +434,6 @@ export default function ReporteDeCompras() {
                   onChange={onTextFieldChangedCaducidad}
                   onBlur={() => setTouched(true)}
                 />
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="TxtFactura"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Factura
-                </label>
-                <select
-                  id="TxtFactura"
-                  name="TxtFactura"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  onChange={onTextFieldChangedFactura}
-                  onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
-                >
-                  <option>Selecciona una opción...</option>
-                  {validYesNoOptions.map((yesNoOptions) => (
-                    <option key={yesNoOptions}>{yesNoOptions}</option>
-                  ))}
-                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">

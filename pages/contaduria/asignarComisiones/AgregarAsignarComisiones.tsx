@@ -45,7 +45,7 @@ export default function AgregarAsignarComisiones() {
       timer: 5000,
     });
 
-    router.push("/contaduria/contaduria/VerAsignarComisiones");
+    router.push("/contaduria/asignarComisiones/VerAsignarComisiones");
 
     setInputSucursalOFranquicia("");
     setInputMinimoDeLaMeta(0);
