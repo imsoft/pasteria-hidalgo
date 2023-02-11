@@ -2,9 +2,9 @@ import { ChangeEvent, useContext, useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 
 import { ReportesVentasAmbulantesIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual/ReporteVentasAmbulantesIndividualContext";
-import ListaReporteVentasAmbulantesIndividual from "../../../components/ui/gerencia-de-ventas/ListaReporteVentasAmbulantesIndividual";
 
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
+import ListaReportesVentasAmbulantesIndividual from '../../../components/ui/gerencia-de-ventas/ListaReportesVentasAmbulantesIndividual';
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
@@ -48,7 +48,7 @@ const VerReporteVentaAmbulantesIndividual = () => {
           reporteVentasAmbulantesIndividual.fecha === inputNuevaFecha
       )
       .map((reporteVentasAmbulantesIndividual) => (
-        <ListaReporteVentasAmbulantesIndividual
+        <ListaReportesVentasAmbulantesIndividual
           key={reporteVentasAmbulantesIndividual._id}
           reporteVentasAmbulantesIndividual={reporteVentasAmbulantesIndividual}
         />
@@ -165,7 +165,7 @@ const VerReporteVentaAmbulantesIndividual = () => {
                     </tr>
                   </thead>
 
-                  {!change
+                  {/* {!change
                     ? reportesVentasAmbulantesIndividualMemo.map(
                         (reporteVentasAmbulantesIndividual) => (
                           <ListaReporteVentasAmbulantesIndividual
@@ -189,7 +189,7 @@ const VerReporteVentaAmbulantesIndividual = () => {
                               reporteVentasAmbulantesIndividual
                             }
                           />
-                        ))}
+                        ))} */}
                 </table>
               </div>
             </div>

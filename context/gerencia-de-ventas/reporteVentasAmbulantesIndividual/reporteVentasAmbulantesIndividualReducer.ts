@@ -15,21 +15,18 @@ export const reporteVentasAmbulantesIndividualReducer = (
     case "[Reporte De Ventas Ambulantes Individual] Agregar-Reporte De Ventas Ambulantes Individual":
       return {
         ...state,
-        reporteVentasAmbulantesIndividual: [...state.reporteVentasAmbulantesIndividual, action.payload],
+        reportesVentasAmbulantesIndividual: [...state.reportesVentasAmbulantesIndividual, action.payload],
       };
 
     case "[Reporte De Ventas Ambulantes Individual] Actualizar-Reporte De Ventas Ambulantes Individual":
       return {
         ...state,
-        reporteVentasAmbulantesIndividual: state.reporteVentasAmbulantesIndividual.map((reportesVentasAmbulantesIndividual) => {
+        reportesVentasAmbulantesIndividual: state.reportesVentasAmbulantesIndividual.map((reportesVentasAmbulantesIndividual) => {
           if (reportesVentasAmbulantesIndividual._id === action.payload._id) {
             reportesVentasAmbulantesIndividual.fecha = action.payload.fecha;
             reportesVentasAmbulantesIndividual.nombreDelVendedor = action.payload.nombreDelVendedor;
-            reportesVentasAmbulantesIndividual.nombreLugarDeVenta = action.payload.nombreLugarDeVenta;
             reportesVentasAmbulantesIndividual.totalDeLaVenta = action.payload.totalDeLaVenta;
             reportesVentasAmbulantesIndividual.listadoDeProductos = action.payload.listadoDeProductos;
-            reportesVentasAmbulantesIndividual.correoElectronicoClienteFrecuente = action.payload.correoElectronicoClienteFrecuente;
-            reportesVentasAmbulantesIndividual.puntosClienteFrecuente = action.payload.puntosClienteFrecuente;
           }
           return reportesVentasAmbulantesIndividual;
         }),
@@ -38,13 +35,13 @@ export const reporteVentasAmbulantesIndividualReducer = (
     case "[Reporte De Ventas Ambulantes Individual] Refrescar-Datos":
       return {
         ...state,
-        reporteVentasAmbulantesIndividual: [...action.payload],
+        reportesVentasAmbulantesIndividual: [...action.payload],
       };
 
     case "[Reporte De Ventas Ambulantes Individual] Eliminar-Reporte De Ventas Ambulantes Individual":
       return {
         ...state,
-        reporteVentasAmbulantesIndividual: state.reporteVentasAmbulantesIndividual.filter(
+        reportesVentasAmbulantesIndividual: state.reportesVentasAmbulantesIndividual.filter(
           (reportesVentasAmbulantesIndividual) => reportesVentasAmbulantesIndividual._id !== action.payload._id
         ),
       };

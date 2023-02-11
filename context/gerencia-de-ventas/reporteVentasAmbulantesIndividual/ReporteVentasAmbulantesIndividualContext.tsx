@@ -11,11 +11,8 @@ interface ContextProps {
   agregarNuevoReporteVentasAmbulantesIndividual: (
     fecha: string,
     nombreDelVendedor: string,
-    nombreLugarDeVenta: string,
     totalDeLaVenta: number,
     listadoDeProductos: ListadoDeProductos[],
-    correoElectronicoClienteFrecuente?: string,
-    puntosClienteFrecuente?: number,
     showNotificacion?: boolean
   ) => void;
 

@@ -11,6 +11,7 @@ import { AsignarPreciosProvider } from "../context/gerencia-de-compras/asignarPr
 import { ProductosYaCompradosProvider } from "../context/gerencia-de-compras/productosYaComprados/ProductosYaCompradosProvider";
 import { ProveedoresProvider } from "../context/gerencia-de-compras/manejoDeProveedores";
 import { ReportesDeComprasProvider } from "../context/gerencia-de-compras/reporteDeCompras";
+import { ReporteVentasAmbulantesIndividualProvider } from "../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual";
 
 // Gerencia de ventas
 
@@ -65,9 +66,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                                 <PersonalesDeMantenimientoProvider>
                                   <ReportesVentasIndividualProvider>
                                     <MateriasPrimasProvider>
-                                      <ReportesVentasIndividualProvider>
+                                      <ReporteVentasAmbulantesIndividualProvider>
                                         <Component {...pageProps} />
-                                      </ReportesVentasIndividualProvider>
+                                      </ReporteVentasAmbulantesIndividualProvider>
                                     </MateriasPrimasProvider>
                                   </ReportesVentasIndividualProvider>
                                 </PersonalesDeMantenimientoProvider>

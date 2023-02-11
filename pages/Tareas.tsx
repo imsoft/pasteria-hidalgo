@@ -32,8 +32,8 @@ const tasksList = [
       {
         title: "Reporte de ventas ambulantes",
         tasks: [
-          "🤔 Clonar reporte de ventas individual en reporte de ventas ambulantes individual y quitar especificación del lugar de evento del clon.",
-          "- Quitar parte de clientes frecuentes.",
+          "🔵 Clonar reporte de ventas individual en reporte de ventas ambulantes individual y quitar especificación del lugar de evento del clon.",
+          "🔵 Quitar parte de clientes frecuentes.",
         ],
       },
       {

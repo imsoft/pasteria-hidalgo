@@ -6,7 +6,6 @@ export interface IReporteVentasAmbulantesIndividual extends ReporteVentasAmbulan
 const reporteVentasAmbulantesIndividualSchema = new Schema({
   fecha: { type: String, required: true },
   nombreDelVendedor: { type: String, required: true },
-  nombreLugarDeVenta: { type: String, required: true },
   totalDeLaVenta: { type: Number, required: true },
   listadoDeProductos: [{
     idProducto: { type: String, required: true },
@@ -16,8 +15,6 @@ const reporteVentasAmbulantesIndividualSchema = new Schema({
     precioProducto: { type: Number, required: true },
     monto: { type: Number, required: true },
   }],
-  correoElectronicoClienteFrecuente: { type: String, required: false },
-  puntosClienteFrecuente: { type: Number, required: false },
 });
 
 const ReporteVentasAmbulantesIndividualModel: Model<IReporteVentasAmbulantesIndividual> =

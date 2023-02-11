@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect, useContext, useMemo } from "react";
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
 
@@ -6,9 +6,8 @@ import { ListadoDeProductos, Paste, TipoDeProducto } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasIndividual/ReportesVentasIndividualContext";
-import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente/ClientesFrecuentesContext";
 import { useRouter } from "next/router";
+import { ReportesVentasAmbulantesIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual/ReporteVentasAmbulantesIndividualContext";
 
 const validProductType: TipoDeProducto[] = [
   "Paste Dulce",
@@ -198,14 +197,8 @@ const validCakeFlavors: Paste[] = [
 
 const AgregarReporteVentaAmbulantesIndividual = () => {
   const router = useRouter();
-  const { agregarNuevoReporteVentasIndividual } = useContext(
-    ReportesVentasIndividualContext
-  );
-
-  const { clientesFrecuentes } = useContext(ClientesFrecuentesContext);
-  const clientesFrecuentesMemo = useMemo(
-    () => clientesFrecuentes,
-    [clientesFrecuentes]
+  const { agregarNuevoReporteVentasAmbulantesIndividual } = useContext(
+    ReportesVentasAmbulantesIndividualContext
   );
 
   const [inputCodigoProducto, setInputCodigoProducto] = useState("");
@@ -281,18 +274,6 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setInputSumaTotal(parseInt(event.target.value));
-  };
-
-  const onTextFieldChangedCorreoClienteFrecuente = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCorreoClienteFrecuente(event.target.value);
-  };
-
-  const onTextFieldChangedPuntosClienteFrecuente = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputPuntosClienteFrecuente(parseInt(event.target.value));
   };
 
   const lookUpProductPrice = () => {
@@ -395,15 +376,11 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
     )
       return;
 
-    agregarNuevoReporteVentasIndividual(
+    agregarNuevoReporteVentasAmbulantesIndividual(
       inputFecha,
       inputNombreVendedor,
-      inputLugarDeLaVenta,
-      inputNombreLugarDeLaVenta,
       inputSumaTotal,
       inputListaDeProductos,
-      inputCorreoClienteFrecuente,
-      inputPuntosClienteFrecuente,
       true
     );
 
@@ -730,84 +707,6 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="col-span-6 sm:col-span-6">
-                <h3 className="text-lg leading-6 font-medium text-gray-900">
-                  Clientes frecuentes
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  Recuerda preguntar si ya esta registrado con nosotros.
-                </p>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <div className="flex items-center">
-                  <label
-                    htmlFor="TxtCorreoElectronicoClienteFrecuente"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Correo electrónico
-                  </label>
-                  <div className="text-xs text-gray-500">
-                    &nbsp;&#40;Opcional&#41;
-                  </div>
-                </div>
-                <input
-                  type="text"
-                  name="TxtCorreoElectronicoClienteFrecuente"
-                  id="TxtCorreoElectronicoClienteFrecuente"
-                  list="correosElectronicos_ClientesFrecuentes"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCorreoClienteFrecuente}
-                  onBlur={() => setTouched(true)}
-                />
-                <datalist id="correosElectronicos_ClientesFrecuentes">
-                  {clientesFrecuentesMemo.map((clienteFrecuente) => (
-                    <option
-                      key={clienteFrecuente._id}
-                      value={clienteFrecuente.correoElectronico}
-                    >
-                      {clienteFrecuente.nombre}
-                    </option>
-                  ))}
-                </datalist>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <div className="flex items-center">
-                  <label
-                    htmlFor="TxtPuntosDeCompraActualesClienteFrecuente"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Puntos de compra actuales
-                  </label>
-                  <div className="text-xs text-gray-500">
-                    &nbsp;&#40;Opcional&#41;
-                  </div>
-                </div>
-
-                <select
-                  id="TxtPuntosDeCompraActualesClienteFrecuente"
-                  name="TxtPuntosDeCompraActualesClienteFrecuente"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  onChange={onTextFieldChangedPuntosClienteFrecuente}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Selecciona los puntos...</option>
-                  {clientesFrecuentesMemo
-                    .filter(
-                      (clientesFrecuentes) =>
-                        clientesFrecuentes.correoElectronico ===
-                        inputCorreoClienteFrecuente
-                    )
-                    .map((clientesFrecuentes) => (
-                      <option key={clientesFrecuentes.correoElectronico}>
-                        {clientesFrecuentes.puntosDeCompra}
-                      </option>
-                    ))}
-                </select>
-              </div>
             </div>
           </div>
 
@@ -825,10 +724,11 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
             <div className="sm:flex sm:items-center">
               <div className="sm:flex-auto">
                 <h1 className="text-xl font-semibold text-gray-900">
-                Reporte De Ventas Ambulantes Individual
+                  Reporte De Ventas Ambulantes Individual
                 </h1>
                 <p className="mt-2 text-sm text-gray-700">
-                  Aquí podras ver los productos que vayas agregando a tu reporte De Ventas Ambulantes Individual.
+                  Aquí podras ver los productos que vayas agregando a tu reporte
+                  De Ventas Ambulantes Individual.
                 </p>
               </div>
               <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none"></div>

@@ -14,12 +14,12 @@ import {
 import Swal from "sweetalert2";
 
 export interface ReporteVentasAmbulantesIndividualState {
-  reporteVentasAmbulantesIndividual: ReporteVentasAmbulantesIndividual[];
+  reportesVentasAmbulantesIndividual: ReporteVentasAmbulantesIndividual[];
 }
 
 const ReporteVentasAmbulantesIndividual_INITIAL_STATE: ReporteVentasAmbulantesIndividualState =
   {
-    reporteVentasAmbulantesIndividual: [],
+    reportesVentasAmbulantesIndividual: [],
   };
 
 interface Props {
@@ -66,11 +66,8 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
   const agregarNuevoReporteVentasAmbulantesIndividual = async (
     fecha: string,
     nombreDelVendedor: string,
-    nombreLugarDeVenta: string,
     totalDeLaVenta: number,
     listadoDeProductos: ListadoDeProductos[],
-    correoElectronicoClienteFrecuente?: string,
-    puntosClienteFrecuente?: number,
     showNotificacion = false
   ) => {
     try {
@@ -79,11 +76,8 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
         {
           fecha,
           nombreDelVendedor,
-          nombreLugarDeVenta,
           totalDeLaVenta,
           listadoDeProductos,
-          correoElectronicoClienteFrecuente,
-          puntosClienteFrecuente,
         }
       );
       dispatch({
@@ -110,11 +104,8 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
       _id,
       fecha,
       nombreDelVendedor,
-      nombreLugarDeVenta,
       totalDeLaVenta,
       listadoDeProductos,
-      correoElectronicoClienteFrecuente,
-      puntosClienteFrecuente,
     }: ReporteVentasAmbulantesIndividual,
     showNotificacion = false
   ) => {
@@ -124,11 +115,8 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
         {
           fecha,
           nombreDelVendedor,
-          nombreLugarDeVenta,
           totalDeLaVenta,
           listadoDeProductos,
-          correoElectronicoClienteFrecuente,
-          puntosClienteFrecuente,
         }
       );
       dispatch({

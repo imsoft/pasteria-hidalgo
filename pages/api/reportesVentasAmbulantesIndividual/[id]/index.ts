@@ -71,8 +71,6 @@ const updateReporteVentasAmbulantesIndividual = async (
     nombreDelVendedor = reporteVentasAmbulantesIndividualToUpdate.nombreDelVendedor,
     totalDeLaVenta = reporteVentasAmbulantesIndividualToUpdate.totalDeLaVenta,
     listadoDeProductos = reporteVentasAmbulantesIndividualToUpdate.listadoDeProductos,
-    correoElectronicoClienteFrecuente = reporteVentasAmbulantesIndividualToUpdate.correoElectronicoClienteFrecuente,
-    puntosClienteFrecuente = reporteVentasAmbulantesIndividualToUpdate.puntosClienteFrecuente,
   } = req.body;
 
   try {
@@ -84,8 +82,6 @@ const updateReporteVentasAmbulantesIndividual = async (
           nombreDelVendedor,
           totalDeLaVenta,
           listadoDeProductos,
-          correoElectronicoClienteFrecuente,
-          puntosClienteFrecuente,
         },
         { runValidators: true, new: true }
       );

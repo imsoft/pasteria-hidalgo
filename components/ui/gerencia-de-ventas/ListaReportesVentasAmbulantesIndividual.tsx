@@ -5,7 +5,7 @@ interface Props {
     reporteVentasAmbulantesIndividual: ReporteVentasAmbulantesIndividual;
 }
 
-const ListaReporteVentasAmbulantesIndividual: FC<Props> = ({
+const ListaReportesVentasAmbulantesIndividual: FC<Props> = ({
     reporteVentasAmbulantesIndividual,
 }) => {
   return (
@@ -22,11 +22,6 @@ const ListaReporteVentasAmbulantesIndividual: FC<Props> = ({
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="text-gray-900">
             {reporteVentasAmbulantesIndividual.nombreDelVendedor}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteVentasAmbulantesIndividual.nombreLugarDeVenta}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -63,19 +58,9 @@ const ListaReporteVentasAmbulantesIndividual: FC<Props> = ({
             ${reporteVentasAmbulantesIndividual.totalDeLaVenta}
           </div>
         </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteVentasAmbulantesIndividual.correoElectronicoClienteFrecuente}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteVentasAmbulantesIndividual.puntosClienteFrecuente}
-          </div>
-        </td>
       </tr>
     </tbody>
   );
 };
 
-export default ListaReporteVentasAmbulantesIndividual;
+export default ListaReportesVentasAmbulantesIndividual;

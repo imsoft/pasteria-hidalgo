@@ -2,7 +2,7 @@ import { ChangeEvent, useContext, useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 
 import { ReportesVentasAmbulantesIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual/ReporteVentasAmbulantesIndividualContext";
-import ListaReporteVentasAmbulantesIndividual from "../../../components/ui/gerencia-de-ventas/ListaReporteVentasAmbulantesIndividual";
+import ListaReporteVentasAmbulantesIndividual from "../../../components/ui/gerencia-de-ventas/ListaReportesVentasAmbulantesIndividual";
 
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 

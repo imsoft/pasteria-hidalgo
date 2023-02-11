@@ -45,21 +45,15 @@ const postReporteVentasAmbulantesIndividual = async (
   const {
     fecha = "",
     nombreDelVendedor = "",
-    nombreLugarDeVenta = "",
     totalDeLaVenta = "",
     listadoDeProductos = "",
-    correoElectronicoClienteFrecuente = "",
-    puntosClienteFrecuente = "",
   } = req.body;
 
   const newReporteVentasAmbulantesIndividual = new ReporteVentasAmbulantesIndividual({
     fecha,
     nombreDelVendedor,
-    nombreLugarDeVenta,
     totalDeLaVenta,
     listadoDeProductos,
-    correoElectronicoClienteFrecuente,
-    puntosClienteFrecuente,
   });
 
   try {
