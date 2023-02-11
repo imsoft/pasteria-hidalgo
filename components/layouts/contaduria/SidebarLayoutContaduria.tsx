@@ -34,18 +34,6 @@ const navigation = [
     current: false,
   },
   {
-    name: "Asignar precios",
-    href: "/contaduria/asignarPrecios/AgregarAsignarPrecios",
-    icon: CurrencyDollarIcon,
-    current: false,
-  },
-  {
-    name: "Ver Asignar precios",
-    href: "/contaduria/asignarPrecios/VerAsignarPrecios",
-    icon: EyeIcon,
-    current: false,
-  },
-  {
     name: "Reporte de ganancias",
     href: "/contaduria/reporteDeGanancias/AgregarReporteDeGanancia",
     icon: DocumentReportIcon,
@@ -90,6 +78,18 @@ const navigation = [
   {
     name: "Ver Check In",
     href: "/contaduria/checkIn/VerCheckInPersonal",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Ver Acondicionamiento de sucursales",
+    href: "/contaduria/acondicionamiendoDeSucursales/VerAcondicionamiendoDeSucursales",
+    icon: EyeIcon,
+    current: false,
+  },
+  {
+    name: "Ver Materia Prima",
+    href: "/contaduria/materiaPrima/VerMateriaPrima",
     icon: EyeIcon,
     current: false,
   },

@@ -1,6 +1,6 @@
 // Contaduria
 
-
+export * as dbAsignarComisiones from './dbAsignarComisiones';
 
 // Gerencia de compras
 

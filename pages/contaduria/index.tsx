@@ -25,20 +25,6 @@ const actions = [
     iconBackground: "bg-primary-blue",
   },
   {
-    title: "Asignar precios",
-    href: "/contaduria/asignarPrecios/AgregarAsignarPrecios",
-    icon: CurrencyDollarIcon,
-    iconForeground: "text-primary-yellow",
-    iconBackground: "bg-primary-blue",
-  },
-  {
-    title: "Ver Asignar precios",
-    href: "/contaduria/asignarPrecios/VerAsignarPrecios",
-    icon: EyeIcon,
-    iconForeground: "text-primary-yellow",
-    iconBackground: "bg-primary-blue",
-  },
-  {
     title: "Reporte de ganancias",
     href: "/contaduria/reporteDeGanancias/AgregarReporteDeGanancia",
     icon: DocumentReportIcon,
@@ -90,6 +76,20 @@ const actions = [
   {
     title: "Ver Check In",
     href: "/contaduria/checkIn/VerCheckInPersonal",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Acondicionamiento de sucursales",
+    href: "/contaduria/acondicionamiendoDeSucursales/VerAcondicionamiendoDeSucursales",
+    icon: EyeIcon,
+    iconForeground: "text-primary-yellow",
+    iconBackground: "bg-primary-blue",
+  },
+  {
+    title: "Ver Materia Prima",
+    href: "/contaduria/materiaPrima/VerMateriaPrima",
     icon: EyeIcon,
     iconForeground: "text-primary-yellow",
     iconBackground: "bg-primary-blue",

@@ -1,6 +1,6 @@
 // Contaduria
 
-
+export { default as AsignarComision, type IAsignarComisiones } from './asignarComisiones';
 
 // Gerencia de compras
 

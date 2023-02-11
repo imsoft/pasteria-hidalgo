@@ -76,7 +76,7 @@ const tasksList = [
           "✅ Agregar otra opción a tipo de producto que diga 'Extra'",
           "✅ Si se seleccionar 'Extra' que aparezca una caja de texto",
           "✅ Agregar una lista como en ventas individual (Quitar de la lista, sucursal a enviar, datos del repartidor, datos de la ruta, Kilometraje de entrada y kilometraje de salida)",
-          "🤔 ¿Datos del repartidor?",
+          "🔵 ¿Datos del repartidor?",
           "🤔 ¿Datos del la ruta?",
         ],
       },
@@ -88,13 +88,13 @@ const tasksList = [
       {
         title: "Asignar comisiones",
         tasks: [
-          "⚒️ Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no.",
+          "🤔 Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no.",
         ],
       },
       {
         title: "Inventario",
         tasks: [
-          "🤔 Ver inventarios. (Solo ver Acondicionamiendo de sucursales)",
+          "🔵 Ver inventarios. (Solo ver Acondicionamiendo de sucursales)",
         ],
       },
       { title: "Asignar precios", tasks: ["✅ Solo ver el precio máximo."] },
@@ -109,12 +109,12 @@ const tasksList = [
       {
         title: "Asignar precios",
         tasks: [
-          "🤔 CRUD de precio máximo, (Quitar la asignacion de precios y solo dejar precio maximo)",
+          "🔵 CRUD de precio máximo, (Quitar la asignacion de precios y solo dejar precio maximo)",
         ],
       },
       {
         title: "Asignar precios",
-        tasks: ["- Traer la materia prima de la BD en productos"],
+        tasks: ["🔵 Traer la materia prima de la BD"],
       },
     ],
   },
