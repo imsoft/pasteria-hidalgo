@@ -1,4 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useContext, useMemo } from "react";
+import { ReportesVentasAmbulantesIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual";
+import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasIndividual";
 import { AsignarComision } from "../../../interfaces";
 
 interface Props {
@@ -6,6 +8,46 @@ interface Props {
 }
 
 const ListaAsignarComision: FC<Props> = ({ asignarComision }) => {
+  const { reportesVentasIndividual } = useContext(
+    ReportesVentasIndividualContext
+  );
+  const reportesVentasIndividualMemo = useMemo(
+    () => reportesVentasIndividual,
+    [reportesVentasIndividual]
+  );
+
+  const { reportesVentasAmbulantesIndividual } = useContext(
+    ReportesVentasAmbulantesIndividualContext
+  );
+  const reportesVentasAmbulantesIndividualMemo = useMemo(
+    () => reportesVentasAmbulantesIndividual,
+    [reportesVentasAmbulantesIndividual]
+  );
+
+  const totalVentasIndividual = reportesVentasIndividualMemo
+    .filter(
+      (reporteVentasIndividual) =>
+        reporteVentasIndividual.nombreLugarDeVenta ===
+        asignarComision.sucursales
+    )
+    .reduce(
+      (total, reporteVentasIndividual) =>
+        total + reporteVentasIndividual.totalDeLaVenta,
+      0
+    );
+
+  const totalVentasAmbulantes = reportesVentasAmbulantesIndividualMemo
+    .filter(
+      (reporteVentasIndividual) =>
+        reporteVentasIndividual.fecha ===
+        asignarComision.sucursales
+    )
+    .reduce(
+      (total, reporteVentasIndividual) =>
+        total + reporteVentasIndividual.totalDeLaVenta,
+      0
+    );
+
   return (
     <>
       <tbody className="divide-y divide-gray-200 bg-white">
@@ -20,12 +62,12 @@ const ListaAsignarComision: FC<Props> = ({ asignarComision }) => {
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.franquicias || '-'}
+              {asignarComision.franquicias || "-"}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.sucursales || '-'}
+              {asignarComision.sucursales || "-"}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -35,12 +77,14 @@ const ListaAsignarComision: FC<Props> = ({ asignarComision }) => {
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              $ 0
+              $ {totalVentasIndividual}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              Lo logro
+              {totalVentasIndividual >= asignarComision.minimoDeLaMeta
+                ? "✅ Lo logro"
+                : "❌ No lo logro"}
             </div>
           </td>
         </tr>

@@ -49,16 +49,16 @@ const VerReportesDeCompras = () => {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Crédito
+                        Nombre Proveedor
                       </th>
-                      
+
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Nombre Proveedor
+                        Crédito
                       </th>
-
+                      
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"

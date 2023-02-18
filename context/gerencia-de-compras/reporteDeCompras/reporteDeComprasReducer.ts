@@ -33,13 +33,11 @@ export const reportesDeComprasReducer = (
         reportesDeCompras: state.reportesDeCompras.map((reporteDeCompra) => {
           if (reporteDeCompra._id === action.payload._id) {
             reporteDeCompra.fechaDeCompra = action.payload.fechaDeCompra;
-            reporteDeCompra.credito = action.payload.credito;
             reporteDeCompra.nombreProveedor = action.payload.nombreProveedor;
+            reporteDeCompra.credito = action.payload.credito;
             reporteDeCompra.factura = action.payload.factura;
-            reporteDeCompra.listadoDeReporteDeCompra =
-              action.payload.listadoDeReporteDeCompra;
-            reporteDeCompra.precioTotalDelCompra =
-              action.payload.precioTotalDelCompra;
+            reporteDeCompra.listadoDeReporteDeCompra = action.payload.listadoDeReporteDeCompra;
+            reporteDeCompra.precioTotalDelCompra = action.payload.precioTotalDelCompra;
           }
           return reporteDeCompra;
         }),

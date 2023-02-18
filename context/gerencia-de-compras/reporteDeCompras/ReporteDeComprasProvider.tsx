@@ -1,5 +1,4 @@
 import { FC, ReactNode, useEffect, useReducer } from "react";
-
 import { entriesApi } from "../../../baseUrlApi";
 import { ReporteDeCompraContext, reportesDeComprasReducer } from ".";
 import { IListadoDeReporteDeCompra, ReporteDeCompra } from "../../../interfaces";
@@ -54,8 +53,8 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
 
   const agregarReporteDeCompra = async (
     fechaDeCompra: string,
-    credito: string,
     nombreProveedor: string,
+    credito: string,
     factura: string,
     listadoDeReporteDeCompra: IListadoDeReporteDeCompra[],
     precioTotalDelCompra: number,
@@ -66,8 +65,8 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
         "/reportesDeCompras",
         {
           fechaDeCompra,
-          credito,
           nombreProveedor,
+          credito,
           factura,
           listadoDeReporteDeCompra,
           precioTotalDelCompra,
@@ -96,8 +95,8 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
     {
       _id,
       fechaDeCompra,
-      credito,
       nombreProveedor,
+      credito,
       factura,
       listadoDeReporteDeCompra,
       precioTotalDelCompra,
@@ -109,8 +108,8 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
         `/reportesDeCompras/${_id}`,
         {
           fechaDeCompra,
-          credito,
           nombreProveedor,
+          credito,
           factura,
           listadoDeReporteDeCompra,
           precioTotalDelCompra,

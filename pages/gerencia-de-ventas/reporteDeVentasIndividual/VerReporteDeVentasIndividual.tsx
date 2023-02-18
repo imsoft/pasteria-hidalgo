@@ -19,7 +19,6 @@ const VerReporteDeVentasIndividual = () => {
   const { reportesVentasIndividual } = useContext(
     ReportesVentasIndividualContext
   );
-
   const reportesVentasIndividualMemo = useMemo(
     () => reportesVentasIndividual,
     [reportesVentasIndividual]

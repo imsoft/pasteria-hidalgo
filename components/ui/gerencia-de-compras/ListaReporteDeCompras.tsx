@@ -9,8 +9,9 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
   // const onClick = () => {
   //   router.push(`/gerencia-de-compras/reporteDeCompras/${reporteDeCompra._id}`);
   // };
-
+  
   return (
+    
     <tbody className="divide-y divide-gray-200 bg-white">
       <tr
         key={reporteDeCompra._id}
@@ -24,12 +25,12 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.credito}
+            {reporteDeCompra.nombreProveedor}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.nombreProveedor}
+            {reporteDeCompra.credito}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -71,7 +72,7 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioTotalDelCompra}
+            $ {reporteDeCompra.precioTotalDelCompra}
           </div>
         </td>
       </tr>

@@ -133,16 +133,12 @@ export default function ReporteDeCompras() {
   const agregarALaLista = () => {
     setInputUuid(inputUuid + 1);
 
-    const nuevaListaReporteDeCompras = {
+    const nuevaListaReporteDeCompras: IListadoDeReporteDeCompra = {
       uuid: inputUuid,
-      fechaDeCompra: inputFechaDeCompra,
-      credito: inputCredito,
       materiaPrima: inputMateriaPrima,
       unidades: inputUnidades as Unidades,
-      nombreProveedor: inputNombreProveedor,
       tempetatura: inputTempetatura as Temperatura,
       caducidad: inputCaducidad,
-      factura: inputFactura,
       cantidad: inputCantidad,
       precioPorUnidad: inputPrecioPorUnidad,
       precioTotalDelProducto: inputPrecioTotalDelProducto,
@@ -157,7 +153,7 @@ export default function ReporteDeCompras() {
       inputPrecioTotalDelCompra + inputPrecioTotalDelProducto
     );
 
-    resetForm();
+    // resetForm();
   };
 
   const eliminarDeLaLista = (idProducto: number) => {
@@ -190,40 +186,36 @@ export default function ReporteDeCompras() {
 
   const resetForm = () => {
     setTouched(false);
-    setInputFechaDeCompra("");
-    setInputCredito("");
     setInputMateriaPrima("");
     setInputUnidades("");
-    setInputNombreProveedor("");
     setInputTempetatura("");
     setInputCaducidad("");
-    setInputFactura("");
     setInputCantidad(0);
     setInputPrecioPorUnidad(0);
     setInputPrecioTotalDelProducto(0);
   };
 
   const onSave = () => {
+
+    console.log(inputFechaDeCompra);
+    console.log(inputNombreProveedor);
+    console.log(inputFactura);
+    console.log(inputCredito);
+
     if (
       inputFechaDeCompra.length === 0 &&
       inputCredito.length === 0 &&
-      inputMateriaPrima.length === 0 &&
-      inputUnidades.length === 0 &&
       inputNombreProveedor.length === 0 &&
-      inputTempetatura.length === 0 &&
-      inputCaducidad.length === 0 &&
       inputFactura.length === 0 &&
-      inputCantidad === 0 &&
-      inputPrecioPorUnidad === 0 &&
-      inputPrecioTotalDelProducto === 0 &&
+      inputListaReporteDeCompras.length === 0 &&
       inputPrecioTotalDelCompra === 0
     )
       return;
 
     agregarReporteDeCompra(
       inputFechaDeCompra,
-      inputCredito,
       inputNombreProveedor,
+      inputCredito,
       inputFactura,
       inputListaReporteDeCompras,
       inputPrecioTotalDelCompra,
@@ -267,8 +259,8 @@ export default function ReporteDeCompras() {
                   type="date"
                   name="TxtFechaDeCompra"
                   id="TxtFechaDeCompra"
-                  autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputFechaDeCompra || ""}
                   onChange={onTextFieldChangedFechaDeCompra}
                   onBlur={() => setTouched(true)}
                 />
@@ -285,7 +277,7 @@ export default function ReporteDeCompras() {
                   id="TxtProveedor"
                   name="TxtProveedor"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
+                  value={inputNombreProveedor || ""}
                   onChange={onTextFieldChangedNombreProveedor}
                   onBlur={() => setTouched(true)}
                 >
@@ -307,9 +299,9 @@ export default function ReporteDeCompras() {
                   id="TxtCredito"
                   name="TxtCredito"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  value={inputCredito || ""}
                   onChange={onTextFieldChangedCredito}
                   onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
                   {validYesNoOptions.map((yesNoOptions) => (
@@ -329,9 +321,9 @@ export default function ReporteDeCompras() {
                   id="TxtFactura"
                   name="TxtFactura"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  value={inputFactura || ""}
                   onChange={onTextFieldChangedFactura}
                   onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
                 >
                   <option>Selecciona una opción...</option>
                   {validYesNoOptions.map((yesNoOptions) => (
@@ -351,7 +343,7 @@ export default function ReporteDeCompras() {
                   id="CmbMateriaPrima"
                   name="CmbMateriaPrima"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
+                  value={inputMateriaPrima || ""}
                   onChange={onTextFieldChangedMateriaPrima}
                   onBlur={() => setTouched(true)}
                 >
@@ -378,7 +370,6 @@ export default function ReporteDeCompras() {
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   onChange={onTextFieldChangedUnidades}
                   onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
                 >
                   <option hidden>Selecciona una opción...</option>
                   {materiasPrimasMemo
@@ -402,7 +393,6 @@ export default function ReporteDeCompras() {
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   onChange={onTextFieldChangedTemperatura}
                   onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
                 >
                   <option hidden>Selecciona una opción...</option>
                   {materiasPrimasMemo

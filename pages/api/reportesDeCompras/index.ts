@@ -38,17 +38,17 @@ const postReporteDeCompra = async (
 ) => {
   const {
     fechaDeCompra = "",
-    credito = "",
     nombreProveedor = "",
+    credito = "",
     factura = "",
     listadoDeReporteDeCompra = "",
-    precioTotalDelCompra = 0,
+    precioTotalDelCompra = "",
   } = req.body;
 
   const newReporteDeCompra = new ReporteDeCompra({
     fechaDeCompra,
-    credito,
     nombreProveedor,
+    credito,
     factura,
     listadoDeReporteDeCompra,
     precioTotalDelCompra,

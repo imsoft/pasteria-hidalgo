@@ -1,5 +1,4 @@
 import { FC } from "react";
-import router from "next/router";
 import { ReporteDeCompra } from "../../../interfaces";
 
 interface Props {
@@ -20,32 +19,12 @@ const ListaReporteDeComprasContaduria: FC<Props> = ({ reporteDeCompra }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.credito}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.materiaPrima}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.unidades}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
             {reporteDeCompra.nombreProveedor}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.tempetatura}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.caducidad}
+            {reporteDeCompra.credito}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -55,17 +34,35 @@ const ListaReporteDeComprasContaduria: FC<Props> = ({ reporteDeCompra }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.cantidad}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioPorUnidad}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioTotalDelProducto}
+            {reporteDeCompra.listadoDeReporteDeCompra.map((listado) => (
+              <div
+                key={listado.uuid}
+                className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+              >
+                <div className="font-medium text-gray-900">
+                  <strong>Materia Prima:</strong> {listado.materiaPrima}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Unidades:</strong> {listado.unidades}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Temperatura:</strong> {listado.tempetatura}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Caducidad:</strong> {listado.caducidad}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Cantidad:</strong> {listado.cantidad}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Precio por unidad:</strong> {listado.precioPorUnidad}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Precio total del producto:</strong>{" "}
+                  {listado.precioTotalDelProducto}
+                </div>
+              </div>
+            ))}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

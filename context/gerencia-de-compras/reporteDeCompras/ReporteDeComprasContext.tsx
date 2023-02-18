@@ -10,8 +10,8 @@ interface ContextProps {
   //Métodos
   agregarReporteDeCompra: (
     fechaDeCompra: string,
-    credito: string,
     nombreProveedor: string,
+    credito: string,
     factura: string,
     listadoDeReporteDeCompra: IListadoDeReporteDeCompra[],
     precioTotalDelCompra: number,

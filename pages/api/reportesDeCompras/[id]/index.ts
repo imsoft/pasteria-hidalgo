@@ -63,8 +63,8 @@ const updateReporteDeCompra = async (
 
   const {
     fechaDeCompra = reporteDeCompraToUpdate.fechaDeCompra,
-    credito = reporteDeCompraToUpdate.credito,
     nombreProveedor = reporteDeCompraToUpdate.nombreProveedor,
+    credito = reporteDeCompraToUpdate.credito,
     factura = reporteDeCompraToUpdate.factura,
     listadoDeReporteDeCompra = reporteDeCompraToUpdate.listadoDeReporteDeCompra,
     precioTotalDelCompra = reporteDeCompraToUpdate.precioTotalDelCompra,
@@ -75,8 +75,8 @@ const updateReporteDeCompra = async (
       id,
       {
         fechaDeCompra,
-        credito,
         nombreProveedor,
+        credito,
         factura,
         listadoDeReporteDeCompra,
         precioTotalDelCompra,

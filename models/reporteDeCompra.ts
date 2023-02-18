@@ -5,10 +5,10 @@ export interface IReporteDeCompra extends ReporteDeCompra {}
 
 const reporteDeCompraSchema = new Schema({
   fechaDeCompra: { type: String, required: true },
-  credito: { type: String, required: true },
   nombreProveedor: { type: String, required: true },
+  credito: { type: String, required: true },
   factura: { type: String, required: true },
-  listadoDeProductos: [
+  listadoDeReporteDeCompra: [
     {
       uuid: { type: String, required: true },
       materiaPrima: { type: String, required: true },
