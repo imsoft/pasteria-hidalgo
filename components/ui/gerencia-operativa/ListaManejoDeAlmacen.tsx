@@ -20,24 +20,28 @@ const ListaManejosDeAlmacen: FC<Props> = ({ reporteDeCompra }) => {
       >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.materiaPrima}
+            {reporteDeCompra.precioTotalDelCompra}
+            {/* {reporteDeCompra.materiaPrima} */}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.unidades}
+            {/* {reporteDeCompra.unidades} */}
+            {reporteDeCompra.credito}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.tempetatura}
+            {reporteDeCompra.factura}
+            {/* {reporteDeCompra.tempetatura} */}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.cantidad}
+            {reporteDeCompra.fechaDeCompra}
+            {/* {reporteDeCompra.cantidad} */}
           </div>
-          <span
+          {/* <span
             className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
               reporteDeCompra.cantidad > 100
                 ? "text-green-800 bg-green-100"
@@ -53,7 +57,7 @@ const ListaManejosDeAlmacen: FC<Props> = ({ reporteDeCompra }) => {
                 reporteDeCompra.cantidad >= 50
               ? "Casi por terminar"
               : reporteDeCompra.cantidad < 50 && "Esta a punto de terminarse"}
-          </span>
+          </span> */}
         </td>
       </tr>
     </tbody>

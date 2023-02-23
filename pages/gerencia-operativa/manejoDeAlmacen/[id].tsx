@@ -32,17 +32,26 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
 
     const [inputFechaDeCompra, setInputFechaDeCompra] = useState(reporteDeCompra.fechaDeCompra);
     const [inputCredito, setInputCredito] = useState(reporteDeCompra.credito);
-    const [inputMateriaPrima, setInputMateriaPrima] = useState(reporteDeCompra.materiaPrima);
-    const [inputUnidades, setInputUnidades] = useState<Unidades>(reporteDeCompra.unidades);
     const [inputNombreProveedor, setInputNombreProveedor] = useState(reporteDeCompra.nombreProveedor);
-    const [inputTempetatura, setInputTempetatura] = useState<Temperatura>(reporteDeCompra.tempetatura);
-    const [inputCaducidad, setInputCaducidad] = useState(reporteDeCompra.caducidad);
     const [inputFactura, setInputFactura] = useState(reporteDeCompra.factura);
-    const [inputCantidad, setInputCantidad] = useState(reporteDeCompra.cantidad);
-    const [inputPrecioPorUnidad, setInputPrecioPorUnidad] = useState(reporteDeCompra.precioPorUnidad);
-    const [inputPrecioTotalDelProducto, setInputPrecioTotalDelProducto] = useState(reporteDeCompra.precioTotalDelProducto);
     const [inputPrecioTotalDelCompra, setInputPrecioTotalDelCompra] = useState(reporteDeCompra.precioTotalDelCompra);
     
+    const [inputMateriaPrima, setInputMateriaPrima] = useState("");
+    const [inputUnidades, setInputUnidades] = useState("");
+    const [inputTempetatura, setInputTempetatura] = useState("");
+    const [inputCaducidad, setInputCaducidad] = useState("");
+    const [inputCantidad, setInputCantidad] = useState(0);
+    const [inputPrecioPorUnidad, setInputPrecioPorUnidad] = useState(0);
+    const [inputPrecioTotalDelProducto, setInputPrecioTotalDelProducto] = useState(0);
+
+    // const [inputMateriaPrima, setInputMateriaPrima] = useState(reporteDeCompra.materiaPrima);
+    // const [inputUnidades, setInputUnidades] = useState<Unidades>(reporteDeCompra.unidades);
+    // const [inputTempetatura, setInputTempetatura] = useState<Temperatura>(reporteDeCompra.tempetatura);
+    // const [inputCaducidad, setInputCaducidad] = useState(reporteDeCompra.caducidad);
+    // const [inputCantidad, setInputCantidad] = useState(reporteDeCompra.cantidad);
+    // const [inputPrecioPorUnidad, setInputPrecioPorUnidad] = useState(reporteDeCompra.precioPorUnidad);
+    // const [inputPrecioTotalDelProducto, setInputPrecioTotalDelProducto] = useState(reporteDeCompra.precioTotalDelProducto);
+
     const MySwal = withReactContent(Swal);
 
   const onInputValueChangedFechaDeCompra = (event: ChangeEvent<HTMLInputElement>) => {
@@ -139,15 +148,8 @@ export const ReporteDeCompraPage: FC<Props> = ({ reporteDeCompra }) => {
           ...reporteDeCompra,
           fechaDeCompra: inputFechaDeCompra,
           credito: inputCredito,
-          materiaPrima: inputMateriaPrima,
-          unidades: inputUnidades,
           nombreProveedor: inputNombreProveedor,
-          tempetatura: inputTempetatura,
-          caducidad: inputCaducidad,
           factura: inputFactura,
-          cantidad: inputCantidad,
-          precioPorUnidad: inputPrecioPorUnidad,
-          precioTotalDelProducto: inputPrecioTotalDelProducto,
           precioTotalDelCompra: inputPrecioTotalDelCompra,
         };
 

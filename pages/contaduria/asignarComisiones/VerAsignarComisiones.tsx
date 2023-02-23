@@ -66,13 +66,13 @@ export default function VerAsignarComisiones() {
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Minimo de la venta
+                        Meta de la venta
                       </th>
                       <th
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Meta actual
+                        Ventas actuales
                       </th>
                       <th
                         scope="col"

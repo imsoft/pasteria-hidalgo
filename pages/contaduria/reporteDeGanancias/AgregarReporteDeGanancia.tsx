@@ -1,10 +1,9 @@
+import { useContext, useMemo } from "react";
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
-
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import { ChangeEvent, useContext, useMemo, useState } from "react";
 import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras";
 import ListaReporteDeComprasContaduria from "../../../components/ui/contaduria/ListaReporteDeComprasContaduria";
+import ListaReporteDeGanancias from '../../../components/ui/contaduria/ListaReporteDeGanancias';
+import { AsignarComisionContext } from "../../../context/contaduria/asignarComision";
 
 export default function ReporteGanancias() {
   const { reportesDeCompras } = useContext(ReporteDeCompraContext);
@@ -13,41 +12,11 @@ export default function ReporteGanancias() {
     [reportesDeCompras]
   );
 
-  const MySwal = withReactContent(Swal);
-
-  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputFranquicias, setInputFranquicias] = useState("");
-  const [inputSucursales, setInputSucursales] = useState("");
-
-  const [touched, setTouched] = useState(false);
-
-  const onTextFieldChangedSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursalOFranquicia(event.target.value);
-  };
-
-  const onTextFieldChangedFranquicias = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputFranquicias(event.target.value);
-  };
-
-  const onTextFieldChangedSucursales = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursales(event.target.value);
-  };
-
-  const onSave = () => {
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Reporte de ganancia Agregado",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-  };
+  const { asignarComisiones } = useContext(AsignarComisionContext);
+  const asignarComisionesMemo = useMemo(
+    () => asignarComisiones,
+    [asignarComisiones]
+  );
 
   return (
     <SidebarLayoutContaduria>
@@ -55,10 +24,10 @@ export default function ReporteGanancias() {
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">
-              Reporte de compras
+              Reporte de ganancias
             </h1>
             <p className="mt-2 text-sm text-gray-700">
-              Aquí podras ver los reportes de compra para la empresa.
+              Aquí podras ver los reportes de ganancia para la empresa.
             </p>
           </div>
         </div>
@@ -119,10 +88,16 @@ export default function ReporteGanancias() {
                       </th>
                     </tr>
                   </thead>
-                  {reportesDeComprasMemo.map((reporteDeCompra) => (
+                  {/* {reportesDeComprasMemo.map((reporteDeCompra) => (
                     <ListaReporteDeComprasContaduria
                       key={reporteDeCompra._id}
                       reporteDeCompra={reporteDeCompra}
+                    />
+                  ))} */}
+                  {asignarComisionesMemo.map((asignarComision) => (
+                    <ListaReporteDeGanancias
+                      key={asignarComision._id}
+                      asignarComision={asignarComision}
                     />
                   ))}
                 </table>

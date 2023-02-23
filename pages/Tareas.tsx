@@ -101,7 +101,7 @@ const tasksList = [
       {
         title: "Reporte de ganancias",
         tasks: [
-          "⚒️ Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales. (Tabla similar a la de asignar comisiones, solo agregandole los datos del balance y las compras)",
+          "⚒️ Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales. (Tabla similar a la de asignar comisiones, solo agregandole los datos del balance y las compras), (Se comprara todo lo comprado con lo vendido por todas las sucursales)",
         ],
       },
       { title: "Reportes de ventas", tasks: ["✅ Ver reportes de ventas."] },
@@ -163,11 +163,11 @@ const Tareas = () => {
                         </dt>
                         <Disclosure.Panel as="dd" className="mt-2 pr-12">
                           {taskList.subtopics.map((subtopic) => (
-                            <div className="py-3">
+                            <div key={subtopic.title} className="py-3">
                               <p className="text-lg leading-7 text-gray-600">
                                 {subtopic.title}
                                 {subtopic.tasks.map((task) => (
-                                  <p className="text-base leading-7 text-gray-500">
+                                  <p key={task} className="text-base leading-7 text-gray-500">
                                     {task}
                                   </p>
                                 ))}

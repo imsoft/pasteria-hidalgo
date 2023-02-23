@@ -67,7 +67,7 @@ const ListaReporteDeComprasContaduria: FC<Props> = ({ reporteDeCompra }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioTotalDelCompra}
+            $ {reporteDeCompra.precioTotalDelCompra}
           </div>
         </td>
       </tr>
