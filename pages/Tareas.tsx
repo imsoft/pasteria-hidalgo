@@ -88,7 +88,7 @@ const tasksList = [
       {
         title: "Asignar comisiones",
         tasks: [
-          "🤔 Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no. (Ir sumando del Reporte Ventas Individual y de los ambulantes, agregar mes y año (del sistema) y filtrarlos al momento de ver, el filtrado de mes y año)",
+          "🔵 Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no. (Ir sumando del Reporte Ventas Individual y de los ambulantes, agregar mes y año (del sistema) y filtrarlos al momento de ver, el filtrado de mes y año)",
         ],
       },
       {

@@ -6,7 +6,26 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { AsignarComisionContext } from "../../../context/contaduria/asignarComision/AsignarComisionContext";
 
+const mesesDelAno: string[] = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
+
+const today = new Date();
+const currentYear = today.getFullYear();
+
 export default function AgregarAsignarComisiones() {
+
   const router = useRouter();
 
   const { agregarNuevoAsignarComision } = useContext(AsignarComisionContext);
@@ -14,6 +33,8 @@ export default function AgregarAsignarComisiones() {
   const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
   const [inputFranquicias, setInputFranquicias] = useState("");
   const [inputSucursales, setInputSucursales] = useState("");
+  const [inputMes, setInputMes] = useState("");
+  const [inputAnio, setInputAnio] = useState(currentYear);
   const [inputMinimoDeLaMeta, setInputMinimoDeLaMeta] = useState(0);
 
   const [touched, setTouched] = useState(false);
@@ -25,12 +46,16 @@ export default function AgregarAsignarComisiones() {
       inputSucursalOFranquicia.length === 0 &&
       inputMinimoDeLaMeta === 0 &&
       inputSucursales.length === 0 &&
+      inputMes.length === 0 &&
+      inputAnio === 0 &&
       inputFranquicias.length === 0
     )
       return;
 
     agregarNuevoAsignarComision(
       inputSucursalOFranquicia,
+      inputMes,
+      inputAnio,
       inputMinimoDeLaMeta,
       inputSucursales,
       inputFranquicias,
@@ -51,6 +76,8 @@ export default function AgregarAsignarComisiones() {
     setInputMinimoDeLaMeta(0);
     setInputSucursales("");
     setInputFranquicias("");
+    setInputMes("");
+    setInputAnio(0);
   };
 
   const onTextFieldChangedFranquicias = (
@@ -69,6 +96,18 @@ export default function AgregarAsignarComisiones() {
     event: ChangeEvent<HTMLSelectElement>
   ) => {
     setInputSucursalOFranquicia(event.target.value);
+  };
+
+  const onTextFieldChangedMes = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputMes(event.target.value);
+  };
+
+  const onTextFieldChangedAnio = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputAnio(parseInt(event.target.value));
   };
 
   const onTextFieldChangedMinimoDeLaMeta = (
@@ -158,6 +197,49 @@ export default function AgregarAsignarComisiones() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
+                  htmlFor="CmbSucursal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Mes
+                </label>
+                <select
+                  id="CmbSucursal"
+                  name="CmbSucursal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  onChange={onTextFieldChangedMes}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione una opción...</option>
+                  {mesesDelAno.map((mes) => (
+                    <option key={mes}>{mes}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtAnio"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Año
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    name="TxtAnio"
+                    id="TxtAnio"
+                    onChange={onTextFieldChangedAnio}
+                    value={inputAnio}
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full sm:text-sm border-gray-300 rounded-md"
+                    aria-describedby="price-currency"
+                    readOnly
+                  />
+                </div>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
                   htmlFor="TxtMinimoDeLaMeta"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -185,6 +267,7 @@ export default function AgregarAsignarComisiones() {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

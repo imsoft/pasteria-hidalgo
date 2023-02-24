@@ -63,6 +63,8 @@ const updateAsignarComision = async (
 
   const {
     sucursalOFranquicia = asignarComisionToUpdate.sucursalOFranquicia,
+    mes = asignarComisionToUpdate.mes,
+    anio = asignarComisionToUpdate.anio,
     minimoDeLaMeta = asignarComisionToUpdate.minimoDeLaMeta,
     sucursales = asignarComisionToUpdate.sucursales,
     franquicias = asignarComisionToUpdate.franquicias,
@@ -73,6 +75,8 @@ const updateAsignarComision = async (
       id,
       {
         sucursalOFranquicia,
+        mes,
+        anio,
         minimoDeLaMeta,
         sucursales,
         franquicias,

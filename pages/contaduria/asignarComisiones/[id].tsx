@@ -13,6 +13,21 @@ interface Props {
   asignarComision: AsignarComision;
 }
 
+const mesesDelAno: string[] = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
+
 export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
   const router = useRouter();
 
@@ -20,10 +35,12 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
     AsignarComisionContext
   );
 
-  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputFranquicias, setInputFranquicias] = useState("");
-  const [inputSucursales, setInputSucursales] = useState("");
-  const [inputMinimoDeLaMeta, setInputMinimoDeLaMeta] = useState(0);
+  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState(asignarComision.sucursalOFranquicia);
+  const [inputFranquicias, setInputFranquicias] = useState(asignarComision.franquicias);
+  const [inputSucursales, setInputSucursales] = useState(asignarComision.sucursales);
+  const [inputMes, setInputMes] = useState(asignarComision.mes);
+  const [inputAnio, setInputAnio] = useState(asignarComision.anio);
+  const [inputMinimoDeLaMeta, setInputMinimoDeLaMeta] = useState(asignarComision.minimoDeLaMeta);
 
   const MySwal = withReactContent(Swal);
 
@@ -45,6 +62,17 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
     setInputSucursalOFranquicia(event.target.value);
   };
 
+  const onInputValueChangedMes = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputMes(event.target.value);
+  };
+
+  const onInputValueChangedAnio = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputAnio(parseInt(event.target.value));
+  };
   const onInputValueChangedMinimoDeLaMeta = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
@@ -55,6 +83,8 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
     if (
       inputFranquicias?.trim().length === 0 &&
       inputSucursales?.trim().length === 0 &&
+      inputMes?.trim().length === 0 &&
+      inputAnio === 0 &&
       inputMinimoDeLaMeta === 0 &&
       inputSucursalOFranquicia.trim().length === 0
     )
@@ -74,6 +104,8 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
         const actualizadoAsignarComision: AsignarComision = {
           ...asignarComision,
           sucursalOFranquicia: inputSucursalOFranquicia,
+          mes: inputMes,
+          anio: inputAnio,
           minimoDeLaMeta: inputMinimoDeLaMeta,
           sucursales: inputSucursales,
           franquicias: inputFranquicias,
@@ -193,6 +225,50 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
                   <option>Chapalita</option>
                   <option>Chiapas</option>
                 </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="CmbSucursal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Mes
+                </label>
+                <select
+                  id="CmbSucursal"
+                  name="CmbSucursal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
+                  value={inputMes}
+                  onChange={onInputValueChangedMes}
+                  // onBlur={() => setTouched(true)}
+                >
+                  <option>Seleccione una opción...</option>
+                  {mesesDelAno.map((mes) => (
+                    <option key={mes}>{mes}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtAnio"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Año
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    name="TxtAnio"
+                    id="TxtAnio"
+                    onChange={onInputValueChangedAnio}
+                    value={inputAnio}
+                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full sm:text-sm border-gray-300 rounded-md"
+                    aria-describedby="price-currency"
+                    readOnly
+                  />
+                </div>
               </div>
 
               <div className="col-span-6 sm:col-span-3">

@@ -36,6 +36,8 @@ const postAsignarComision = async( req: NextApiRequest, res: NextApiResponse<Dat
     
     const {
         sucursalOFranquicia = '',
+        mes = '',
+        anio = '',
         minimoDeLaMeta = '',
         sucursales = '',
         franquicias = '',
@@ -43,6 +45,8 @@ const postAsignarComision = async( req: NextApiRequest, res: NextApiResponse<Dat
 
     const newAsignarComision = new AsignarComision({
         sucursalOFranquicia,
+        mes,
+        anio,
         minimoDeLaMeta,
         sucursales,
         franquicias,

@@ -54,6 +54,8 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
 
   const agregarNuevoAsignarComision = async (
     sucursalOFranquicia: string,
+    mes: string,
+    anio: number,
     minimoDeLaMeta: number,
     sucursales?: string,
     franquicias?: string,
@@ -64,6 +66,8 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
         "/asignarComisiones",
         {
           sucursalOFranquicia,
+          mes,
+          anio,
           minimoDeLaMeta,
           sucursales,
           franquicias,
@@ -92,6 +96,8 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
     {
       _id,
       sucursalOFranquicia,
+      mes,
+      anio,
       minimoDeLaMeta,
       sucursales,
       franquicias,
@@ -103,6 +109,8 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
         `/asignarComisiones/${_id}`,
         {
           sucursalOFranquicia,
+          mes,
+          anio,
           minimoDeLaMeta,
           sucursales,
           franquicias,
