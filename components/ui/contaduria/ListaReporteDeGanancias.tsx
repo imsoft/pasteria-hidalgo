@@ -100,7 +100,7 @@ const ListaReporteDeGanancias: FC<Props> = ({ asignarComision }) => {
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            {/* <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2 sm:col-span-1">
                 {partesFecha.map((mes) => (
                   <div
@@ -121,7 +121,7 @@ const ListaReporteDeGanancias: FC<Props> = ({ asignarComision }) => {
                   </div>
                 ))}
               </div>
-            </div> */}
+            </div>
 
             <div className="font-medium text-gray-900">$ {totalDeCompras}</div>
           </td>

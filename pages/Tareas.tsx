@@ -88,7 +88,7 @@ const tasksList = [
       {
         title: "Asignar comisiones",
         tasks: [
-          "🔵 Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no. (Ir sumando del Reporte Ventas Individual y de los ambulantes, agregar mes y año (del sistema) y filtrarlos al momento de ver, el filtrado de mes y año)",
+          "🔵 Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no. (Ir sumando del Reporte Ventas Individual y de los ambulantes, agregar mes y año (del sistema) y filtrarlos al momento de ver, el filtrado de mes y año)... Arreglar filtrado",
         ],
       },
       {
@@ -101,7 +101,7 @@ const tasksList = [
       {
         title: "Reporte de ganancias",
         tasks: [
-          "⚒️ Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales. (Tabla similar a la de asignar comisiones, solo agregandole los datos del balance y las compras), (Se comprara todo lo comprado con lo vendido por todas las sucursales)",
+          "🔵 Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales. (Tabla similar a la de asignar comisiones, solo agregandole los datos del balance y las compras), (Se comprara todo lo comprado con lo vendido por todas las sucursales)... Checar captura de pantalla",
         ],
       },
       { title: "Reportes de ventas", tasks: ["✅ Ver reportes de ventas."] },

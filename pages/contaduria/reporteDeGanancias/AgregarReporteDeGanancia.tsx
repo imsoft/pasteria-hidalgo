@@ -77,7 +77,7 @@ export default function ReporteGanancias() {
           </div>
         </div>
 
-        <div className="grid grid-cols-6 gap-6 py-4">
+        {/* <div className="grid grid-cols-6 gap-6 py-4">
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="CmbSucursal"
@@ -123,7 +123,7 @@ export default function ReporteGanancias() {
               </select>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="mt-8 flex flex-col">
           <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
