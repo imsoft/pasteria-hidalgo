@@ -71,7 +71,7 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
   const onInputValueChangedAnio = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputAnio(parseInt(event.target.value));
+    setInputAnio(event.target.value);
   };
   const onInputValueChangedMinimoDeLaMeta = (
     event: ChangeEvent<HTMLInputElement>
@@ -84,7 +84,7 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
       inputFranquicias?.trim().length === 0 &&
       inputSucursales?.trim().length === 0 &&
       inputMes?.trim().length === 0 &&
-      inputAnio === 0 &&
+      inputAnio?.trim().length === 0 &&
       inputMinimoDeLaMeta === 0 &&
       inputSucursalOFranquicia.trim().length === 0
     )

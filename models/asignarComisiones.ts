@@ -6,7 +6,7 @@ export interface IAsignarComisiones extends AsignarComision {}
 const asignarComisionSchema  = new Schema({
   sucursalOFranquicia: { type: String, required: true },
   mes: { type: String, required: true },
-  anio: { type: Number, required: true },
+  anio: { type: String, required: true },
   minimoDeLaMeta: { type: Number, required: true },
   sucursales: { type: String, required: false },
   franquicias: { type: String, required: false },

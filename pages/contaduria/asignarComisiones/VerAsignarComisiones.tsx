@@ -1,5 +1,5 @@
+import { ChangeEvent, useContext, useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import { ChangeEvent, useContext, useMemo, useState } from "react";
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 import { AsignarComisionContext } from "../../../context/contaduria/asignarComision/AsignarComisionContext";
 import ListaAsignarComision from "../../../components/ui/contaduria/ListaAsignarComision";
@@ -19,11 +19,11 @@ const mesesDelAno: string[] = [
   "Diciembre",
 ];
 
-const years: number[] = [2023, 2024, 2025];
+const years: string[] = ["2023", "2024", "2025"];
 
 export default function VerAsignarComisiones() {
   const [inputMes, setInputMes] = useState("");
-  const [inputAnio, setInputAnio] = useState(years);
+  const [inputAnio, setInputAnio] = useState("");
 
   const [change, setChange] = useState(false);
 
@@ -35,12 +35,35 @@ export default function VerAsignarComisiones() {
 
   const onTextFieldChangedMes = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputMes(event.target.value);
+    console.log(inputMes);
   };
 
   const onTextFieldChangedAnio = (event: ChangeEvent<HTMLSelectElement>) => {
-    setInputAnio([parseInt(event.target.value)]);
+    setInputAnio(event.target.value);
+    console.log(inputAnio);
   };
 
+  const mostrarTodos = () => {
+    setChange(false);
+  };
+
+  useEffect(() => {
+    setChange(true);
+    asignarComisionesMemo
+      .filter((asignarComision) => asignarComision.mes === inputMes)
+      .filter((asignarComision) => asignarComision.anio === inputAnio)
+      .map((asignarComision) => (
+        <ListaAsignarComision
+          key={asignarComision._id}
+          asignarComision={asignarComision}
+        />
+      ));
+  }, [inputMes, inputAnio]);
+
+  useEffect(() => {
+    setChange(false);
+  }, []);
+  
   return (
     <SidebarLayoutContaduria>
       <div className="px-4 sm:px-6 lg:px-8">
@@ -69,8 +92,8 @@ export default function VerAsignarComisiones() {
         </div>
         <div className="mt-8 flex flex-col">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
-            <div className="grid grid-cols-6 gap-6">
-              <div className="col-span-6 sm:col-span-3">
+            <div className="grid grid-cols-3 gap-6">
+              <div className="col-span-3 sm:col-span-1">
                 <label
                   htmlFor="CmbSucursal"
                   className="block text-sm font-medium text-gray-700"
@@ -92,7 +115,7 @@ export default function VerAsignarComisiones() {
                 </select>
               </div>
 
-              <div className="col-span-6 sm:col-span-3">
+              <div className="col-span-3 sm:col-span-1">
                 <label
                   htmlFor="TxtAnio"
                   className="block text-sm font-medium text-gray-700"
@@ -110,9 +133,21 @@ export default function VerAsignarComisiones() {
                   >
                     <option>Seleccione una opción...</option>
                     {years.map((year) => (
-                      <option key={year}>{year}</option>
+                      <option key={year}>{year.toString()}</option>
                     ))}
                   </select>
+                </div>
+              </div>
+
+              <div className="col-span-3 sm:col-span-1">
+                <div className="mt-3 px-4 py-3 bg-white text-right sm:px-2">
+                  <button
+                    type="submit"
+                    className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+                    onClick={mostrarTodos}
+                  >
+                    Mostrar todos
+                  </button>
                 </div>
               </div>
             </div>
@@ -174,12 +209,6 @@ export default function VerAsignarComisiones() {
                       </th>
                     </tr>
                   </thead>
-                  {/* {asignarComisionesMemo.map((asignarComision) => (
-                    <ListaAsignarComision
-                      key={asignarComision._id}
-                      asignarComision={asignarComision}
-                    />
-                  ))} */}
 
                   {!change
                     ? asignarComisionesMemo.map((asignarComision) => (
@@ -194,7 +223,7 @@ export default function VerAsignarComisiones() {
                         )
                         .filter(
                           (asignarComision) =>
-                            asignarComision.anio === (Array.isArray(inputAnio) ? inputAnio[0] : inputAnio)
+                            asignarComision.anio === inputAnio
                         )
                         .map((asignarComision) => (
                           <ListaAsignarComision

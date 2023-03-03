@@ -34,8 +34,7 @@ const ListaReporteDeGanancias: FC<Props> = ({ asignarComision }) => {
   const totalVentasIndividual = reportesVentasIndividualMemo
     .filter(
       (reporteVentasIndividual) =>
-        reporteVentasIndividual.nombreLugarDeVenta ===
-        asignarComision.sucursales
+        reporteVentasIndividual.lugarDeVenta === "Sucursal"
     )
     .reduce(
       (total, reporteVentasIndividual) =>
@@ -100,7 +99,7 @@ const ListaReporteDeGanancias: FC<Props> = ({ asignarComision }) => {
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <div className="grid grid-cols-2 gap-4">
+            {/* <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2 sm:col-span-1">
                 {partesFecha.map((mes) => (
                   <div
@@ -121,12 +120,29 @@ const ListaReporteDeGanancias: FC<Props> = ({ asignarComision }) => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             <div className="font-medium text-gray-900">$ {totalDeCompras}</div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2 sm:col-span-1">
+                  {reportesVentasIndividualMemo
+                    .filter(
+                      (sucursales) => sucursales.lugarDeVenta === "Sucursal"
+                    )
+                    .map((reportesVentasIndividual) => (
+                      <div
+                        key={reportesVentasIndividual._id}
+                        className="font-medium text-gray-900 py-4"
+                      >
+                        {reportesVentasIndividual.nombreLugarDeVenta} $
+                        {reportesVentasIndividual.totalDeLaVenta}
+                      </div>
+                    ))}
+                </div>
+              </div>
               $ {totalVentasIndividual}
             </div>
           </td>

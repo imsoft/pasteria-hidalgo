@@ -189,11 +189,11 @@ export default function ReporteGanancias() {
                     />
                   ))} */}
 
-                  {
+                  {/* {
                     asignarComisionesMemo.map((asignarComision) => (
                       asignarComision.mes
                     ))
-                  }
+                  } */}
 
                   {!change
                     ? asignarComisionesMemo.map((asignarComision) => (

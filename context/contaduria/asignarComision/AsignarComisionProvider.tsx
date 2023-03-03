@@ -55,7 +55,7 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
   const agregarNuevoAsignarComision = async (
     sucursalOFranquicia: string,
     mes: string,
-    anio: number,
+    anio: string,
     minimoDeLaMeta: number,
     sucursales?: string,
     franquicias?: string,

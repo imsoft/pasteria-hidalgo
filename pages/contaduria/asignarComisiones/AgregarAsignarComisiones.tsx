@@ -34,7 +34,7 @@ export default function AgregarAsignarComisiones() {
   const [inputFranquicias, setInputFranquicias] = useState("");
   const [inputSucursales, setInputSucursales] = useState("");
   const [inputMes, setInputMes] = useState("");
-  const [inputAnio, setInputAnio] = useState(currentYear);
+  const [inputAnio, setInputAnio] = useState(currentYear.toString());
   const [inputMinimoDeLaMeta, setInputMinimoDeLaMeta] = useState(0);
 
   const [touched, setTouched] = useState(false);
@@ -47,7 +47,7 @@ export default function AgregarAsignarComisiones() {
       inputMinimoDeLaMeta === 0 &&
       inputSucursales.length === 0 &&
       inputMes.length === 0 &&
-      inputAnio === 0 &&
+      inputAnio.length === 0 &&
       inputFranquicias.length === 0
     )
       return;
@@ -77,7 +77,7 @@ export default function AgregarAsignarComisiones() {
     setInputSucursales("");
     setInputFranquicias("");
     setInputMes("");
-    setInputAnio(0);
+    setInputAnio("");
   };
 
   const onTextFieldChangedFranquicias = (
@@ -107,7 +107,7 @@ export default function AgregarAsignarComisiones() {
   const onTextFieldChangedAnio = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputAnio(parseInt(event.target.value));
+    setInputAnio(event.target.value);
   };
 
   const onTextFieldChangedMinimoDeLaMeta = (
