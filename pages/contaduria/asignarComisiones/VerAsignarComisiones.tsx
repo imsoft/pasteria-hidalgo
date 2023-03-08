@@ -35,12 +35,10 @@ export default function VerAsignarComisiones() {
 
   const onTextFieldChangedMes = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputMes(event.target.value);
-    console.log(inputMes);
   };
 
   const onTextFieldChangedAnio = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputAnio(event.target.value);
-    console.log(inputAnio);
   };
 
   const mostrarTodos = () => {
@@ -63,7 +61,7 @@ export default function VerAsignarComisiones() {
   useEffect(() => {
     setChange(false);
   }, []);
-  
+
   return (
     <SidebarLayoutContaduria>
       <div className="px-4 sm:px-6 lg:px-8">

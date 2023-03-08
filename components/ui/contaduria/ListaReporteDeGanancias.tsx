@@ -83,7 +83,7 @@ const ListaReporteDeGanancias: FC<Props> = ({ asignarComision }) => {
           key={asignarComision._id}
           className="cursor-pointer hover:bg-yellow-100"
         >
-          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          {/* <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
               {asignarComision.sucursalOFranquicia}
             </div>
@@ -97,54 +97,46 @@ const ListaReporteDeGanancias: FC<Props> = ({ asignarComision }) => {
             <div className="font-medium text-gray-900">
               {asignarComision.sucursales || "-"}
             </div>
+          </td> */}
+          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <div className="font-medium text-gray-900">
+              {reportesVentasIndividualMemo
+                .filter((sucursales) => sucursales.lugarDeVenta === "Sucursal")
+                .map((reportesVentasIndividual) => (
+                  <div
+                    key={reportesVentasIndividual._id}
+                    className="font-medium text-gray-900 py-4"
+                  >
+                    {reportesVentasIndividual.fecha}
+                  </div>
+                ))}
+            </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            {/* <div className="grid grid-cols-2 gap-4">
-              <div className="col-span-2 sm:col-span-1">
-                {partesFecha.map((mes) => (
+            <div className="font-medium text-gray-900">
+              {reportesVentasIndividualMemo
+                .filter((sucursales) => sucursales.lugarDeVenta === "Sucursal")
+                .map((reportesVentasIndividual) => (
                   <div
-                    key={mes + Math.floor(Math.random() * 100)}
+                    key={reportesVentasIndividual._id}
                     className="font-medium text-gray-900 py-4"
                   >
-                    {mes}
+                    {reportesVentasIndividual.nombreLugarDeVenta}
                   </div>
                 ))}
-              </div>
-              <div className="col-span-2 sm:col-span-1">
-                {reportesDeComprasMemo.map((reporteDeCompras) => (
-                  <div
-                    key={reporteDeCompras._id}
-                    className="font-medium text-gray-900 py-4"
-                  >
-                    $ {reporteDeCompras.precioTotalDelCompra}
-                  </div>
-                ))}
-              </div>
-            </div> */}
-
-            <div className="font-medium text-gray-900">$ {totalDeCompras}</div>
+            </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2 sm:col-span-1">
-                  {reportesVentasIndividualMemo
-                    .filter(
-                      (sucursales) => sucursales.lugarDeVenta === "Sucursal"
-                    )
-                    .map((reportesVentasIndividual) => (
-                      <div
-                        key={reportesVentasIndividual._id}
-                        className="font-medium text-gray-900 py-4"
-                      >
-                        {reportesVentasIndividual.nombreLugarDeVenta} $
-                        {reportesVentasIndividual.totalDeLaVenta}
-                      </div>
-                    ))}
+                  $ {totalVentasIndividual}
                 </div>
               </div>
-              $ {totalVentasIndividual}
             </div>
+          </td>
+          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <div className="font-medium text-gray-900">$ {totalDeCompras}</div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">$ {diferencia}</div>
