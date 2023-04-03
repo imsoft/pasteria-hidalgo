@@ -143,7 +143,7 @@ export default function AgregarPersonalActivo() {
                   onChange={onTextFieldChangedNombre}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione el nombre...</option>
+                  <option hidden>Seleccione el nombre...</option>
                   {candidatosMemo.map((candidato) => (
                     <option key={candidato._id}> {candidato.nombre} </option>
                   ))}
@@ -165,12 +165,12 @@ export default function AgregarPersonalActivo() {
                   onChange={onTextFieldChangedPuesto}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione el puesto...</option>
-                  {puestosValidos.map((puesto) => (
-                    <option key={puesto} value={puesto}>
-                      {puesto}
-                    </option>
-                  ))}
+                  <option hidden>Selecciona una opción...</option>
+                  {candidatosMemo
+                    .filter((candidato) => candidato.nombre === inputNombre)
+                    .map((candidato) => (
+                      <option key={candidato.puesto}>{candidato.puesto}</option>
+                    ))}
                 </select>
               </div>
 

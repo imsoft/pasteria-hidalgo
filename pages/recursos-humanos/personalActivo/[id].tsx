@@ -17,7 +17,14 @@ interface Props {
   personalActivo: PersonalActivo;
 }
 
-const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
+const puestosValidos: PuestosEmpresa[] = [
+  "Administrador",
+  "Contaduria",
+  "Gerencia de compras",
+  "Gerencia operativa",
+  "Gerencia de ventas",
+  "Recursos Humanos",
+];
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
@@ -189,11 +196,11 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                   id="CmbPuesto"
                   name="CmbPuesto"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
+                  defaultValue={inputPuesto}
                   onChange={onInputValueChangedPuesto}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione el puesto...</option>
+                  <option hidden>Seleccione el puesto...</option>
                   {puestosValidos.map((puesto) => (
                     <option key={puesto} value={puesto}>
                       {puesto}
@@ -275,7 +282,7 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
                   onBlur={() => setTouched(true)}
                   defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona una opción...</option>
+                  <option hidden>Selecciona una opción...</option>
                   {validYesNoOptions.map((yesNoOptions) => (
                     <option key={yesNoOptions}>{yesNoOptions}</option>
                   ))}

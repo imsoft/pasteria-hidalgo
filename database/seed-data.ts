@@ -26,8 +26,19 @@ interface SeedCandidato {
   referencia3Observaciones?: string;
 }
 
+interface SeedPersonalActivo {
+  nombre: string;
+  puesto: PuestosEmpresa;
+  fechaDeContratacion: string;
+  noContrato: string;
+  noExpediente: string;
+  bajaTemporal: string;
+  comentarios: string;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
+  personalActivo: SeedPersonalActivo[];
 }
 
 export const initialData: SeedData = {
@@ -300,6 +311,71 @@ export const initialData: SeedData = {
       referencia3NumeroTelefonico: "7778889999",
       referencia3Observaciones:
         "Excelente coordinación y liderazgo en equipos médicos multidisciplinarios",
+    },
+  ],
+  personalActivo: [
+    {
+      // 1, relacionado con candidato #9
+      nombre: "Pedro García",
+      puesto: "Gerencia de ventas",
+      fechaDeContratacion: "2021-06-01",
+      noContrato: "20210601",
+      noExpediente: "MFS20210601",
+      bajaTemporal: "No",
+      comentarios: "Excelente desempeño y habilidades de liderazgo.",
+    },
+    {
+      // 2, relacionado con candidato #8
+      nombre: "Luisa Torres",
+      puesto: "Recursos Humanos",
+      fechaDeContratacion: "2023-01-15",
+      noContrato: "JLGP20230115",
+      noExpediente: "20230115",
+      bajaTemporal: "No",
+      comentarios:
+        "Posee amplios conocimientos en programación y bases de datos.",
+    },
+    {
+      // 3, relacionado con candidato #2
+      nombre: "Juan Perez",
+      puesto: "Contaduria",
+      fechaDeContratacion: "2022-09-10",
+      noContrato: "AKHG20220910",
+      noExpediente: "20220910",
+      bajaTemporal: "Si",
+      comentarios: "Licencia temporal por maternidad.",
+    },
+    {
+      // 4, relacionado con candidato #7
+      nombre: "María Fernández",
+      puesto: "Administrador",
+      fechaDeContratacion: "2020-03-01",
+      noContrato: "RP20200301",
+      noExpediente: "20200301",
+      bajaTemporal: "No",
+      comentarios:
+        "Excelente manejo de la contabilidad y finanzas de la empresa.",
+    },
+    {
+      // 5, relacionado con candidato #5
+      nombre: "Diego López",
+      puesto: "Gerencia de ventas",
+      fechaDeContratacion: "2021-11-10",
+      noContrato: "SLG20211110",
+      noExpediente: "20211110",
+      bajaTemporal: "Si",
+      comentarios: "Licencia temporal por enfermedad.",
+    },
+    {
+      // 6, relacionado con candidato #4
+      nombre: "Luisa Rodríguez",
+      puesto: "Recursos Humanos",
+      fechaDeContratacion: "2022-05-20",
+      noContrato: "JCTH20220520",
+      noExpediente: "20220520",
+      bajaTemporal: "No",
+      comentarios:
+        "Responsable de la supervisión y ejecución de proyectos de construcción.",
     },
   ],
 };
