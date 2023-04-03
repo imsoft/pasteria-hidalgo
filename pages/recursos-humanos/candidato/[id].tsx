@@ -13,7 +13,14 @@ import { Candidato, PuestosEmpresa } from "../../../interfaces";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
+const puestosValidos: PuestosEmpresa[] = [
+  "Administrador",
+  "Contaduria",
+  "Gerencia de compras",
+  "Gerencia operativa",
+  "Gerencia de ventas",
+  "Recursos Humanos",
+];
 
 interface Props {
   candidato: Candidato;
@@ -56,10 +63,8 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     inputReferencia1NumeroTelefonico,
     setInputReferencia1NumeroTelefonico,
   ] = useState(candidato.referencia1NumeroTelefonico);
-  const [
-    inputReferencia1Observaciones,
-    setInputReferencia1Observaciones,
-  ] = useState(candidato.referencia1Observaciones);
+  const [inputReferencia1Observaciones, setInputReferencia1Observaciones] =
+    useState(candidato.referencia1Observaciones);
   const [inputReferencia2Nombre, setInputReferencia2Nombre] = useState(
     candidato.referencia2Nombre
   );
@@ -70,10 +75,8 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     inputReferencia2NumeroTelefonico,
     setInputReferencia2NumeroTelefonico,
   ] = useState(candidato.referencia2NumeroTelefonico);
-  const [
-    inputReferencia2Observaciones,
-    setInputReferencia2Observaciones,
-  ] = useState(candidato.referencia2Observaciones);
+  const [inputReferencia2Observaciones, setInputReferencia2Observaciones] =
+    useState(candidato.referencia2Observaciones);
   const [inputReferencia3Nombre, setInputReferencia3Nombre] = useState(
     candidato.referencia3Nombre
   );
@@ -84,10 +87,8 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
     inputReferencia3NumeroTelefonico,
     setInputReferencia3NumeroTelefonico,
   ] = useState(candidato.referencia3NumeroTelefonico);
-  const [
-    inputReferencia3Observaciones,
-    setInputReferencia3Observaciones,
-  ] = useState(candidato.referencia3Observaciones);
+  const [inputReferencia3Observaciones, setInputReferencia3Observaciones] =
+    useState(candidato.referencia3Observaciones);
 
   const MySwal = withReactContent(Swal);
 
@@ -365,7 +366,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                   onChange={onStatusChanged}
                   // onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione el puesto...</option>
+                  <option hidden>Selecciona un producto...</option>
                   {puestosValidos.map((puesto) => (
                     <option key={puesto} value={puesto}>
                       {puesto}

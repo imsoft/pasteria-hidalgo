@@ -109,6 +109,11 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
+            {candidato.referencia3NumeroTelefonico}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
             {candidato.referencia3Observaciones}
           </div>
         </td>

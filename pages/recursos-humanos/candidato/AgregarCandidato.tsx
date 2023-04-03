@@ -10,7 +10,14 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 
-const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
+const puestosValidos: PuestosEmpresa[] = [
+  "Administrador",
+  "Contaduria",
+  "Gerencia de compras",
+  "Gerencia operativa",
+  "Gerencia de ventas",
+  "Recursos Humanos",
+];
 
 export default function AgregarCandidato() {
   const router = useRouter();
@@ -324,7 +331,7 @@ export default function AgregarCandidato() {
                   onChange={onTextFieldChangedPuesto}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione el puesto...</option>
+                  <option hidden>Selecciona un producto...</option>
                   {puestosValidos.map((puesto) => (
                     <option key={puesto} value={puesto}>
                       {puesto}
@@ -724,7 +731,7 @@ export default function AgregarCandidato() {
                       onBlur={() => setTouched(true)}
                     />
                   </div>
-                  
+
                   <div className="col-span-6 sm:col-span-3">
                     <label
                       htmlFor="TxtObservaciones"

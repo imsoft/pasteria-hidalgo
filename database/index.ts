@@ -33,4 +33,4 @@ export * as dbPersonalActivo from './dbPersonalActivo';
 // Miscelaneos
 
 export * as db from "./db";
-export * from './seed-data';
+export * as seedDatabase from './seed-data';
