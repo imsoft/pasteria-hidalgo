@@ -51,13 +51,13 @@ const ListaReportesVentasIndividual: FC<Props> = ({
                   <strong>Sabor del producto:</strong> {listado.saborProducto}
                 </div>
                 <div className="font-medium text-gray-900">
-                  <strong>Precio:</strong> ${listado.precioProducto}
+                  <strong>Precio:</strong> $ {listado.precioProducto}
                 </div>
                 <div className="font-medium text-gray-900">
                   <strong>Cantidad:</strong> {listado.cantidad}
                 </div>
                 <div className="font-medium text-gray-900">
-                  <strong>Monto:</strong> ${listado.monto}
+                  <strong>Monto:</strong> $ {listado.monto}
                 </div>
               </div>
             ))}
@@ -65,7 +65,7 @@ const ListaReportesVentasIndividual: FC<Props> = ({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            ${reporteVentasIndividual.totalDeLaVenta}
+            $ {reporteVentasIndividual.totalDeLaVenta}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

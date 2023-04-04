@@ -7,11 +7,10 @@ interface ContextProps {
   //Métodos
   agregarNuevoAsignarComision: (
     sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     mes: string,
     anio: string,
     minimoDeLaMeta: number,
-    sucursales?: string,
-    franquicias?: string,
     showNotification?: boolean
   ) => void;
 

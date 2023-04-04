@@ -15,7 +15,6 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 
-
 type Props = {
   children?: React.ReactNode;
 };
@@ -37,12 +36,6 @@ const navigation = [
     name: "Reporte de ganancias",
     href: "/contaduria/reporteDeGanancias/AgregarReporteDeGanancia",
     icon: DocumentReportIcon,
-    current: false,
-  },
-  {
-    name: "Ver Reporte de ganancias",
-    href: "/contaduria/reporteDeGanancias/VerReporteDeGanancia",
-    icon: EyeIcon,
     current: false,
   },
   {
@@ -184,7 +177,7 @@ export const SidebarLayoutContaduria: React.FC<Props> = ({ children }) => {
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <Link href={item.href} key={ item.name }>
+                      <Link href={item.href} key={item.name}>
                         <a
                           key={item.name}
                           className={classNames(

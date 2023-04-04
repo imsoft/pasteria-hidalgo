@@ -32,13 +32,6 @@ const actions = [
     iconBackground: "bg-primary-blue",
   },
   {
-    title: "Ver Reporte de ganancias",
-    href: "/contaduria/reporteDeGanancias/VerReporteDeGanancia",
-    icon: EyeIcon,
-    iconForeground: "text-primary-yellow",
-    iconBackground: "bg-primary-blue",
-  },
-  {
     title: "Ver Reporte de compras",
     href: "/contaduria/reporteDeEntrada/VerReporteDeCompras",
     icon: EyeIcon,

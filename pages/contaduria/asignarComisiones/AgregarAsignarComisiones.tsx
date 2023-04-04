@@ -1,10 +1,11 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useMemo, useState } from "react";
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 import { useRouter } from "next/router";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { AsignarComisionContext } from "../../../context/contaduria/asignarComision/AsignarComisionContext";
+import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
 const mesesDelAno: string[] = [
   "Enero",
@@ -25,14 +26,19 @@ const today = new Date();
 const currentYear = today.getFullYear();
 
 export default function AgregarAsignarComisiones() {
-
   const router = useRouter();
 
   const { agregarNuevoAsignarComision } = useContext(AsignarComisionContext);
 
+  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const sucursalesYFranquiciasMemo = useMemo(
+    () => sucursalesYFranquicias,
+    [sucursalesYFranquicias]
+  );
+
   const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputFranquicias, setInputFranquicias] = useState("");
-  const [inputSucursales, setInputSucursales] = useState("");
+  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
+    useState("");
   const [inputMes, setInputMes] = useState("");
   const [inputAnio, setInputAnio] = useState(currentYear.toString());
   const [inputMinimoDeLaMeta, setInputMinimoDeLaMeta] = useState(0);
@@ -44,21 +50,19 @@ export default function AgregarAsignarComisiones() {
   const onSave = () => {
     if (
       inputSucursalOFranquicia.length === 0 &&
+      inputNombreSucursalOFranquicia.length === 0 &&
       inputMinimoDeLaMeta === 0 &&
-      inputSucursales.length === 0 &&
       inputMes.length === 0 &&
-      inputAnio.length === 0 &&
-      inputFranquicias.length === 0
+      inputAnio.length === 0
     )
       return;
 
     agregarNuevoAsignarComision(
       inputSucursalOFranquicia,
+      inputNombreSucursalOFranquicia,
       inputMes,
       inputAnio,
       inputMinimoDeLaMeta,
-      inputSucursales,
-      inputFranquicias,
       true
     );
 
@@ -73,23 +77,16 @@ export default function AgregarAsignarComisiones() {
     router.push("/contaduria/asignarComisiones/VerAsignarComisiones");
 
     setInputSucursalOFranquicia("");
+    setInputNombreSucursalOFranquicia("");
     setInputMinimoDeLaMeta(0);
-    setInputSucursales("");
-    setInputFranquicias("");
     setInputMes("");
     setInputAnio("");
   };
 
-  const onTextFieldChangedFranquicias = (
+  const onTextFieldChangedNombreSucursalOFranquicia = (
     event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputFranquicias(event.target.value);
-  };
-
-  const onTextFieldChangedSucursales = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursales(event.target.value);
+    setInputNombreSucursalOFranquicia(event.target.value);
   };
 
   const onTextFieldChangedSucursalOFranquicia = (
@@ -98,15 +95,11 @@ export default function AgregarAsignarComisiones() {
     setInputSucursalOFranquicia(event.target.value);
   };
 
-  const onTextFieldChangedMes = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
+  const onTextFieldChangedMes = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputMes(event.target.value);
   };
 
-  const onTextFieldChangedAnio = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onTextFieldChangedAnio = (event: ChangeEvent<HTMLInputElement>) => {
     setInputAnio(event.target.value);
   };
 
@@ -126,72 +119,73 @@ export default function AgregarAsignarComisiones() {
                 Asignar comisiones
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
-
-              <div className="col-span-6 sm:col-span-3">
-                <select
-                  id="CmbNombre"
-                  name="CmbNombre"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione una opción...</option>
-                  <option>Sucursal</option>
-                  <option>Franquicia</option>
-                </select>
-              </div>
             </div>
             <div className="grid grid-cols-6 gap-6">
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Franquicia" || "hidden"
-                } col-span-6`}
-              >
+              <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Franquicia
+                  ¿Sucursal o Franquicia?
+                </label>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <select
+                    id="CmbNombre"
+                    name="CmbNombre"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    defaultValue="Selecciona un producto..."
+                    onChange={onTextFieldChangedSucursalOFranquicia}
+                    onBlur={() => setTouched(true)}
+                  >
+                    <option hidden>Seleccione una opción...</option>
+                    <option>Sucursal</option>
+                    <option>Franquicia</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="CmbFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {inputSucursalOFranquicia === "Sucursal"
+                    ? "Sucursal"
+                    : inputSucursalOFranquicia === "Franquicia"
+                    ? "Franquicia"
+                    : "Primero seleccione si es franquicia o sucursal"}
                 </label>
                 <select
                   id="CmbFranquicia"
                   name="CmbFranquicia"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedFranquicias}
+                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione la franquicia...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
-              </div>
-
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Sucursal" || "hidden"
-                } col-span-6`}
-              >
-                <label
-                  htmlFor="CmbSucursal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Sucursal
-                </label>
-                <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedSucursales}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la sucursal...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
+                  <option hidden>
+                    Seleccione la{" "}
+                    {inputSucursalOFranquicia === "Sucursal"
+                      ? "Sucursal"
+                      : inputSucursalOFranquicia === "Franquicia"
+                      ? "Franquicia"
+                      : "Primero seleccione si es franquicia o sucursal"}
+                    ...
+                  </option>
+                  {sucursalesYFranquiciasMemo
+                    .filter(
+                      (sucursalesYFranquicias) =>
+                        sucursalesYFranquicias.sucursalOFranquicia ===
+                        inputSucursalOFranquicia
+                    )
+                    .map((sucursalesYFranquicias) => (
+                      <option
+                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      >
+                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      </option>
+                    ))}
                 </select>
               </div>
 
@@ -210,7 +204,7 @@ export default function AgregarAsignarComisiones() {
                   onChange={onTextFieldChangedMes}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione una opción...</option>
+                  <option hidden>Seleccione una opción...</option>
                   {mesesDelAno.map((mes) => (
                     <option key={mes}>{mes}</option>
                   ))}
@@ -267,7 +261,6 @@ export default function AgregarAsignarComisiones() {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

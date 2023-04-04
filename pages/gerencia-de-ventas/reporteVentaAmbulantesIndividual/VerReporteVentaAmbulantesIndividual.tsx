@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ReportesVentasAmbulantesIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual/ReporteVentasAmbulantesIndividualContext";
 
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
-import ListaReportesVentasAmbulantesIndividual from '../../../components/ui/gerencia-de-ventas/ListaReportesVentasAmbulantesIndividual';
+import ListaReportesVentasAmbulantesIndividual from "../../../components/ui/gerencia-de-ventas/ListaReportesVentasAmbulantesIndividual";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
@@ -136,12 +136,6 @@ const VerReporteVentaAmbulantesIndividual = () => {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Nombre Lugar De Venta
-                      </th>
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
                         Listado De Productos
                       </th>
                       <th
@@ -149,18 +143,6 @@ const VerReporteVentaAmbulantesIndividual = () => {
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
                         Total De La Venta
-                      </th>
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Correo Electrónico Cliente Frecuente
-                      </th>
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Puntos usados Cliente Frecuente
                       </th>
                     </tr>
                   </thead>

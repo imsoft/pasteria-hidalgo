@@ -1,5 +1,4 @@
 import { ChangeEvent, useContext, useMemo, useState, useEffect } from "react";
-import Link from "next/link";
 
 import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasIndividual/ReportesVentasIndividualContext";
 import ListaReportesVentasIndividual from "../../../components/ui/gerencia-de-ventas/ListaReportesDeVentaIndividual";

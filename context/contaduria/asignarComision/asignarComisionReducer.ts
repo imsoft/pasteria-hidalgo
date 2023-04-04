@@ -34,11 +34,11 @@ export const asignarComisionesReducer = (
           if (checkInPersonal._id === action.payload._id) {
             checkInPersonal.sucursalOFranquicia =
               action.payload.sucursalOFranquicia;
+            checkInPersonal.nombreSucursalOFranquicia =
+              action.payload.nombreSucursalOFranquicia;
             checkInPersonal.mes = action.payload.mes;
             checkInPersonal.anio = action.payload.anio;
             checkInPersonal.minimoDeLaMeta = action.payload.minimoDeLaMeta;
-            checkInPersonal.sucursales = action.payload.sucursales;
-            checkInPersonal.franquicias = action.payload.franquicias;
           }
           return checkInPersonal;
         }),

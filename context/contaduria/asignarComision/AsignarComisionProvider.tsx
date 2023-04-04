@@ -54,11 +54,10 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
 
   const agregarNuevoAsignarComision = async (
     sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     mes: string,
     anio: string,
     minimoDeLaMeta: number,
-    sucursales?: string,
-    franquicias?: string,
     showNotificacion = false
   ) => {
     try {
@@ -66,11 +65,10 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
         "/asignarComisiones",
         {
           sucursalOFranquicia,
+          nombreSucursalOFranquicia,
           mes,
           anio,
           minimoDeLaMeta,
-          sucursales,
-          franquicias,
         }
       );
       dispatch({
@@ -96,11 +94,10 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
     {
       _id,
       sucursalOFranquicia,
+      nombreSucursalOFranquicia,
       mes,
       anio,
       minimoDeLaMeta,
-      sucursales,
-      franquicias,
     }: AsignarComision,
     showNotificacion = false
   ) => {
@@ -109,11 +106,10 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
         `/asignarComisiones/${_id}`,
         {
           sucursalOFranquicia,
+          nombreSucursalOFranquicia,
           mes,
           anio,
           minimoDeLaMeta,
-          sucursales,
-          franquicias,
         }
       );
       dispatch({

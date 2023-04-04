@@ -61,7 +61,7 @@ const ListaAcondicionamientoDeSucursales: FC<Props> = ({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {acondicionamientoDeSucursal.precioDeCompra}
+            $ {acondicionamientoDeSucursal.precioDeCompra}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -71,7 +71,7 @@ const ListaAcondicionamientoDeSucursales: FC<Props> = ({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {acondicionamientoDeSucursal.totalAcomulado}
+            $ {acondicionamientoDeSucursal.totalAcomulado}
           </div>
         </td>
       </tr>

@@ -29,7 +29,7 @@ const ListaAsignarComision: FC<Props> = ({ asignarComision }) => {
     .filter(
       (reporteVentasIndividual) =>
         reporteVentasIndividual.nombreLugarDeVenta ===
-        asignarComision.sucursales
+        asignarComision.nombreSucursalOFranquicia
     )
     .reduce(
       (total, reporteVentasIndividual) =>
@@ -41,7 +41,7 @@ const ListaAsignarComision: FC<Props> = ({ asignarComision }) => {
     .filter(
       (reporteVentasIndividual) =>
         reporteVentasIndividual.fecha ===
-        asignarComision.sucursales
+        asignarComision.nombreSucursalOFranquicia
     )
     .reduce(
       (total, reporteVentasIndividual) =>
@@ -49,9 +49,9 @@ const ListaAsignarComision: FC<Props> = ({ asignarComision }) => {
       0
     );
 
-    const onClick = () => {
-      router.push(`/contaduria/asignarComisiones/${asignarComision._id}`);
-    };
+  const onClick = () => {
+    router.push(`/contaduria/asignarComisiones/${asignarComision._id}`);
+  };
 
   return (
     <>
@@ -68,12 +68,7 @@ const ListaAsignarComision: FC<Props> = ({ asignarComision }) => {
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.franquicias || "-"}
-            </div>
-          </td>
-          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <div className="font-medium text-gray-900">
-              {asignarComision.sucursales || "-"}
+              {asignarComision.nombreSucursalOFranquicia || "-"}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
