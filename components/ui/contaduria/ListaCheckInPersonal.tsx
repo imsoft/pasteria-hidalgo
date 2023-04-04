@@ -7,7 +7,6 @@ interface Props {
 }
 
 const ListaChecksInPersonal: FC<Props> = ({ checkInPersonal }) => {
-  
   return (
     <tbody className="divide-y divide-gray-200 bg-white">
       <tr
@@ -21,12 +20,7 @@ const ListaChecksInPersonal: FC<Props> = ({ checkInPersonal }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {checkInPersonal.franquicias || "-"}
-          </div>
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="text-gray-900">
-            {checkInPersonal.sucursales || "-"}
+            {checkInPersonal.nombreSucursalOFranquicia || "-"}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
