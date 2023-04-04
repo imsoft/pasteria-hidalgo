@@ -36,9 +36,19 @@ interface SeedPersonalActivo {
   comentarios: string;
 }
 
+interface SeedCheckInPersonal {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  nombre: string;
+  fecha: string;
+  horaDeIngreso: string;
+  horaDeSalida: string;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
+  checkInDePersonal: SeedCheckInPersonal[];
 }
 
 export const initialData: SeedData = {
@@ -376,6 +386,56 @@ export const initialData: SeedData = {
       bajaTemporal: "No",
       comentarios:
         "Responsable de la supervisión y ejecución de proyectos de construcción.",
+    },
+  ],
+  checkInDePersonal: [
+    {
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Galerías",
+      nombre: "Pedro García",
+      fecha: "2023-07-15",
+      horaDeIngreso: "09:30",
+      horaDeSalida: "18:00",
+    },
+    {
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Zapopan",
+      nombre: "Luisa Torres",
+      fecha: "2023-04-20",
+      horaDeIngreso: "08:00",
+      horaDeSalida: "17:00",
+    },
+    {
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Plaza del Sol",
+      nombre: "Juan Perez",
+      fecha: "2023-10-10",
+      horaDeIngreso: "11:00",
+      horaDeSalida: "20:00",
+    },
+    {
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Tlaquepaque",
+      nombre: "María Fernández",
+      fecha: "2023-05-05",
+      horaDeIngreso: "07:00",
+      horaDeSalida: "16:00",
+    },
+    {
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Andares",
+      nombre: "Diego López",
+      fecha: "2023-11-20",
+      horaDeIngreso: "10:00",
+      horaDeSalida: "19:00",
+    },
+    {
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Centro",
+      nombre: "Luisa Rodríguez",
+      fecha: "2023-06-15",
+      horaDeIngreso: "13:00",
+      horaDeSalida: "21:00",
     },
   ],
 };

@@ -34,12 +34,12 @@ export const checksInPersonalReducer = (
           if (checkInPersonal._id === action.payload._id) {
             checkInPersonal.sucursalOFranquicia =
               action.payload.sucursalOFranquicia;
+            checkInPersonal.nombreSucursalOFranquicia =
+              action.payload.nombreSucursalOFranquicia;
             checkInPersonal.nombre = action.payload.nombre;
             checkInPersonal.fecha = action.payload.fecha;
             checkInPersonal.horaDeIngreso = action.payload.horaDeIngreso;
             checkInPersonal.horaDeSalida = action.payload.horaDeSalida;
-            checkInPersonal.sucursales = action.payload.sucursales;
-            checkInPersonal.franquicias = action.payload.franquicias;
           }
           return checkInPersonal;
         }),

@@ -60,12 +60,11 @@ const updateCheckInPersonal = async (
 
   const {
     sucursalOFranquicia = checkInPersonalToUpdate.sucursalOFranquicia,
+    nombreSucursalOFranquicia = checkInPersonalToUpdate.nombreSucursalOFranquicia,
     nombre = checkInPersonalToUpdate.nombre,
     fecha = checkInPersonalToUpdate.fecha,
     horaDeIngreso = checkInPersonalToUpdate.horaDeIngreso,
     horaDeSalida = checkInPersonalToUpdate.horaDeSalida,
-    sucursales = checkInPersonalToUpdate.sucursales,
-    franquicias = checkInPersonalToUpdate.franquicias,
   } = req.body;
 
   try {
@@ -73,12 +72,11 @@ const updateCheckInPersonal = async (
       id,
       {
         sucursalOFranquicia,
+        nombreSucursalOFranquicia,
         nombre,
         fecha,
         horaDeIngreso,
         horaDeSalida,
-        sucursales,
-        franquicias,
       },
       { runValidators: true, new: true }
     );

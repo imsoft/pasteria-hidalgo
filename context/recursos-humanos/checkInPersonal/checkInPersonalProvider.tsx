@@ -54,12 +54,11 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
 
   const agregarCheckInPersonal = async (
     sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     nombre: string,
     fecha: string,
     horaDeIngreso: string,
     horaDeSalida: string,
-    sucursales?: string,
-    franquicias?: string,
     showNotificacion = false
   ) => {
     try {
@@ -67,12 +66,11 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
         "/checksInPersonal",
         {
           sucursalOFranquicia,
+          nombreSucursalOFranquicia,
           nombre,
           fecha,
           horaDeIngreso,
           horaDeSalida,
-          sucursales,
-          franquicias,
         }
       );
       dispatch({
@@ -98,12 +96,11 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
     {
       _id,
       sucursalOFranquicia,
+      nombreSucursalOFranquicia,
       nombre,
       fecha,
       horaDeIngreso,
       horaDeSalida,
-      sucursales,
-      franquicias,
     }: CheckInPersonal,
     showNotificacion = false
   ) => {
@@ -112,12 +109,11 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
         `/checksInPersonal/${_id}`,
         {
           sucursalOFranquicia,
+          nombreSucursalOFranquicia,
           nombre,
           fecha,
           horaDeIngreso,
           horaDeSalida,
-          sucursales,
-          franquicias,
         }
       );
       dispatch({

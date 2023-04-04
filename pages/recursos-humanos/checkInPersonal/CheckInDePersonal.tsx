@@ -8,6 +8,7 @@ import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recurs
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
@@ -16,33 +17,33 @@ export default function CheckInDePersonal() {
   const router = useRouter();
 
   const { agregarCheckInPersonal } = useContext(CheckInPersonalContext);
+  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const sucursalesYFranquiciasMemo = useMemo(
+    () => sucursalesYFranquicias,
+    [sucursalesYFranquicias]
+  );
 
   const { personasActivas } = useContext(PersonalActivoContext);
   const personasActivasMemo = useMemo(() => personasActivas, [personasActivas]);
 
-  const [inputFranquicias, setInputFranquicias] = useState("");
-  const [inputSucursales, setInputSucursales] = useState("");
+  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
+  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
+    useState("");
   const [inputNombre, setInputNombre] = useState("");
   const [inputFecha, setInputFecha] = useState(hoy.toLocaleDateString());
-  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState(hoy.toLocaleTimeString());
+  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState(
+    hoy.toLocaleTimeString()
+  );
   const [inputHoraDeSalida, setInputHoraDeSalida] = useState("");
-
-  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
 
   const [touched, setTouched] = useState(false);
 
   const MySwal = withReactContent(Swal);
 
-  const onTextFieldChangedFranquicias = (
+  const onTextFieldChangedNombreSucursalOFranquicia = (
     event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputFranquicias(event.target.value);
-  };
-
-  const onTextFieldChangedSucursales = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursales(event.target.value);
+    setInputNombreSucursalOFranquicia(event.target.value);
   };
 
   const onTextFieldChangedNombre = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -73,8 +74,7 @@ export default function CheckInDePersonal() {
 
   const onSave = () => {
     if (
-      inputFranquicias.length === 0 &&
-      inputSucursales.length === 0 &&
+      inputNombreSucursalOFranquicia.length === 0 &&
       inputNombre.length === 0 &&
       inputFecha.length === 0 &&
       inputHoraDeIngreso.length === 0 &&
@@ -85,12 +85,11 @@ export default function CheckInDePersonal() {
 
     agregarCheckInPersonal(
       inputSucursalOFranquicia,
+      inputNombreSucursalOFranquicia,
       inputNombre,
       inputFecha,
       inputHoraDeIngreso,
       inputHoraDeSalida,
-      inputSucursales,
-      inputFranquicias,
       true
     );
 
@@ -104,13 +103,12 @@ export default function CheckInDePersonal() {
 
     router.push("/recursos-humanos/checkInPersonal/VerCheckInPersonal");
 
-    setInputFranquicias("");
-    setInputSucursales("");
+    setInputSucursalOFranquicia("");
+    setInputNombreSucursalOFranquicia("");
     setInputNombre("");
     setInputFecha("");
     setInputHoraDeIngreso("");
     setInputHoraDeSalida("");
-    setInputSucursalOFranquicia("");
   };
 
   return (
@@ -125,80 +123,72 @@ export default function CheckInDePersonal() {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
 
-            <div>
-              <label className="text-base font-medium text-gray-900">
-                Seleccione una opción
-              </label>
-              <p className="text-sm leading-5 text-gray-500">
-                ¿Sucursal o Franquicia?
-              </p>
-
-              <div className="col-span-6 sm:col-span-3">
-                <select
-                  id="CmbNombre"
-                  name="CmbNombre"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione una opción...</option>
-                  <option>Sucursal</option>
-                  <option>Franquicia</option>
-                </select>
-              </div>
-            </div>
-
             <div className="grid grid-cols-6 gap-6">
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Franquicia" || "hidden"
-                } col-span-6`}
-              >
+              <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Franquicia
+                  ¿Sucursal o Franquicia?
+                </label>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <select
+                    id="CmbNombre"
+                    name="CmbNombre"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    defaultValue="Selecciona un producto..."
+                    onChange={onTextFieldChangedSucursalOFranquicia}
+                    onBlur={() => setTouched(true)}
+                  >
+                    <option hidden>Seleccione una opción...</option>
+                    <option>Sucursal</option>
+                    <option>Franquicia</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="CmbFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {inputSucursalOFranquicia === "Sucursal"
+                    ? "Sucursal"
+                    : inputSucursalOFranquicia === "Franquicia"
+                    ? "Franquicia"
+                    : "Primero seleccione si es franquicia o sucursal"}
                 </label>
                 <select
                   id="CmbFranquicia"
                   name="CmbFranquicia"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedFranquicias}
+                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione la franquicia...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
-              </div>
-
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Sucursal" || "hidden"
-                } col-span-6`}
-              >
-                <label
-                  htmlFor="CmbSucursal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Sucursal
-                </label>
-                <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedSucursales}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la sucursal...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
+                  <option hidden>
+                    Seleccione la{" "}
+                    {inputSucursalOFranquicia === "Sucursal"
+                      ? "Sucursal"
+                      : inputSucursalOFranquicia === "Franquicia"
+                      ? "Franquicia"
+                      : "Primero seleccione si es franquicia o sucursal"}
+                    ...
+                  </option>
+                  {sucursalesYFranquiciasMemo
+                    .filter(
+                      (sucursalesYFranquicias) =>
+                        sucursalesYFranquicias.sucursalOFranquicia ===
+                        inputSucursalOFranquicia
+                    )
+                    .map((sucursalesYFranquicias) => (
+                      <option
+                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      >
+                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      </option>
+                    ))}
                 </select>
               </div>
 
@@ -217,7 +207,7 @@ export default function CheckInDePersonal() {
                   onChange={onTextFieldChangedNombre}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione el nombre...</option>
+                  <option hidden>Seleccione el nombre...</option>
                   {personasActivasMemo.map((personaActiva) => (
                     <option key={personaActiva._id}>
                       {personaActiva.nombre}

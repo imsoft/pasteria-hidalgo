@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db, seedDatabase } from "../../database";
-import { Candidato, PersonalActivo } from "../../models";
+import { Candidato, CheckInDePersonal, PersonalActivo } from "../../models";
 
 type Data = {
   message: string;
@@ -22,6 +22,11 @@ export default async function handler(
 
   await PersonalActivo.deleteMany(); //Borra todo de la DB
   await PersonalActivo.insertMany(seedDatabase.initialData.personalActivo);
+
+  await CheckInDePersonal.deleteMany(); //Borra todo de la DB
+  await CheckInDePersonal.insertMany(
+    seedDatabase.initialData.checkInDePersonal
+  );
   await db.disconnect();
 
   res.status(200).json({ message: "Proceso realizado correctamente" });
