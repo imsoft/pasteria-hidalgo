@@ -63,11 +63,10 @@ const updateAsignarComision = async (
 
   const {
     sucursalOFranquicia = asignarComisionToUpdate.sucursalOFranquicia,
+    nombreSucursalOFranquicia = asignarComisionToUpdate.nombreSucursalOFranquicia,
     mes = asignarComisionToUpdate.mes,
     anio = asignarComisionToUpdate.anio,
     minimoDeLaMeta = asignarComisionToUpdate.minimoDeLaMeta,
-    sucursales = asignarComisionToUpdate.sucursales,
-    franquicias = asignarComisionToUpdate.franquicias,
   } = req.body;
 
   try {
@@ -75,11 +74,10 @@ const updateAsignarComision = async (
       id,
       {
         sucursalOFranquicia,
+        nombreSucursalOFranquicia,
         mes,
         anio,
         minimoDeLaMeta,
-        sucursales,
-        franquicias,
       },
       { runValidators: true, new: true }
     );
