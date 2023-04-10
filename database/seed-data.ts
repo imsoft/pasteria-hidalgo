@@ -1,6 +1,7 @@
 import {
   IListadoDeReporteDeCompra,
   ListadoDeProductos,
+  LugarDeVenta,
   PuestosEmpresa,
   YesNo,
 } from "../interfaces";
@@ -105,6 +106,17 @@ interface SeedReporteVentasAmbulantesIndividual {
   listadoDeProductos: ListadoDeProductos[];
 }
 
+export interface SeedReporteVentasIndividual {
+  fecha: string;
+  nombreDelVendedor: string;
+  lugarDeVenta: LugarDeVenta;
+  nombreLugarDeVenta: string;
+  totalDeLaVenta: number;
+  listadoDeProductos: ListadoDeProductos[];
+  correoElectronicoClienteFrecuente: string;
+  puntosClienteFrecuente: number;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -115,6 +127,7 @@ interface SeedData {
   asignarPrecio: SeedAsignarPrecio[];
   clienteFrecuente: SeedClienteFrecuente[];
   reporteVentasAmbulantesIndividual: SeedReporteVentasAmbulantesIndividual[];
+  reporteVentasIndividual: SeedReporteVentasIndividual[];
 }
 
 export const initialData: SeedData = {
@@ -1437,6 +1450,296 @@ export const initialData: SeedData = {
           monto: 500,
         },
       ],
+    },
+  ],
+  reporteVentasIndividual: [
+    {
+      // 1
+      fecha: "14/07/2023",
+      nombreDelVendedor: "Ana",
+      lugarDeVenta: "Sucursal",
+      nombreLugarDeVenta: "Polanco",
+      totalDeLaVenta: 1500,
+      listadoDeProductos: [
+        {
+          idProducto: "O_L",
+          tipoDeProducto: "Otros",
+          saborProducto: "Limpieza",
+          cantidad: 3,
+          precioProducto: 100,
+          monto: 300,
+        },
+        {
+          idProducto: "PA_J",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Jeans",
+          cantidad: 2,
+          precioProducto: 500,
+          monto: 1000,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "ana@gmail.com",
+      puntosClienteFrecuente: 25,
+    },
+    {
+      // 2
+      fecha: "22/09/2023",
+      nombreDelVendedor: "Carlos",
+      lugarDeVenta: "Franquicia",
+      nombreLugarDeVenta: "Centro Histórico",
+      totalDeLaVenta: 780,
+      listadoDeProductos: [
+        {
+          idProducto: "LB_B",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Biografía",
+          cantidad: 1,
+          precioProducto: 500,
+          monto: 500,
+        },
+        {
+          idProducto: "PE_E",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Exótico",
+          cantidad: 2,
+          precioProducto: 140,
+          monto: 280,
+        },
+        {
+          idProducto: "CE_M",
+          tipoDeProducto: "Otros",
+          saborProducto: "Manga larga",
+          cantidad: 1,
+          precioProducto: 60,
+          monto: 60,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "carlos@gmail.com",
+      puntosClienteFrecuente: 10,
+    },
+    {
+      // 3
+      fecha: "05/12/2023",
+      nombreDelVendedor: "Lucía",
+      lugarDeVenta: "Sucursal",
+      nombreLugarDeVenta: "Satélite",
+      totalDeLaVenta: 4500,
+      listadoDeProductos: [
+        {
+          idProducto: "PH_T",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Tecnología",
+          cantidad: 1,
+          precioProducto: 4000,
+          monto: 4000,
+        },
+        {
+          idProducto: "AU_A",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Alámbricos",
+          cantidad: 1,
+          precioProducto: 500,
+          monto: 500,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "lucia@gmail.com",
+      puntosClienteFrecuente: 100,
+    },
+    {
+      // 4
+      fecha: "10/03/2023",
+      nombreDelVendedor: "Pedro",
+      lugarDeVenta: "Sucursal",
+      nombreLugarDeVenta: "Condesa",
+      totalDeLaVenta: 750,
+      listadoDeProductos: [
+        {
+          idProducto: "ZP_D",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Deportivos",
+          cantidad: 1,
+          precioProducto: 600,
+          monto: 600,
+        },
+        {
+          idProducto: "CM_N",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Negra",
+          cantidad: 2,
+          precioProducto: 75,
+          monto: 150,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "pedro@gmail.com",
+      puntosClienteFrecuente: 5,
+    },
+    {
+      // 5
+      fecha: "20/06/2023",
+      nombreDelVendedor: "María",
+      lugarDeVenta: "Franquicia",
+      nombreLugarDeVenta: "Polanco",
+      totalDeLaVenta: 1200,
+      listadoDeProductos: [
+        {
+          idProducto: "CO_L",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Laptop",
+          cantidad: 1,
+          precioProducto: 1000,
+          monto: 1000,
+        },
+        {
+          idProducto: "MP_T",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Tecnológico",
+          cantidad: 1,
+          precioProducto: 200,
+          monto: 200,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "maria@gmail.com",
+      puntosClienteFrecuente: 50,
+    },
+    {
+      // 6
+      fecha: "15/09/2023",
+      nombreDelVendedor: "Luisa",
+      lugarDeVenta: "Franquicia",
+      nombreLugarDeVenta: "Centro Histórico",
+      totalDeLaVenta: 900,
+      listadoDeProductos: [
+        {
+          idProducto: "TV_S",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Smart TV",
+          cantidad: 1,
+          precioProducto: 800,
+          monto: 800,
+        },
+        {
+          idProducto: "B_C",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Clásico",
+          cantidad: 2,
+          precioProducto: 50,
+          monto: 100,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "luisa@gmail.com",
+      puntosClienteFrecuente: 20,
+    },
+    {
+      // 7
+      fecha: "22/11/2023",
+      nombreDelVendedor: "Carlos",
+      lugarDeVenta: "Sucursal",
+      nombreLugarDeVenta: "Polanco",
+      totalDeLaVenta: 450,
+      listadoDeProductos: [
+        {
+          idProducto: "RC_G",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Gala",
+          cantidad: 1,
+          precioProducto: 400,
+          monto: 400,
+        },
+        {
+          idProducto: "PS_DM",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Doble Mole",
+          cantidad: 3,
+          precioProducto: 50,
+          monto: 150,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "carlos@gmail.com",
+      puntosClienteFrecuente: 10,
+    },
+    {
+      // 8
+      fecha: "5/5/2023",
+      nombreDelVendedor: "Ana",
+      lugarDeVenta: "Franquicia",
+      nombreLugarDeVenta: "Providencia",
+      totalDeLaVenta: 3200,
+      listadoDeProductos: [
+        {
+          idProducto: "C_A",
+          tipoDeProducto: "Otros",
+          saborProducto: "Android",
+          cantidad: 1,
+          precioProducto: 3000,
+          monto: 3000,
+        },
+        {
+          idProducto: "CA_G",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Genérico",
+          cantidad: 2,
+          precioProducto: 100,
+          monto: 200,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "ana@gmail.com",
+      puntosClienteFrecuente: 100,
+    },
+    {
+      // 9
+      fecha: "10/3/2023",
+      nombreDelVendedor: "Sofía",
+      lugarDeVenta: "Sucursal",
+      nombreLugarDeVenta: "Condesa",
+      totalDeLaVenta: 750,
+      listadoDeProductos: [
+        {
+          idProducto: "LP_LP",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Literatura Polaca",
+          cantidad: 3,
+          precioProducto: 150,
+          monto: 450,
+        },
+        {
+          idProducto: "PS_VV",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Vegano",
+          cantidad: 5,
+          precioProducto: 60,
+          monto: 300,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "sofia@gmail.com",
+      puntosClienteFrecuente: 30,
+    },
+    {
+      // 10
+      fecha: "7/6/2023",
+      nombreDelVendedor: "Pedro",
+      lugarDeVenta: "Franquicia",
+      nombreLugarDeVenta: "Polanco",
+      totalDeLaVenta: 420,
+      listadoDeProductos: [
+        {
+          idProducto: "AB_A",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Aretes",
+          cantidad: 1,
+          precioProducto: 350,
+          monto: 350,
+        },
+        {
+          idProducto: "PD_CCM",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Cajeta con caramelo",
+          cantidad: 2,
+          precioProducto: 35,
+          monto: 70,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "pedro@gmail.com",
+      puntosClienteFrecuente: 5,
     },
   ],
 };

@@ -207,7 +207,7 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
 
   const [inputCodigoProducto, setInputCodigoProducto] = useState("");
   const [inputFecha, setInputFecha] = useState(
-    `${dia < 10 ? "0" + dia : dia}-${mes < 10 ? "0" + mes : mes}-${anio}`
+    `${dia < 10 ? "0" + dia : dia}/${mes < 10 ? "0" + mes : mes}/${anio}`
   );
   const [inputNombreVendedor, setInputNombreVendedor] = useState("");
   const [inputLugarDeLaVenta, setInputLugarDeLaVenta] = useState("");
