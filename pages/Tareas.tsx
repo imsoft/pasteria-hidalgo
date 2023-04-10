@@ -88,7 +88,7 @@ const tasksList = [
       {
         title: "Asignar comisiones",
         tasks: [
-          "🔵 Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no. (Ir sumando del Reporte Ventas Individual y de los ambulantes, agregar mes y año (del sistema) y filtrarlos al momento de ver, el filtrado de mes y año)... Arreglar filtrado",
+          "✅ Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no. (Ir sumando del Reporte Ventas Individual y de los ambulantes, agregar mes y año (del sistema) y filtrarlos al momento de ver, el filtrado de mes y año)... Arreglar filtrado",
         ],
       },
       {
@@ -101,7 +101,7 @@ const tasksList = [
       {
         title: "Reporte de ganancias",
         tasks: [
-          "🔵 Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales. (Tabla similar a la de asignar comisiones, solo agregandole los datos del balance y las compras), (Se comprara todo lo comprado con lo vendido por todas las sucursales)... Checar captura de pantalla",
+          "✅ Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales. (Tabla similar a la de asignar comisiones, solo agregandole los datos del balance y las compras), (Se comprara todo lo comprado con lo vendido por todas las sucursales)... Checar captura de pantalla",
         ],
       },
       { title: "Reportes de ventas", tasks: ["✅ Ver reportes de ventas."] },
@@ -122,6 +122,12 @@ const tasksList = [
     topic: "💻 Miscelaneos",
     subtopics: [
       { title: "Caja registradora", tasks: ["⚒️ Ver caja registradora"] },
+      {
+        title: "General",
+        tasks: [
+          "⚒️ Incorporar el login, actualizar productos segun reporte de entrada y salida, actualizar puntos del cliente frecuente segun la compra",
+        ],
+      },
     ],
   },
 ];
@@ -167,7 +173,10 @@ const Tareas = () => {
                               <p className="text-lg leading-7 text-gray-600">
                                 {subtopic.title}
                                 {subtopic.tasks.map((task) => (
-                                  <p key={task} className="text-base leading-7 text-gray-500">
+                                  <p
+                                    key={task}
+                                    className="text-base leading-7 text-gray-500"
+                                  >
                                     {task}
                                   </p>
                                 ))}
