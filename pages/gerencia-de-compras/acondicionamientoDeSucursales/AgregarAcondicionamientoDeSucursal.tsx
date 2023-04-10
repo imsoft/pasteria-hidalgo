@@ -347,7 +347,7 @@ export default function AcondicionamientoDeSucursales() {
                   onBlur={() => setTouched(true)}
                   defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona un proveedor...</option>
+                  <option hidden>Selecciona un proveedor...</option>
                   {proveedoresMemo.map((proveedor) => (
                     <option key={proveedor._id}> {proveedor.nombre} </option>
                   ))}
@@ -369,7 +369,7 @@ export default function AcondicionamientoDeSucursales() {
                   onBlur={() => setTouched(true)}
                   defaultValue="Selecciona unq opción..."
                 >
-                  <option>Selecciona una opción...</option>
+                  <option hidden>Selecciona una opción...</option>
                   {validYesNoOptions.map((yesNoOptions) => (
                     <option key={yesNoOptions}>{yesNoOptions}</option>
                   ))}

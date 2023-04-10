@@ -303,7 +303,7 @@ export default function ReporteDeCompras() {
                   onChange={onTextFieldChangedCredito}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Selecciona una opción...</option>
+                  <option hidden>Selecciona una opción...</option>
                   {validYesNoOptions.map((yesNoOptions) => (
                     <option key={yesNoOptions}>{yesNoOptions}</option>
                   ))}

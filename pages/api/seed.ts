@@ -5,6 +5,8 @@ import {
   Candidato,
   CheckInDePersonal,
   PersonalActivo,
+  Proveedor,
+  ReporteDeCompra,
 } from "../../models";
 
 type Data = {
@@ -37,6 +39,12 @@ export default async function handler(
   await AcondicionamientoDeSucursal.insertMany(
     seedDatabase.initialData.acondicionamientoDeSucursal
   );
+
+  await Proveedor.deleteMany(); //Borra todo de la DB
+  await Proveedor.insertMany(seedDatabase.initialData.proveedor);
+
+  await ReporteDeCompra.deleteMany(); //Borra todo de la DB
+  await ReporteDeCompra.insertMany(seedDatabase.initialData.reporteDeCompra);
   await db.disconnect();
 
   res.status(200).json({ message: "Proceso realizado correctamente" });

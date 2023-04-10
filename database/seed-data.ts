@@ -1,4 +1,8 @@
-import { PuestosEmpresa, YesNo } from "../interfaces";
+import {
+  IListadoDeReporteDeCompra,
+  PuestosEmpresa,
+  YesNo,
+} from "../interfaces";
 
 interface SeedCandidato {
   nombre: string;
@@ -59,11 +63,33 @@ interface SeedAcondicionamientoDeSucursal {
   totalAcomulado: number;
 }
 
+interface SeedProveedor {
+  nombre: string;
+  direccion: string;
+  telefono: string;
+  horarioDeApertura: string;
+  horarioDeCierre: string;
+  productosQueSeCompran: string;
+  entregasADomicilio: string;
+  rfc: string;
+}
+
+interface SeedReporteDeCompra {
+  fechaDeCompra: string;
+  nombreProveedor: string;
+  credito: string;
+  factura: string;
+  listadoDeReporteDeCompra: IListadoDeReporteDeCompra[];
+  precioTotalDelCompra: number;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
   checkInDePersonal: SeedCheckInPersonal[];
   acondicionamientoDeSucursal: SeedAcondicionamientoDeSucursal[];
+  proveedor: SeedProveedor[];
+  reporteDeCompra: SeedReporteDeCompra[];
 }
 
 export const initialData: SeedData = {
@@ -593,6 +619,420 @@ export const initialData: SeedData = {
       factura: "No",
       totalAcomulado: 20,
       cantidad: 2,
+    },
+  ],
+  proveedor: [
+    {
+      // 1
+      nombre: "María",
+      direccion: "Avenida Revolución #456",
+      telefono: "3312345678",
+      horarioDeApertura: "08:30",
+      horarioDeCierre: "17:30",
+      productosQueSeCompran: "Manzanas",
+      entregasADomicilio: "Sí",
+      rfc: "MARG890715DFA",
+    },
+    {
+      // 2
+      nombre: "Juan",
+      direccion: "Calle Juárez #123",
+      telefono: "3333333333",
+      horarioDeApertura: "09:00",
+      horarioDeCierre: "18:00",
+      productosQueSeCompran: "Plátanos",
+      entregasADomicilio: "Sí",
+      rfc: "JUAG790503GH",
+    },
+    {
+      // 3
+      nombre: "Laura",
+      direccion: "Calle Reforma #789",
+      telefono: "3356789012",
+      horarioDeApertura: "11:00",
+      horarioDeCierre: "20:00",
+      productosQueSeCompran: "Uvas",
+      entregasADomicilio: "No",
+      rfc: "LAUG870415JKL",
+    },
+    {
+      // 4
+      nombre: "Pedro",
+      direccion: "Avenida Vallarta #456",
+      telefono: "3378901234",
+      horarioDeApertura: "07:30",
+      horarioDeCierre: "16:30",
+      productosQueSeCompran: "Papayas",
+      entregasADomicilio: "Sí",
+      rfc: "PEDM880512QWE",
+    },
+    {
+      // 5
+      nombre: "María",
+      direccion: "Calle Independencia #123",
+      telefono: "3345678901",
+      horarioDeApertura: "09:00",
+      horarioDeCierre: "18:00",
+      productosQueSeCompran: "Plátanos",
+      entregasADomicilio: "Sí",
+      rfc: "MAAM901205RTY",
+    },
+    {
+      // 6
+      nombre: "Juan",
+      direccion: "Avenida Juárez #789",
+      telefono: "3367890123",
+      horarioDeApertura: "08:30",
+      horarioDeCierre: "17:30",
+      productosQueSeCompran: "Manzanas",
+      entregasADomicilio: "No",
+      rfc: "JUAG880721QAZ",
+    },
+    {
+      // 7
+      nombre: "Laura",
+      direccion: "Calle Reforma #456",
+      telefono: "3356789012",
+      horarioDeApertura: "08:00",
+      horarioDeCierre: "16:30",
+      productosQueSeCompran: "Huevos",
+      entregasADomicilio: "Sí",
+      rfc: "LAUG890527JKL",
+    },
+    {
+      // 8
+      nombre: "Pedro",
+      direccion: "Avenida Hidalgo #789",
+      telefono: "3378901234",
+      horarioDeApertura: "07:30",
+      horarioDeCierre: "18:00",
+      productosQueSeCompran: "Carne",
+      entregasADomicilio: "No",
+      rfc: "PEDP940315RTY",
+    },
+    {
+      // 9
+      nombre: "María",
+      direccion: "Calle Juárez #1234",
+      telefono: "3367890123",
+      horarioDeApertura: "09:00",
+      horarioDeCierre: "20:00",
+      productosQueSeCompran: "Verduras",
+      entregasADomicilio: "Sí",
+      rfc: "MARG891205UIO",
+    },
+    {
+      // 10
+      nombre: "Juan",
+      direccion: "Boulevard López Mateos #567",
+      telefono: "3345678901",
+      horarioDeApertura: "10:30",
+      horarioDeCierre: "18:30",
+      productosQueSeCompran: "Pan",
+      entregasADomicilio: "Sí",
+      rfc: "JUAN880915KLO",
+    },
+  ],
+  reporteDeCompra: [
+    {
+      // 1
+      fechaDeCompra: "2022-09-28",
+      nombreProveedor: "María",
+      credito: "No",
+      factura: "No",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Lechuga",
+          unidades: "Gramos",
+          tempetatura: "Ambiente",
+          caducidad: "2022-09-30",
+          cantidad: 5,
+          precioPorUnidad: 5,
+          precioTotalDelProducto: 25,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Pepino",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2022-09-30",
+          cantidad: 3,
+          precioPorUnidad: 8,
+          precioTotalDelProducto: 24,
+        },
+      ],
+      precioTotalDelCompra: 49,
+    },
+    {
+      // 2
+      fechaDeCompra: "2022-11-10",
+      nombreProveedor: "Juan",
+      credito: "Sí",
+      factura: "Sí",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Carne de res",
+          unidades: "Kilogramos",
+          tempetatura: "Refrigerado",
+          caducidad: "2022-11-12",
+          cantidad: 2,
+          precioPorUnidad: 50,
+          precioTotalDelProducto: 100,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Pescado",
+          unidades: "Kilogramos",
+          tempetatura: "Congelado",
+          caducidad: "2022-11-15",
+          cantidad: 3,
+          precioPorUnidad: 30,
+          precioTotalDelProducto: 90,
+        },
+      ],
+      precioTotalDelCompra: 190,
+    },
+    {
+      // 3
+      fechaDeCompra: "2023-02-12",
+      nombreProveedor: "Pedro",
+      credito: "No",
+      factura: "Sí",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Arroz",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-03-30",
+          cantidad: 10,
+          precioPorUnidad: 5,
+          precioTotalDelProducto: 50,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Frijoles",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-04-30",
+          cantidad: 5,
+          precioPorUnidad: 8,
+          precioTotalDelProducto: 40,
+        },
+      ],
+      precioTotalDelCompra: 90,
+    },
+    {
+      // 4
+      fechaDeCompra: "2023-03-20",
+      nombreProveedor: "Ana",
+      credito: "Sí",
+      factura: "No",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Queso",
+          unidades: "Kilogramos",
+          tempetatura: "Refrigerado",
+          caducidad: "2023-03-31",
+          cantidad: 2,
+          precioPorUnidad: 30,
+          precioTotalDelProducto: 60,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Huevo",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-04-15",
+          cantidad: 12,
+          precioPorUnidad: 1,
+          precioTotalDelProducto: 12,
+        },
+      ],
+      precioTotalDelCompra: 72,
+    },
+    {
+      // 5
+      fechaDeCompra: "2023-04-01",
+      nombreProveedor: "María",
+      credito: "Sí",
+      factura: "Sí",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Lechuga",
+          unidades: "Gramos",
+          tempetatura: "Refrigerado",
+          caducidad: "2023-04-03",
+          cantidad: 6,
+          precioPorUnidad: 2,
+          precioTotalDelProducto: 12,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Zanahoria",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-04-10",
+          cantidad: 3,
+          precioPorUnidad: 3,
+          precioTotalDelProducto: 9,
+        },
+      ],
+      precioTotalDelCompra: 21,
+    },
+    {
+      // 6
+      fechaDeCompra: "2023-03-25",
+      nombreProveedor: "Juan",
+      credito: "No",
+      factura: "No",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Pollo",
+          unidades: "Kilogramos",
+          tempetatura: "Congelado",
+          caducidad: "2023-04-02",
+          cantidad: 5,
+          precioPorUnidad: 8,
+          precioTotalDelProducto: 40,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Papa",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-04-20",
+          cantidad: 2,
+          precioPorUnidad: 2,
+          precioTotalDelProducto: 4,
+        },
+      ],
+      precioTotalDelCompra: 44,
+    },
+    {
+      // 7
+      fechaDeCompra: "2023-04-02",
+      nombreProveedor: "Pedro",
+      credito: "Sí",
+      factura: "Sí",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Tomate",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-04-04",
+          cantidad: 3,
+          precioPorUnidad: 5,
+          precioTotalDelProducto: 15,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Cebolla",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-04-15",
+          cantidad: 2,
+          precioPorUnidad: 3,
+          precioTotalDelProducto: 6,
+        },
+      ],
+      precioTotalDelCompra: 21,
+    },
+    {
+      // 8
+      fechaDeCompra: "2023-03-31",
+      nombreProveedor: "Ana",
+      credito: "No",
+      factura: "Sí",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Queso",
+          unidades: "Kilogramos",
+          tempetatura: "Refrigerado",
+          caducidad: "2023-04-05",
+          cantidad: 2,
+          precioPorUnidad: 7,
+          precioTotalDelProducto: 14,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Huevo",
+          unidades: "Gramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-04-10",
+          cantidad: 1,
+          precioPorUnidad: 12,
+          precioTotalDelProducto: 12,
+        },
+      ],
+      precioTotalDelCompra: 26,
+    },
+    {
+      // 9
+      fechaDeCompra: "2023-04-01",
+      nombreProveedor: "María",
+      credito: "No",
+      factura: "No",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Lechuga",
+          unidades: "Gramos",
+          tempetatura: "Refrigerado",
+          caducidad: "2023-04-03",
+          cantidad: 5,
+          precioPorUnidad: 2,
+          precioTotalDelProducto: 10,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Zanahoria",
+          unidades: "Kilogramos",
+          tempetatura: "Ambiente",
+          caducidad: "2023-04-07",
+          cantidad: 3,
+          precioPorUnidad: 4,
+          precioTotalDelProducto: 12,
+        },
+      ],
+      precioTotalDelCompra: 22,
+    },
+    {
+      // 10
+      fechaDeCompra: "2023-03-30",
+      nombreProveedor: "Juan",
+      credito: "Sí",
+      factura: "Sí",
+      listadoDeReporteDeCompra: [
+        {
+          uuid: 1,
+          materiaPrima: "Pollo",
+          unidades: "Kilogramos",
+          tempetatura: "Congelado",
+          caducidad: "2023-04-05",
+          cantidad: 2,
+          precioPorUnidad: 8,
+          precioTotalDelProducto: 16,
+        },
+        {
+          uuid: 2,
+          materiaPrima: "Pescado",
+          unidades: "Kilogramos",
+          tempetatura: "Refrigerado",
+          caducidad: "2023-04-10",
+          cantidad: 1,
+          precioPorUnidad: 15,
+          precioTotalDelProducto: 15,
+        },
+      ],
+      precioTotalDelCompra: 31,
     },
   ],
 };

@@ -280,7 +280,7 @@ export const ProveedorPage: FC<Props> = ({ proveedor }) => {
                   // onBlur={() => setTouched(true)}
                   defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona una opción...</option>
+                  <option hidden>Selecciona una opción...</option>
                   {validYesNoOptions.map((yesNoOptions) => (
                     <option key={yesNoOptions}>{yesNoOptions}</option>
                   ))}

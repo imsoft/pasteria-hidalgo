@@ -61,10 +61,10 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
                   <strong>Cantidad:</strong> {listado.cantidad}
                 </div>
                 <div className="font-medium text-gray-900">
-                  <strong>Precio por unidad:</strong> {listado.precioPorUnidad}
+                  <strong>Precio por unidad:</strong> $ {listado.precioPorUnidad}
                 </div>
                 <div className="font-medium text-gray-900">
-                  <strong>Precio total del producto:</strong> {listado.precioTotalDelProducto}
+                  <strong>Precio total del producto:</strong> $ {listado.precioTotalDelProducto}
                 </div>
               </div>
             ))}
