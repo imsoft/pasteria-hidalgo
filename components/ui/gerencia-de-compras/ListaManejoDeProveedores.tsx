@@ -1,6 +1,7 @@
 import { FC } from "react";
 import router from "next/router";
 import { Proveedor } from "../../../interfaces";
+import { phoneNumberFormat } from "../../../utils";
 
 interface Props {
   proveedor: Proveedor;
@@ -25,7 +26,9 @@ const ListaProveedores: FC<Props> = ({ proveedor }) => {
           <div className="text-gray-900">{proveedor.direccion}</div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">{proveedor.telefono}</div>
+          <div className="font-medium text-gray-900">
+            {phoneNumberFormat(proveedor.telefono)}
+          </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import router from "next/router";
 import { Candidato } from "../../../interfaces";
+import { phoneNumberFormat } from "../../../utils";
 
 interface Props {
   candidato: Candidato;
@@ -45,11 +46,13 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">{candidato.celular}</div>
+          <div className="font-medium text-gray-900">
+            {phoneNumberFormat(candidato.celular)}
+          </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {candidato.contactoDeEmergencia}
+            {phoneNumberFormat(candidato.contactoDeEmergencia)}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -69,7 +72,7 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {candidato.referencia1NumeroTelefonico}
+            {phoneNumberFormat(candidato.referencia1NumeroTelefonico)}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -89,7 +92,7 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {candidato.referencia2NumeroTelefonico}
+            {phoneNumberFormat(candidato.referencia2NumeroTelefonico)}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -109,7 +112,7 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {candidato.referencia3NumeroTelefonico}
+            {phoneNumberFormat(candidato.referencia3NumeroTelefonico || "")}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
