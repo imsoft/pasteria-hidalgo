@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { db, seedDatabase } from "../../database";
 import {
   AcondicionamientoDeSucursal,
+  AsignarPrecio,
   Candidato,
   CheckInDePersonal,
   PersonalActivo,
@@ -45,6 +46,9 @@ export default async function handler(
 
   await ReporteDeCompra.deleteMany(); //Borra todo de la DB
   await ReporteDeCompra.insertMany(seedDatabase.initialData.reporteDeCompra);
+
+  await AsignarPrecio.deleteMany(); //Borra todo de la DB
+  await AsignarPrecio.insertMany(seedDatabase.initialData.asignarPrecio);
   await db.disconnect();
 
   res.status(200).json({ message: "Proceso realizado correctamente" });

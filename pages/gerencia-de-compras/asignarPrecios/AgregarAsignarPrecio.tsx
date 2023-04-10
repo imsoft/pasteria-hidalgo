@@ -1,5 +1,5 @@
-import { ChangeEvent, useContext, useState } from "react";
-import { useRouter } from 'next/router';
+import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { useRouter } from "next/router";
 
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
 
@@ -7,12 +7,15 @@ import { AsignarPreciosContext } from "../../../context/gerencia-de-compras/asig
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima";
 
 export default function AgregarCandidato() {
-
   const router = useRouter();
 
   const { agregarNuevoAsignarPrecio } = useContext(AsignarPreciosContext);
+
+  const { materiasPrimas } = useContext(MateriasPrimasContext);
+  const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
 
   const [inputProducto, setInputProducto] = useState("");
   const [inputPrecioMaximo, setInputPrecioMaximo] = useState("");
@@ -65,7 +68,6 @@ export default function AgregarCandidato() {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
-              
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtProducto"
@@ -81,10 +83,13 @@ export default function AgregarCandidato() {
                   onBlur={() => setTouched(true)}
                   defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona un producto...</option>
-                  <option>Masa</option>
-                  <option>Fresas</option>
-                  <option>Leche</option>
+                  <option hidden>Selecciona un producto...</option>
+                  {materiasPrimasMemo.map((materiaPrima) => (
+                    <option key={materiaPrima._id}>
+                      {" "}
+                      {materiaPrima.materiaPrima}{" "}
+                    </option>
+                  ))}
                 </select>
               </div>
 

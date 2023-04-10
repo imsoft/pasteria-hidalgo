@@ -83,6 +83,11 @@ interface SeedReporteDeCompra {
   precioTotalDelCompra: number;
 }
 
+interface SeedAsignarPrecio {
+  producto: string;
+  precioMaximo: string;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -90,6 +95,7 @@ interface SeedData {
   acondicionamientoDeSucursal: SeedAcondicionamientoDeSucursal[];
   proveedor: SeedProveedor[];
   reporteDeCompra: SeedReporteDeCompra[];
+  asignarPrecio: SeedAsignarPrecio[];
 }
 
 export const initialData: SeedData = {
@@ -1033,6 +1039,59 @@ export const initialData: SeedData = {
         },
       ],
       precioTotalDelCompra: 31,
+    },
+  ],
+  asignarPrecio: [
+    {
+      // 1
+      producto: "Harina",
+      precioMaximo: "50",
+    },
+    {
+      // 2
+      producto: "Arroz",
+      precioMaximo: "30",
+    },
+    {
+      // 3
+      producto: "Leche",
+      precioMaximo: "25",
+    },
+    {
+      // 4
+      producto: "Aceite de oliva",
+      precioMaximo: "120",
+    },
+
+    {
+      // 5
+      producto: "Salchichas",
+      precioMaximo: "60",
+    },
+    {
+      // 6
+      producto: "Café",
+      precioMaximo: "80",
+    },
+    {
+      // 7
+      producto: "Azúcar",
+      precioMaximo: "40",
+    },
+    {
+      // 8
+      producto: "Pasta de dientes",
+      precioMaximo: "15",
+    },
+    {
+      // 9
+      producto: "Jabón de baño",
+      precioMaximo: "10",
+    },
+    {
+      // 10
+      producto: "Papel higiénico",
+      precioMaximo: "20",
     },
   ],
 };
