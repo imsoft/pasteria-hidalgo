@@ -3,7 +3,7 @@ import { SidebarLayout } from "../components/layouts/SidebarLayout";
 import { CheckCircleIcon, PhotographIcon } from "@heroicons/react/outline";
 import { uploadFile } from "../firebase";
 
-const pruebas = () => {
+const Pruebas = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
 
@@ -80,4 +80,4 @@ const pruebas = () => {
   );
 };
 
-export default pruebas;
+export default Pruebas;
