@@ -147,10 +147,10 @@ const VerReporteVentaAmbulantesIndividual = () => {
                     </tr>
                   </thead>
 
-                  {/* {!change
+                  {!change
                     ? reportesVentasAmbulantesIndividualMemo.map(
                         (reporteVentasAmbulantesIndividual) => (
-                          <ListaReporteVentasAmbulantesIndividual
+                          <ListaReportesVentasAmbulantesIndividual
                             key={reporteVentasAmbulantesIndividual._id}
                             reporteVentasAmbulantesIndividual={
                               reporteVentasAmbulantesIndividual
@@ -165,13 +165,13 @@ const VerReporteVentaAmbulantesIndividual = () => {
                             inputNuevaFecha
                         )
                         .map((reporteVentasAmbulantesIndividual) => (
-                          <ListaReporteVentasAmbulantesIndividual
+                          <ListaReportesVentasAmbulantesIndividual
                             key={reporteVentasAmbulantesIndividual._id}
                             reporteVentasAmbulantesIndividual={
                               reporteVentasAmbulantesIndividual
                             }
                           />
-                        ))} */}
+                        ))}
                 </table>
               </div>
             </div>

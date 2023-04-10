@@ -18,6 +18,10 @@ const validProductType: TipoDeProducto[] = [
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
 
+const anio = hoy.getFullYear();
+const mes = hoy.getMonth() + 1;
+const dia = hoy.getDate();
+
 const validCakeFlavors: Paste[] = [
   {
     _id: "PD_ACL",
@@ -202,7 +206,9 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
   );
 
   const [inputCodigoProducto, setInputCodigoProducto] = useState("");
-  const [inputFecha, setInputFecha] = useState(hoy.toLocaleDateString());
+  const [inputFecha, setInputFecha] = useState(
+    `${dia < 10 ? "0" + dia : dia}-${mes < 10 ? "0" + mes : mes}-${anio}`
+  );
   const [inputNombreVendedor, setInputNombreVendedor] = useState("");
   const [inputLugarDeLaVenta, setInputLugarDeLaVenta] = useState("");
   const [inputNombreLugarDeLaVenta, setInputNombreLugarDeLaVenta] =
@@ -459,58 +465,6 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
                   onChange={onTextFieldChangedNombreVendedor}
                   onBlur={() => setTouched(true)}
                 />
-              </div>
-
-              <div
-                className={` ${
-                  inputLugarDeLaVenta === "Franquicia" || "hidden"
-                } col-span-6 sm:col-span-3`}
-              >
-                <label
-                  htmlFor="CmbFranquicia"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Franquicia
-                </label>
-                <select
-                  id="CmbFranquicia"
-                  name="CmbFranquicia"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreLugarDeLaVenta}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la franquicia...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
-              </div>
-
-              <div
-                className={` ${
-                  inputLugarDeLaVenta === "Sucursal" || "hidden"
-                } col-span-6 sm:col-span-3`}
-              >
-                <label
-                  htmlFor="CmbSucursal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Sucursal
-                </label>
-                <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreLugarDeLaVenta}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la sucursal...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">

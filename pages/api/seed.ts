@@ -9,6 +9,7 @@ import {
   PersonalActivo,
   Proveedor,
   ReporteDeCompra,
+  ReporteVentasAmbulantesIndividual,
 } from "../../models";
 
 type Data = {
@@ -26,6 +27,7 @@ export default async function handler(
   }
 
   await db.connect();
+
   await Candidato.deleteMany(); //Borra todo de la DB
   await Candidato.insertMany(seedDatabase.initialData.candidatos);
 
@@ -53,6 +55,12 @@ export default async function handler(
 
   await ClienteFrecuente.deleteMany(); //Borra todo de la DB
   await ClienteFrecuente.insertMany(seedDatabase.initialData.clienteFrecuente);
+
+  await ReporteVentasAmbulantesIndividual.deleteMany(); //Borra todo de la DB
+  await ReporteVentasAmbulantesIndividual.insertMany(
+    seedDatabase.initialData.reporteVentasAmbulantesIndividual
+  );
+
   await db.disconnect();
 
   res.status(200).json({ message: "Proceso realizado correctamente" });

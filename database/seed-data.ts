@@ -1,5 +1,6 @@
 import {
   IListadoDeReporteDeCompra,
+  ListadoDeProductos,
   PuestosEmpresa,
   YesNo,
 } from "../interfaces";
@@ -97,6 +98,13 @@ interface SeedClienteFrecuente {
   nombreSucursalOFranquicia: string;
 }
 
+interface SeedReporteVentasAmbulantesIndividual {
+  fecha: string;
+  nombreDelVendedor: string;
+  totalDeLaVenta: number;
+  listadoDeProductos: ListadoDeProductos[];
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -106,6 +114,7 @@ interface SeedData {
   reporteDeCompra: SeedReporteDeCompra[];
   asignarPrecio: SeedAsignarPrecio[];
   clienteFrecuente: SeedClienteFrecuente[];
+  reporteVentasAmbulantesIndividual: SeedReporteVentasAmbulantesIndividual[];
 }
 
 export const initialData: SeedData = {
@@ -1194,6 +1203,240 @@ export const initialData: SeedData = {
       puntosDeCompra: 15,
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Centro-Este",
+    },
+  ],
+  reporteVentasAmbulantesIndividual: [
+    {
+      // 1
+      fecha: "15/05/2023",
+      nombreDelVendedor: "Laura",
+      totalDeLaVenta: 250,
+      listadoDeProductos: [
+        {
+          idProducto: "PC_SP",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Strawberry Pecan",
+          cantidad: 3,
+          precioProducto: 70,
+          monto: 210,
+        },
+        {
+          idProducto: "GB_CJ",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Chocolate Chip",
+          cantidad: 2,
+          precioProducto: 20,
+          monto: 40,
+        },
+      ],
+    },
+    {
+      // 2
+      fecha: "06/07/2023",
+      nombreDelVendedor: "Juan",
+      totalDeLaVenta: 480,
+      listadoDeProductos: [
+        {
+          idProducto: "PN_PA",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Pan de Ajo",
+          cantidad: 8,
+          precioProducto: 40,
+          monto: 320,
+        },
+        {
+          idProducto: "DS_AU",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Azúcar",
+          cantidad: 12,
+          precioProducto: 10,
+          monto: 120,
+        },
+      ],
+    },
+    {
+      // 3
+      fecha: "20/07/2023",
+      nombreDelVendedor: "Ricardo",
+      totalDeLaVenta: 85,
+      listadoDeProductos: [
+        {
+          idProducto: "BE_ML",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Manzana",
+          cantidad: 2,
+          precioProducto: 30,
+          monto: 60,
+        },
+        {
+          idProducto: "PA_TQ",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Tres Leches",
+          cantidad: 1,
+          precioProducto: 25,
+          monto: 25,
+        },
+      ],
+    },
+    {
+      // 4
+      fecha: "12/08/2023",
+      nombreDelVendedor: "Pedro",
+      totalDeLaVenta: 2000,
+      listadoDeProductos: [
+        {
+          idProducto: "HB_HN",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Hawaiana",
+          cantidad: 5,
+          precioProducto: 250,
+          monto: 1250,
+        },
+        {
+          idProducto: "FB_RN",
+          tipoDeProducto: "Otros",
+          saborProducto: "Regular",
+          cantidad: 3,
+          precioProducto: 100,
+          monto: 300,
+        },
+        {
+          idProducto: "BT_ST",
+          tipoDeProducto: "Otros",
+          saborProducto: "Soda",
+          cantidad: 4,
+          precioProducto: 50,
+          monto: 200,
+        },
+      ],
+    },
+    {
+      // 5
+      fecha: "18/09/2023",
+      nombreDelVendedor: "María",
+      totalDeLaVenta: 350,
+      listadoDeProductos: [
+        {
+          idProducto: "CH_CV",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Chocolate Vainilla",
+          cantidad: 2,
+          precioProducto: 120,
+          monto: 240,
+        },
+        {
+          idProducto: "PM_BT",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Mango",
+          cantidad: 3,
+          precioProducto: 30,
+          monto: 90,
+        },
+        {
+          idProducto: "CP_MS",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Mocha Sin Azúcar",
+          cantidad: 1,
+          precioProducto: 80,
+          monto: 80,
+        },
+      ],
+    },
+    {
+      // 6
+      fecha: "10/05/2023",
+      nombreDelVendedor: "Andrés",
+      totalDeLaVenta: 540,
+      listadoDeProductos: [
+        {
+          idProducto: "SV_MM",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Vegetariano",
+          cantidad: 4,
+          precioProducto: 120,
+          monto: 480,
+        },
+        {
+          idProducto: "BT_FR",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Fruta",
+          cantidad: 2,
+          precioProducto: 30,
+          monto: 60,
+        },
+      ],
+    },
+    {
+      // 7
+      fecha: "14/11/2023",
+      nombreDelVendedor: "Luisa",
+      totalDeLaVenta: 120,
+      listadoDeProductos: [
+        {
+          idProducto: "CB_CR",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Crema",
+          cantidad: 6,
+          precioProducto: 20,
+          monto: 120,
+        },
+      ],
+    },
+    {
+      // 8
+      fecha: "22/12/2023",
+      nombreDelVendedor: "David",
+      totalDeLaVenta: 420,
+      listadoDeProductos: [
+        {
+          idProducto: "CC_MR",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Mocha Rebanado",
+          cantidad: 10,
+          precioProducto: 30,
+          monto: 300,
+        },
+        {
+          idProducto: "BV_FR",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Fresa",
+          cantidad: 2,
+          precioProducto: 60,
+          monto: 120,
+        },
+      ],
+    },
+    {
+      // 9
+      fecha: "01/01/2024",
+      nombreDelVendedor: "Roberto",
+      totalDeLaVenta: 80,
+      listadoDeProductos: [
+        {
+          idProducto: "BR_TP",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Tres Pudines",
+          cantidad: 1,
+          precioProducto: 80,
+          monto: 80,
+        },
+      ],
+    },
+    {
+      // 10
+      fecha: "28/02/2024",
+      nombreDelVendedor: "Laura",
+      totalDeLaVenta: 500,
+      listadoDeProductos: [
+        {
+          idProducto: "TM_CH",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Chocolate",
+          cantidad: 1,
+          precioProducto: 500,
+          monto: 500,
+        },
+      ],
     },
   ],
 };
