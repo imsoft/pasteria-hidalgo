@@ -68,8 +68,7 @@ const updateAcondicionamientoDeSucursal = async (
 
   const {
     sucursalOFranquicia = acondicionamientoDeSucursalToUpdate.sucursalOFranquicia,
-    sucursales = acondicionamientoDeSucursalToUpdate.sucursales,
-    franquicias = acondicionamientoDeSucursalToUpdate.franquicias,
+    nombreSucursalOFranquicia = acondicionamientoDeSucursalToUpdate.nombreSucursalOFranquicia,
     producto = acondicionamientoDeSucursalToUpdate.producto,
     fechaDeCompra = acondicionamientoDeSucursalToUpdate.fechaDeCompra,
     descripcionDelProducto = acondicionamientoDeSucursalToUpdate.descripcionDelProducto,
@@ -87,8 +86,7 @@ const updateAcondicionamientoDeSucursal = async (
         id,
         {
           sucursalOFranquicia,
-          sucursales,
-          franquicias,
+          nombreSucursalOFranquicia,
           producto,
           fechaDeCompra,
           descripcionDelProducto,

@@ -3,8 +3,7 @@ import { YesNo } from ".";
 export interface AcondicionamientoDeSucursal {
   _id: string;
   sucursalOFranquicia: string;
-  sucursales?: string;
-  franquicias?: string;
+  nombreSucursalOFranquicia: string;
   producto: string;
   fechaDeCompra: string;
   descripcionDelProducto: string;

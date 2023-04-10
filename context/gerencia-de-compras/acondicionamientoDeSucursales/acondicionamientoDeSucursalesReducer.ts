@@ -41,10 +41,8 @@ export const acondicionamientoDeSucursalesReducer = (
             if (acondicionamientoDeSucursal._id === action.payload._id) {
               acondicionamientoDeSucursal.sucursalOFranquicia =
                 action.payload.sucursalOFranquicia;
-              acondicionamientoDeSucursal.sucursales =
-                action.payload.sucursales;
-              acondicionamientoDeSucursal.franquicias =
-                action.payload.franquicias;
+              acondicionamientoDeSucursal.nombreSucursalOFranquicia =
+                action.payload.nombreSucursalOFranquicia;
               acondicionamientoDeSucursal.producto = action.payload.producto;
               acondicionamientoDeSucursal.fechaDeCompra =
                 action.payload.fechaDeCompra;

@@ -6,8 +6,7 @@ export interface IAcondicionamientoDeSucursal
 
 const acondicionamientoDeSucursalesSchema = new Schema({
   sucursalOFranquicia: { type: String, required: true },
-  sucursales: { type: String, required: false },
-  franquicias: { type: String, required: false },
+  nombreSucursalOFranquicia: { type: String, required: true },
   producto: { type: String, required: true },
   fechaDeCompra: { type: String, required: true },
   descripcionDelProducto: { type: String, required: true },

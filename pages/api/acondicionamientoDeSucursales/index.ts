@@ -43,8 +43,7 @@ const postAcondicionamientoDeSucursal = async (
 ) => {
   const {
     sucursalOFranquicia = "",
-    sucursales = "",
-    franquicias = "",
+    nombreSucursalOFranquicia = "",
     producto = "",
     fechaDeCompra = "",
     descripcionDelProducto = "",
@@ -58,8 +57,7 @@ const postAcondicionamientoDeSucursal = async (
 
   const newAcondicionamientoDeSucursal = new AcondicionamientoDeSucursal({
     sucursalOFranquicia,
-    sucursales,
-    franquicias,
+    nombreSucursalOFranquicia,
     producto,
     fechaDeCompra,
     descripcionDelProducto,

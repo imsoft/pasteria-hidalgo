@@ -1,4 +1,4 @@
-import { PuestosEmpresa } from "../interfaces";
+import { PuestosEmpresa, YesNo } from "../interfaces";
 
 interface SeedCandidato {
   nombre: string;
@@ -45,10 +45,25 @@ interface SeedCheckInPersonal {
   horaDeSalida: string;
 }
 
+interface SeedAcondicionamientoDeSucursal {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  producto: string;
+  fechaDeCompra: string;
+  descripcionDelProducto: string;
+  fechaEstimadaDeEntrega: string;
+  proveedor: string;
+  factura: YesNo;
+  precioDeCompra: number;
+  cantidad: number;
+  totalAcomulado: number;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
   checkInDePersonal: SeedCheckInPersonal[];
+  acondicionamientoDeSucursal: SeedAcondicionamientoDeSucursal[];
 }
 
 export const initialData: SeedData = {
@@ -436,6 +451,148 @@ export const initialData: SeedData = {
       fecha: "2023-06-15",
       horaDeIngreso: "13:00",
       horaDeSalida: "21:00",
+    },
+  ],
+  acondicionamientoDeSucursal: [
+    {
+      // 1
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Polanco",
+      producto: "Sillones",
+      fechaDeCompra: "2023-02-15",
+      descripcionDelProducto: "Material de gamuza",
+      precioDeCompra: 30,
+      fechaEstimadaDeEntrega: "2023-02-18",
+      proveedor: "Frutas y Verduras S.A.",
+      factura: "No",
+      totalAcomulado: 90,
+      cantidad: 3,
+    },
+    {
+      // 2
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Reforma",
+      producto: "Sillas",
+      fechaDeCompra: "2023-03-10",
+      descripcionDelProducto: "Sillas ergonomias",
+      precioDeCompra: 250,
+      fechaEstimadaDeEntrega: "2023-03-18",
+      proveedor: "Tienda de Ropa Fashion",
+      factura: "Si",
+      totalAcomulado: 500,
+      cantidad: 2,
+    },
+    {
+      // 3
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Centro",
+      producto: "Computadora portátil",
+      fechaDeCompra: "2023-04-01",
+      descripcionDelProducto: "Laptop Dell Inspiron 15",
+      precioDeCompra: 1200,
+      fechaEstimadaDeEntrega: "2023-04-05",
+      proveedor: "Tecnología Total",
+      factura: "Si",
+      totalAcomulado: 1200,
+      cantidad: 1,
+    },
+    {
+      // 4
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Providencia",
+      producto: "Papel de baño",
+      fechaDeCompra: "2023-03-20",
+      descripcionDelProducto: "Marca charmin",
+      precioDeCompra: 15,
+      fechaEstimadaDeEntrega: "2023-03-22",
+      proveedor: "Ropa Cool S.A.",
+      factura: "No",
+      totalAcomulado: 45,
+      cantidad: 3,
+    },
+    {
+      // 5
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Polanco",
+      producto: "Teléfono móvil",
+      fechaDeCompra: "2023-03-15",
+      descripcionDelProducto: "Smartphone Samsung Galaxy S21",
+      precioDeCompra: 900,
+      fechaEstimadaDeEntrega: "2023-03-20",
+      proveedor: "ElectroTech",
+      factura: "Si",
+      totalAcomulado: 1800,
+      cantidad: 2,
+    },
+    {
+      // 6
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Providencia",
+      producto: "Mesa de comedor",
+      fechaDeCompra: "2023-02-28",
+      descripcionDelProducto: "Mesa de madera maciza para 8 personas",
+      precioDeCompra: 1200,
+      fechaEstimadaDeEntrega: "2023-03-10",
+      proveedor: "Muebles Elegantes",
+      factura: "No",
+      totalAcomulado: 1200,
+      cantidad: 1,
+    },
+    {
+      // 7
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Santa Fe",
+      producto: "Laptop",
+      fechaDeCompra: "2023-04-01",
+      descripcionDelProducto: "Laptop HP Spectre x360",
+      precioDeCompra: 1500,
+      fechaEstimadaDeEntrega: "2023-04-07",
+      proveedor: "Tecnología Avanzada",
+      factura: "Si",
+      totalAcomulado: 1500,
+      cantidad: 1,
+    },
+    {
+      // 8
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Polanco",
+      producto: "Delantales",
+      fechaDeCompra: "2023-03-20",
+      descripcionDelProducto: "Color blanco",
+      precioDeCompra: 80,
+      fechaEstimadaDeEntrega: "2023-03-25",
+      proveedor: "Deportes Max",
+      factura: "No",
+      totalAcomulado: 240,
+      cantidad: 3,
+    },
+    {
+      // 9
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Centro Histórico",
+      producto: "Smartphone",
+      fechaDeCompra: "2023-04-02",
+      descripcionDelProducto: "Samsung Galaxy S21",
+      precioDeCompra: 1000,
+      fechaEstimadaDeEntrega: "2023-04-05",
+      proveedor: "ElectroTech",
+      factura: "Si",
+      totalAcomulado: 2000,
+      cantidad: 2,
+    },
+    {
+      // 10
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Providencia",
+      producto: "Libro",
+      fechaDeCompra: "2023-03-28",
+      descripcionDelProducto: "El Principito",
+      precioDeCompra: 10,
+      fechaEstimadaDeEntrega: "2023-04-01",
+      proveedor: "Librería El Sabio",
+      factura: "No",
+      totalAcomulado: 20,
+      cantidad: 2,
     },
   ],
 };

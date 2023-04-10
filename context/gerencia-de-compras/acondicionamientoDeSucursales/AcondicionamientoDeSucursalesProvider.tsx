@@ -60,6 +60,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
 
   const agregarNuevoAcondicionamientoDeSucursal = async (
     sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     producto: string,
     fechaDeCompra: string,
     descripcionDelProducto: string,
@@ -69,8 +70,6 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
     precioDeCompra: number,
     cantidad: number,
     totalAcomulado: number,
-    sucursales?: string,
-    franquicias?: string,
     showNotificacion = false
   ) => {
     try {
@@ -78,8 +77,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
         "/acondicionamientoDeSucursales",
         {
           sucursalOFranquicia,
-          sucursales,
-          franquicias,
+          nombreSucursalOFranquicia,
           producto,
           fechaDeCompra,
           descripcionDelProducto,
@@ -114,8 +112,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
     {
       _id,
       sucursalOFranquicia,
-      sucursales,
-      franquicias,
+      nombreSucursalOFranquicia,
       producto,
       fechaDeCompra,
       descripcionDelProducto,
@@ -133,8 +130,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
         `/acondicionamientoDeSucursales/${_id}`,
         {
           sucursalOFranquicia,
-          sucursales,
-          franquicias,
+          nombreSucursalOFranquicia,
           producto,
           fechaDeCompra,
           descripcionDelProducto,
