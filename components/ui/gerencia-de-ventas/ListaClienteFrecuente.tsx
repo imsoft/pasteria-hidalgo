@@ -40,12 +40,12 @@ const ListaClientesFrecuentes: FC<Props> = ({ clienteFrecuente }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {clienteFrecuente.sucursal || "-"}
+            {clienteFrecuente.sucursalOFranquicia || "-"}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {clienteFrecuente.franquicia || "-"}
+            {clienteFrecuente.nombreSucursalOFranquicia || "-"}
           </div>
         </td>
       </tr>

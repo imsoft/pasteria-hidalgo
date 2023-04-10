@@ -88,6 +88,15 @@ interface SeedAsignarPrecio {
   precioMaximo: string;
 }
 
+interface SeedClienteFrecuente {
+  nombre: string;
+  correoElectronico: string;
+  fechaDeNacimiento: string;
+  puntosDeCompra: number;
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -96,6 +105,7 @@ interface SeedData {
   proveedor: SeedProveedor[];
   reporteDeCompra: SeedReporteDeCompra[];
   asignarPrecio: SeedAsignarPrecio[];
+  clienteFrecuente: SeedClienteFrecuente[];
 }
 
 export const initialData: SeedData = {
@@ -1092,6 +1102,98 @@ export const initialData: SeedData = {
       // 10
       producto: "Papel higiénico",
       precioMaximo: "20",
+    },
+  ],
+  clienteFrecuente: [
+    {
+      // 1
+      nombre: "María",
+      correoElectronico: "maria@hotmail.com",
+      fechaDeNacimiento: "1995-07-15",
+      puntosDeCompra: 50,
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Norte",
+    },
+    {
+      // 2
+      nombre: "Juan",
+      correoElectronico: "juan@yahoo.com",
+      fechaDeNacimiento: "1980-05-10",
+      puntosDeCompra: 25,
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Este",
+    },
+    {
+      // 3
+      nombre: "Pedro",
+      correoElectronico: "pedro@gmail.com",
+      fechaDeNacimiento: "1978-02-28",
+      puntosDeCompra: 100,
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Oeste",
+    },
+    {
+      // 4
+      nombre: "Luisa",
+      correoElectronico: "luisa@hotmail.com",
+      fechaDeNacimiento: "2000-09-12",
+      puntosDeCompra: 75,
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Sur",
+    },
+    {
+      // 5
+      nombre: "Ana",
+      correoElectronico: "ana@gmail.com",
+      fechaDeNacimiento: "1992-03-20",
+      puntosDeCompra: 40,
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Noreste",
+    },
+    {
+      // 6
+      nombre: "Carlos",
+      correoElectronico: "carlos@yahoo.com",
+      fechaDeNacimiento: "1985-11-05",
+      puntosDeCompra: 20,
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Sureste",
+    },
+    {
+      // 7
+      nombre: "Laura",
+      correoElectronico: "laura@hotmail.com",
+      fechaDeNacimiento: "1998-06-30",
+      puntosDeCompra: 60,
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Noroeste",
+    },
+    {
+      // 8
+      nombre: "Jorge",
+      correoElectronico: "jorge@gmail.com",
+      fechaDeNacimiento: "1974-12-18",
+      puntosDeCompra: 30,
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Centro-Sur",
+    },
+    {
+      // 9
+      nombre: "Isabel",
+      correoElectronico: "isabel@yahoo.com",
+      fechaDeNacimiento: "1988-08-08",
+      puntosDeCompra: 70,
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Centro-Norte",
+    },
+    {
+      // 10
+      nombre: "Ricardo",
+      correoElectronico: "ricardo@gmail.com",
+      fechaDeNacimiento: "1991-04-25",
+      puntosDeCompra: 15,
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Centro-Este",
     },
   ],
 };

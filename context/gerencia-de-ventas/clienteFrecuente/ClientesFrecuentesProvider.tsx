@@ -57,8 +57,8 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
     correoElectronico: string,
     fechaDeNacimiento: string,
     puntosDeCompra: number,
-    sucursal: string,
-    franquicia: string,
+    sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     showNotificacion = false
   ) => {
     try {
@@ -69,8 +69,8 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
           correoElectronico,
           fechaDeNacimiento,
           puntosDeCompra,
-          sucursal,
-          franquicia,
+          sucursalOFranquicia,
+          nombreSucursalOFranquicia,
         }
       );
       dispatch({
@@ -99,8 +99,8 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
       correoElectronico,
       fechaDeNacimiento,
       puntosDeCompra,
-      sucursal,
-      franquicia,
+      sucursalOFranquicia,
+      nombreSucursalOFranquicia,
     }: ClienteFrecuente,
     showNotificacion = false
   ) => {
@@ -112,8 +112,8 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
           correoElectronico,
           fechaDeNacimiento,
           puntosDeCompra,
-          sucursal,
-          franquicia,
+          sucursalOFranquicia,
+          nombreSucursalOFranquicia,
         }
       );
       dispatch({

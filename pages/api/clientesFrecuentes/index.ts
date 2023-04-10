@@ -41,8 +41,8 @@ const postClienteFrecuente = async (
     correoElectronico = "",
     fechaDeNacimiento = "",
     puntosDeCompra = "",
-    sucursal = "",
-    franquicia = "",
+    sucursalOFranquicia = "",
+    nombreSucursalOFranquicia = "",
   } = req.body;
 
   const newClienteFrecuente = new ClienteFrecuente({
@@ -50,8 +50,8 @@ const postClienteFrecuente = async (
     correoElectronico,
     fechaDeNacimiento,
     puntosDeCompra,
-    sucursal,
-    franquicia,
+    sucursalOFranquicia,
+    nombreSucursalOFranquicia,
   });
 
   try {

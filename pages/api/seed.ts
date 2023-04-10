@@ -5,6 +5,7 @@ import {
   AsignarPrecio,
   Candidato,
   CheckInDePersonal,
+  ClienteFrecuente,
   PersonalActivo,
   Proveedor,
   ReporteDeCompra,
@@ -49,6 +50,9 @@ export default async function handler(
 
   await AsignarPrecio.deleteMany(); //Borra todo de la DB
   await AsignarPrecio.insertMany(seedDatabase.initialData.asignarPrecio);
+
+  await ClienteFrecuente.deleteMany(); //Borra todo de la DB
+  await ClienteFrecuente.insertMany(seedDatabase.initialData.clienteFrecuente);
   await db.disconnect();
 
   res.status(200).json({ message: "Proceso realizado correctamente" });

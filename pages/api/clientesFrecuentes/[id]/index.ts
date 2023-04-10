@@ -66,8 +66,8 @@ const updateClienteFrecuente = async (
     correoElectronico = clienteFrecuenteToUpdate.correoElectronico,
     fechaDeNacimiento = clienteFrecuenteToUpdate.fechaDeNacimiento,
     puntosDeCompra = clienteFrecuenteToUpdate.puntosDeCompra,
-    sucursal = clienteFrecuenteToUpdate.sucursal,
-    franquicia = clienteFrecuenteToUpdate.franquicia,
+    sucursalOFranquicia = clienteFrecuenteToUpdate.sucursalOFranquicia,
+    nombreSucursalOFranquicia = clienteFrecuenteToUpdate.nombreSucursalOFranquicia,
   } = req.body;
 
   try {
@@ -78,8 +78,8 @@ const updateClienteFrecuente = async (
         correoElectronico,
         fechaDeNacimiento,
         puntosDeCompra,
-        sucursal,
-        franquicia,
+        sucursalOFranquicia,
+        nombreSucursalOFranquicia,
       },
       { runValidators: true, new: true }
     );

@@ -10,8 +10,8 @@ interface ContextProps {
     correoElectronico: string,
     fechaDeNacimiento: string,
     puntosDeCompra: number,
-    sucursal: string,
-    franquicia: string,
+    sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     showNotificacion?: boolean
   ) => void;
 
