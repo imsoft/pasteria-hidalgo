@@ -14,7 +14,8 @@ export default function ManejoSucursalesFranquicias() {
   );
 
   const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] = useState("");
+  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
+    useState("");
   const [inputDireccion, setInputDireccion] = useState("");
   const [inputDistancia, setInputDistancia] = useState("");
   const [inputFechaDePago, setInputFechaDePago] = useState("");
@@ -151,31 +152,28 @@ export default function ManejoSucursalesFranquicias() {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
 
-            <div>
-              <label className="text-base font-medium text-gray-900">
-                Seleccione una opción
-              </label>
-              <p className="text-sm leading-5 text-gray-500">
-                ¿Sucursal o Franquicia?
-              </p>
-
-              <div className="col-span-6 sm:col-span-3">
-                <select
-                  id="CmbNombre"
-                  name="CmbNombre"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione una opción...</option>
-                  <option>Sucursal</option>
-                  <option>Franquicia</option>
-                </select>
-              </div>
-            </div>
-
             <div className="grid grid-cols-6 gap-6">
+              <div className="col-span-6 sm:col-span-3">
+                <label className="block text-sm font-medium text-gray-700">
+                  ¿Sucursal o Franquicia?
+                </label>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <select
+                    id="CmbNombre"
+                    name="CmbNombre"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    defaultValue="Selecciona un producto..."
+                    onChange={onTextFieldChangedSucursalOFranquicia}
+                    onBlur={() => setTouched(true)}
+                  >
+                    <option>Seleccione una opción...</option>
+                    <option>Sucursal</option>
+                    <option>Franquicia</option>
+                  </select>
+                </div>
+              </div>
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"

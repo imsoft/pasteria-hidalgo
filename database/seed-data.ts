@@ -123,6 +123,19 @@ interface SeedApartadoJuridico {
   documento: string;
 }
 
+interface SeedSucursalYFranquicia {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  direccion: string;
+  distancia: string;
+  fechaDePago: string;
+  montoDePago: string;
+  cuentaBancaria: string;
+  banco: string;
+  nombreDelBeneficiario: string;
+  rfc: string;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -135,6 +148,7 @@ interface SeedData {
   reporteVentasAmbulantesIndividual: SeedReporteVentasAmbulantesIndividual[];
   reporteVentasIndividual: SeedReporteVentasIndividual[];
   apartadoJuridico: SeedApartadoJuridico[];
+  sucursalYFranquicia: SeedSucursalYFranquicia[];
 }
 
 export const initialData: SeedData = {
@@ -1809,6 +1823,138 @@ export const initialData: SeedData = {
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Zapopan",
       documento: "C:\\fakepath\\Promociones_Sucursal_Zapopan.pdf",
+    },
+  ],
+  sucursalYFranquicia: [
+    {
+      // 1
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Polanco",
+      direccion: "Av. Presidente Masaryk #123",
+      distancia: "20",
+      fechaDePago: "15/03/2023",
+      montoDePago: "78",
+      cuentaBancaria: "MX31 2345 6789 1234 5678",
+      banco: "Bancomer",
+      nombreDelBeneficiario: "Juan Pérez",
+      rfc: "PELJ890315DF",
+    },
+    {
+      // 2
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Condesa",
+      direccion: "Av. Tamaulipas #456",
+      distancia: "10",
+      fechaDePago: "28/06/2023",
+      montoDePago: "92.5",
+      cuentaBancaria: "MX98 9876 5432 1098 7654",
+      banco: "Santander",
+      nombreDelBeneficiario: "Ana Gómez",
+      rfc: "GOZA890623SD",
+    },
+    {
+      // 3
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Centro Histórico",
+      direccion: "Calle de Madero #789",
+      distancia: "5",
+      fechaDePago: "10/09/2022",
+      montoDePago: "65.75",
+      cuentaBancaria: "MX76 1234 5678 9876 5432",
+      banco: "HSBC",
+      nombreDelBeneficiario: "Pedro Rodríguez",
+      rfc: "ROPD800910LR",
+    },
+    {
+      // 4
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Santa Fe",
+      direccion: "Av. Vasco de Quiroga #234",
+      distancia: "15",
+      fechaDePago: "05/11/2022",
+      montoDePago: "150.25",
+      cuentaBancaria: "MX45 6789 1234 9876 5432",
+      banco: "Banorte",
+      nombreDelBeneficiario: "María Hernández",
+      rfc: "HEMM921105JK",
+    },
+    {
+      // 5
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Polanco II",
+      direccion: "Av. Horacio #567",
+      distancia: "12",
+      fechaDePago: "20/07/2023",
+      montoDePago: "42.99",
+      cuentaBancaria: "MX22 5432 9876 1234 5678",
+      banco: "Scotiabank",
+      nombreDelBeneficiario: "Carlos Pérez",
+      rfc: "PERC920720KQ",
+    },
+    {
+      // 6
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Roma Norte",
+      direccion: "Calle de Álvaro Obregón #789",
+      distancia: "8",
+      fechaDePago: "12/12/2022",
+      montoDePago: "25.50",
+      cuentaBancaria: "MX89 1098 7654 5678 4321",
+      banco: "Banregio",
+      nombreDelBeneficiario: "Laura Morales",
+      rfc: "MOLM910612RT",
+    },
+    {
+      // 7
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Providencia",
+      direccion: "Av. Terranova #456",
+      distancia: "6",
+      fechaDePago: "08/09/2022",
+      montoDePago: "37.75",
+      cuentaBancaria: "MX12 8765 4321 9876 5432",
+      banco: "Inbursa",
+      nombreDelBeneficiario: "Juanita González",
+      rfc: "GOJG880908HP",
+    },
+    {
+      // 8
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Las Águilas",
+      direccion: "Av. Revolución #1234",
+      distancia: "18",
+      fechaDePago: "05/06/2023",
+      montoDePago: "63.25",
+      cuentaBancaria: "MX76 4321 9876 5678 1098",
+      banco: "Banco del Bajío",
+      nombreDelBeneficiario: "Pedro Gómez",
+      rfc: "GOPG910605XT",
+    },
+    {
+      // 9
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Andares",
+      direccion: "Av. Patria #5678",
+      distancia: "22",
+      fechaDePago: "18/03/2023",
+      montoDePago: "92.00",
+      cuentaBancaria: "MX22 9876 5432 1234 1098",
+      banco: "Afirme",
+      nombreDelBeneficiario: "Eduardo Martínez",
+      rfc: "MAME891230PH",
+    },
+    {
+      //10
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Polanco",
+      direccion: "Av. Presidente Masaryk #123",
+      distancia: "12.5",
+      fechaDePago: "02/04/2023",
+      montoDePago: "150.75",
+      cuentaBancaria: "US12 3456 7890 1234 5678",
+      banco: "Bank of America",
+      nombreDelBeneficiario: "Ana Sánchez",
+      rfc: "SAAA8907125A",
     },
   ],
 };

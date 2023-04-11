@@ -11,6 +11,7 @@ import {
   Proveedor,
   ReporteDeCompra,
   ReporteVentasAmbulantesIndividual,
+  SucursalYFranquicia,
 } from "../../models";
 
 type Data = {
@@ -64,6 +65,11 @@ export default async function handler(
 
   await ApartadoJuridico.deleteMany(); //Borra todo de la DB
   await ApartadoJuridico.insertMany(seedDatabase.initialData.apartadoJuridico);
+
+  await SucursalYFranquicia.deleteMany(); //Borra todo de la DB
+  await SucursalYFranquicia.insertMany(
+    seedDatabase.initialData.sucursalYFranquicia
+  );
 
   await db.disconnect();
 

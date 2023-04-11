@@ -37,7 +37,7 @@ const ListaSucursalesYFranquicias: FC<Props> = ({ sucursalYFranquicia }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {sucursalYFranquicia.distancia}
+            {sucursalYFranquicia.distancia} km
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -47,7 +47,7 @@ const ListaSucursalesYFranquicias: FC<Props> = ({ sucursalYFranquicia }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {sucursalYFranquicia.montoDePago}
+            $ {sucursalYFranquicia.montoDePago}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
