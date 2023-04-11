@@ -4,6 +4,8 @@ import {
   ListadoDeProductos,
   LugarDeVenta,
   PuestosEmpresa,
+  Temperatura,
+  Unidades,
   YesNo,
 } from "../interfaces";
 
@@ -163,6 +165,12 @@ interface SeedReporteDeSalida {
   listadoReporteDeSalida: IListadoReporteDeSalida[];
 }
 
+interface SeedMateriaPrima {
+  materiaPrima: string;
+  unidades: Unidades;
+  temperatura: Temperatura;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -179,6 +187,7 @@ interface SeedData {
   personalDeMantenimiento: SeedPersonalDeMantenimiento[];
   mantenimiento: SeedMantenimiento[];
   reporteDeSalida: SeedReporteDeSalida[];
+  materiaPrima: SeedMateriaPrima[];
 }
 
 export const initialData: SeedData = {
@@ -2421,6 +2430,68 @@ export const initialData: SeedData = {
           cantidadDeProducto: 9,
         },
       ],
+    },
+  ],
+  materiaPrima: [
+    {
+      // 1
+      materiaPrima: "Manzana",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+    },
+    {
+      // 2
+      materiaPrima: "Papa",
+      unidades: "Gramos",
+      temperatura: "Ambiente",
+    },
+    {
+      // 3
+      materiaPrima: "Carne de res",
+      unidades: "Gramos",
+      temperatura: "Congelado",
+    },
+    {
+      // 4
+      materiaPrima: "Cebolla",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+    },
+    {
+      // 5
+      materiaPrima: "Tomate",
+      unidades: "Kilogramos",
+      temperatura: "Refrigerado",
+    },
+    {
+      // 6
+      materiaPrima: "Lechuga",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+    },
+    {
+      // 7
+      materiaPrima: "Aceite de oliva",
+      unidades: "Litros",
+      temperatura: "Ambiente",
+    },
+    {
+      // 8
+      materiaPrima: "Harina de trigo",
+      unidades: "Gramos",
+      temperatura: "Ambiente",
+    },
+    {
+      // 9
+      materiaPrima: "Azúcar",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+    },
+    {
+      // 10
+      materiaPrima: "Huevo",
+      unidades: "Kilogramos",
+      temperatura: "Refrigerado",
     },
   ],
 };

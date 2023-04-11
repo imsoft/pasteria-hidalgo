@@ -8,6 +8,7 @@ import {
   CheckInDePersonal,
   ClienteFrecuente,
   Mantenimiento,
+  MateriaPrima,
   PersonalActivo,
   PersonalDeMantenimiento,
   Proveedor,
@@ -84,6 +85,9 @@ export default async function handler(
 
   await ReporteDeSalida.deleteMany(); //Borra todo de la DB
   await ReporteDeSalida.insertMany(seedDatabase.initialData.reporteDeSalida);
+
+  await MateriaPrima.deleteMany(); //Borra todo de la DB
+  await MateriaPrima.insertMany(seedDatabase.initialData.materiaPrima);
 
   await db.disconnect();
 
