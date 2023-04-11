@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../../../database";
-import { IMantenimiento, Mantenimiento } from '../../../../models';
+import { IMantenimiento, Mantenimiento } from "../../../../models";
 
 type Data = { message: string } | IMantenimiento;
 
@@ -60,8 +60,7 @@ const updateMantenimiento = async (
 
   const {
     sucursalOFranquicia = mantenimientoToUpdate.sucursalOFranquicia,
-    sucursal = mantenimientoToUpdate.sucursal,
-    franquicia = mantenimientoToUpdate.franquicia,
+    nombreSucursalOFranquicia = mantenimientoToUpdate.nombreSucursalOFranquicia,
     nombreMaquina = mantenimientoToUpdate.nombreMaquina,
     proveedor = mantenimientoToUpdate.proveedor,
     fechaDeGarantia = mantenimientoToUpdate.fechaDeGarantia,
@@ -74,8 +73,7 @@ const updateMantenimiento = async (
       id,
       {
         sucursalOFranquicia,
-        sucursal,
-        franquicia,
+        nombreSucursalOFranquicia,
         nombreMaquina,
         proveedor,
         fechaDeGarantia,
@@ -92,7 +90,10 @@ const updateMantenimiento = async (
   }
 };
 
-const deleteMantenimiento = async (req: NextApiRequest, res: NextApiResponse) => {
+const deleteMantenimiento = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
   const { id } = req.query;
 
   await db.connect();

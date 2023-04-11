@@ -5,8 +5,7 @@ export interface IMantenimiento extends Mantenimiento {}
 
 const mantenimientoSchema = new Schema({
   sucursalOFranquicia: { type: String, required: true },
-  sucursal: { type: String, required: true },
-  franquicia: { type: String, required: true },
+  nombreSucursalOFranquicia: { type: String, required: true },
   nombreMaquina: { type: String, required: true },
   proveedor: { type: String, required: true },
   fechaDeGarantia: { type: String, required: true },
@@ -15,6 +14,7 @@ const mantenimientoSchema = new Schema({
 });
 
 const MantenimientoModel: Model<IMantenimiento> =
-  mongoose.models.Mantenimiento || mongoose.model("Mantenimiento", mantenimientoSchema);
+  mongoose.models.Mantenimiento ||
+  mongoose.model("Mantenimiento", mantenimientoSchema);
 
 export default MantenimientoModel;

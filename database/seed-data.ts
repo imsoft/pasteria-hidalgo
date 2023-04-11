@@ -143,6 +143,16 @@ interface SeedPersonalDeMantenimiento {
   telefono: string;
 }
 
+interface SeedMantenimiento {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  nombreMaquina: string;
+  proveedor: string;
+  fechaDeGarantia: string;
+  fechaDeMantenimiento: string;
+  modificacionDeMantenimiento: string;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -157,6 +167,7 @@ interface SeedData {
   apartadoJuridico: SeedApartadoJuridico[];
   sucursalYFranquicia: SeedSucursalYFranquicia[];
   personalDeMantenimiento: SeedPersonalDeMantenimiento[];
+  mantenimiento: SeedMantenimiento[];
 }
 
 export const initialData: SeedData = {
@@ -2035,6 +2046,108 @@ export const initialData: SeedData = {
       oficio: "Instalador de Aire Acondicionado",
       direccion: "Calle Reforma #567",
       telefono: "3312345678",
+    },
+  ],
+  mantenimiento: [
+    {
+      // 1
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Polanco",
+      nombreMaquina: "Cafetera",
+      proveedor: "Breville",
+      fechaDeGarantia: "15/06/2025",
+      fechaDeMantenimiento: "18/03/2023",
+      modificacionDeMantenimiento: "Reemplazo de bomba de agua",
+    },
+    {
+      // 2
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Zapopan",
+      nombreMaquina: "Horno",
+      proveedor: "Whirlpool",
+      fechaDeGarantia: "10/12/2024",
+      fechaDeMantenimiento: "28/09/2023",
+      modificacionDeMantenimiento: "Limpieza de quemadores",
+    },
+    {
+      // 3
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Reforma",
+      nombreMaquina: "Batidora",
+      proveedor: "KitchenAid",
+      fechaDeGarantia: "05/08/2025",
+      fechaDeMantenimiento: "14/11/2023",
+      modificacionDeMantenimiento: "Cambio de motor",
+    },
+    {
+      // 4
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Condesa",
+      nombreMaquina: "Freidora",
+      proveedor: "T-fal",
+      fechaDeGarantia: "20/09/2024",
+      fechaDeMantenimiento: "30/07/2023",
+      modificacionDeMantenimiento: "Limpieza profunda de cestillos",
+    },
+    {
+      // 5
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Satélite",
+      nombreMaquina: "Máquina de café",
+      proveedor: "Saeco",
+      fechaDeGarantia: "18/03/2025",
+      fechaDeMantenimiento: "12/10/2023",
+      modificacionDeMantenimiento: "Calibración de molinillo",
+    },
+    {
+      // 6
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "San Angel",
+      nombreMaquina: "Extractor de jugos",
+      proveedor: "Hurom",
+      fechaDeGarantia: "25/07/2024",
+      fechaDeMantenimiento: "05/12/2023",
+      modificacionDeMantenimiento: "Cambio de filtros",
+    },
+    {
+      // 7
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Roma",
+      nombreMaquina: "Extractor de jugos",
+      proveedor: "Oster",
+      fechaDeGarantia: "10/09/2024",
+      fechaDeMantenimiento: "15/05/2023",
+      modificacionDeMantenimiento: "Limpieza de filtro",
+    },
+    {
+      // 8
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Del Valle",
+      nombreMaquina: "Licuadora",
+      proveedor: "Hamilton Beach",
+      fechaDeGarantia: "28/07/2025",
+      fechaDeMantenimiento: "10/11/2023",
+      modificacionDeMantenimiento: "Cambio de vaso",
+    },
+    {
+      // 9
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Coyoacán",
+      nombreMaquina: "Horno",
+      proveedor: "LG",
+      fechaDeGarantia: "15/12/2024",
+      fechaDeMantenimiento: "20/09/2023",
+      modificacionDeMantenimiento: "Cambio de resistencia",
+    },
+    {
+      // 10
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Narvarte",
+      nombreMaquina: "Cafetera",
+      proveedor: "De'Longhi",
+      fechaDeGarantia: "20/01/2025",
+      fechaDeMantenimiento: "12/08/2023",
+      modificacionDeMantenimiento: "Limpieza de sistema de leche",
     },
   ],
 };

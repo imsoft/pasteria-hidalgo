@@ -7,6 +7,7 @@ import {
   Candidato,
   CheckInDePersonal,
   ClienteFrecuente,
+  Mantenimiento,
   PersonalActivo,
   PersonalDeMantenimiento,
   Proveedor,
@@ -76,6 +77,9 @@ export default async function handler(
   await PersonalDeMantenimiento.insertMany(
     seedDatabase.initialData.personalDeMantenimiento
   );
+
+  await Mantenimiento.deleteMany(); //Borra todo de la DB
+  await Mantenimiento.insertMany(seedDatabase.initialData.mantenimiento);
 
   await db.disconnect();
 

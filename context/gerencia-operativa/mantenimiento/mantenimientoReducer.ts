@@ -23,14 +23,17 @@ export const mantenimientosReducer = (
         ...state,
         mantenimientos: state.mantenimientos.map((mantenimiento) => {
           if (mantenimiento._id === action.payload._id) {
-            mantenimiento.sucursalOFranquicia = action.payload.sucursalOFranquicia;
-            mantenimiento.sucursal = action.payload.sucursal;
-            mantenimiento.franquicia = action.payload.franquicia;
+            mantenimiento.sucursalOFranquicia =
+              action.payload.sucursalOFranquicia;
+            mantenimiento.nombreSucursalOFranquicia =
+              action.payload.nombreSucursalOFranquicia;
             mantenimiento.nombreMaquina = action.payload.nombreMaquina;
             mantenimiento.proveedor = action.payload.proveedor;
             mantenimiento.fechaDeGarantia = action.payload.fechaDeGarantia;
-            mantenimiento.fechaDeMantenimiento = action.payload.fechaDeMantenimiento;
-            mantenimiento.modificacionDeMantenimiento = action.payload.modificacionDeMantenimiento;
+            mantenimiento.fechaDeMantenimiento =
+              action.payload.fechaDeMantenimiento;
+            mantenimiento.modificacionDeMantenimiento =
+              action.payload.modificacionDeMantenimiento;
           }
           return mantenimiento;
         }),

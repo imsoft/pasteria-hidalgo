@@ -1,9 +1,9 @@
 import { useContext, useMemo } from "react";
 import Link from "next/link";
 
-import { MantenimientosContext } from '../../../context/gerencia-operativa/mantenimiento/MantenimientoContext';
+import { MantenimientosContext } from "../../../context/gerencia-operativa/mantenimiento/MantenimientoContext";
 
-import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
+import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 import ListaMantenimientos from "../../../components/ui/gerencia-operativa/ListaMantenimiento";
 
 const VerMantenimientos = () => {
@@ -15,7 +15,9 @@ const VerMantenimientos = () => {
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Mantenimiento</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Mantenimiento
+            </h1>
             <p className="mt-2 text-sm text-gray-700">
               Aquí podras ver los mantenimientos para la empresa.
             </p>
@@ -25,7 +27,9 @@ const VerMantenimientos = () => {
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
             >
-              <Link href={"/gerencia-operativa/mantenimiento/AgregarMantenimiento"}>
+              <Link
+                href={"/gerencia-operativa/mantenimiento/AgregarMantenimiento"}
+              >
                 <a>Agregar Mantenimiento</a>
               </Link>
             </button>
@@ -48,13 +52,7 @@ const VerMantenimientos = () => {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Sucursal
-                      </th>
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Franquicia
+                        Nombre sucursal o franquicia
                       </th>
                       <th
                         scope="col"
