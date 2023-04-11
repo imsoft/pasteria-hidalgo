@@ -136,6 +136,13 @@ interface SeedSucursalYFranquicia {
   rfc: string;
 }
 
+interface SeedPersonalDeMantenimiento {
+  nombre: string;
+  oficio: string;
+  direccion: string;
+  telefono: string;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -149,6 +156,7 @@ interface SeedData {
   reporteVentasIndividual: SeedReporteVentasIndividual[];
   apartadoJuridico: SeedApartadoJuridico[];
   sucursalYFranquicia: SeedSucursalYFranquicia[];
+  personalDeMantenimiento: SeedPersonalDeMantenimiento[];
 }
 
 export const initialData: SeedData = {
@@ -1955,6 +1963,78 @@ export const initialData: SeedData = {
       banco: "Bank of America",
       nombreDelBeneficiario: "Ana Sánchez",
       rfc: "SAAA8907125A",
+    },
+  ],
+  personalDeMantenimiento: [
+    {
+      // 1
+      nombre: "María Rodríguez",
+      oficio: "Arquitecta",
+      direccion: "Av. Reforma #456",
+      telefono: "5512345678",
+    },
+    {
+      // 2
+      nombre: "Pedro Gómez",
+      oficio: "Plomero",
+      direccion: "Calle Juárez #789",
+      telefono: "3323456789",
+    },
+    {
+      // 3
+      nombre: "Laura Torres",
+      oficio: "Electricista",
+      direccion: "Av. Hidalgo #234",
+      telefono: "3334567890",
+    },
+    {
+      // 4
+      nombre: "Ricardo Fernández",
+      oficio: "Pintor",
+      direccion: "Calle 5 de Mayo #567",
+      telefono: "5545678901",
+    },
+    {
+      // 5
+      nombre: "Carolina López",
+      oficio: "Albañil",
+      direccion: "Av. Insurgentes #890",
+      telefono: "3312345678",
+    },
+    {
+      // 6
+      nombre: "Fernando Ramírez",
+      oficio: "Jardinero",
+      direccion: "Calle Zaragoza #123",
+      telefono: "3323456789",
+    },
+    {
+      // 7
+      nombre: "Patricia Méndez",
+      oficio: "Fontanera",
+      direccion: "Av. Benito Juárez #456",
+      telefono: "5512345678",
+    },
+    {
+      // 8
+      nombre: "Sergio Torres",
+      oficio: "Cerrajero",
+      direccion: "Calle Allende #789",
+      telefono: "3334567890",
+    },
+    {
+      // 9
+      nombre: "Martha García",
+      oficio: "Vidriera",
+      direccion: "Av. Madero #234",
+      telefono: "5545678901",
+    },
+    {
+      // 10
+      nombre: "Carlos Hernández",
+      oficio: "Instalador de Aire Acondicionado",
+      direccion: "Calle Reforma #567",
+      telefono: "3312345678",
     },
   ],
 };

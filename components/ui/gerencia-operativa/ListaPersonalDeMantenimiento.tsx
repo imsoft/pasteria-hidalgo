@@ -1,6 +1,7 @@
 import { FC } from "react";
 import router from "next/router";
 import { PersonalDeMantenimiento } from "../../../interfaces";
+import { phoneNumberFormat } from "../../../utils";
 
 interface Props {
   personalDeMantenimiento: PersonalDeMantenimiento;
@@ -37,7 +38,7 @@ const ListaPersonalesDeMantenimiento: FC<Props> = ({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="text-gray-900">
-            {personalDeMantenimiento.telefono}
+            {phoneNumberFormat(personalDeMantenimiento.telefono)}
           </div>
         </td>
       </tr>

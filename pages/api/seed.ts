@@ -8,6 +8,7 @@ import {
   CheckInDePersonal,
   ClienteFrecuente,
   PersonalActivo,
+  PersonalDeMantenimiento,
   Proveedor,
   ReporteDeCompra,
   ReporteVentasAmbulantesIndividual,
@@ -69,6 +70,11 @@ export default async function handler(
   await SucursalYFranquicia.deleteMany(); //Borra todo de la DB
   await SucursalYFranquicia.insertMany(
     seedDatabase.initialData.sucursalYFranquicia
+  );
+
+  await PersonalDeMantenimiento.deleteMany(); //Borra todo de la DB
+  await PersonalDeMantenimiento.insertMany(
+    seedDatabase.initialData.personalDeMantenimiento
   );
 
   await db.disconnect();
