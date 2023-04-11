@@ -14,43 +14,13 @@ const ListaReportesDeSalidaContaduria: FC<Props> = ({ reporteDeSalida }) => {
       >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeSalida.fecha}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.productoExtra}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.codigoDeProductoExtra}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.cantidadDeProductoExtra}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {reporteDeSalida.unidadesDeProductoExtra}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
             {reporteDeSalida.sucursalAEnviar}
           </div>
         </td>
 
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeSalida.datosDeRepartidor}
+            {reporteDeSalida.nombreDelRepartidor}
           </div>
         </td>
 
@@ -69,6 +39,34 @@ const ListaReportesDeSalidaContaduria: FC<Props> = ({ reporteDeSalida }) => {
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
             {reporteDeSalida.kilometrajeDeSalida}
+          </div>
+        </td>
+
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {reporteDeSalida.listadoReporteDeSalida.map((listado) => (
+              <div
+                key={listado.uuid}
+                className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+              >
+                <div className="font-medium text-gray-900">
+                  <strong>Fecha:</strong> {listado.fecha}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Tipo de producto:</strong> {listado.tipoDeProducto}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Producto:</strong> {listado.producto}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Código del producto:</strong>{" "}
+                  {listado.codigoDelProducto}
+                </div>
+                <div className="font-medium text-gray-900">
+                  <strong>Cantidad:</strong> {listado.cantidadDeProducto}
+                </div>
+              </div>
+            ))}
           </div>
         </td>
       </tr>
