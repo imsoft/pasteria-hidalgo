@@ -2,50 +2,113 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
-import { ManejosDePersonalContext } from '../../../context/gerencia-operativa/manejoDePersonal/ManejoDePersonalContext';
+import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 
-import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
+import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
-import { dbManejoPersonal } from "../../../database";
+import { dbPersonalActivo } from "../../../database";
 
-import { ManejoPersonal } from "../../../interfaces";
+import { PersonalActivo, PuestosEmpresa, YesNo } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 interface Props {
-  manejoDePersonal: ManejoPersonal;
+  personalActivo: PersonalActivo;
 }
 
-export const ManejoPersonalPage: FC<Props> = ({ manejoDePersonal }) => {
+const puestosValidos: PuestosEmpresa[] = [
+  "Administrador",
+  "Contaduria",
+  "Gerencia de compras",
+  "Gerencia operativa",
+  "Gerencia de ventas",
+  "Recursos Humanos",
+];
+
+const validYesNoOptions: YesNo[] = ["Si", "No"];
+
+export const ManejoDePersonalPage: FC<Props> = ({ personalActivo }) => {
   const router = useRouter();
 
-  const { actualizarManejoDePersonal, eliminarManejoDePersonal } =
-    useContext(ManejosDePersonalContext);
+  const { actualizarPersonalActivo, eliminarPersonalActivo } = useContext(
+    PersonalActivoContext
+  );
 
-  const [inputNombre, setInputNombre] = useState(manejoDePersonal.nombre);
-  const [inputDescripcionDelPuesto, setInputDescripcionDelPuesto] = useState(manejoDePersonal.descripcionDelPuesto);
-  
+  const [inputNombre, setInputNombre] = useState(personalActivo.nombre);
+  const [inputPuesto, setInputPuesto] = useState(personalActivo.puesto);
+  const [inputFechaDeContratacion, setInputFechaDeContratacion] = useState(
+    personalActivo.fechaDeContratacion
+  );
+  const [inputNoContrato, setInputNoContrato] = useState(
+    personalActivo.noContrato
+  );
+  const [inputNoExpediente, setInputNoExpediente] = useState(
+    personalActivo.noExpediente
+  );
+  const [inputBajaTemporal, setInputBajaTemporal] = useState(
+    personalActivo.bajaTemporal
+  );
+  const [inputComentarios, setInputComentarios] = useState(
+    personalActivo.comentarios
+  );
+
   const MySwal = withReactContent(Swal);
+
+  const [touched, setTouched] = useState(false);
 
   const onInputValueChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
   };
 
-  const onInputValueChangedDescripcionDelPuesto = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputDescripcionDelPuesto(event.target.value);
+  const onInputValueChangedPuesto = (event: ChangeEvent<HTMLSelectElement>) => {
+    setInputPuesto(event.target.value as PuestosEmpresa);
   };
 
+  const onInputValueChangedFechaDeContratacion = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputFechaDeContratacion(event.target.value);
+  };
+
+  const onInputValueChangedNoContrato = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputNoContrato(event.target.value);
+  };
+
+  const onInputValueChangedNoExpediente = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputNoExpediente(event.target.value);
+  };
+
+  const onInputValueChangedBajaTemporal = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputBajaTemporal(event.target.value);
+  };
+
+  const onInputValueChangedComentarios = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputComentarios(event.target.value);
+  };
 
   const onSave = () => {
     if (
       inputNombre.trim().length === 0 &&
-      inputDescripcionDelPuesto.trim().length === 0
+      inputPuesto.trim().length === 0 &&
+      inputFechaDeContratacion.trim().length === 0 &&
+      inputNoContrato.trim().length === 0 &&
+      inputNoExpediente.trim().length === 0 &&
+      inputBajaTemporal.trim().length === 0 &&
+      inputComentarios.trim().length === 0
     )
       return;
 
     MySwal.fire({
-      title: "¿Quieres actualizar la información a este manejo de personal?",
+      title: "¿Quieres actualizar la información a este Personal Activo?",
       text: "Verifica los datos antes de la operación",
       icon: "warning",
       showCancelButton: true,
@@ -55,21 +118,26 @@ export const ManejoPersonalPage: FC<Props> = ({ manejoDePersonal }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        const actualizadoManejoPersonal: ManejoPersonal = {
-          ...manejoDePersonal,
+        const actualizadoPersonalActivo: PersonalActivo = {
+          ...personalActivo,
           nombre: inputNombre,
-          descripcionDelPuesto: inputDescripcionDelPuesto,
+          puesto: inputPuesto,
+          fechaDeContratacion: inputFechaDeContratacion,
+          noContrato: inputNoContrato,
+          noExpediente: inputNoExpediente,
+          bajaTemporal: inputBajaTemporal,
+          comentarios: inputComentarios,
         };
 
-        actualizarManejoDePersonal(actualizadoManejoPersonal, true);
-        router.push("/gerencia-operativa/manejoDePersonal/VerManejosDePersonal");
+        actualizarPersonalActivo(actualizadoPersonalActivo, true);
+        router.push("/recursos-humanos/personalActivo/VerPersonalActivo");
       }
     });
   };
 
   const onDelete = () => {
     MySwal.fire({
-      title: "¿Quieres eliminar a este manejo de personal?",
+      title: "¿Quieres eliminar a este personal activo?",
       text: "Verifica los datos antes de la operación",
       icon: "warning",
       showCancelButton: true,
@@ -79,28 +147,28 @@ export const ManejoPersonalPage: FC<Props> = ({ manejoDePersonal }) => {
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        eliminarManejoDePersonal(manejoDePersonal, true);
-        router.push("/gerencia-operativa/manejoDePersonal/VerManejosDePersonal");
+        eliminarPersonalActivo(personalActivo, true);
+        router.push("/recursos-humanos/personalActivo/VerPersonalActivo");
       }
     });
   };
 
   return (
-    <SidebarLayoutGerenciaOperativa>
+    <SidebarLayoutRecursosHumanos>
       <form>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Agregar Manejo de Personal
+                Personal Activo
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
+
             <div className="grid grid-cols-6 gap-6">
-              
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNombre"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre
@@ -116,26 +184,129 @@ export const ManejoPersonalPage: FC<Props> = ({ manejoDePersonal }) => {
                   // onBlur={() => setTouched(true)}
                 />
               </div>
-              
+
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionDelPuesto"
+                  htmlFor="TxtDPuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Descripción Del Puesto
+                  Puesto
+                </label>
+                <select
+                  id="CmbPuesto"
+                  name="CmbPuesto"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue={inputPuesto}
+                  onChange={onInputValueChangedPuesto}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option hidden>Seleccione el puesto...</option>
+                  {puestosValidos.map((puesto) => (
+                    <option key={puesto} value={puesto}>
+                      {puesto}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtFechaDeContratacion"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Fecha De Contratación
                 </label>
                 <input
-                  type="text"
-                  name="TxtDescripcionDelPuesto"
-                  id="TxtDescripcionDelPuesto"
+                  type="date"
+                  name="TxtFechaDeContratacion"
+                  id="TxtFechaDeContratacion"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputDescripcionDelPuesto}
-                  onChange={onInputValueChangedDescripcionDelPuesto}
+                  value={inputFechaDeContratacion}
+                  onChange={onInputValueChangedFechaDeContratacion}
                   // onBlur={() => setTouched(true)}
                 />
               </div>
 
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtNoContrato"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  No. Contrato
+                </label>
+                <input
+                  type="text"
+                  name="TxtNoContrato"
+                  id="TxtNoContrato"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputNoContrato}
+                  onChange={onInputValueChangedNoContrato}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtNoExpediente"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  No. Expediente
+                </label>
+                <input
+                  type="text"
+                  name="TxtNoExpediente"
+                  id="TxtNoExpediente"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputNoExpediente}
+                  onChange={onInputValueChangedNoExpediente}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="CmbBajaTemporal"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Baja Temporal
+                </label>
+                <select
+                  id="CmbBajaTemporal"
+                  name="CmbBajaTemporal"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  value={inputBajaTemporal}
+                  onChange={onInputValueChangedBajaTemporal}
+                  onBlur={() => setTouched(true)}
+                  defaultValue="Selecciona un producto..."
+                >
+                  <option hidden>Selecciona una opción...</option>
+                  {validYesNoOptions.map((yesNoOptions) => (
+                    <option key={yesNoOptions}>{yesNoOptions}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtComentarios"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Comentarios
+                </label>
+                <input
+                  type="text"
+                  name="TxtComentarios"
+                  id="TxtComentarios"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputComentarios}
+                  onChange={onInputValueChangedComentarios}
+                  // onBlur={() => setTouched(true)}
+                />
+              </div>
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -156,7 +327,7 @@ export const ManejoPersonalPage: FC<Props> = ({ manejoDePersonal }) => {
           </div>
         </div>
       </form>
-    </SidebarLayoutGerenciaOperativa>
+    </SidebarLayoutRecursosHumanos>
   );
 };
 
@@ -165,9 +336,9 @@ export const ManejoPersonalPage: FC<Props> = ({ manejoDePersonal }) => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params as { id: string };
 
-  const manejoPersonal = await dbManejoPersonal.getManejoPersonalById(id);
+  const personalActivo = await dbPersonalActivo.getPersonalActivoById(id);
 
-  if (!manejoPersonal) {
+  if (!personalActivo) {
     return {
       redirect: {
         destination: "/",
@@ -178,9 +349,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
-      manejoPersonal,
+      personalActivo,
     },
   };
 };
 
-export default ManejoPersonalPage;
+export default ManejoDePersonalPage;
