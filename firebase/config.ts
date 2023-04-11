@@ -20,7 +20,10 @@ const firebaseConfig = {
 const FirebaseApp = initializeApp(firebaseConfig);
 export const FirebaseStorage = getStorage(FirebaseApp);
 
-export const uploadFile = async (file: any, fileName: string) => {
+export const uploadFile = async (
+  file: any,
+  fileName: string
+): Promise<string> => {
   const storageRef = ref(FirebaseStorage, `/apartado-juridico/${fileName}`);
   await uploadBytes(storageRef, file);
   const url = getDownloadURL(storageRef);

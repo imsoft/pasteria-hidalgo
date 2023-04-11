@@ -60,8 +60,7 @@ const updateApartadoJuridico = async (
 
   const {
     sucursalOFranquicia = apartadoJuridicoToUpdate.sucursalOFranquicia,
-    sucursales = apartadoJuridicoToUpdate.sucursales,
-    franquicias = apartadoJuridicoToUpdate.franquicias,
+    nombreSucursalOFranquicia = apartadoJuridicoToUpdate.nombreSucursalOFranquicia,
     documento = apartadoJuridicoToUpdate.documento,
   } = req.body;
 
@@ -70,8 +69,7 @@ const updateApartadoJuridico = async (
       id,
       {
         sucursalOFranquicia,
-        sucursales,
-        franquicias,
+        nombreSucursalOFranquicia,
         documento,
       },
       { runValidators: true, new: true }

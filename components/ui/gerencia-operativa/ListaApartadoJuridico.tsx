@@ -26,13 +26,7 @@ const ListaApartadosJuridicos: FC<Props> = ({ apartadoJuridico }) => {
 
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {apartadoJuridico.sucursales || "-"}
-          </div>
-        </td>
-
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          <div className="font-medium text-gray-900">
-            {apartadoJuridico.franquicias || "-"}
+            {apartadoJuridico.nombreSucursalOFranquicia || "-"}
           </div>
         </td>
 

@@ -54,9 +54,8 @@ export const ApartadosJuridicosProvider: FC<Props> = ({ children }) => {
 
   const agregarNuevoApartadoJuridico = async (
     sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     documento: string,
-    sucursales?: string,
-    franquicias?: string,
     showNotificacion = false
   ) => {
     try {
@@ -64,9 +63,8 @@ export const ApartadosJuridicosProvider: FC<Props> = ({ children }) => {
         "/apartadosJuridicos",
         {
           sucursalOFranquicia,
+          nombreSucursalOFranquicia,
           documento,
-          sucursales,
-          franquicias,
         }
       );
       dispatch({
@@ -92,9 +90,8 @@ export const ApartadosJuridicosProvider: FC<Props> = ({ children }) => {
     {
       _id,
       sucursalOFranquicia,
+      nombreSucursalOFranquicia,
       documento,
-      sucursales,
-      franquicias,
     }: ApartadoJuridico,
     showNotificacion = false
   ) => {
@@ -103,9 +100,8 @@ export const ApartadosJuridicosProvider: FC<Props> = ({ children }) => {
         `/apartadosJuridicos/${_id}`,
         {
           sucursalOFranquicia,
+          nombreSucursalOFranquicia,
           documento,
-          sucursales,
-          franquicias,
         }
       );
       dispatch({

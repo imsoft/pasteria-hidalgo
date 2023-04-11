@@ -5,8 +5,7 @@ export interface IApartadoJuridico extends ApartadoJuridico {}
 
 const apartadoJuridicoSchema = new Schema({
   sucursalOFranquicia: { type: String, required: true },
-  sucursales: { type: String, required: false },
-  franquicias: { type: String, required: false },
+  nombreSucursalOFranquicia: { type: String, required: true },
   documento: { type: String, required: true },
 });
 

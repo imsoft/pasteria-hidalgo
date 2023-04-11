@@ -106,7 +106,7 @@ interface SeedReporteVentasAmbulantesIndividual {
   listadoDeProductos: ListadoDeProductos[];
 }
 
-export interface SeedReporteVentasIndividual {
+interface SeedReporteVentasIndividual {
   fecha: string;
   nombreDelVendedor: string;
   lugarDeVenta: LugarDeVenta;
@@ -115,6 +115,12 @@ export interface SeedReporteVentasIndividual {
   listadoDeProductos: ListadoDeProductos[];
   correoElectronicoClienteFrecuente: string;
   puntosClienteFrecuente: number;
+}
+
+interface SeedApartadoJuridico {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  documento: string;
 }
 
 interface SeedData {
@@ -128,6 +134,7 @@ interface SeedData {
   clienteFrecuente: SeedClienteFrecuente[];
   reporteVentasAmbulantesIndividual: SeedReporteVentasAmbulantesIndividual[];
   reporteVentasIndividual: SeedReporteVentasIndividual[];
+  apartadoJuridico: SeedApartadoJuridico[];
 }
 
 export const initialData: SeedData = {
@@ -1740,6 +1747,68 @@ export const initialData: SeedData = {
       ],
       correoElectronicoClienteFrecuente: "pedro@gmail.com",
       puntosClienteFrecuente: 5,
+    },
+  ],
+  apartadoJuridico: [
+    {
+      // 1
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Polanco",
+      documento: "C:\\fakepath\\Menu_Franquicia_Polanco.pdf",
+    },
+    {
+      // 2
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Condesa",
+      documento: "C:\\fakepath\\Menu_Sucursal_Condesa.pdf",
+    },
+    {
+      // 3
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Roma",
+      documento: "C:\\fakepath\\Promociones_Roma.pdf",
+    },
+    {
+      // 4
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Santa Fe",
+      documento: "C:\\fakepath\\Ofertas_Franquicia_SantaFe.pdf",
+    },
+    {
+      // 5
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Polanco",
+      documento: "C:\\fakepath\\Catalogo_Sucursal_Polanco.pdf",
+    },
+    {
+      // 6
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Interlomas",
+      documento: "C:\\fakepath\\Promociones_Franquicia_Interlomas.pdf",
+    },
+    {
+      // 7
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Satélite",
+      documento: "C:\\fakepath\\Ofertas_Sucursal_Satelite.pdf",
+    },
+    {
+      // 8
+      sucursalOFranquicia: "Franquicia",
+      nombreSucursalOFranquicia: "Centro Histórico",
+      documento: "C:\\fakepath\\Menu_Franquicia_CentroHistorico.pdf",
+    },
+    {
+      // 9
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Providencia",
+      documento: "C:\\fakepath\\Catalogo_Sucursal_Providencia.pdf",
+    },
+    {
+      // 10
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Zapopan",
+      documento: "C:\\fakepath\\Promociones_Sucursal_Zapopan.pdf",
     },
   ],
 };

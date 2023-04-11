@@ -34,8 +34,7 @@ export const apartadosJuridicosReducer = (
           if (apartadoJuridico._id === action.payload._id) {
             apartadoJuridico.sucursalOFranquicia =
               action.payload.sucursalOFranquicia;
-            apartadoJuridico.sucursales = action.payload.sucursales;
-            apartadoJuridico.franquicias = action.payload.franquicias;
+            apartadoJuridico.nombreSucursalOFranquicia = action.payload.nombreSucursalOFranquicia;
             apartadoJuridico.documento = action.payload.documento;
           }
           return apartadoJuridico;

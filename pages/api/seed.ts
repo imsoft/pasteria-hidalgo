@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { db, seedDatabase } from "../../database";
 import {
   AcondicionamientoDeSucursal,
+  ApartadoJuridico,
   AsignarPrecio,
   Candidato,
   CheckInDePersonal,
@@ -60,6 +61,9 @@ export default async function handler(
   await ReporteVentasAmbulantesIndividual.insertMany(
     seedDatabase.initialData.reporteVentasAmbulantesIndividual
   );
+
+  await ApartadoJuridico.deleteMany(); //Borra todo de la DB
+  await ApartadoJuridico.insertMany(seedDatabase.initialData.apartadoJuridico);
 
   await db.disconnect();
 

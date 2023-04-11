@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
@@ -7,33 +7,48 @@ import { ApartadosJuridicosContext } from "../../../context/gerencia-operativa/a
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
+import { DocumentTextIcon } from "@heroicons/react/outline";
+import { uploadFile } from "../../../firebase";
 
 const ApartadoJuridico = () => {
   const { agregarNuevoApartadoJuridico } = useContext(
     ApartadosJuridicosContext
   );
 
+  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const sucursalesYFranquiciasMemo = useMemo(
+    () => sucursalesYFranquicias,
+    [sucursalesYFranquicias]
+  );
+
   const router = useRouter();
 
   const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputSucursales, setInputSucursales] = useState("");
-  const [inputFranquicias, setInputFranquicias] = useState("");
-  const [inputDocumento, setInputDocumento] = useState("");
+  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
+    useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState("");
+  const [documentURL, setDocumentURL] = useState("");
 
   const [touched, setTouched] = useState(false);
 
-  const MySwal = withReactContent(Swal);
-
-  const onTextFieldChangedFranquicias = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputFranquicias(event.target.value);
+  const uploadDocument = async () => {
+    try {
+      const result = await uploadFile(file, fileName);
+      setDocumentURL(result);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const onTextFieldChangedSucursales = (
+  const MySwal = withReactContent(Swal);
+
+  const onTextFieldChangedNombreSucursalOFranquicia = (
     event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputSucursales(event.target.value);
+    setInputNombreSucursalOFranquicia(event.target.value);
   };
 
   const onTextFieldChangedSucursalOFranquicia = (
@@ -42,26 +57,25 @@ const ApartadoJuridico = () => {
     setInputSucursalOFranquicia(event.target.value);
   };
 
-  const onTextFieldChangedDocumento = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputDocumento(event.target.value);
+  const onChangeInputFile = (newFile: File | null, newFileName: string) => {
+    setFile(newFile);
+    setFileName(newFileName);
   };
 
   const onSave = () => {
     if (
       inputSucursalOFranquicia.length === 0 &&
-      inputSucursales.length === 0 &&
-      inputFranquicias.length === 0 &&
-      inputDocumento.length === 0
+      inputNombreSucursalOFranquicia.length === 0 &&
+      documentURL.length === 0
     )
       return;
 
+    uploadDocument();
+
     agregarNuevoApartadoJuridico(
       inputSucursalOFranquicia,
-      inputDocumento,
-      inputSucursales,
-      inputFranquicias,
+      inputNombreSucursalOFranquicia,
+      documentURL,
       true
     );
 
@@ -77,9 +91,8 @@ const ApartadoJuridico = () => {
 
     setTouched(false);
     setInputSucursalOFranquicia("");
-    setInputSucursales("");
-    setInputFranquicias("");
-    setInputDocumento("");
+    setInputNombreSucursalOFranquicia("");
+    setDocumentURL("");
   };
 
   return (
@@ -94,99 +107,118 @@ const ApartadoJuridico = () => {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
 
-            <div>
-              <label className="text-base font-medium text-gray-900">
-                Seleccione una opción
-              </label>
-              <p className="text-sm leading-5 text-gray-500">
-                ¿Sucursal o Franquicia?
-              </p>
-
-              <div className="col-span-6 sm:col-span-3">
-                <select
-                  id="CmbNombre"
-                  name="CmbNombre"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione una opción...</option>
-                  <option>Sucursal</option>
-                  <option>Franquicia</option>
-                </select>
-              </div>
-            </div>
-
             <div className="grid grid-cols-6 gap-6">
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Franquicia" || "hidden"
-                } col-span-6`}
-              >
+              <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Franquicia
+                  ¿Sucursal o Franquicia?
+                </label>
+
+                <div className="col-span-6 sm:col-span-3">
+                  <select
+                    id="CmbNombre"
+                    name="CmbNombre"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    defaultValue="Selecciona un producto..."
+                    onChange={onTextFieldChangedSucursalOFranquicia}
+                    onBlur={() => setTouched(true)}
+                  >
+                    <option hidden>Seleccione una opción...</option>
+                    <option>Sucursal</option>
+                    <option>Franquicia</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="CmbFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {inputSucursalOFranquicia === "Sucursal"
+                    ? "Sucursal"
+                    : inputSucursalOFranquicia === "Franquicia"
+                    ? "Franquicia"
+                    : "Primero seleccione si es franquicia o sucursal"}
                 </label>
                 <select
                   id="CmbFranquicia"
                   name="CmbFranquicia"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedFranquicias}
+                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione la franquicia...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
+                  <option hidden>
+                    Seleccione la{" "}
+                    {inputSucursalOFranquicia === "Sucursal"
+                      ? "Sucursal"
+                      : inputSucursalOFranquicia === "Franquicia"
+                      ? "Franquicia"
+                      : "Primero seleccione si es franquicia o sucursal"}
+                    ...
+                  </option>
+                  {sucursalesYFranquiciasMemo
+                    .filter(
+                      (sucursalesYFranquicias) =>
+                        sucursalesYFranquicias.sucursalOFranquicia ===
+                        inputSucursalOFranquicia
+                    )
+                    .map((sucursalesYFranquicias) => (
+                      <option
+                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      >
+                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      </option>
+                    ))}
                 </select>
               </div>
 
-              <div
-                className={` ${
-                  inputSucursalOFranquicia === "Sucursal" || "hidden"
-                } col-span-6`}
-              >
+              <div className="col-span-full">
                 <label
-                  htmlFor="CmbSucursal"
-                  className="block text-sm font-medium text-gray-700"
+                  htmlFor="cover-photo"
+                  className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Sucursal
+                  Selecciona un archivo
                 </label>
-                <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedSucursales}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la sucursal...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
-              </div>
-
-              <div className="col-span-6">
-                <label className="text-base font-medium text-gray-900">
-                  Seleccione un documento...
-                </label>
-                <p className="text-sm leading-5 text-gray-500">
-                  Solo archivos con extensión &apos;.pdf&apos;
-                </p>
-                <input
-                  type="file"
-                  id="BtnSeleccionarArchivo"
-                  name="BtnSeleccionarArchivo"
-                  accept="application/pdf"
-                  className="bg-gray-400 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-                  onChange={onTextFieldChangedDocumento}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                  <div className="text-center">
+                    <DocumentTextIcon
+                      className="mx-auto h-12 w-12 text-gray-300"
+                      aria-hidden="true"
+                    />
+                    <div className="mt-4 flex text-sm justify-center leading-6 text-gray-600">
+                      <label
+                        htmlFor="file-upload"
+                        className="relative cursor-pointer rounded-md bg-white font-semibold text-primary-yellow focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-yellow focus-within:ring-offset-2 hover:text-primary-yellow"
+                      >
+                        <span>Sube un archivo</span>
+                        <input
+                          id="file-upload"
+                          name="file-upload"
+                          type="file"
+                          accept="application/pdf"
+                          className="sr-only"
+                          onChange={(e) =>
+                            onChangeInputFile(
+                              e.target.files![0],
+                              e.target.files![0].name
+                            )
+                          }
+                        />
+                      </label>
+                      {/* <p className="pl-1">o solo arrastralo aquí</p> */}
+                    </div>
+                    <p className="text-xs leading-5 text-gray-600">
+                      Unicamente archivos en formato PDF
+                    </p>
+                    <p className="text-sm mt-5 leading-5 text-gray-600">
+                      {fileName}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

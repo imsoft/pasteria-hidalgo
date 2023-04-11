@@ -36,15 +36,13 @@ const postApartadoJuridico = async( req: NextApiRequest, res: NextApiResponse<Da
     
     const {
         sucursalOFranquicia = '',
-        sucursales = '',
-        franquicias = '',
+        nombreSucursalOFranquicia = '',
         documento = '',
     } = req.body;
 
     const newApartadoJuridico = new ApartadoJuridico({
         sucursalOFranquicia,
-        sucursales,
-        franquicias,
+        nombreSucursalOFranquicia,
         documento,
     });
 

@@ -7,9 +7,8 @@ interface ContextProps {
   //Métodos
   agregarNuevoApartadoJuridico: (
     sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string,
     documento: string,
-    sucursales?: string,
-    franquicias?: string,
     showNotificacion?: boolean
   ) => void;
 
