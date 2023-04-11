@@ -3,6 +3,7 @@ import { db, seedDatabase } from "../../database";
 import {
   AcondicionamientoDeSucursal,
   ApartadoJuridico,
+  AsignarComision,
   AsignarPrecio,
   Candidato,
   CheckInDePersonal,
@@ -88,6 +89,9 @@ export default async function handler(
 
   await MateriaPrima.deleteMany(); //Borra todo de la DB
   await MateriaPrima.insertMany(seedDatabase.initialData.materiaPrima);
+
+  await AsignarComision.deleteMany(); //Borra todo de la DB
+  await AsignarComision.insertMany(seedDatabase.initialData.asignarComision);
 
   await db.disconnect();
 

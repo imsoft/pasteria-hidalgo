@@ -171,6 +171,14 @@ interface SeedMateriaPrima {
   temperatura: Temperatura;
 }
 
+interface SeedAsignarComision {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  mes: string;
+  anio: string;
+  minimoDeLaMeta: number;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -188,6 +196,7 @@ interface SeedData {
   mantenimiento: SeedMantenimiento[];
   reporteDeSalida: SeedReporteDeSalida[];
   materiaPrima: SeedMateriaPrima[];
+  asignarComision: SeedAsignarComision[];
 }
 
 export const initialData: SeedData = {
@@ -2492,6 +2501,88 @@ export const initialData: SeedData = {
       materiaPrima: "Huevo",
       unidades: "Kilogramos",
       temperatura: "Refrigerado",
+    },
+  ],
+  asignarComision: [
+    {
+      // 1
+      sucursalOFranquicia: "Franquicia",
+      minimoDeLaMeta: 5000,
+      nombreSucursalOFranquicia: "Polanco",
+      mes: "Noviembre",
+      anio: "2024",
+    },
+    {
+      // 2
+      sucursalOFranquicia: "Sucursal",
+      minimoDeLaMeta: 6000,
+      nombreSucursalOFranquicia: "Reforma",
+      mes: "Diciembre",
+      anio: "2024",
+    },
+    {
+      // 3
+      sucursalOFranquicia: "Franquicia",
+      minimoDeLaMeta: 7000,
+      nombreSucursalOFranquicia: "Condesa",
+      mes: "Enero",
+      anio: "2025",
+    },
+    {
+      // 4
+      sucursalOFranquicia: "Sucursal",
+      minimoDeLaMeta: 5500,
+      nombreSucursalOFranquicia: "Del Valle",
+      mes: "Febrero",
+      anio: "2025",
+    },
+    {
+      // 5
+      sucursalOFranquicia: "Franquicia",
+      minimoDeLaMeta: 9000,
+      nombreSucursalOFranquicia: "Polanco",
+      mes: "Marzo",
+      anio: "2025",
+    },
+    {
+      // 6
+      sucursalOFranquicia: "Sucursal",
+      minimoDeLaMeta: 7000,
+      nombreSucursalOFranquicia: "Santa Fe",
+      mes: "Abril",
+      anio: "2025",
+    },
+    {
+      // 7
+      sucursalOFranquicia: "Franquicia",
+      minimoDeLaMeta: 6500,
+      nombreSucursalOFranquicia: "Roma",
+      mes: "Mayo",
+      anio: "2025",
+    },
+    {
+      // 8
+      sucursalOFranquicia: "Sucursal",
+      minimoDeLaMeta: 7500,
+      nombreSucursalOFranquicia: "Centro",
+      mes: "Junio",
+      anio: "2025",
+    },
+    {
+      // 9
+      sucursalOFranquicia: "Franquicia",
+      minimoDeLaMeta: 6000,
+      nombreSucursalOFranquicia: "Polanco",
+      mes: "Julio",
+      anio: "2025",
+    },
+    {
+      // 10
+      sucursalOFranquicia: "Sucursal",
+      minimoDeLaMeta: 7000,
+      nombreSucursalOFranquicia: "Reforma",
+      mes: "Agosto",
+      anio: "2025",
     },
   ],
 };
