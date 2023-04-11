@@ -1,22 +1,17 @@
 import { createContext } from "react";
-import { ListadoDeProductos, ReporteDeSalida, Unidades } from "../../../interfaces";
+import { IListadoReporteDeSalida, ReporteDeSalida } from "../../../interfaces";
 
 interface ContextProps {
   reportesDeSalida: ReporteDeSalida[];
 
   //Métodos
   agregarNuevoReporteDeSalida: (
-    fecha: string,
-    productoExtra: string,
-    codigoDeProductoExtra: string,
-    cantidadDeProductoExtra: string,
-    unidadesDeProductoExtra: string,
-    listadoDeProductos: ListadoDeProductos[],
     sucursalAEnviar: string,
-    datosDeRepartidor: string,
+    nombreDelRepartidor: string,
     datosDeLaRuta: string,
     kilometrajeDeEntrada: string,
     kilometrajeDeSalida: string,
+    listadoReporteDeSalida: IListadoReporteDeSalida[],
     showNotificacion?: boolean
   ) => void;
 

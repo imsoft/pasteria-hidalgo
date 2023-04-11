@@ -24,6 +24,7 @@ export * from './manejoPersonal';
 export * from './mantenimiento';
 export * from './personalMantenimiento';
 export * from './reporteDeSalida';
+export * from './listaReporteDeSalida';
 export * from './sucursalYFranquicia';
 export * from './materiaPrima';
 

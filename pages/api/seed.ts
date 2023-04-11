@@ -12,6 +12,7 @@ import {
   PersonalDeMantenimiento,
   Proveedor,
   ReporteDeCompra,
+  ReporteDeSalida,
   ReporteVentasAmbulantesIndividual,
   SucursalYFranquicia,
 } from "../../models";
@@ -80,6 +81,9 @@ export default async function handler(
 
   await Mantenimiento.deleteMany(); //Borra todo de la DB
   await Mantenimiento.insertMany(seedDatabase.initialData.mantenimiento);
+
+  await ReporteDeSalida.deleteMany(); //Borra todo de la DB
+  await ReporteDeSalida.insertMany(seedDatabase.initialData.reporteDeSalida);
 
   await db.disconnect();
 

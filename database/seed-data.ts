@@ -1,5 +1,6 @@
 import {
   IListadoDeReporteDeCompra,
+  IListadoReporteDeSalida,
   ListadoDeProductos,
   LugarDeVenta,
   PuestosEmpresa,
@@ -153,6 +154,15 @@ interface SeedMantenimiento {
   modificacionDeMantenimiento: string;
 }
 
+interface SeedReporteDeSalida {
+  sucursalAEnviar: string;
+  nombreDelRepartidor: string;
+  datosDeLaRuta: string;
+  kilometrajeDeEntrada: string;
+  kilometrajeDeSalida: string;
+  listadoReporteDeSalida: IListadoReporteDeSalida[];
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -168,6 +178,7 @@ interface SeedData {
   sucursalYFranquicia: SeedSucursalYFranquicia[];
   personalDeMantenimiento: SeedPersonalDeMantenimiento[];
   mantenimiento: SeedMantenimiento[];
+  reporteDeSalida: SeedReporteDeSalida[];
 }
 
 export const initialData: SeedData = {
@@ -2148,6 +2159,268 @@ export const initialData: SeedData = {
       fechaDeGarantia: "20/01/2025",
       fechaDeMantenimiento: "12/08/2023",
       modificacionDeMantenimiento: "Limpieza de sistema de leche",
+    },
+  ],
+  reporteDeSalida: [
+    {
+      // 1
+      sucursalAEnviar: "Polanco",
+      nombreDelRepartidor: "María Rodríguez",
+      datosDeLaRuta: "Pasará por Paseo de la Reforma",
+      kilometrajeDeEntrada: "10",
+      kilometrajeDeSalida: "18",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-15",
+          tipoDeProducto: "Bebidas",
+          producto: "Refresco",
+          codigoDelProducto: "B_R",
+          cantidadDeProducto: 12,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-04-28",
+          tipoDeProducto: "Alimentos",
+          producto: "Chips",
+          codigoDelProducto: "A_C",
+          cantidadDeProducto: 8,
+        },
+      ],
+    },
+    {
+      // 2
+      sucursalAEnviar: "Roma",
+      nombreDelRepartidor: "Pedro García",
+      datosDeLaRuta: "Pasará por Insurgentes Sur",
+      kilometrajeDeEntrada: "5",
+      kilometrajeDeSalida: "11",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-16",
+          tipoDeProducto: "Bebidas",
+          producto: "Agua embotellada",
+          codigoDelProducto: "B_A",
+          cantidadDeProducto: 24,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-04-29",
+          tipoDeProducto: "Alimentos",
+          producto: "Chocolate",
+          codigoDelProducto: "A_CH",
+          cantidadDeProducto: 10,
+        },
+      ],
+    },
+    {
+      // 3
+      sucursalAEnviar: "Del Valle",
+      nombreDelRepartidor: "Carlos Martínez",
+      datosDeLaRuta: "Pasará por Viaducto Miguel Alemán",
+      kilometrajeDeEntrada: "8",
+      kilometrajeDeSalida: "15",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-17",
+          tipoDeProducto: "Bebidas",
+          producto: "Cerveza",
+          codigoDelProducto: "B_C",
+          cantidadDeProducto: 18,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-04-30",
+          tipoDeProducto: "Alimentos",
+          producto: "Papas fritas",
+          codigoDelProducto: "A_PF",
+          cantidadDeProducto: 6,
+        },
+      ],
+    },
+    {
+      // 4
+      sucursalAEnviar: "Condesa",
+      nombreDelRepartidor: "Mario Jiménez",
+      datosDeLaRuta: "Pasará por Avenida Álvaro Obregón",
+      kilometrajeDeEntrada: "6",
+      kilometrajeDeSalida: "14",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-19",
+          tipoDeProducto: "Bebidas",
+          producto: "Té helado",
+          codigoDelProducto: "B_TH",
+          cantidadDeProducto: 10,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-05-01",
+          tipoDeProducto: "Alimentos",
+          producto: "Cereal",
+          codigoDelProducto: "A_CE",
+          cantidadDeProducto: 3,
+        },
+      ],
+    },
+    {
+      // 5
+      sucursalAEnviar: "Polanco",
+      nombreDelRepartidor: "Laura Torres",
+      datosDeLaRuta: "Pasará por Reforma Lomas",
+      kilometrajeDeEntrada: "4",
+      kilometrajeDeSalida: "12",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-20",
+          tipoDeProducto: "Bebidas",
+          producto: "Refresco de cola",
+          codigoDelProducto: "B_RC",
+          cantidadDeProducto: 15,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-05-02",
+          tipoDeProducto: "Alimentos",
+          producto: "Pizzas",
+          codigoDelProducto: "A_PI",
+          cantidadDeProducto: 4,
+        },
+      ],
+    },
+    {
+      // 6
+      sucursalAEnviar: "Centro",
+      nombreDelRepartidor: "Jorge Ramírez",
+      datosDeLaRuta: "Pasará por Calle Madero",
+      kilometrajeDeEntrada: "7",
+      kilometrajeDeSalida: "13",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-21",
+          tipoDeProducto: "Bebidas",
+          producto: "Agua mineral",
+          codigoDelProducto: "B_AM",
+          cantidadDeProducto: 20,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-05-03",
+          tipoDeProducto: "Alimentos",
+          producto: "Sandwiches",
+          codigoDelProducto: "A_SA",
+          cantidadDeProducto: 6,
+        },
+      ],
+    },
+    {
+      // 7
+      sucursalAEnviar: "Roma",
+      nombreDelRepartidor: "María Fernández",
+      datosDeLaRuta: "Pasará por Avenida Cuauhtémoc",
+      kilometrajeDeEntrada: "5",
+      kilometrajeDeSalida: "9",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-23",
+          tipoDeProducto: "Bebidas",
+          producto: "Jugo de naranja",
+          codigoDelProducto: "B_JN",
+          cantidadDeProducto: 8,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-05-04",
+          tipoDeProducto: "Alimentos",
+          producto: "Frutas",
+          codigoDelProducto: "A_FR",
+          cantidadDeProducto: 12,
+        },
+      ],
+    },
+    {
+      // 8
+      sucursalAEnviar: "Del Valle",
+      nombreDelRepartidor: "Carlos Martínez",
+      datosDeLaRuta: "Pasará por Avenida Universidad",
+      kilometrajeDeEntrada: "6",
+      kilometrajeDeSalida: "14",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-24",
+          tipoDeProducto: "Bebidas",
+          producto: "Refresco de limón",
+          codigoDelProducto: "B_RL",
+          cantidadDeProducto: 6,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-05-05",
+          tipoDeProducto: "Alimentos",
+          producto: "Snacks",
+          codigoDelProducto: "A_SN",
+          cantidadDeProducto: 8,
+        },
+      ],
+    },
+    {
+      // 9
+      sucursalAEnviar: "Polanco",
+      nombreDelRepartidor: "Patricia Silva",
+      datosDeLaRuta: "Pasará por Paseo de la Reforma",
+      kilometrajeDeEntrada: "7",
+      kilometrajeDeSalida: "13",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-25",
+          tipoDeProducto: "Bebidas",
+          producto: "Agua con gas",
+          codigoDelProducto: "B_AG",
+          cantidadDeProducto: 10,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-05-06",
+          tipoDeProducto: "Alimentos",
+          producto: "Hamburguesas",
+          codigoDelProducto: "A_HB",
+          cantidadDeProducto: 5,
+        },
+      ],
+    },
+    {
+      // 10
+      sucursalAEnviar: "Condesa",
+      nombreDelRepartidor: "Andrés López",
+      datosDeLaRuta: "Pasará por Avenida Tamaulipas",
+      kilometrajeDeEntrada: "8",
+      kilometrajeDeSalida: "17",
+      listadoReporteDeSalida: [
+        {
+          uuid: 1,
+          fecha: "2023-04-26",
+          tipoDeProducto: "Bebidas",
+          producto: "Té helado",
+          codigoDelProducto: "B_TH",
+          cantidadDeProducto: 7,
+        },
+        {
+          uuid: 2,
+          fecha: "2023-05-07",
+          tipoDeProducto: "Alimentos",
+          producto: "Pizza",
+          codigoDelProducto: "A_PZ",
+          cantidadDeProducto: 9,
+        },
+      ],
     },
   ],
 };

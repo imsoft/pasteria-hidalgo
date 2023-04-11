@@ -2,7 +2,11 @@ import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../baseUrlApi";
 import { ReportesDeSalidaContext, reportesDeSalidaReducer } from ".";
-import { ListadoDeProductos, ReporteDeSalida } from "../../../interfaces";
+import {
+  IListadoReporteDeSalida,
+  ListadoDeProductos,
+  ReporteDeSalida,
+} from "../../../interfaces";
 
 import Swal from "sweetalert2";
 
@@ -53,34 +57,24 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
   };
 
   const agregarNuevoReporteDeSalida = async (
-    fecha: string,
-    productoExtra: string,
-    codigoDeProductoExtra: string,
-    cantidadDeProductoExtra: string,
-    unidadesDeProductoExtra: string,
-    listadoDeProductos: ListadoDeProductos[],
     sucursalAEnviar: string,
-    datosDeRepartidor: string,
+    nombreDelRepartidor: string,
     datosDeLaRuta: string,
     kilometrajeDeEntrada: string,
     kilometrajeDeSalida: string,
+    listadoReporteDeSalida: IListadoReporteDeSalida[],
     showNotificacion = false
   ) => {
     try {
       const { data } = await entriesApi.post<ReporteDeSalida>(
         "/reportesDeSalida",
         {
-          fecha,
-          productoExtra,
-          codigoDeProductoExtra,
-          cantidadDeProductoExtra,
-          unidadesDeProductoExtra,
-          listadoDeProductos,
           sucursalAEnviar,
-          datosDeRepartidor,
+          nombreDelRepartidor,
           datosDeLaRuta,
           kilometrajeDeEntrada,
           kilometrajeDeSalida,
+          listadoReporteDeSalida,
         }
       );
       dispatch({
@@ -105,17 +99,12 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
   const actualizarReporteDeSalida = async (
     {
       _id,
-      fecha,
-      productoExtra,
-      codigoDeProductoExtra,
-      cantidadDeProductoExtra,
-      unidadesDeProductoExtra,
-      listadoDeProductos,
       sucursalAEnviar,
-      datosDeRepartidor,
+      nombreDelRepartidor,
       datosDeLaRuta,
       kilometrajeDeEntrada,
       kilometrajeDeSalida,
+      listadoReporteDeSalida,
     }: ReporteDeSalida,
     showNotificacion = false
   ) => {
@@ -123,17 +112,12 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
       const { data } = await entriesApi.put<ReporteDeSalida>(
         `/reportesDeSalida/${_id}`,
         {
-          fecha,
-          productoExtra,
-          codigoDeProductoExtra,
-          cantidadDeProductoExtra,
-          unidadesDeProductoExtra,
-          listadoDeProductos,
           sucursalAEnviar,
-          datosDeRepartidor,
+          nombreDelRepartidor,
           datosDeLaRuta,
           kilometrajeDeEntrada,
           kilometrajeDeSalida,
+          listadoReporteDeSalida,
         }
       );
       dispatch({

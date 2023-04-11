@@ -167,7 +167,7 @@ export default function ManejoSucursalesFranquicias() {
                     onChange={onTextFieldChangedSucursalOFranquicia}
                     onBlur={() => setTouched(true)}
                   >
-                    <option>Seleccione una opción...</option>
+                    <option hidden>Seleccione una opción...</option>
                     <option>Sucursal</option>
                     <option>Franquicia</option>
                   </select>

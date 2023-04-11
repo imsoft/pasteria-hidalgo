@@ -1,28 +1,19 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 
 import { ReportesDeSalidaContext } from "../../../context/gerencia-operativa/reporteDeSalida/ReportesDeSalidaContext";
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
-import { ListadoDeProductos, Paste, TipoDeProducto } from "../../../interfaces";
+import {
+  IListadoReporteDeSalida,
+  Paste,
+  TipoDeProducto,
+} from "../../../interfaces";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
-
-interface ListaDeProductosDeSalida {
-  id: number;
-  fecha: string;
-  tipoDeProducto: string;
-  producto: string;
-  codigoDeProducto: string;
-  cantidadDelProducto: number;
-  sucursalAEnviar: string;
-  datosDelRepartidor: string;
-  datosDeLaRuta: string;
-  kilometrajeDeEntrada: string;
-  kilometrajeDeSalida: string;
-}
+import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
 const validProductType: TipoDeProducto[] = [
   "Paste Dulce",
@@ -212,10 +203,16 @@ export default function ReportesSalida() {
   const router = useRouter();
   const { agregarNuevoReporteDeSalida } = useContext(ReportesDeSalidaContext);
 
+  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const sucursalesYFranquiciasMemo = useMemo(
+    () => sucursalesYFranquicias,
+    [sucursalesYFranquicias]
+  );
+
   const [inputFecha, setInputFecha] = useState("");
   const [inputCodigoProducto, setInputCodigoProducto] = useState("");
   const [inputListaDeProductos, setInputListaDeProductos] = useState<
-    ListaDeProductosDeSalida[]
+    IListadoReporteDeSalida[]
   >([]);
   const [inputTipoDeProducto, setInputTipoDeProducto] = useState("");
   const [inputSaborProducto, setInputSaborProducto] = useState("");
@@ -259,7 +256,7 @@ export default function ReportesSalida() {
   };
 
   const onTextFieldChangedSucursalAEnviar = (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLSelectElement>
   ) => {
     setInputSucursalAEnviar(event.target.value);
   };
@@ -288,21 +285,27 @@ export default function ReportesSalida() {
     setInputKilometrajeDeSalida(event.target.value);
   };
 
+  const lookUpProductId = () => {
+    const result = validCakeFlavors.find(
+      (cakeFlavors) => cakeFlavors.saborDelPaste === inputSaborProducto
+    );
+    setInputCodigoProducto(result?._id!);
+  };
+
+  useEffect(() => {
+    lookUpProductId();
+  }, [inputSaborProducto]);
+
   const agregarALaLista = () => {
     setInputUuid(inputUuid + 1);
 
     const nuevaListaProductos = {
-      id: inputUuid,
+      uuid: inputUuid,
       fecha: inputFecha,
       tipoDeProducto: inputTipoDeProducto as TipoDeProducto,
       producto: inputSaborProducto,
-      codigoDeProducto: inputCodigoProducto,
-      cantidadDelProducto: inputCantidad,
-      sucursalAEnviar: inputSucursalAEnviar,
-      datosDelRepartidor: inputDatosDeRepartidor,
-      datosDeLaRuta: inputDatosDeLaRuta,
-      kilometrajeDeEntrada: inputKilometrajeDeEntrada,
-      kilometrajeDeSalida: inputKilometrajeDeSalida,
+      codigoDelProducto: inputCodigoProducto,
+      cantidadDeProducto: inputCantidad,
     };
 
     setInputListaDeProductos([...inputListaDeProductos, nuevaListaProductos]);
@@ -316,36 +319,26 @@ export default function ReportesSalida() {
     setInputSaborProducto("");
     setInputCodigoProducto("");
     setInputCantidad(0);
-    setInputSucursalAEnviar("");
-    setInputDatosDeRepartidor("");
-    setInputDatosDeLaRuta("");
-    setInputKilometrajeDeEntrada("");
-    setInputKilometrajeDeSalida("");
   };
 
   const eliminarDeLaLista = (idProducto: number) => {
     setInputListaDeProductos(
       inputListaDeProductos.filter((producto) => {
-        return producto.id !== idProducto;
+        return producto.uuid !== idProducto;
       })
     );
   };
 
   const updateProduct = (idProducto: number) => {
     const productoAEditar = inputListaDeProductos.find(
-      (producto) => producto.id === idProducto
+      (producto) => producto.uuid === idProducto
     );
-    setInputUuid(productoAEditar?.id!);
+    setInputUuid(productoAEditar?.uuid!);
     setInputFecha(productoAEditar?.fecha!);
     setInputTipoDeProducto(productoAEditar?.tipoDeProducto!);
     setInputSaborProducto(productoAEditar?.producto!);
-    setInputCodigoProducto(productoAEditar?.codigoDeProducto!);
-    setInputCantidad(productoAEditar?.cantidadDelProducto!);
-    setInputSucursalAEnviar(productoAEditar?.sucursalAEnviar!);
-    setInputDatosDeRepartidor(productoAEditar?.datosDelRepartidor!);
-    setInputDatosDeLaRuta(productoAEditar?.datosDeLaRuta!);
-    setInputKilometrajeDeEntrada(productoAEditar?.kilometrajeDeEntrada!);
-    setInputKilometrajeDeSalida(productoAEditar?.kilometrajeDeSalida!);
+    setInputCodigoProducto(productoAEditar?.codigoDelProducto!);
+    setInputCantidad(productoAEditar?.cantidadDeProducto!);
   };
 
   const onSave = () => {
@@ -360,16 +353,15 @@ export default function ReportesSalida() {
     )
       return;
 
-    // agregarNuevoReporteDeSalida(
-    //   inputFecha,
-    //   inputListaDeProductos,
-    //   inputSucursalAEnviar,
-    //   inputDatosDeRepartidor,
-    //   inputDatosDeLaRuta,
-    //   inputKilometrajeDeEntrada,
-    //   inputKilometrajeDeSalida,
-    //   true
-    // );
+    agregarNuevoReporteDeSalida(
+      inputSucursalAEnviar,
+      inputDatosDeRepartidor,
+      inputDatosDeLaRuta,
+      inputKilometrajeDeEntrada,
+      inputKilometrajeDeSalida,
+      inputListaDeProductos,
+      true
+    );
 
     MySwal.fire({
       position: "top-end",
@@ -503,6 +495,7 @@ export default function ReportesSalida() {
                   value={inputCodigoProducto || ""}
                   onChange={onTextFieldChangedCodigoProducto}
                   onBlur={() => setTouched(true)}
+                  readOnly
                 />
               </div>
 
@@ -528,21 +521,34 @@ export default function ReportesSalida() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Sucursal a enviar
                 </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputSucursalAEnviar || ""}
+                <select
+                  id="CmbFranquicia"
+                  name="CmbFranquicia"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  defaultValue="Selecciona un producto..."
                   onChange={onTextFieldChangedSucursalAEnviar}
                   onBlur={() => setTouched(true)}
-                />
+                >
+                  <option hidden>Seleccione la sucursal...</option>
+                  {sucursalesYFranquiciasMemo
+                    .filter(
+                      (sucursalesYFranquicias) =>
+                        sucursalesYFranquicias.sucursalOFranquicia ===
+                        "Sucursal"
+                    )
+                    .map((sucursalesYFranquicias) => (
+                      <option
+                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      >
+                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      </option>
+                    ))}
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -679,13 +685,6 @@ export default function ReportesSalida() {
                             scope="col"
                             className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                           >
-                            ID
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
                             Fecha
                           </th>
 
@@ -720,41 +719,6 @@ export default function ReportesSalida() {
                           <th
                             scope="col"
                             className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
-                            Sucursal a enviar
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
-                            Nombre del repartidor
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
-                            Datos de la ruta
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
-                            Kilometraje de entrada
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                          >
-                            Kilometraje de salida
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                           ></th>
 
                           <th
@@ -765,16 +729,10 @@ export default function ReportesSalida() {
                       </thead>
                       {inputListaDeProductos.map((listadoProductos) => (
                         <tbody
-                          key={listadoProductos.id}
+                          key={listadoProductos.uuid}
                           className="divide-y divide-gray-200 bg-white"
                         >
                           <tr className="cursor-pointer hover:bg-yellow-100">
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
-                                {listadoProductos.id || ""}
-                              </div>
-                            </td>
-
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <div className="font-medium text-gray-900">
                                 {listadoProductos.fecha || ""}
@@ -795,43 +753,13 @@ export default function ReportesSalida() {
 
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <div className="font-medium text-gray-900">
-                                {listadoProductos.codigoDeProducto || ""}
+                                {listadoProductos.codigoDelProducto || ""}
                               </div>
                             </td>
 
                             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                               <div className="font-medium text-gray-900">
-                                {listadoProductos.cantidadDelProducto || ""}
-                              </div>
-                            </td>
-
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
-                                {listadoProductos.sucursalAEnviar || ""}
-                              </div>
-                            </td>
-
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
-                                {listadoProductos.datosDelRepartidor || ""}
-                              </div>
-                            </td>
-
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
-                                {listadoProductos.datosDeLaRuta || ""}
-                              </div>
-                            </td>
-
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
-                                {listadoProductos.kilometrajeDeEntrada || ""}
-                              </div>
-                            </td>
-
-                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                              <div className="font-medium text-gray-900">
-                                {listadoProductos.kilometrajeDeSalida || ""}
+                                {listadoProductos.cantidadDeProducto || ""}
                               </div>
                             </td>
 
@@ -840,7 +768,7 @@ export default function ReportesSalida() {
                                 type="button"
                                 className="bg-primary-yellow border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-blue hover:text-primary-yellow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
                                 onClick={() =>
-                                  updateProduct(listadoProductos.id)
+                                  updateProduct(listadoProductos.uuid)
                                 }
                               >
                                 Editar
@@ -852,7 +780,7 @@ export default function ReportesSalida() {
                                 type="button"
                                 className="bg-primary-yellow border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-blue hover:text-primary-yellow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
                                 onClick={() =>
-                                  eliminarDeLaLista(listadoProductos.id)
+                                  eliminarDeLaLista(listadoProductos.uuid)
                                 }
                               >
                                 Eliminar
@@ -868,7 +796,7 @@ export default function ReportesSalida() {
             </div>
           </div>
 
-          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          <div className="px-4 py-3 mt-6 bg-gray-50 text-right sm:px-6">
             <button
               type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"

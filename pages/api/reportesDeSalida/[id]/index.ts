@@ -62,34 +62,24 @@ const updateReporteDeSalida = async (
   }
 
   const {
-    fecha = reporteDeSalidaToUpdate.fecha,
-    productoExtra = reporteDeSalidaToUpdate.productoExtra,
-    codigoDeProductoExtra = reporteDeSalidaToUpdate.codigoDeProductoExtra,
-    cantidadDeProductoExtra = reporteDeSalidaToUpdate.cantidadDeProductoExtra,
-    unidadesDeProductoExtra = reporteDeSalidaToUpdate.unidadesDeProductoExtra,
-    listadoDeProductos = reporteDeSalidaToUpdate.listadoDeProductos,
     sucursalAEnviar = reporteDeSalidaToUpdate.sucursalAEnviar,
-    datosDeRepartidor = reporteDeSalidaToUpdate.datosDeRepartidor,
+    nombreDelRepartidor = reporteDeSalidaToUpdate.nombreDelRepartidor,
     datosDeLaRuta = reporteDeSalidaToUpdate.datosDeLaRuta,
     kilometrajeDeEntrada = reporteDeSalidaToUpdate.kilometrajeDeEntrada,
     kilometrajeDeSalida = reporteDeSalidaToUpdate.kilometrajeDeSalida,
+    listadoReporteDeSalida = reporteDeSalidaToUpdate.listadoReporteDeSalida,
   } = req.body;
 
   try {
     const updatedReporteDeSalida = await ReporteDeSalida.findByIdAndUpdate(
       id,
       {
-        fecha,
-        productoExtra,
-        codigoDeProductoExtra,
-        cantidadDeProductoExtra,
-        unidadesDeProductoExtra,
-        listadoDeProductos,
         sucursalAEnviar,
-        datosDeRepartidor,
+        nombreDelRepartidor,
         datosDeLaRuta,
         kilometrajeDeEntrada,
         kilometrajeDeSalida,
+        listadoReporteDeSalida,
       },
       { runValidators: true, new: true }
     );

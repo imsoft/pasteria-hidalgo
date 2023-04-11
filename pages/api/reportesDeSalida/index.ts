@@ -37,31 +37,21 @@ const postReporteDeSalida = async (
   res: NextApiResponse<Data>
 ) => {
   const {
-    fecha = "",
-    productoExtra = "",
-    codigoDeProductoExtra = "",
-    cantidadDeProductoExtra = "",
-    unidadesDeProductoExtra = "",
-    listadoDeProductos = "",
     sucursalAEnviar = "",
-    datosDeRepartidor = "",
+    nombreDelRepartidor = "",
     datosDeLaRuta = "",
     kilometrajeDeEntrada = "",
     kilometrajeDeSalida = "",
+    listadoReporteDeSalida = "",
   } = req.body;
 
   const newReporteDeSalida = new ReporteDeSalida({
-    fecha,
-    productoExtra,
-    codigoDeProductoExtra,
-    cantidadDeProductoExtra,
-    unidadesDeProductoExtra,
-    listadoDeProductos,
     sucursalAEnviar,
-    datosDeRepartidor,
+    nombreDelRepartidor,
     datosDeLaRuta,
     kilometrajeDeEntrada,
     kilometrajeDeSalida,
+    listadoReporteDeSalida,
   });
 
   try {

@@ -32,24 +32,16 @@ export const reportesDeSalidaReducer = (
         ...state,
         reportesDeSalida: state.reportesDeSalida.map((reporteDeSalida) => {
           if (reporteDeSalida._id === action.payload._id) {
-            reporteDeSalida.fecha = action.payload.fecha;
-            reporteDeSalida.productoExtra = action.payload.productoExtra;
-            reporteDeSalida.codigoDeProductoExtra =
-              action.payload.codigoDeProductoExtra;
-            reporteDeSalida.cantidadDeProductoExtra =
-              action.payload.cantidadDeProductoExtra;
-            reporteDeSalida.unidadesDeProductoExtra =
-              action.payload.unidadesDeProductoExtra;
-            reporteDeSalida.listadoDeProductos =
-              action.payload.listadoDeProductos;
             reporteDeSalida.sucursalAEnviar = action.payload.sucursalAEnviar;
-            reporteDeSalida.datosDeRepartidor =
-              action.payload.datosDeRepartidor;
+            reporteDeSalida.nombreDelRepartidor =
+              action.payload.nombreDelRepartidor;
             reporteDeSalida.datosDeLaRuta = action.payload.datosDeLaRuta;
             reporteDeSalida.kilometrajeDeEntrada =
               action.payload.kilometrajeDeEntrada;
             reporteDeSalida.kilometrajeDeSalida =
               action.payload.kilometrajeDeSalida;
+            reporteDeSalida.listadoReporteDeSalida =
+              action.payload.listadoReporteDeSalida;
           }
           return reporteDeSalida;
         }),
