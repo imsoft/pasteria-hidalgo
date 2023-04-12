@@ -125,7 +125,9 @@ const tasksList = [
       {
         title: "General",
         tasks: [
-          "⚒️ Incorporar el login, actualizar productos segun reporte de entrada y salida, actualizar puntos del cliente frecuente segun la compra",
+          "⚒️ Incorporar el login",
+          "⚒️ Actualizar productos segun reporte de entrada y salida",
+          "⚒️ Actualizar puntos del cliente frecuente segun la compra",
         ],
       },
     ],
