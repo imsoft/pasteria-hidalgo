@@ -123,7 +123,8 @@ interface SeedReporteVentasIndividual {
 interface SeedApartadoJuridico {
   sucursalOFranquicia: string;
   nombreSucursalOFranquicia: string;
-  documento: string;
+  nombreDelArchivo: string;
+  urlDelArchivo: string;
 }
 
 interface SeedSucursalYFranquicia {
@@ -1816,61 +1817,81 @@ export const initialData: SeedData = {
       // 1
       sucursalOFranquicia: "Franquicia",
       nombreSucursalOFranquicia: "Polanco",
-      documento: "C:\\fakepath\\Menu_Franquicia_Polanco.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 2
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Condesa",
-      documento: "C:\\fakepath\\Menu_Sucursal_Condesa.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 3
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Roma",
-      documento: "C:\\fakepath\\Promociones_Roma.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 4
       sucursalOFranquicia: "Franquicia",
       nombreSucursalOFranquicia: "Santa Fe",
-      documento: "C:\\fakepath\\Ofertas_Franquicia_SantaFe.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 5
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Polanco",
-      documento: "C:\\fakepath\\Catalogo_Sucursal_Polanco.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 6
       sucursalOFranquicia: "Franquicia",
       nombreSucursalOFranquicia: "Interlomas",
-      documento: "C:\\fakepath\\Promociones_Franquicia_Interlomas.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 7
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Satélite",
-      documento: "C:\\fakepath\\Ofertas_Sucursal_Satelite.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 8
       sucursalOFranquicia: "Franquicia",
       nombreSucursalOFranquicia: "Centro Histórico",
-      documento: "C:\\fakepath\\Menu_Franquicia_CentroHistorico.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 9
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Providencia",
-      documento: "C:\\fakepath\\Catalogo_Sucursal_Providencia.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 10
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Zapopan",
-      documento: "C:\\fakepath\\Promociones_Sucursal_Zapopan.pdf",
+      nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
+      urlDelArchivo:
+        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
   ],
   sucursalYFranquicia: [

@@ -1,4 +1,12 @@
-import { ChangeEvent, FC, useContext, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
@@ -39,8 +47,13 @@ export const ApartadoJuridicoPage: FC<Props> = ({ apartadoJuridico }) => {
   const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
     useState(apartadoJuridico.nombreSucursalOFranquicia);
   const [file, setFile] = useState<File | null>(null);
-  const [fileName, setFileName] = useState("");
-  const [documentURL, setDocumentURL] = useState(apartadoJuridico.documento);
+  const [inputNombreDelArchivo, setInputNombreDelArchivo] = useState(
+    apartadoJuridico.nombreDelArchivo
+  );
+  const [inputUrlDelArchivo, setInputUrlDelArchivo] = useState(
+    apartadoJuridico.urlDelArchivo
+  );
+  const [flag, setFlag] = useState(false);
 
   const MySwal = withReactContent(Swal);
 
@@ -56,25 +69,34 @@ export const ApartadoJuridicoPage: FC<Props> = ({ apartadoJuridico }) => {
     setInputNombreSucursalOFranquicia(event.target.value);
   };
 
-  const onChangeInputFile = (newFile: File | null, newFileName: string) => {
-    setFile(newFile);
-    setFileName(newFileName);
+  const onFileFieldChangedFile = (event: ChangeEvent<HTMLInputElement>) => {
+    setFile(event.target.files![0]);
+    setInputNombreDelArchivo(event.target.files![0].name);
   };
 
-  const uploadDocument = async () => {
+  const onTextFieldChangedUrlDelArchivo = (url: string) => {
+    setInputUrlDelArchivo(url);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     try {
-      const result = await uploadFile(file, fileName);
-      setDocumentURL(result);
-      console.log(result);
+      const result = await uploadFile(file, inputNombreDelArchivo);
+      onTextFieldChangedUrlDelArchivo(result);
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    flag ? onSave() : true;
+  }, [inputUrlDelArchivo]);
+
   const onSave = () => {
     if (
       inputSucursalOFranquicia.trim().length === 0 &&
-      documentURL.length === 0 &&
+      inputUrlDelArchivo.length === 0 &&
       inputNombreSucursalOFranquicia?.trim().length === 0
     )
       return;
@@ -94,7 +116,8 @@ export const ApartadoJuridicoPage: FC<Props> = ({ apartadoJuridico }) => {
           ...apartadoJuridico,
           sucursalOFranquicia: inputSucursalOFranquicia,
           nombreSucursalOFranquicia: inputNombreSucursalOFranquicia,
-          documento: documentURL,
+          nombreDelArchivo: inputNombreDelArchivo,
+          urlDelArchivo: inputUrlDelArchivo,
         };
 
         actualizarApartadoJuridico(actualizadoApartadoJuridico, true);
@@ -123,7 +146,7 @@ export const ApartadoJuridicoPage: FC<Props> = ({ apartadoJuridico }) => {
 
   return (
     <SidebarLayoutGerenciaOperativa>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -229,13 +252,8 @@ export const ApartadoJuridicoPage: FC<Props> = ({ apartadoJuridico }) => {
                           type="file"
                           accept="application/pdf"
                           className="sr-only"
-                          value={documentURL}
-                          onChange={(e) =>
-                            onChangeInputFile(
-                              e.target.files![0],
-                              e.target.files![0].name
-                            )
-                          }
+                          // value={inputUrlDelArchivo}
+                          onChange={onFileFieldChangedFile}
                         />
                       </label>
                       {/* <p className="pl-1">o solo arrastralo aquí</p> */}
@@ -244,7 +262,7 @@ export const ApartadoJuridicoPage: FC<Props> = ({ apartadoJuridico }) => {
                       Unicamente archivos en formato PDF
                     </p>
                     <p className="text-sm mt-5 leading-5 text-gray-600">
-                      {fileName}
+                      {inputNombreDelArchivo}
                     </p>
                   </div>
                 </div>

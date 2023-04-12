@@ -1,4 +1,11 @@
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
 import { useRouter } from "next/router";
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
@@ -28,20 +35,10 @@ const ApartadoJuridico = () => {
   const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
     useState("");
   const [file, setFile] = useState<File | null>(null);
-  const [fileName, setFileName] = useState("");
-  const [documentURL, setDocumentURL] = useState("");
+  const [inputNombreDelArchivo, setInputNombreDelArchivo] = useState("");
+  const [inputUrlDelArchivo, setInputUrlDelArchivo] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const uploadDocument = async () => {
-    try {
-      const result = await uploadFile(file, fileName);
-      setDocumentURL(result);
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const MySwal = withReactContent(Swal);
 
@@ -57,25 +54,44 @@ const ApartadoJuridico = () => {
     setInputSucursalOFranquicia(event.target.value);
   };
 
-  const onChangeInputFile = (newFile: File | null, newFileName: string) => {
-    setFile(newFile);
-    setFileName(newFileName);
+  const onFileFieldChangedFile = (event: ChangeEvent<HTMLInputElement>) => {
+    setFile(event.target.files![0]);
+    setInputNombreDelArchivo(event.target.files![0].name);
   };
+
+  const onTextFieldChangedUrlDelArchivo = (url: string) => {
+    setInputUrlDelArchivo(url);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const result = await uploadFile(file, inputNombreDelArchivo);
+      onTextFieldChangedUrlDelArchivo(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    onSave();
+  }, [inputUrlDelArchivo]);
 
   const onSave = () => {
     if (
       inputSucursalOFranquicia.length === 0 &&
       inputNombreSucursalOFranquicia.length === 0 &&
-      documentURL.length === 0
+      inputNombreDelArchivo.length === 0 &&
+      inputUrlDelArchivo.length === 0
     )
       return;
-
-    uploadDocument();
 
     agregarNuevoApartadoJuridico(
       inputSucursalOFranquicia,
       inputNombreSucursalOFranquicia,
-      documentURL,
+      inputNombreDelArchivo,
+      inputUrlDelArchivo,
       true
     );
 
@@ -92,12 +108,13 @@ const ApartadoJuridico = () => {
     setTouched(false);
     setInputSucursalOFranquicia("");
     setInputNombreSucursalOFranquicia("");
-    setDocumentURL("");
+    setInputNombreDelArchivo("");
+    setInputUrlDelArchivo("");
   };
 
   return (
     <SidebarLayoutGerenciaOperativa>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -201,12 +218,7 @@ const ApartadoJuridico = () => {
                           type="file"
                           accept="application/pdf"
                           className="sr-only"
-                          onChange={(e) =>
-                            onChangeInputFile(
-                              e.target.files![0],
-                              e.target.files![0].name
-                            )
-                          }
+                          onChange={onFileFieldChangedFile}
                         />
                       </label>
                       {/* <p className="pl-1">o solo arrastralo aquí</p> */}
@@ -215,7 +227,7 @@ const ApartadoJuridico = () => {
                       Unicamente archivos en formato PDF
                     </p>
                     <p className="text-sm mt-5 leading-5 text-gray-600">
-                      {fileName}
+                      {inputNombreDelArchivo}
                     </p>
                   </div>
                 </div>
@@ -227,7 +239,7 @@ const ApartadoJuridico = () => {
             <button
               type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={onSave}
+              // onClick={handleSubmit}
             >
               Guardar
             </button>

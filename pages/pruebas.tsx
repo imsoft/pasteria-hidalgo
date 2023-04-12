@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { SidebarLayout } from "../components/layouts/SidebarLayout";
 import { CheckCircleIcon, PhotographIcon } from "@heroicons/react/outline";
 import { uploadFile } from "../firebase";
@@ -6,6 +6,7 @@ import { uploadFile } from "../firebase";
 const Pruebas = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
+  const [urlFile, setUrlFile] = useState("");
 
   const onChangeInputFile = (newFile: File | null, newFileName: string) => {
     setFile(newFile);
@@ -17,11 +18,15 @@ const Pruebas = () => {
 
     try {
       const result = await uploadFile(file, fileName);
-      console.log(result);
+      setUrlFile(result);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    console.log(urlFile);
+  }, [urlFile]);
 
   return (
     <>

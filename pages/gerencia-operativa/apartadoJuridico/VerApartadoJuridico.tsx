@@ -63,7 +63,13 @@ const VerApartadosJuridicos = () => {
                         scope="col"
                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Documento
+                        Nombre del archivo
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Url del archivo
                       </th>
                     </tr>
                   </thead>

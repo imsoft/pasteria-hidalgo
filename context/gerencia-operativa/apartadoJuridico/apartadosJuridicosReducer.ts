@@ -34,8 +34,10 @@ export const apartadosJuridicosReducer = (
           if (apartadoJuridico._id === action.payload._id) {
             apartadoJuridico.sucursalOFranquicia =
               action.payload.sucursalOFranquicia;
-            apartadoJuridico.nombreSucursalOFranquicia = action.payload.nombreSucursalOFranquicia;
-            apartadoJuridico.documento = action.payload.documento;
+            apartadoJuridico.nombreSucursalOFranquicia =
+              action.payload.nombreSucursalOFranquicia;
+            apartadoJuridico.nombreDelArchivo = action.payload.nombreDelArchivo;
+            apartadoJuridico.urlDelArchivo = action.payload.urlDelArchivo;
           }
           return apartadoJuridico;
         }),

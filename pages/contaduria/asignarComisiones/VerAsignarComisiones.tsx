@@ -106,7 +106,7 @@ export default function VerAsignarComisiones() {
                   onChange={onTextFieldChangedMes}
                   // onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione una opción...</option>
+                  <option hidden>Seleccione una opción...</option>
                   {mesesDelAno.map((mes) => (
                     <option key={mes}>{mes}</option>
                   ))}
@@ -129,7 +129,7 @@ export default function VerAsignarComisiones() {
                     onChange={onTextFieldChangedAnio}
                     // onBlur={() => setTouched(true)}
                   >
-                    <option>Seleccione una opción...</option>
+                    <option hidden>Seleccione una opción...</option>
                     {years.map((year) => (
                       <option key={year}>{year.toString()}</option>
                     ))}

@@ -61,7 +61,8 @@ const updateApartadoJuridico = async (
   const {
     sucursalOFranquicia = apartadoJuridicoToUpdate.sucursalOFranquicia,
     nombreSucursalOFranquicia = apartadoJuridicoToUpdate.nombreSucursalOFranquicia,
-    documento = apartadoJuridicoToUpdate.documento,
+    nombreDelArchivo = apartadoJuridicoToUpdate.nombreDelArchivo,
+    urlDelArchivo = apartadoJuridicoToUpdate.urlDelArchivo,
   } = req.body;
 
   try {
@@ -70,7 +71,8 @@ const updateApartadoJuridico = async (
       {
         sucursalOFranquicia,
         nombreSucursalOFranquicia,
-        documento,
+        nombreDelArchivo,
+        urlDelArchivo,
       },
       { runValidators: true, new: true }
     );

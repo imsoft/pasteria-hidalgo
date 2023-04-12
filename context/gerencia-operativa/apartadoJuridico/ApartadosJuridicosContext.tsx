@@ -8,7 +8,8 @@ interface ContextProps {
   agregarNuevoApartadoJuridico: (
     sucursalOFranquicia: string,
     nombreSucursalOFranquicia: string,
-    documento: string,
+    nombreDelArchivo: string,
+    urlDelArchivo: string,
     showNotificacion?: boolean
   ) => void;
 
