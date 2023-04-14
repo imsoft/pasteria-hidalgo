@@ -7,7 +7,6 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 
 import {
   CashIcon,
-  CurrencyDollarIcon,
   DocumentReportIcon,
   BellIcon,
   MenuAlt2Icon,
@@ -90,7 +89,6 @@ const navigation = [
 
 const userNavigation = [
   { name: "Perfil", href: "#" },
-  { name: "Configuración", href: "#" },
   { name: "Salir", href: "#" },
 ];
 

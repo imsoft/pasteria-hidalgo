@@ -60,7 +60,6 @@ const navigation = [
 
 const userNavigation = [
   { name: "Perfil", href: "#" },
-  { name: "Configuración", href: "#" },
   { name: "Salir", href: "#" },
 ];
 

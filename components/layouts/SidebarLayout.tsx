@@ -54,39 +54,7 @@ const navigation = [
 
 const userNavigation = [
   { name: "Perfil", href: "#" },
-  { name: "Configuración", href: "#" },
   { name: "Salir", href: "#" },
-];
-
-const solutions = [
-  {
-    name: "Blog",
-    description: "Learn about tips, product updates and company culture.",
-    href: "#",
-  },
-  {
-    name: "Help Center",
-    description:
-      "Get all of your questions answered in our forums of contact support.",
-    href: "#",
-  },
-  {
-    name: "Guides",
-    description:
-      "Learn how to maximize our platform to get the most out of it.",
-    href: "#",
-  },
-  {
-    name: "Events",
-    description:
-      "Check out webinars with experts and learn about our annual conference.",
-    href: "#",
-  },
-  {
-    name: "Security",
-    description: "Understand how we take your privacy seriously.",
-    href: "#",
-  },
 ];
 
 function classNames(...classes: string[]) {
