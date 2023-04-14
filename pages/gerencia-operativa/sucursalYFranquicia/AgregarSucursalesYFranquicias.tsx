@@ -3,8 +3,6 @@ import { ChangeEvent, useContext, useState } from "react";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia/SucursalYFranquiciaContext";
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 
 export default function ManejoSucursalesFranquicias() {
@@ -27,8 +25,6 @@ export default function ManejoSucursalesFranquicias() {
   const [inputRfc, setInputRfc] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedSucursalOFranquicia = (
     event: ChangeEvent<HTMLSelectElement>
@@ -114,15 +110,7 @@ export default function ManejoSucursalesFranquicias() {
       inputRfc,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Sucursal O Franquicia Agregada Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
-
+    
     router.push(
       "/gerencia-operativa/sucursalYFranquicia/VerSucursalesYFranquicias"
     );

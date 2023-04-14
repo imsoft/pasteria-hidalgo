@@ -58,7 +58,7 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
         icon: "success",
         title: "Reporte Ventas Ambulantes Individual Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -89,9 +89,9 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Reporte Ventas Individual Agregado",
+          title: "Reporte Ventas Ambulantes Individual Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -130,7 +130,7 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
           icon: "success",
           title: "Reporte Ventas Ambulantes Individual Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

@@ -7,8 +7,6 @@ import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerenc
 
 import { YesNo } from "../../../interfaces";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
@@ -47,8 +45,6 @@ export default function AcondicionamientoDeSucursales() {
   const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedNombreSucursalOFranquicia = (
     event: ChangeEvent<HTMLSelectElement>
@@ -152,14 +148,6 @@ export default function AcondicionamientoDeSucursales() {
       inputTotalAcomulado,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Acondicionamiento de sucursal Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push(
       "/gerencia-operativa/acondicionamientoDeSucursales/VerAcondicinamientoDeSucursal"

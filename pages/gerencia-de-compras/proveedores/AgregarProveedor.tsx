@@ -7,9 +7,6 @@ import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoD
 
 import { YesNo } from "../../../interfaces";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 export default function ManejoDeProveedores() {
@@ -28,8 +25,6 @@ export default function ManejoDeProveedores() {
   const [inputRfc, setInputRfc] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
@@ -97,14 +92,6 @@ export default function ManejoDeProveedores() {
       inputRfc,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Proveedor Agregado",
-      showConfirmButton: false,
-      timer: 2000,
-    });
 
     router.push("/gerencia-de-compras/proveedores/VerProveedores");
 

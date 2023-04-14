@@ -6,8 +6,6 @@ import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recurs
 
 import { PuestosEmpresa } from "../../../interfaces";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 
 const puestosValidos: PuestosEmpresa[] = [
@@ -63,8 +61,6 @@ export default function AgregarCandidato() {
     useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
@@ -248,14 +244,6 @@ export default function AgregarCandidato() {
       inputReferencia3Observaciones,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Candidato Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/recursos-humanos/candidato/VerCandidatos");
 

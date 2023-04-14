@@ -3,8 +3,6 @@ import { ChangeEvent, useContext, useState } from "react";
 import { PersonalesDeMantenimientoContext } from '../../../context/gerencia-operativa/personalDeMantenimiento/PersonalDeMantenimientoContext';
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 
 export default function AgregarPersonalDeMantenimiento() {
@@ -17,8 +15,6 @@ export default function AgregarPersonalDeMantenimiento() {
   const [inputTelefono, setInputTelefono] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedNombre = (
     event: ChangeEvent<HTMLInputElement>
@@ -60,14 +56,6 @@ export default function AgregarPersonalDeMantenimiento() {
       inputTelefono,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Personal de mantenimiento Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/gerencia-operativa/personalMantenimiento/VerPersonalMantenimiento");
 

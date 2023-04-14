@@ -3,8 +3,6 @@ import { ChangeEvent, useContext, useMemo, useState } from "react";
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
@@ -28,12 +26,6 @@ export default function AgregarCandidato() {
     useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
-
-  // const onTextFieldChanged = (event: ChangeEvent<HTMLInputElement>) => {
-  //   console.log( event.target.value );
-  // };
 
   const onTextFieldChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
     setInputNombre(event.target.value);
@@ -90,14 +82,6 @@ export default function AgregarCandidato() {
       inputNombreSucursalOFranquicia,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Cliente Frecuente Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/gerencia-de-ventas/clienteFrecuente/VerClientesFrecuentes");
 

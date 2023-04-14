@@ -1,6 +1,4 @@
 import { ChangeEvent, useContext, useState } from "react";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
 import { Temperatura, Unidades } from "../../../interfaces";
@@ -23,8 +21,6 @@ export default function AgregarMateriaPrima() {
   const [inputTemperatura, setInputTemperatura] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedMateriaPrima = (
     event: ChangeEvent<HTMLInputElement>
@@ -58,14 +54,6 @@ export default function AgregarMateriaPrima() {
       inputTemperatura,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Materia prima Agregada",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/gerencia-operativa/materiaPrima/VerMateriaPrima");
 

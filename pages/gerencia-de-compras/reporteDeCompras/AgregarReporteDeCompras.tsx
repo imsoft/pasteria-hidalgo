@@ -12,8 +12,6 @@ import {
   YesNo,
 } from "../../../interfaces";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
 
@@ -49,8 +47,6 @@ export default function ReporteDeCompras() {
   >([]);
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedFechaDeCompra = (
     event: ChangeEvent<HTMLInputElement>
@@ -221,14 +217,6 @@ export default function ReporteDeCompras() {
       inputPrecioTotalDelCompra,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Reporte de compra Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras");
 

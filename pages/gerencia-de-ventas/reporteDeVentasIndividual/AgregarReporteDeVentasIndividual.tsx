@@ -10,8 +10,6 @@ import {
   TipoDeProducto,
 } from "../../../interfaces";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasIndividual/ReportesVentasIndividualContext";
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente/ClientesFrecuentesContext";
 import { useRouter } from "next/router";
@@ -254,8 +252,6 @@ const AgregarReporteDeVentasIndividual = () => {
 
   const [touched, setTouched] = useState(false);
 
-  const MySwal = withReactContent(Swal);
-
   const onTextFieldChangedNombreVendedor = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
@@ -485,14 +481,6 @@ const AgregarReporteDeVentasIndividual = () => {
       inputPuntosClienteFrecuente,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Candidato Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push(
       "/gerencia-de-ventas/reporteDeVentasIndividual/VerReporteDeVentasIndividual"

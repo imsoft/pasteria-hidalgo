@@ -10,8 +10,6 @@ import {
   TipoDeProducto,
 } from "../../../interfaces";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
@@ -227,8 +225,6 @@ export default function ReportesSalida() {
 
   const [touched, setTouched] = useState(false);
 
-  const MySwal = withReactContent(Swal);
-
   const onTextFieldChangedFecha = (event: ChangeEvent<HTMLInputElement>) => {
     setInputFecha(event.target.value);
   };
@@ -362,14 +358,6 @@ export default function ReportesSalida() {
       inputListaDeProductos,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Reporte de salida Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/gerencia-operativa/reporteDeSalida/VerReportesDeSalida");
 

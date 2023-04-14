@@ -47,7 +47,7 @@ export const MateriasPrimasProvider: FC<Props> = ({ children }) => {
         icon: "success",
         title: "Materia Prima Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -72,7 +72,7 @@ export const MateriasPrimasProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Materia Prima Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -103,7 +103,7 @@ export const MateriasPrimasProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Materia Prima Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

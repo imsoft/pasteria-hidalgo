@@ -1,21 +1,7 @@
-import { SidebarLayoutContaduria } from '../../../components/layouts/contaduria/SidebarLayoutContaduria';
-
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 
 const AgregarAsignarPrecios = () => {
-
-  const MySwal = withReactContent(Swal);
-
-  const onSave = () => {
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Asignación de precio Agregado",
-      showConfirmButton: false,
-      timer: 2000,
-    });
-  };
+  const onSave = () => {};
 
   return (
     <SidebarLayoutContaduria>
@@ -106,7 +92,7 @@ const AgregarAsignarPrecios = () => {
         </div>
       </form>
     </SidebarLayoutContaduria>
-  )
-}
+  );
+};
 
 export default AgregarAsignarPrecios;

@@ -8,9 +8,6 @@ import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recurs
 
 import { PuestosEmpresa } from "../../../interfaces";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
 const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
 
 export default function AgregarManejoDePersonal() {
@@ -30,8 +27,6 @@ export default function AgregarManejoDePersonal() {
 
   const { candidatos } = useContext(CandidatosContext);
   const candidatosMemo = useMemo(() => candidatos, [candidatos]);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedNombre = (event: ChangeEvent<HTMLSelectElement>) => {
     setInputNombre(event.target.value);
@@ -95,14 +90,6 @@ export default function AgregarManejoDePersonal() {
       inputComentarios,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Personal Activo Agregado",
-      showConfirmButton: false,
-      timer: 2000,
-    });
 
     router.push("/recursos-humanos/personalActivo/VerPersonalActivo");
 

@@ -46,7 +46,7 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
         icon: "success",
         title: "Reporte De Compra Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -83,7 +83,7 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Reportes De Compras Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -126,7 +126,7 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Reporte De Compra Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

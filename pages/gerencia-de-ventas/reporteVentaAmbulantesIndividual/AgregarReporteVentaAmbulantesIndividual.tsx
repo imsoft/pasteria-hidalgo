@@ -4,8 +4,6 @@ import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerenci
 
 import { ListadoDeProductos, Paste, TipoDeProducto } from "../../../interfaces";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { useRouter } from "next/router";
 import { ReportesVentasAmbulantesIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual/ReporteVentasAmbulantesIndividualContext";
 
@@ -230,8 +228,6 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
 
   const [touched, setTouched] = useState(false);
 
-  const MySwal = withReactContent(Swal);
-
   const onTextFieldChangedNombreVendedor = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
@@ -389,14 +385,6 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
       inputListaDeProductos,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Reporte de ventas ambulantes Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push(
       "/gerencia-de-ventas/reporteDeVentasIndividual/VerReporteDeVentasIndividual"

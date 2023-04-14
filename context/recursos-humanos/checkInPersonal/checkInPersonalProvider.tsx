@@ -47,7 +47,7 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
         icon: "success",
         title: "Check In Personal Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -84,7 +84,7 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Check In Personal Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -127,7 +127,7 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Candidato Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

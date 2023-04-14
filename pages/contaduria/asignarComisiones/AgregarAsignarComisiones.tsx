@@ -2,8 +2,6 @@ import { ChangeEvent, useContext, useMemo, useState } from "react";
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 import { useRouter } from "next/router";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { AsignarComisionContext } from "../../../context/contaduria/asignarComision/AsignarComisionContext";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
@@ -45,8 +43,6 @@ export default function AgregarAsignarComisiones() {
 
   const [touched, setTouched] = useState(false);
 
-  const MySwal = withReactContent(Swal);
-
   const onSave = () => {
     if (
       inputSucursalOFranquicia.length === 0 &&
@@ -65,14 +61,6 @@ export default function AgregarAsignarComisiones() {
       inputMinimoDeLaMeta,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Asignación de precio Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/contaduria/asignarComisiones/VerAsignarComisiones");
 

@@ -51,7 +51,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
         icon: "success",
         title: "Personal De Mantenimiento Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -84,7 +84,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Personal De Mantenimiento Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -117,7 +117,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Personal De Mantenimiento Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

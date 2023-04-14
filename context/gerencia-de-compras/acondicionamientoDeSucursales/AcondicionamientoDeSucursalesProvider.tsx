@@ -53,7 +53,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
         icon: "success",
         title: "Acondicionamiento De Sucursal Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -100,7 +100,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
           icon: "success",
           title: "Acondicionamiento De Sucursal Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -153,7 +153,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
           icon: "success",
           title: "Acondicionamiento De Sucursal Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

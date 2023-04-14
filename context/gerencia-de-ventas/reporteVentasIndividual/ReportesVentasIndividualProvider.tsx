@@ -54,7 +54,7 @@ export const ReportesVentasIndividualProvider: FC<Props> = ({ children }) => {
         icon: "success",
         title: "Reporte Ventas Individual Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -95,7 +95,7 @@ export const ReportesVentasIndividualProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Reporte Ventas Individual Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -142,7 +142,7 @@ export const ReportesVentasIndividualProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Reporte Ventas Individual Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

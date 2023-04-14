@@ -43,7 +43,7 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Personal Activo Eliminado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -83,9 +83,9 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Candidato Agregado",
+          title: "Personal Activo Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -130,7 +130,7 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Personal Activo Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

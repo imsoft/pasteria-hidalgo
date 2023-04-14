@@ -6,8 +6,6 @@ import { PersonalActivoContext } from "../../../context/recursos-humanos/persona
 
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
 const tiempoTranscurrido = Date.now();
@@ -37,8 +35,6 @@ export default function CheckInDePersonal() {
   const [inputHoraDeSalida, setInputHoraDeSalida] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedNombreSucursalOFranquicia = (
     event: ChangeEvent<HTMLSelectElement>
@@ -92,14 +88,6 @@ export default function CheckInDePersonal() {
       inputHoraDeSalida,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Check In De Personal Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/recursos-humanos/checkInPersonal/VerCheckInPersonal");
 

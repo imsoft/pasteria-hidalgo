@@ -5,8 +5,6 @@ import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerenc
 
 import { AsignarPreciosContext } from "../../../context/gerencia-de-compras/asignarPrecios/AsignarPreciosContext";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima";
 
 export default function AgregarCandidato() {
@@ -21,8 +19,6 @@ export default function AgregarCandidato() {
   const [inputPrecioMaximo, setInputPrecioMaximo] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedProducto = (
     event: ChangeEvent<HTMLSelectElement>
@@ -40,14 +36,6 @@ export default function AgregarCandidato() {
     if (inputProducto.length === 0 && inputPrecioMaximo.length === 0) return;
 
     agregarNuevoAsignarPrecio(inputProducto, inputPrecioMaximo, true);
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Precio Asignado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/gerencia-de-compras/asignarPrecios/VerAsignarPrecio");
 

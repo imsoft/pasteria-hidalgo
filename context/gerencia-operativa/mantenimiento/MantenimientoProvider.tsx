@@ -47,7 +47,7 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
         icon: "success",
         title: "Mantenimiento Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -83,7 +83,7 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Mantenimiento Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -128,7 +128,7 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Mantenimiento Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

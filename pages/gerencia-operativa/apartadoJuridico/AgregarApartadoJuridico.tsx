@@ -12,8 +12,6 @@ import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gere
 
 import { ApartadosJuridicosContext } from "../../../context/gerencia-operativa/apartadoJuridico/ApartadosJuridicosContext";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 import { DocumentTextIcon } from "@heroicons/react/outline";
 import { uploadFile } from "../../../firebase";
@@ -39,8 +37,6 @@ const ApartadoJuridico = () => {
   const [inputUrlDelArchivo, setInputUrlDelArchivo] = useState("");
 
   const [touched, setTouched] = useState(false);
-
-  const MySwal = withReactContent(Swal);
 
   const onTextFieldChangedNombreSucursalOFranquicia = (
     event: ChangeEvent<HTMLSelectElement>
@@ -94,14 +90,6 @@ const ApartadoJuridico = () => {
       inputUrlDelArchivo,
       true
     );
-
-    MySwal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Candidato Agregado",
-      showConfirmButton: false,
-      timer: 5000,
-    });
 
     router.push("/gerencia-operativa/apartadoJuridico/VerApartadoJuridico");
 

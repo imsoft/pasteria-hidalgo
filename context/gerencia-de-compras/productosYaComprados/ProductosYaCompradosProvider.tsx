@@ -47,7 +47,7 @@ export const ProductosYaCompradosProvider: FC<Props> = ({ children }) => {
         icon: "success",
         title: "Producto Ya Comprado Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -86,7 +86,7 @@ export const ProductosYaCompradosProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Producto Ya Comprado Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -131,7 +131,7 @@ export const ProductosYaCompradosProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Producto Ya Comprado Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {

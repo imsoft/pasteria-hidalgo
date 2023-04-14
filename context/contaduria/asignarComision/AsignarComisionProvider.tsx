@@ -47,7 +47,7 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
         icon: "success",
         title: "Asignar Comision Eliminado",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1000,
       });
     }
   };
@@ -82,7 +82,7 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Asignar Comision Agregado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
@@ -123,7 +123,7 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
           icon: "success",
           title: "Asignar Comision Actualizado",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
         });
       }
     } catch (error) {
