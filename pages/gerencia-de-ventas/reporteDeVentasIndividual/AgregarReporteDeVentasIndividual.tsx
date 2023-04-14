@@ -3,6 +3,7 @@ import { ChangeEvent, useState, useEffect, useContext, useMemo } from "react";
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
 
 import {
+  ClienteFrecuente,
   ListadoDeProductos,
   LugarDeVenta,
   Paste,
@@ -218,7 +219,9 @@ const AgregarReporteDeVentasIndividual = () => {
     ReportesVentasIndividualContext
   );
 
-  const { clientesFrecuentes } = useContext(ClientesFrecuentesContext);
+  const { clientesFrecuentes, actualizarClienteFrecuente } = useContext(
+    ClientesFrecuentesContext
+  );
   const clientesFrecuentesMemo = useMemo(
     () => clientesFrecuentes,
     [clientesFrecuentes]
@@ -414,6 +417,48 @@ const AgregarReporteDeVentasIndividual = () => {
     setInputMonto(0);
   };
 
+  const actualizarPuntosClienteFrecuente = () => {
+    if (inputUsarPuntos === "Si") {
+      clientesFrecuentes
+        .filter((cf) => cf.correoElectronico === inputCorreoClienteFrecuente)
+        .map((ccff) => {
+          const actualizadoClienteFrecuente: ClienteFrecuente = {
+            ...clientesFrecuentes,
+            _id: ccff._id,
+            nombre: ccff.nombre,
+            fechaDeNacimiento: ccff.fechaDeNacimiento,
+            correoElectronico: ccff.correoElectronico,
+            puntosDeCompra: ccff.puntosDeCompra - inputPuntosClienteFrecuente,
+            sucursalOFranquicia: ccff.sucursalOFranquicia,
+            nombreSucursalOFranquicia: ccff.sucursalOFranquicia,
+          };
+
+          actualizarClienteFrecuente(actualizadoClienteFrecuente, false);
+
+          console.log(ccff);
+        });
+    } else {
+      clientesFrecuentes
+        .filter((cf) => cf.correoElectronico === inputCorreoClienteFrecuente)
+        .map((ccff) => {
+          const actualizadoClienteFrecuente: ClienteFrecuente = {
+            ...clientesFrecuentes,
+            _id: ccff._id,
+            nombre: ccff.nombre,
+            fechaDeNacimiento: ccff.fechaDeNacimiento,
+            correoElectronico: ccff.correoElectronico,
+            puntosDeCompra: ccff.puntosDeCompra + 2.5,
+            sucursalOFranquicia: ccff.sucursalOFranquicia,
+            nombreSucursalOFranquicia: ccff.sucursalOFranquicia,
+          };
+
+          actualizarClienteFrecuente(actualizadoClienteFrecuente, false);
+
+          console.log(ccff);
+        });
+    }
+  };
+
   const onSave = () => {
     if (
       inputFecha.length === 0 &&
@@ -426,6 +471,8 @@ const AgregarReporteDeVentasIndividual = () => {
       inputPuntosClienteFrecuente === 0
     )
       return;
+
+    actualizarPuntosClienteFrecuente();
 
     agregarNuevoReporteVentasIndividual(
       inputFecha,
@@ -605,8 +652,6 @@ const AgregarReporteDeVentasIndividual = () => {
                   onChange={onTextFieldChangedTipoDeProducto}
                   onBlur={() => setTouched(true)}
                 >
-                  {/* <option disabled selected>Selecciona una opción</option>
-                  <option value="">Selecciona una opción</option> */}
                   <option hidden>Selecciona un producto...</option>
                   {validProductType.map((productType) => (
                     <option key={productType}>{productType}</option>
@@ -813,7 +858,10 @@ const AgregarReporteDeVentasIndividual = () => {
                       key={clienteFrecuente._id}
                       value={clienteFrecuente.correoElectronico}
                     >
-                      {clienteFrecuente.nombre}
+                      {clienteFrecuente.puntosDeCompra}{" "}
+                      {clienteFrecuente.puntosDeCompra === 1
+                        ? "punto"
+                        : "puntos"}
                     </option>
                   ))}
                 </datalist>
