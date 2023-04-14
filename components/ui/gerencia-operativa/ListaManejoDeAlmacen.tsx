@@ -20,44 +20,47 @@ const ListaManejosDeAlmacen: FC<Props> = ({ reporteDeCompra }) => {
       >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.precioTotalDelCompra}
-            {/* {reporteDeCompra.materiaPrima} */}
+            {reporteDeCompra.listadoDeReporteDeCompra.map((lrc, index) => {
+              if (index === 0) {
+                // Verificar si es el primer valor del arreglo
+                return lrc.materiaPrima; // Retornar el valor de materiaPrima
+              }
+              return null; // Retornar null para los demás elementos
+            })}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {/* {reporteDeCompra.unidades} */}
-            {reporteDeCompra.credito}
+            {reporteDeCompra.listadoDeReporteDeCompra.map((lrc, index) => {
+              if (index === 0) {
+                // Verificar si es el primer valor del arreglo
+                return lrc.unidades; // Retornar el valor de materiaPrima
+              }
+              return null; // Retornar null para los demás elementos
+            })}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.factura}
-            {/* {reporteDeCompra.tempetatura} */}
+            {reporteDeCompra.listadoDeReporteDeCompra.map((lrc, index) => {
+              if (index === 0) {
+                // Verificar si es el primer valor del arreglo
+                return lrc.tempetatura; // Retornar el valor de materiaPrima
+              }
+              return null; // Retornar null para los demás elementos
+            })}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {reporteDeCompra.fechaDeCompra}
-            {/* {reporteDeCompra.cantidad} */}
+            {reporteDeCompra.listadoDeReporteDeCompra.map((lrc, index) => {
+              if (index === 0) {
+                // Verificar si es el primer valor del arreglo
+                return lrc.cantidad; // Retornar el valor de materiaPrima
+              }
+              return null; // Retornar null para los demás elementos
+            })}
           </div>
-          {/* <span
-            className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${
-              reporteDeCompra.cantidad > 100
-                ? "text-green-800 bg-green-100"
-                : reporteDeCompra.cantidad <= 100 &&
-                  reporteDeCompra.cantidad >= 50
-                ? "text-yellow-800 bg-yellow-100"
-                : reporteDeCompra.cantidad < 50 && "text-red-800 bg-red-100"
-            }`}
-          >
-            {reporteDeCompra.cantidad > 100
-              ? "Suficiente"
-              : reporteDeCompra.cantidad <= 100 &&
-                reporteDeCompra.cantidad >= 50
-              ? "Casi por terminar"
-              : reporteDeCompra.cantidad < 50 && "Esta a punto de terminarse"}
-          </span> */}
         </td>
       </tr>
     </tbody>
