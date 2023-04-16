@@ -1,8 +1,7 @@
 import { useContext, useMemo } from "react";
-import Link from "next/link";
 import { MateriasPrimasContext } from '../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext';
-import ListaMateriasPrimas from '../../../components/ui/gerencia-operativa/ListaMateriaPrima';
 import { SidebarLayoutContaduria } from '../../../components/layouts/contaduria/SidebarLayoutContaduria';
+import ListaMateriaPrima from "../../../components/ui/contaduria/ListaMateriaPrima";
 
 const VerMateriaPrima = () => {
   const { materiasPrimas } = useContext(MateriasPrimasContext);
@@ -47,7 +46,7 @@ const VerMateriaPrima = () => {
                     </tr>
                   </thead>
                   {materiasPrimasMemo.map((materiaPrima) => (
-                    <ListaMateriasPrimas
+                    <ListaMateriaPrima
                       key={materiaPrima._id}
                       materiaPrima={materiaPrima}
                     />

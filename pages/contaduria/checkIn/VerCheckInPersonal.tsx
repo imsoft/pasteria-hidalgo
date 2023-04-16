@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext";
 
-import ListaChecksInPersonal from "../../../components/ui/recursos-humanos/ListaCheckInPersonal";
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
+import ListaChecksInPersonal from "../../../components/ui/contaduria/ListaCheckInPersonal";
 
 const VerCheckInPersonal = () => {
   const { checksInPersonal } = useContext(CheckInPersonalContext);
@@ -24,18 +24,6 @@ const VerCheckInPersonal = () => {
             <p className="mt-2 text-sm text-gray-700">
               Aquí podras ver los checks in de la empresa para la empresa.
             </p>
-          </div>
-          <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
-            >
-              <Link
-                href={"/recursos-humanos/checkInPersonal/CheckInDePersonal"}
-              >
-                <a>Agregar Check In Personal</a>
-              </Link>
-            </button>
           </div>
         </div>
         <div className="mt-8 flex flex-col">

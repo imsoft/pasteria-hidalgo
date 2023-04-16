@@ -21,49 +21,49 @@ const tasksList = [
       {
         title: "Ver Acondicionamiento de sucursales",
         tasks: [
-          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
         ],
       },
       {
         title: "Ver Check In",
         tasks: [
-          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
         ],
       },
       {
         title: "Ver Materia Prima",
         tasks: [
-          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
         ],
       },
       {
         title: "Ver Precio Maximo",
         tasks: [
-          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
         ],
       },
       {
         title: "Ver Reporte de compras",
         tasks: [
-          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
         ],
       },
       {
         title: "Ver Reporte de salida",
         tasks: [
-          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
         ],
       },
       {
         title: "Ver Reporte de venta ambulantes individual",
         tasks: [
-          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
         ],
       },
       {
         title: "Ver Reporte Ventas Individual",
         tasks: [
-          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
         ],
       },
     ],
