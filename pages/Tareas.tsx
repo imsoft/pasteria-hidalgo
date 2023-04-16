@@ -6,19 +6,90 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 
 const tasksList = [
   {
+    topic: "🔢 Contaduria",
+    subtopics: [
+      {
+        title: "Asignar comisiones",
+        tasks: [""],
+      },
+      {
+        title: "Reporte de ganancias",
+        tasks: [
+          "⚒️ En reporte de ganancias, hacer la suma de compras y ventas según el mes y la sucursal.",
+        ],
+      },
+      {
+        title: "Ver Acondicionamiento de sucursales",
+        tasks: [
+          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+        ],
+      },
+      {
+        title: "Ver Check In",
+        tasks: [
+          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+        ],
+      },
+      {
+        title: "Ver Materia Prima",
+        tasks: [
+          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+        ],
+      },
+      {
+        title: "Ver Precio Maximo",
+        tasks: [
+          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+        ],
+      },
+      {
+        title: "Ver Reporte de compras",
+        tasks: [
+          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+        ],
+      },
+      {
+        title: "Ver Reporte de salida",
+        tasks: [
+          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+        ],
+      },
+      {
+        title: "Ver Reporte de venta ambulantes individual",
+        tasks: [
+          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+        ],
+      },
+      {
+        title: "Ver Reporte Ventas Individual",
+        tasks: [
+          "⚒️ En contaduría checar que sólo pueda ver y no editar o agregar.",
+        ],
+      },
+    ],
+  },
+  {
     topic: "🛍️ Gerencia de compras",
     subtopics: [
       {
-        title: "Reporte de compra",
+        title: "Acondicionamiento de sucursales",
+        tasks: [""],
+      },
+      {
+        title: "Asignar Precios",
         tasks: [
-          "✅ Sumatoria en reporte de compra.",
-          "✅ Arreglar diseño al ver reporte de compra. (Traer materia prima, unidades, temperatura, caducidad, cantidad, PPU, PTP)",
+          "⚒️ Poner leyenda en asignar precios, de verificar si el producto ya está registrado.",
         ],
       },
-
       {
-        title: "Acondicionamiento de sucursales",
-        tasks: ["✅ Corregir las sucursales y franquicias."],
+        title: "Proveedores",
+        tasks: ["⚒️ Animación y cambio de ventana en proveedores."],
+      },
+      {
+        title: "Reporte de compras",
+        tasks: [
+          "⚒️ Filtrado en reporte de compras por fecha, como en reporte de ventas individual.",
+        ],
       },
     ],
   },
@@ -27,24 +98,17 @@ const tasksList = [
     subtopics: [
       {
         title: "Cliente frecuente",
-        tasks: ["✅ Agregar sucursal o franquicia."],
+        tasks: [""],
       },
       {
-        title: "Reporte de ventas ambulantes",
+        title: "Reporte De Ventas Ambulantes Individual",
+        tasks: [""],
+      },
+      {
+        title: "Reporte Ventas Individual",
         tasks: [
-          "✅ Clonar reporte de ventas individual en reporte de ventas ambulantes individual y quitar especificación del lugar de evento del clon.",
-          "✅ Quitar parte de clientes frecuentes.",
-        ],
-      },
-      {
-        title: "Reporte de ventas ambulantes general",
-        tasks: ["✅ Eliminarlo"],
-      },
-      {
-        title: "Reporte de ventas individual",
-        tasks: [
-          "✅ Preguntar al cliente frecuente si quiere usar sus puntos o no.",
-          "- Al momento de preguntar si quiere usar los puntos o no, solo ocultar los puntos para que pueda seleccionar el correo electrónico.",
+          "⚒️ Checar el guardado de reporte de ventas individual.",
+          "⚒️ Actualizar puntos del cliente frecuente segun la compra",
         ],
       },
     ],
@@ -53,68 +117,59 @@ const tasksList = [
     topic: "👷 Gerencia operativa",
     subtopics: [
       {
-        title: "Sucursal o franquicia",
+        title: "Apartado jurídico",
+        tasks: [""],
+      },
+      {
+        title: "Manejo de almacen",
         tasks: [
-          "✅ Quitar la lista y solo dejar el cuadro de texto.",
-          "🤔 Agregar pestaña del pago según el presupuesto.",
+          "⚒️ Que no se dupliquen productos en almacén.",
+          "⚒️ Actualizar productos segun reporte de entrada y salida.",
         ],
       },
       {
-        title: "Personal de mantenimiento",
-        tasks: ["✅ Agregar número de teléfono"],
+        title: "Manejo de personal",
+        tasks: [""],
       },
       {
         title: "Mantenimiento",
-        tasks: ["✅ Agregar la sucursal o franquicia."],
+        tasks: [""],
       },
       {
-        title: "Reporte de salida",
+        title: "Materia Prima",
+        tasks: [""],
+      },
+      {
+        title: "Personal De Mantenimiento",
+        tasks: [""],
+      },
+      {
+        title: "Reporte Salida",
         tasks: [
-          "✅ Quitar desde masa hasta temperatura de relleno.",
-          "✅ Agregar lista de paste de salado, dulce y otros, junto con la cantidad.",
-          "✅ Quitar todo lo de producto extra",
-          "✅ Agregar otra opción a tipo de producto que diga 'Extra'",
-          "✅ Si se seleccionar 'Extra' que aparezca una caja de texto",
-          "✅ Agregar una lista como en ventas individual (Quitar de la lista, sucursal a enviar, datos del repartidor, datos de la ruta, Kilometraje de entrada y kilometraje de salida)",
-          "✅ ¿Datos del repartidor?",
-          "🤔 ¿Datos del la ruta?",
+          "⚒️ Cambiar datos de la ruta en reporte de salida por distancia de la fábrica al destino.",
+          "⚒️ Corregir el click en ver salidas.",
         ],
+      },
+      {
+        title: "Sucursales y Franquicias",
+        tasks: ["⚒️ Cambio de ventana en sucursales y franquicias."],
       },
     ],
   },
   {
-    topic: "🔢 Contaduria",
+    topic: "👥 Recursos Humanos",
     subtopics: [
       {
-        title: "Asignar comisiones",
-        tasks: [
-          "✅ Por sucursal o franquicia, mínimo de la meta y si ya se alcanzó o no. (Ir sumando del Reporte Ventas Individual y de los ambulantes, agregar mes y año (del sistema) y filtrarlos al momento de ver, el filtrado de mes y año)... Arreglar filtrado",
-        ],
+        title: "Candidato",
+        tasks: [""],
       },
       {
-        title: "Inventario",
-        tasks: [
-          "✅ Ver inventarios. (Solo ver Acondicionamiendo de sucursales)",
-        ],
-      },
-      { title: "Asignar precios", tasks: ["✅ Solo ver el precio máximo."] },
-      {
-        title: "Reporte de ganancias",
-        tasks: [
-          "✅ Se comprara con el reporte de entrada con las ventas del mes, según las sucursales y franquicias y de todas las sucursales. (Tabla similar a la de asignar comisiones, solo agregandole los datos del balance y las compras), (Se comprara todo lo comprado con lo vendido por todas las sucursales)... Checar captura de pantalla",
-        ],
-      },
-      { title: "Reportes de ventas", tasks: ["✅ Ver reportes de ventas."] },
-      { title: "Check In", tasks: ["✅ Ver la lista."] },
-      {
-        title: "Asignar precios",
-        tasks: [
-          "✅ CRUD de precio máximo, (Quitar la asignacion de precios y solo dejar precio maximo)",
-        ],
+        title: "Check In de Personal",
+        tasks: [""],
       },
       {
-        title: "Asignar precios",
-        tasks: ["✅ Traer la materia prima de la BD"],
+        title: "Personal activo",
+        tasks: [""],
       },
     ],
   },
@@ -124,10 +179,19 @@ const tasksList = [
       { title: "Caja registradora", tasks: ["⚒️ Ver caja registradora"] },
       {
         title: "General",
+        tasks: ["⚒️ Incorporar el login"],
+      },
+    ],
+  },
+  {
+    topic: "📘 Simbología",
+    subtopics: [
+      {
+        title: "",
         tasks: [
-          "⚒️ Incorporar el login",
-          "⚒️ Actualizar productos segun reporte de entrada y salida",
-          "🔵 Actualizar puntos del cliente frecuente segun la compra",
+          "⚒️ = En mantenimiento.",
+          "🔵 = Tarea terminada pero sin revisar. ",
+          "✅ = Tarea terminada y revisada.",
         ],
       },
     ],
