@@ -13,6 +13,7 @@ import {
 import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasIndividual/ReportesVentasIndividualContext";
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente/ClientesFrecuentesContext";
 import { useRouter } from "next/router";
+import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
@@ -225,6 +226,12 @@ const AgregarReporteDeVentasIndividual = () => {
     [clientesFrecuentes]
   );
 
+  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const sucursalesYFranquiciasMemo = useMemo(
+    () => sucursalesYFranquicias,
+    [sucursalesYFranquicias]
+  );
+
   const [inputCodigoProducto, setInputCodigoProducto] = useState("");
   const [inputFecha, setInputFecha] = useState(
     `${dia < 10 ? "0" + dia : dia}/${mes < 10 ? "0" + mes : mes}/${anio}`
@@ -243,6 +250,8 @@ const AgregarReporteDeVentasIndividual = () => {
     useState("");
   const [inputPuntosClienteFrecuente, setInputPuntosClienteFrecuente] =
     useState(0);
+  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
+    useState("");
 
   const [inputListaDeProductos, setInputListaDeProductos] = useState<
     ListadoDeProductos[]
@@ -268,6 +277,12 @@ const AgregarReporteDeVentasIndividual = () => {
     event: ChangeEvent<HTMLSelectElement>
   ) => {
     setInputNombreLugarDeLaVenta(event.target.value);
+  };
+
+  const onTextFieldChangedNombreSucursalOFranquicia = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputNombreSucursalOFranquicia(event.target.value);
   };
 
   const onTextFieldChangedTipoDeProducto = (
@@ -468,8 +483,6 @@ const AgregarReporteDeVentasIndividual = () => {
     )
       return;
 
-    actualizarPuntosClienteFrecuente();
-
     agregarNuevoReporteVentasIndividual(
       inputFecha,
       inputNombreVendedor,
@@ -481,6 +494,8 @@ const AgregarReporteDeVentasIndividual = () => {
       inputPuntosClienteFrecuente,
       true
     );
+
+    actualizarPuntosClienteFrecuente();
 
     router.push(
       "/gerencia-de-ventas/reporteDeVentasIndividual/VerReporteDeVentasIndividual"
@@ -573,55 +588,49 @@ const AgregarReporteDeVentasIndividual = () => {
                 </select>
               </div>
 
-              <div
-                className={` ${
-                  inputLugarDeLaVenta === "Franquicia" || "hidden"
-                } col-span-6 sm:col-span-3`}
-              >
+              <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="CmbFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Franquicia
+                  {inputLugarDeLaVenta === "Sucursal"
+                    ? "Sucursal"
+                    : inputLugarDeLaVenta === "Franquicia"
+                    ? "Franquicia"
+                    : "Primero seleccione si es franquicia, sucursal o evento"}
                 </label>
                 <select
                   id="CmbFranquicia"
                   name="CmbFranquicia"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreLugarDeLaVenta}
+                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Seleccione la franquicia...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
-                </select>
-              </div>
-
-              <div
-                className={` ${
-                  inputLugarDeLaVenta === "Sucursal" || "hidden"
-                } col-span-6 sm:col-span-3`}
-              >
-                <label
-                  htmlFor="CmbSucursal"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Sucursal
-                </label>
-                <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreLugarDeLaVenta}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option>Seleccione la sucursal...</option>
-                  <option>Chapultepec</option>
-                  <option>Chapalita</option>
-                  <option>Chiapas</option>
+                  <option hidden>
+                    Seleccione la{" "}
+                    {inputLugarDeLaVenta === "Sucursal"
+                      ? "Sucursal"
+                      : inputLugarDeLaVenta === "Franquicia"
+                      ? "Franquicia"
+                      : inputLugarDeLaVenta === "Evento"
+                      ? ""
+                      : "Primero seleccione si es franquicia, sucursal o evento"}
+                    ...
+                  </option>
+                  {sucursalesYFranquiciasMemo
+                    .filter(
+                      (sucursalesYFranquicias) =>
+                        sucursalesYFranquicias.sucursalOFranquicia ===
+                        inputLugarDeLaVenta
+                    )
+                    .map((sucursalesYFranquicias) => (
+                      <option
+                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      >
+                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      </option>
+                    ))}
                 </select>
               </div>
 
@@ -854,8 +863,6 @@ const AgregarReporteDeVentasIndividual = () => {
                   ))}
                 </datalist>
               </div>
-
-              <div className="col-span-6 sm:col-span-3" />
 
               <div className="col-span-6 sm:col-span-3">
                 <label className="text-base font-medium text-gray-900">

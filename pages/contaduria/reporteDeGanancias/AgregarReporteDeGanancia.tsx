@@ -19,7 +19,7 @@ const mesesDelAno: string[] = [
   "Diciembre",
 ];
 
-const years: string[] = ["2023", "2024", "2025"];
+const years: string[] = ["2022", "2023", "2024", "2025"];
 
 export default function ReporteGanancias() {
   const [inputMes, setInputMes] = useState("");

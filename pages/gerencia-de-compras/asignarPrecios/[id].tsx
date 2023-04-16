@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useContext, useState } from "react";
+import { ChangeEvent, FC, useContext, useMemo, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
@@ -12,6 +12,7 @@ import { AsignarPrecio } from "../../../interfaces/asignarPrecio";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima";
 
 interface Props {
   asignarPrecio: AsignarPrecio;
@@ -23,6 +24,9 @@ export const AsignarPrecioPage: FC<Props> = ({ asignarPrecio }) => {
   const { actualizarAsignarPrecio, eliminarAsignarPrecio } = useContext(
     AsignarPreciosContext
   );
+
+  const { materiasPrimas } = useContext(MateriasPrimasContext);
+  const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
 
   const [inputProducto, setInputProducto] = useState(asignarPrecio.producto);
   const [inputPrecioMaximo, setInputPrecioMaximo] = useState(
@@ -103,7 +107,6 @@ export const AsignarPrecioPage: FC<Props> = ({ asignarPrecio }) => {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
-
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtProducto"
@@ -120,10 +123,13 @@ export const AsignarPrecioPage: FC<Props> = ({ asignarPrecio }) => {
                   //   onBlur={() => setTouched(true)}
                   defaultValue="Selecciona un producto..."
                 >
-                  <option>Selecciona un producto...</option>
-                  <option>Masa</option>
-                  <option>Fresas</option>
-                  <option>Leche</option>
+                  <option hidden>Selecciona un producto...</option>
+                  {materiasPrimasMemo.map((materiaPrima) => (
+                    <option key={materiaPrima._id}>
+                      {" "}
+                      {materiaPrima.materiaPrima}{" "}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -159,7 +165,6 @@ export const AsignarPrecioPage: FC<Props> = ({ asignarPrecio }) => {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

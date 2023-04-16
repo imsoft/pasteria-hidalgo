@@ -150,7 +150,7 @@ export default function AcondicionamientoDeSucursales() {
     );
 
     router.push(
-      "/gerencia-operativa/acondicionamientoDeSucursales/VerAcondicinamientoDeSucursal"
+      "/gerencia-de-compras/acondicionamientoDeSucursales/VerAcondicinamientoDeSucursal"
     );
 
     setTouched(false);

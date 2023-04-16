@@ -333,7 +333,7 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   onChange={onInputValueChangedProducto}
-                  value={inputDescripcionDelProducto}
+                  value={inputProducto}
                   //   onBlur={() => setTouched(true)}
                 />
               </div>
