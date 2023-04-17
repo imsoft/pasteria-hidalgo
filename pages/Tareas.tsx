@@ -107,8 +107,8 @@ const tasksList = [
       {
         title: "Reporte Ventas Individual",
         tasks: [
-          "⚒️ Checar el guardado de reporte de ventas individual.",
-          "⚒️ Actualizar puntos del cliente frecuente segun la compra",
+          "🔵 Checar el guardado de reporte de ventas individual.",
+          "🔵 Actualizar puntos del cliente frecuente segun la compra",
         ],
       },
     ],
@@ -124,7 +124,7 @@ const tasksList = [
         title: "Manejo de almacen",
         tasks: [
           "⚒️ Que no se dupliquen productos en almacén.",
-          "⚒️ Actualizar productos segun reporte de entrada y salida.",
+          "⚒️ Actualizar productos segun reporte de entrada.",
         ],
       },
       {

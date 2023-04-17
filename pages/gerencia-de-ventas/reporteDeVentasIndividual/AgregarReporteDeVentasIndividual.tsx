@@ -238,8 +238,6 @@ const AgregarReporteDeVentasIndividual = () => {
   );
   const [inputNombreVendedor, setInputNombreVendedor] = useState("");
   const [inputLugarDeLaVenta, setInputLugarDeLaVenta] = useState("");
-  const [inputNombreLugarDeLaVenta, setInputNombreLugarDeLaVenta] =
-    useState("");
   const [inputTipoDeProducto, setInputTipoDeProducto] = useState("");
   const [inputSaborProducto, setInputSaborProducto] = useState("");
   const [inputCantidad, setInputCantidad] = useState(0);
@@ -273,14 +271,8 @@ const AgregarReporteDeVentasIndividual = () => {
     setInputLugarDeLaVenta(event.target.value as LugarDeVenta);
   };
 
-  const onTextFieldChangedNombreLugarDeLaVenta = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputNombreLugarDeLaVenta(event.target.value);
-  };
-
   const onTextFieldChangedNombreSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
+    event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
   ) => {
     setInputNombreSucursalOFranquicia(event.target.value);
   };
@@ -475,7 +467,7 @@ const AgregarReporteDeVentasIndividual = () => {
       inputFecha.length === 0 &&
       inputNombreVendedor.length === 0 &&
       inputLugarDeLaVenta.length === 0 &&
-      inputNombreLugarDeLaVenta.length === 0 &&
+      inputNombreSucursalOFranquicia.length === 0 &&
       inputSumaTotal === 0 &&
       inputListaDeProductos.length === 0 &&
       inputCorreoClienteFrecuente.length === 0 &&
@@ -487,7 +479,7 @@ const AgregarReporteDeVentasIndividual = () => {
       inputFecha,
       inputNombreVendedor,
       inputLugarDeLaVenta,
-      inputNombreLugarDeLaVenta,
+      inputNombreSucursalOFranquicia,
       inputSumaTotal,
       inputListaDeProductos,
       inputCorreoClienteFrecuente,
@@ -506,7 +498,6 @@ const AgregarReporteDeVentasIndividual = () => {
     setInputFecha("");
     setInputNombreVendedor("");
     setInputLugarDeLaVenta("");
-    setInputNombreLugarDeLaVenta("");
     setInputTipoDeProducto("");
     setInputSaborProducto("");
     setInputCantidad(0);
@@ -588,51 +579,94 @@ const AgregarReporteDeVentasIndividual = () => {
                 </select>
               </div>
 
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="CmbFranquicia"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  {inputLugarDeLaVenta === "Sucursal"
-                    ? "Sucursal"
-                    : inputLugarDeLaVenta === "Franquicia"
-                    ? "Franquicia"
-                    : "Primero seleccione si es franquicia, sucursal o evento"}
-                </label>
-                <select
-                  id="CmbFranquicia"
-                  name="CmbFranquicia"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>
-                    Seleccione la{" "}
+              {inputLugarDeLaVenta === "Sucursal" ||
+              inputLugarDeLaVenta === "Franquicia" ? (
+                <div className="col-span-6 sm:col-span-3">
+                  <label
+                    htmlFor="CmbFranquicia"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     {inputLugarDeLaVenta === "Sucursal"
                       ? "Sucursal"
                       : inputLugarDeLaVenta === "Franquicia"
                       ? "Franquicia"
-                      : inputLugarDeLaVenta === "Evento"
-                      ? ""
                       : "Primero seleccione si es franquicia, sucursal o evento"}
-                    ...
-                  </option>
-                  {sucursalesYFranquiciasMemo
-                    .filter(
-                      (sucursalesYFranquicias) =>
-                        sucursalesYFranquicias.sucursalOFranquicia ===
-                        inputLugarDeLaVenta
-                    )
-                    .map((sucursalesYFranquicias) => (
-                      <option
-                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
-                      >
-                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
-                      </option>
-                    ))}
-                </select>
-              </div>
+                  </label>
+                  <select
+                    id="CmbFranquicia"
+                    name="CmbFranquicia"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    defaultValue="Selecciona un producto..."
+                    onChange={onTextFieldChangedNombreSucursalOFranquicia}
+                    onBlur={() => setTouched(true)}
+                  >
+                    <option hidden>
+                      Seleccione la{" "}
+                      {inputLugarDeLaVenta === "Sucursal"
+                        ? "Sucursal"
+                        : inputLugarDeLaVenta === "Franquicia"
+                        ? "Franquicia"
+                        : inputLugarDeLaVenta === "Evento"
+                        ? ""
+                        : "Primero seleccione si es franquicia, sucursal o evento"}
+                      ...
+                    </option>
+                    {sucursalesYFranquiciasMemo
+                      .filter(
+                        (sucursalesYFranquicias) =>
+                          sucursalesYFranquicias.sucursalOFranquicia ===
+                          inputLugarDeLaVenta
+                      )
+                      .map((sucursalesYFranquicias) => (
+                        <option
+                          key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                        >
+                          {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+              ) : inputLugarDeLaVenta === "Evento" ? (
+                <div className="col-span-6 sm:col-span-3">
+                  <label
+                    htmlFor="TxtLugarDelEvento"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Lugar del evento
+                  </label>
+                  <input
+                    type="text"
+                    name="TxtLugarDelEvento"
+                    id="TxtLugarDelEvento"
+                    autoComplete="off"
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    onChange={onTextFieldChangedNombreSucursalOFranquicia}
+                    onBlur={() => setTouched(true)}
+                  />
+                </div>
+              ) : (
+                <div className="col-span-6 sm:col-span-3">
+                  <label
+                    htmlFor="TxtLugarDelEvento"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Primero seleccione si es franquicia, sucursal o evento
+                  </label>
+                  <input
+                    type="text"
+                    name="TxtLugarDelEvento"
+                    id="TxtLugarDelEvento"
+                    autoComplete="off"
+                    defaultValue={
+                      "Primero seleccione si es franquicia, sucursal o evento"
+                    }
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    onChange={onTextFieldChangedNombreSucursalOFranquicia}
+                    onBlur={() => setTouched(true)}
+                    readOnly
+                  />
+                </div>
+              )}
 
               <div className="col-span-6 sm:col-span-3">
                 <label
@@ -1108,7 +1142,7 @@ const AgregarReporteDeVentasIndividual = () => {
 
           <div className="mt-5 px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="submit"
+              type="button"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
               onClick={onSave}
             >
