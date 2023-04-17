@@ -135,7 +135,7 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<AsignarComision[]>(
       "/asignarComisiones"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Asignar Comision] Refrescar-Datos", payload: data });
   };
 

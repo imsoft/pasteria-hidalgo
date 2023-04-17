@@ -138,7 +138,7 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
 
   const refreshMantenimientos = async () => {
     const { data } = await entriesApi.get<Mantenimiento[]>("/mantenimientos");
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Mantenimiento] Refrescar-Datos", payload: data });
   };
 

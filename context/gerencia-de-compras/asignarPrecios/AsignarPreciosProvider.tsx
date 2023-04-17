@@ -114,7 +114,7 @@ export const AsignarPreciosProvider: FC<Props> = ({ children }) => {
 
   const refreshCandidatos = async () => {
     const { data } = await entriesApi.get<AsignarPrecio[]>("/asignarPrecios");
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Asignar Precios] Refrescar-Datos", payload: data });
   };
 

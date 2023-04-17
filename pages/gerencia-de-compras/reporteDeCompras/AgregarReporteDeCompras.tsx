@@ -7,6 +7,8 @@ import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoD
 
 import {
   IListadoDeReporteDeCompra,
+  ListaManejoDeAlmacen,
+  ManejoDeAlmacen,
   Temperatura,
   Unidades,
   YesNo,
@@ -14,12 +16,14 @@ import {
 
 import { useRouter } from "next/router";
 import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
+import { ManejosDeAlmacenContext } from "../../../context/gerencia-operativa/manejoDeAlmacen";
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
 export default function ReporteDeCompras() {
   const router = useRouter();
   const { agregarReporteDeCompra } = useContext(ReporteDeCompraContext);
+  const { agregarNuevoManejoDeAlmacen } = useContext(ManejosDeAlmacenContext);
 
   const { proveedores } = useContext(ProveedoresContext);
   const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
@@ -44,6 +48,10 @@ export default function ReporteDeCompras() {
 
   const [inputListaReporteDeCompras, setInputListaReporteDeCompras] = useState<
     IListadoDeReporteDeCompra[]
+  >([]);
+
+  const [inputListaManejoDeAlmacen, setInputListaManejoDeAlmacen] = useState<
+    ListaManejoDeAlmacen[]
   >([]);
 
   const [touched, setTouched] = useState(false);
@@ -145,6 +153,22 @@ export default function ReporteDeCompras() {
       nuevaListaReporteDeCompras,
     ]);
 
+    const nuevaListaManejoDeAlmacen: ListaManejoDeAlmacen = {
+      listaManejoDeAlmacen: [
+        {
+          materiaPrima: inputMateriaPrima,
+          unidades: inputUnidades as Unidades,
+          temperatura: inputTempetatura as Temperatura,
+          cantidad: inputCantidad,
+        },
+      ],
+    };
+
+    setInputListaManejoDeAlmacen([
+      ...inputListaManejoDeAlmacen,
+      nuevaListaManejoDeAlmacen,
+    ]);
+
     setInputPrecioTotalDelCompra(
       inputPrecioTotalDelCompra + inputPrecioTotalDelProducto
     );
@@ -192,12 +216,6 @@ export default function ReporteDeCompras() {
   };
 
   const onSave = () => {
-
-    console.log(inputFechaDeCompra);
-    console.log(inputNombreProveedor);
-    console.log(inputFactura);
-    console.log(inputCredito);
-
     if (
       inputFechaDeCompra.length === 0 &&
       inputCredito.length === 0 &&
@@ -217,6 +235,10 @@ export default function ReporteDeCompras() {
       inputPrecioTotalDelCompra,
       true
     );
+
+    console.log(inputListaManejoDeAlmacen);
+
+    agregarNuevoManejoDeAlmacen(inputListaManejoDeAlmacen, true);
 
     router.push("/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras");
 
@@ -313,7 +335,7 @@ export default function ReporteDeCompras() {
                   onChange={onTextFieldChangedFactura}
                   onBlur={() => setTouched(true)}
                 >
-                  <option>Selecciona una opción...</option>
+                  <option hidden>Selecciona una opción...</option>
                   {validYesNoOptions.map((yesNoOptions) => (
                     <option key={yesNoOptions}>{yesNoOptions}</option>
                   ))}

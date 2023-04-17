@@ -113,7 +113,7 @@ export const MateriasPrimasProvider: FC<Props> = ({ children }) => {
 
   const refreshMateriasPrimas = async () => {
     const { data } = await entriesApi.get<MateriaPrima[]>("/materiasPrimas");
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Materia Prima] Refrescar-Datos", payload: data });
   };
 

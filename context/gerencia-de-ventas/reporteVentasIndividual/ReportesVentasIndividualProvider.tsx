@@ -154,7 +154,7 @@ export const ReportesVentasIndividualProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<ReporteVentasIndividual[]>(
       "/reportesVentasIndividual"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: "[Reporte Ventas Individual] Refrescar-Datos",
       payload: data,

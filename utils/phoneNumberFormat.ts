@@ -5,7 +5,3 @@ export const phoneNumberFormat = (telefono: string): string =>{
   const telefonoSeparado = `${firstPart} - ${secondPart} - ${thirdPart}`;
   return telefonoSeparado;
 }
-
-// const telefonoOriginal = "3367890123";
-// const telefonoSeparado = phoneNumberFormat(telefonoOriginal);
-// console.log(telefonoSeparado); // "33 6789 0123"

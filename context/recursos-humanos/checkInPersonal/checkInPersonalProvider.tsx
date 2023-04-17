@@ -139,7 +139,7 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<CheckInPersonal[]>(
       "/checksInPersonal"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Check In Personal] Refrescar-Datos", payload: data });
   };
 

@@ -139,7 +139,7 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<ClienteFrecuente[]>(
       "/clientesFrecuentes"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Cliente Frecuente] Refrescar-Datos", payload: data });
   };
 

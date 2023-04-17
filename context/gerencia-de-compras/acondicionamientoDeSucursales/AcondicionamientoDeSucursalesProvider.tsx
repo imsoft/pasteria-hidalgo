@@ -165,7 +165,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
     const { data } = await entriesApi.get<AcondicionamientoDeSucursal[]>(
       "/acondicionamientoDeSucursales"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: "[Acondicionamiento De Sucursales] Refrescar-Datos",
       payload: data,

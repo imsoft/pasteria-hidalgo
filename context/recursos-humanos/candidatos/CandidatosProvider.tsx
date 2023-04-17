@@ -193,7 +193,7 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
 
   const refreshCandidatos = async () => {
     const { data } = await entriesApi.get<Candidato[]>("/candidatos");
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Candidato] Refrescar-Datos", payload: data });
   };
 

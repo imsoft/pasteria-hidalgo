@@ -142,7 +142,7 @@ export const ReporteVentasAmbulantesIndividualProvider: FC<Props> = ({
     const { data } = await entriesApi.get<ReporteVentasAmbulantesIndividual[]>(
       "/reportesVentasAmbulantesIndividual"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: "[Reporte De Ventas Ambulantes Individual] Refrescar-Datos",
       payload: data,

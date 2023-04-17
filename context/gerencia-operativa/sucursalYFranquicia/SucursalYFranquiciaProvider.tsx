@@ -155,7 +155,7 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<SucursalYFranquicia[]>(
       "/sucursalesYFranquicias"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: "[Sucursal Y Franquicia] Refrescar-Datos",
       payload: data,

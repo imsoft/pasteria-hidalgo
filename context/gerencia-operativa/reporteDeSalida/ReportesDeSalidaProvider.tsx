@@ -143,7 +143,7 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<ReporteDeSalida[]>(
       "/reportesDeSalida"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Reporte De Salida] Refrescar-Datos", payload: data });
   };
 

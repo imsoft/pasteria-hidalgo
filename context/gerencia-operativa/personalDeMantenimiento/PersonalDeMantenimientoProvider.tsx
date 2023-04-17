@@ -129,7 +129,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<PersonalDeMantenimiento[]>(
       "/personalesDeMantenimiento"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({
       type: "[Personal De Mantenimiento] Refrescar-Datos",
       payload: data,

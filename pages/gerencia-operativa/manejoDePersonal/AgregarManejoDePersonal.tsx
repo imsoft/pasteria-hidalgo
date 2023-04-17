@@ -78,8 +78,6 @@ export default function AgregarManejoDePersonal() {
     )
       return;
 
-    console.log(inputBajaTemporal);
-
     agregarPersonalActivo(
       inputNombre,
       inputPuesto,

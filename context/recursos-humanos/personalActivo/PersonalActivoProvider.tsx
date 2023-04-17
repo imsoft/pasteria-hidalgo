@@ -140,7 +140,7 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
 
   const refreshCandidatos = async () => {
     const { data } = await entriesApi.get<PersonalActivo[]>("/personalActivo");
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Personal Activo] Refrescar-Datos", payload: data });
   };
 

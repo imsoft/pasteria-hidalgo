@@ -138,7 +138,7 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<ReporteDeCompra[]>(
       "/reportesDeCompras"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Reporte De Compra] Refrescar-Datos", payload: data });
   };
 

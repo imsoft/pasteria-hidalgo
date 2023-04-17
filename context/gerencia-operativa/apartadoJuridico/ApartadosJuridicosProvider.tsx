@@ -131,7 +131,7 @@ export const ApartadosJuridicosProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<ApartadoJuridico[]>(
       "/apartadosJuridicos"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Apartado Juridico] Refrescar-Datos", payload: data });
   };
 

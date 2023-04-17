@@ -143,7 +143,7 @@ export const ProductosYaCompradosProvider: FC<Props> = ({ children }) => {
     const { data } = await entriesApi.get<ProductoYaComprado[]>(
       "/productosYaComprados"
     );
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Producto Ya Comprado] Refrescar-Datos", payload: data });
   };
 

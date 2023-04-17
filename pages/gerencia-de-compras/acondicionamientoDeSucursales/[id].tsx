@@ -149,7 +149,6 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
   };
 
   const precioTotalDelProducto = () => {
-    console.log(inputCantidad * inputPrecioDeCompra);
     setInputTotalAcomulado(inputCantidad * inputPrecioDeCompra);
   };
 

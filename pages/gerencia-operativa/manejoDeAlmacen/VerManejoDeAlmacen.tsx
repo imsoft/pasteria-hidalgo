@@ -1,20 +1,24 @@
 import { useContext, useMemo } from "react";
 
-import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
-
-import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
+import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 import ListaManejosDeAlmacen from "../../../components/ui/gerencia-operativa/ListaManejoDeAlmacen";
+import { ManejosDeAlmacenContext } from "../../../context/gerencia-operativa/manejoDeAlmacen";
 
 const VerReportesDeCompras = () => {
-  const { reportesDeCompras } = useContext(ReporteDeCompraContext);
-  const reportesDeComprasMemo = useMemo(() => reportesDeCompras, [reportesDeCompras]);
+  const { manejosDeAlmacen } = useContext(ManejosDeAlmacenContext);
+  const manejosDeAlmacenMemo = useMemo(
+    () => manejosDeAlmacen,
+    [manejosDeAlmacen]
+  );
 
   return (
     <SidebarLayoutGerenciaOperativa>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Manejo de almacen</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Manejo de almacen
+            </h1>
             <p className="mt-2 text-sm text-gray-700">
               Aquí podras ver los manejos de almacen para la empresa.
             </p>
@@ -27,14 +31,13 @@ const VerReportesDeCompras = () => {
                 <table className="min-w-full divide-y divide-gray-300">
                   <thead className="bg-gray-50">
                     <tr>
-
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
                         Materia Prima
                       </th>
-                      
+
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
@@ -55,13 +58,12 @@ const VerReportesDeCompras = () => {
                       >
                         Cantidad
                       </th>
-                      
                     </tr>
                   </thead>
-                  {reportesDeComprasMemo.map((reporteDeCompra) => (
+                  {manejosDeAlmacenMemo.map((manejoDeAlmacen) => (
                     <ListaManejosDeAlmacen
-                      key={reporteDeCompra._id}
-                      reporteDeCompra={reporteDeCompra}
+                      key={manejoDeAlmacen._id}
+                      manejoDeAlmacen={manejoDeAlmacen}
                     />
                   ))}
                 </table>

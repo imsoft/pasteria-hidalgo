@@ -437,8 +437,6 @@ const AgregarReporteDeVentasIndividual = () => {
           };
 
           actualizarClienteFrecuente(actualizadoClienteFrecuente, false);
-
-          console.log(ccff);
         });
     } else {
       clientesFrecuentes
@@ -456,8 +454,6 @@ const AgregarReporteDeVentasIndividual = () => {
           };
 
           actualizarClienteFrecuente(actualizadoClienteFrecuente, false);
-
-          console.log(ccff);
         });
     }
   };

@@ -133,7 +133,7 @@ export const ProveedoresProvider: FC<Props> = ({ children }) => {
 
   const refreshProveedores = async () => {
     const { data } = await entriesApi.get<Proveedor[]>("/proveedores");
-    console.log(data);
+    // console.log(data);
     dispatch({ type: "[Proveedor] Refrescar-Datos", payload: data });
   };
 
