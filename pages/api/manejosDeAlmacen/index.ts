@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../../database";
-import { IManejoDeAlmacen, ManejoDeAlmacen } from "../../../models";
+import { IListaManejoDeAlmacen, ManejoDeAlmacen } from "../../../models";
 
-type Data = { message: string } | IManejoDeAlmacen[] | IManejoDeAlmacen;
+type Data = { message: string } | IListaManejoDeAlmacen[] | IListaManejoDeAlmacen;
 
 export default function handler(
   req: NextApiRequest,

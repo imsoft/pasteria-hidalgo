@@ -25,7 +25,7 @@ export { default as PersonalDeMantenimiento, type IPersonalDeMantenimiento } fro
 export { default as ReporteDeSalida, type IReporteDeSalida } from './reporteDeSalida';
 export { default as SucursalYFranquicia, type ISucursalYFranquicia } from './sucursalYFranquicia';
 export { default as MateriaPrima, type IMateriaPrima } from './materiaPrima';
-export { default as ManejoDeAlmacen, type IManejoDeAlmacen } from './manejoDeAlmacen';
+export { default as ManejoDeAlmacen, type IListaManejoDeAlmacen } from './manejoDeAlmacen';
 
 // Recursos Humanos
 
