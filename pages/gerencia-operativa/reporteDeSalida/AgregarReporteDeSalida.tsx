@@ -221,7 +221,7 @@ export default function ReportesSalida() {
   const [inputDatosDeLaRuta, setInputDatosDeLaRuta] = useState("");
   const [inputKilometrajeDeEntrada, setInputKilometrajeDeEntrada] =
     useState("");
-  const [inputKilometrajeDeSalida, setInputKilometrajeDeSalida] = useState("");
+  const [inputKilometrajeDeSalida, setInputKilometrajeDeSalida] = useState("0");
 
   const [touched, setTouched] = useState(false);
 
@@ -563,18 +563,28 @@ export default function ReportesSalida() {
                   htmlFor="TxtDescripcionProducto"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Datos de la ruta
+                  Distancia de la fábrica al destino
                 </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputDatosDeLaRuta || ""}
-                  onChange={onTextFieldChangedDatosDeLaRuta}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    name="TxtDescripcionProducto"
+                    id="TxtDescripcionProducto"
+                    autoComplete="off"
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    value={inputDatosDeLaRuta || ""}
+                    onChange={onTextFieldChangedDatosDeLaRuta}
+                    onBlur={() => setTouched(true)}
+                  />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      KM
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -625,6 +635,7 @@ export default function ReportesSalida() {
                     onBlur={() => setTouched(true)}
                     placeholder="0"
                     aria-describedby="price-currency"
+                    readOnly
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <span

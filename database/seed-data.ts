@@ -844,7 +844,7 @@ export const initialData: SeedData = {
   reporteDeCompra: [
     {
       // 1
-      fechaDeCompra: "2022-09-28",
+      fechaDeCompra: "28/09/2022",
       nombreProveedor: "María",
       credito: "No",
       factura: "No",
@@ -874,7 +874,7 @@ export const initialData: SeedData = {
     },
     {
       // 2
-      fechaDeCompra: "2022-11-10",
+      fechaDeCompra: "10/11/2022",
       nombreProveedor: "Juan",
       credito: "Sí",
       factura: "Sí",
@@ -904,7 +904,7 @@ export const initialData: SeedData = {
     },
     {
       // 3
-      fechaDeCompra: "2023-02-12",
+      fechaDeCompra: "12/02/2023",
       nombreProveedor: "Pedro",
       credito: "No",
       factura: "Sí",
@@ -934,7 +934,7 @@ export const initialData: SeedData = {
     },
     {
       // 4
-      fechaDeCompra: "2023-03-20",
+      fechaDeCompra: "20/03/2023",
       nombreProveedor: "Ana",
       credito: "Sí",
       factura: "No",
@@ -964,7 +964,7 @@ export const initialData: SeedData = {
     },
     {
       // 5
-      fechaDeCompra: "2023-04-01",
+      fechaDeCompra: "01/04/2023",
       nombreProveedor: "María",
       credito: "Sí",
       factura: "Sí",
@@ -994,7 +994,7 @@ export const initialData: SeedData = {
     },
     {
       // 6
-      fechaDeCompra: "2023-03-25",
+      fechaDeCompra: "25/02/2023",
       nombreProveedor: "Juan",
       credito: "No",
       factura: "No",
@@ -1024,7 +1024,7 @@ export const initialData: SeedData = {
     },
     {
       // 7
-      fechaDeCompra: "2023-04-02",
+      fechaDeCompra: "02/04/2023",
       nombreProveedor: "Pedro",
       credito: "Sí",
       factura: "Sí",
@@ -1054,7 +1054,7 @@ export const initialData: SeedData = {
     },
     {
       // 8
-      fechaDeCompra: "2023-03-31",
+      fechaDeCompra: "31/03/2023",
       nombreProveedor: "Ana",
       credito: "No",
       factura: "Sí",
@@ -1084,7 +1084,7 @@ export const initialData: SeedData = {
     },
     {
       // 9
-      fechaDeCompra: "2023-04-01",
+      fechaDeCompra: "01/04/2023",
       nombreProveedor: "María",
       credito: "No",
       factura: "No",
@@ -1114,7 +1114,7 @@ export const initialData: SeedData = {
     },
     {
       // 10
-      fechaDeCompra: "2023-03-30",
+      fechaDeCompra: "30/03/2023",
       nombreProveedor: "Juan",
       credito: "Sí",
       factura: "Sí",

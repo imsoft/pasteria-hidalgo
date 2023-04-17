@@ -1,21 +1,64 @@
-import { useContext, useMemo } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
-import ListaReportesDeCompras from '../../../components/ui/gerencia-de-compras/ListaReporteDeCompras';
+import ListaReportesDeCompras from "../../../components/ui/gerencia-de-compras/ListaReporteDeCompras";
 
-import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
+import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext";
+
+const tiempoTranscurrido = Date.now();
+const hoy = new Date(tiempoTranscurrido);
 
 const VerReportesDeCompras = () => {
   const { reportesDeCompras } = useContext(ReporteDeCompraContext);
-  const reportesDeComprasMemo = useMemo(() => reportesDeCompras, [reportesDeCompras]);
+  const reportesDeComprasMemo = useMemo(
+    () => reportesDeCompras,
+    [reportesDeCompras]
+  );
+
+  const [inputFecha, setInputFecha] = useState(hoy.toLocaleDateString());
+  const [inputNuevaFecha, setInputNuevaFecha] = useState(
+    hoy.toLocaleDateString()
+  );
+  const [change, setChange] = useState(false);
+
+  const onTextFieldChangedFecha = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputFecha(event.target.value);
+    const nuevaFecha = event.target.value.split("-", 3);
+    const dia = nuevaFecha[2];
+    const mes = nuevaFecha[1];
+    const anio = nuevaFecha[0];
+    setInputNuevaFecha(`${dia}/${mes}/${anio}`);
+    setChange(true);
+  };
+
+  const mostrarTodos = () => {
+    setChange(false);
+    setInputFecha(hoy.toLocaleDateString());
+    setInputNuevaFecha(hoy.toLocaleDateString());
+  };
+
+  useEffect(() => {
+    reportesDeComprasMemo
+      .filter(
+        (reporteDeCompra) => reporteDeCompra.fechaDeCompra === inputNuevaFecha
+      )
+      .map((reporteDeCompra) => (
+        <ListaReportesDeCompras
+          key={reporteDeCompra._id}
+          reporteDeCompra={reporteDeCompra}
+        />
+      ));
+  }, [inputFecha]);
 
   return (
     <SidebarLayoutGerenciaCompras>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Reporte de compras</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Reporte de compras
+            </h1>
             <p className="mt-2 text-sm text-gray-700">
               Aquí podras ver los reportes de compra para la empresa.
             </p>
@@ -25,12 +68,47 @@ const VerReportesDeCompras = () => {
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
             >
-              <Link href={"/gerencia-de-compras/reporteDeCompras/AgregarReporteDeCompras"}>
+              <Link
+                href={
+                  "/gerencia-de-compras/reporteDeCompras/AgregarReporteDeCompras"
+                }
+              >
                 <a>Agregar Reporte de compra</a>
               </Link>
             </button>
           </div>
         </div>
+
+        <div className="grid grid-cols-6 gap-6 mt-6">
+          <div className="col-span-6 sm:col-span-3">
+            <label
+              htmlFor="TxtFecha"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Filtrado por fecha
+            </label>
+            <input
+              type="date"
+              name="TxtFecha"
+              id="TxtFecha"
+              autoComplete="off"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+              value={inputFecha}
+              onChange={onTextFieldChangedFecha}
+            />
+          </div>
+
+          <div className="mt-3 px-4 py-3 bg-white text-right sm:px-2">
+            <button
+              type="submit"
+              className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+              onClick={mostrarTodos}
+            >
+              Mostrar todos
+            </button>
+          </div>
+        </div>
+
         <div className="mt-8 flex flex-col">
           <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -44,7 +122,7 @@ const VerReportesDeCompras = () => {
                       >
                         Fecha De Compra
                       </th>
-                      
+
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
@@ -58,7 +136,7 @@ const VerReportesDeCompras = () => {
                       >
                         Crédito
                       </th>
-                      
+
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
@@ -72,22 +150,40 @@ const VerReportesDeCompras = () => {
                       >
                         Listado De Reporte De Compra
                       </th>
-                      
+
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
                         Precio Total De La Compra
                       </th>
-
                     </tr>
                   </thead>
-                  {reportesDeComprasMemo.map((reporteDeCompra) => (
+                  {/* {reportesDeComprasMemo.map((reporteDeCompra) => (
                     <ListaReportesDeCompras
                       key={reporteDeCompra._id}
                       reporteDeCompra={reporteDeCompra}
                     />
-                  ))}
+                  ))} */}
+
+                  {!change
+                    ? reportesDeComprasMemo.map((reporteDeCompra) => (
+                        <ListaReportesDeCompras
+                          key={reporteDeCompra._id}
+                          reporteDeCompra={reporteDeCompra}
+                        />
+                      ))
+                    : reportesDeComprasMemo
+                        .filter(
+                          (reporteDeCompra) =>
+                            reporteDeCompra.fechaDeCompra === inputNuevaFecha
+                        )
+                        .map((reporteDeCompra) => (
+                          <ListaReportesDeCompras
+                            key={reporteDeCompra._id}
+                            reporteDeCompra={reporteDeCompra}
+                          />
+                        ))}
                 </table>
               </div>
             </div>

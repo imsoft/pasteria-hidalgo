@@ -53,7 +53,9 @@ export default function AgregarCandidato() {
               <h3 className="text-lg leading-6 font-medium text-gray-900">
                 Asignar Precios
               </h3>
-              <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
+              <p className="mt-1 text-sm text-gray-500">
+                ➡ Recuerda verificar si el producto ya ingresado en la lista.
+              </p>
             </div>
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">

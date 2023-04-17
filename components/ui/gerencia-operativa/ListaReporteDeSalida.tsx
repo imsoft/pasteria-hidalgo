@@ -7,15 +7,15 @@ interface Props {
 }
 
 const ListaReportesDeSalida: FC<Props> = ({ reporteDeSalida }) => {
-  const onClick = () => {
-    router.push(`/gerencia-operativa/reporteDeSalida/${reporteDeSalida._id}`);
-  };
+  // const onClick = () => {
+  //   router.push(`/gerencia-operativa/reporteDeSalida/${reporteDeSalida._id}`);
+  // };
 
   return (
     <tbody className="divide-y divide-gray-200 bg-white">
       <tr
         key={reporteDeSalida._id}
-        onClick={onClick}
+        // onClick={onClick}
         className="cursor-pointer hover:bg-yellow-100"
       >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

@@ -78,17 +78,17 @@ const tasksList = [
       {
         title: "Asignar Precios",
         tasks: [
-          "⚒️ Poner leyenda en asignar precios, de verificar si el producto ya está registrado.",
+          "🔵 Poner leyenda en asignar precios, de verificar si el producto ya está registrado.",
         ],
       },
       {
         title: "Proveedores",
-        tasks: ["⚒️ Animación y cambio de ventana en proveedores."],
+        tasks: ["🔵 Animación y cambio de ventana en proveedores."],
       },
       {
         title: "Reporte de compras",
         tasks: [
-          "⚒️ Filtrado en reporte de compras por fecha, como en reporte de ventas individual.",
+          "🔵 Filtrado en reporte de compras por fecha, como en reporte de ventas individual.",
         ],
       },
     ],
@@ -146,13 +146,13 @@ const tasksList = [
       {
         title: "Reporte Salida",
         tasks: [
-          "⚒️ Cambiar datos de la ruta en reporte de salida por distancia de la fábrica al destino.",
-          "⚒️ Corregir el click en ver salidas.",
+          "🔵 Cambiar datos de la ruta en reporte de salida por distancia de la fábrica al destino.",
+          "🔵 Corregir el click en ver salidas.",
         ],
       },
       {
         title: "Sucursales y Franquicias",
-        tasks: ["⚒️ Cambio de ventana en sucursales y franquicias."],
+        tasks: ["🔵 Cambio de ventana en sucursales y franquicias."],
       },
     ],
   },
