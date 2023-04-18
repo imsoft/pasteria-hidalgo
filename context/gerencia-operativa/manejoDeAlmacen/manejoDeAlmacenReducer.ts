@@ -1,22 +1,22 @@
 import { ManejosDeAlmacenState } from ".";
-import { ListaManejoDeAlmacen } from "../../../interfaces";
+import { ManejoDeAlmacen } from "../../../interfaces";
 
 type ManejosDeAlmacenActionType =
   | {
       type: "[Manejo De Almacen] Agregar-Manejo De Almacen";
-      payload: ListaManejoDeAlmacen;
+      payload: ManejoDeAlmacen;
     }
   | {
       type: "[Manejo De Almacen] Actualizar-Manejo De Almacen";
-      payload: ListaManejoDeAlmacen;
+      payload: ManejoDeAlmacen;
     }
   | {
       type: "[Manejo De Almacen] Refrescar-Datos";
-      payload: ListaManejoDeAlmacen[];
+      payload: ManejoDeAlmacen[];
     }
   | {
       type: "[Manejo De Almacen] Eliminar-Manejo De Almacen";
-      payload: ListaManejoDeAlmacen;
+      payload: ManejoDeAlmacen;
     };
 
 export const manejosDeAlmacenReducer = (
@@ -35,8 +35,10 @@ export const manejosDeAlmacenReducer = (
         ...state,
         manejosDeAlmacen: state.manejosDeAlmacen.map((manejoDeAlmacen) => {
           if (manejoDeAlmacen._id === action.payload._id) {
-            manejoDeAlmacen.listaManejoDeAlmacen =
-              action.payload.listaManejoDeAlmacen;
+            manejoDeAlmacen.materiaPrima = action.payload.materiaPrima;
+            manejoDeAlmacen.unidades = action.payload.unidades;
+            manejoDeAlmacen.temperatura = action.payload.temperatura;
+            manejoDeAlmacen.cantidad = action.payload.cantidad;
           }
           return manejoDeAlmacen;
         }),

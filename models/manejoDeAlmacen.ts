@@ -1,21 +1,16 @@
 import mongoose, { Model, Schema } from "mongoose";
-import { ListaManejoDeAlmacen } from "../interfaces";
+import { ManejoDeAlmacen } from "../interfaces";
 
-
-export interface IListaManejoDeAlmacen extends ListaManejoDeAlmacen {}
+export interface IManejoDeAlmacen extends ManejoDeAlmacen {}
 
 const manejoDeAlmacenSchema = new Schema({
-  listaManejoDeAlmacen: [
-    {
-      materiaPrima: { type: String, required: true },
-      unidades: { type: String, required: true },
-      temperatura: { type: String, required: true },
-      cantidad: { type: Number, required: true },
-    },
-  ],
+  materiaPrima: { type: String, required: true },
+  unidades: { type: String, required: true },
+  temperatura: { type: String, required: true },
+  cantidad: { type: Number, required: true },
 });
 
-const ManejoDeAlmacenModel: Model<IListaManejoDeAlmacen> =
+const ManejoDeAlmacenModel: Model<IManejoDeAlmacen> =
   mongoose.models.ManejoDeAlmacen ||
   mongoose.model("ManejoDeAlmacen", manejoDeAlmacenSchema);
 

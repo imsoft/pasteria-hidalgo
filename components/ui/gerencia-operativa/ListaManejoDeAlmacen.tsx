@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { ListaManejoDeAlmacen } from "../../../interfaces";
+import { FC, useEffect, useState } from "react";
+import { ManejoDeAlmacen } from "../../../interfaces";
 
 interface Props {
-  manejoDeAlmacen: ListaManejoDeAlmacen;
+  manejoDeAlmacen: ManejoDeAlmacen;
 }
 
 const ListaManejosDeAlmacen: FC<Props> = ({ manejoDeAlmacen }) => {
@@ -14,30 +14,22 @@ const ListaManejosDeAlmacen: FC<Props> = ({ manejoDeAlmacen }) => {
       >
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {manejoDeAlmacen.listaManejoDeAlmacen.map(
-              (listadoManejoDeAlmacen) => listadoManejoDeAlmacen.materiaPrima
-            )}
+            {manejoDeAlmacen.materiaPrima}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {manejoDeAlmacen.listaManejoDeAlmacen.map(
-              (listadoManejoDeAlmacen) => listadoManejoDeAlmacen.unidades
-            )}
+            {manejoDeAlmacen.unidades}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {manejoDeAlmacen.listaManejoDeAlmacen.map(
-              (listadoManejoDeAlmacen) => listadoManejoDeAlmacen.temperatura
-            )}
+            {manejoDeAlmacen.temperatura}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {manejoDeAlmacen.listaManejoDeAlmacen.map(
-              (listadoManejoDeAlmacen) => listadoManejoDeAlmacen.cantidad
-            )}
+            {manejoDeAlmacen.cantidad}
           </div>
         </td>
       </tr>

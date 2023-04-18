@@ -2,12 +2,12 @@ import { FC, ReactNode, useEffect, useReducer } from "react";
 
 import { entriesApi } from "../../../baseUrlApi";
 import { ManejosDeAlmacenContext, manejosDeAlmacenReducer } from ".";
-import { ListaManejoDeAlmacen } from "../../../interfaces";
+import { ManejoDeAlmacen } from "../../../interfaces";
 
 import Swal from "sweetalert2";
 
 export interface ManejosDeAlmacenState {
-  manejosDeAlmacen: ListaManejoDeAlmacen[];
+  manejosDeAlmacen: ManejoDeAlmacen[];
 }
 
 const ManejosDeAlmacen_INITIAL_STATE: ManejosDeAlmacenState = {
@@ -25,11 +25,11 @@ export const ManejosDeAlmacenProvider: FC<Props> = ({ children }) => {
   );
 
   const eliminarManejoDeAlmacen = async (
-    manejoDeAlmacen: ListaManejoDeAlmacen,
+    manejoDeAlmacen: ManejoDeAlmacen,
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.delete<ListaManejoDeAlmacen>(
+      const { data } = await entriesApi.delete<ManejoDeAlmacen>(
         `/manejosDeAlmacen/${manejoDeAlmacen._id}`
       );
 
@@ -53,14 +53,20 @@ export const ManejosDeAlmacenProvider: FC<Props> = ({ children }) => {
   };
 
   const agregarNuevoManejoDeAlmacen = async (
-    listaManejoDeAlmacen: ListaManejoDeAlmacen[],
+    materiaPrima: string,
+    unidades: string,
+    temperatura: string,
+    cantidad: number,
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.post<ListaManejoDeAlmacen>(
+      const { data } = await entriesApi.post<ManejoDeAlmacen>(
         "/manejosDeAlmacen",
         {
-          listaManejoDeAlmacen,
+          materiaPrima,
+          unidades,
+          temperatura,
+          cantidad,
         }
       );
       dispatch({
@@ -83,14 +89,17 @@ export const ManejosDeAlmacenProvider: FC<Props> = ({ children }) => {
   };
 
   const actualizarManejoDeAlmacen = async (
-    { _id, listaManejoDeAlmacen }: ListaManejoDeAlmacen,
+    { _id, materiaPrima, unidades, temperatura, cantidad }: ManejoDeAlmacen,
     showNotificacion = false
   ) => {
     try {
-      const { data } = await entriesApi.put<ListaManejoDeAlmacen>(
+      const { data } = await entriesApi.put<ManejoDeAlmacen>(
         `/manejosDeAlmacen/${_id}`,
         {
-          listaManejoDeAlmacen,
+          materiaPrima,
+          unidades,
+          temperatura,
+          cantidad,
         }
       );
       dispatch({
@@ -113,7 +122,7 @@ export const ManejosDeAlmacenProvider: FC<Props> = ({ children }) => {
   };
 
   const refreshManejosDeAlmacen = async () => {
-    const { data } = await entriesApi.get<ListaManejoDeAlmacen[]>(
+    const { data } = await entriesApi.get<ManejoDeAlmacen[]>(
       "/manejosDeAlmacen"
     );
     // console.log(data);

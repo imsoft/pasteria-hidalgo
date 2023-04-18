@@ -7,7 +7,6 @@ import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoD
 
 import {
   IListadoDeReporteDeCompra,
-  ListaManejoDeAlmacen,
   ManejoDeAlmacen,
   Temperatura,
   Unidades,
@@ -17,6 +16,13 @@ import {
 import { useRouter } from "next/router";
 import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
 import { ManejosDeAlmacenContext } from "../../../context/gerencia-operativa/manejoDeAlmacen";
+
+const tiempoTranscurrido = Date.now();
+const hoy = new Date(tiempoTranscurrido);
+
+const anio = hoy.getFullYear();
+const mes = hoy.getMonth() + 1;
+const dia = hoy.getDate();
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
@@ -32,7 +38,9 @@ export default function ReporteDeCompras() {
   const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
 
   const [inputUuid, setInputUuid] = useState(1);
-  const [inputFechaDeCompra, setInputFechaDeCompra] = useState("");
+  const [inputFechaDeCompra, setInputFechaDeCompra] = useState(
+    `${dia < 10 ? "0" + dia : dia}/${mes < 10 ? "0" + mes : mes}/${anio}`
+  );
   const [inputCredito, setInputCredito] = useState("");
   const [inputMateriaPrima, setInputMateriaPrima] = useState("");
   const [inputUnidades, setInputUnidades] = useState("");
@@ -51,7 +59,7 @@ export default function ReporteDeCompras() {
   >([]);
 
   const [inputListaManejoDeAlmacen, setInputListaManejoDeAlmacen] = useState<
-    ListaManejoDeAlmacen[]
+    ManejoDeAlmacen[]
   >([]);
 
   const [touched, setTouched] = useState(false);
@@ -153,15 +161,11 @@ export default function ReporteDeCompras() {
       nuevaListaReporteDeCompras,
     ]);
 
-    const nuevaListaManejoDeAlmacen: ListaManejoDeAlmacen = {
-      listaManejoDeAlmacen: [
-        {
-          materiaPrima: inputMateriaPrima,
-          unidades: inputUnidades as Unidades,
-          temperatura: inputTempetatura as Temperatura,
-          cantidad: inputCantidad,
-        },
-      ],
+    const nuevaListaManejoDeAlmacen: ManejoDeAlmacen = {
+      materiaPrima: inputMateriaPrima,
+      unidades: inputUnidades as Unidades,
+      temperatura: inputTempetatura as Temperatura,
+      cantidad: inputCantidad,
     };
 
     setInputListaManejoDeAlmacen([
@@ -226,6 +230,16 @@ export default function ReporteDeCompras() {
     )
       return;
 
+    inputListaManejoDeAlmacen.map((listaManejoDeAlmacen) =>
+      agregarNuevoManejoDeAlmacen(
+        listaManejoDeAlmacen.materiaPrima,
+        listaManejoDeAlmacen.unidades,
+        listaManejoDeAlmacen.temperatura,
+        listaManejoDeAlmacen.cantidad,
+        true
+      )
+    );
+
     agregarReporteDeCompra(
       inputFechaDeCompra,
       inputNombreProveedor,
@@ -235,10 +249,6 @@ export default function ReporteDeCompras() {
       inputPrecioTotalDelCompra,
       true
     );
-
-    console.log(inputListaManejoDeAlmacen);
-
-    agregarNuevoManejoDeAlmacen(inputListaManejoDeAlmacen, true);
 
     router.push("/gerencia-de-compras/reporteDeCompras/VerReporteDeCompras");
 
@@ -738,7 +748,7 @@ export default function ReporteDeCompras() {
 
           <div className="px-4 py-3 mt-4 bg-gray-50 text-right sm:px-6">
             <button
-              type="submit"
+              type="button"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
               onClick={onSave}
             >

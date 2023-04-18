@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../../../database";
-import { IListaManejoDeAlmacen, ManejoDeAlmacen } from "../../../../models";
+import { IManejoDeAlmacen, ManejoDeAlmacen } from "../../../../models";
 
-type Data = { message: string } | IListaManejoDeAlmacen;
+type Data = { message: string } | IManejoDeAlmacen;
 
 export default function handler(
   req: NextApiRequest,
@@ -62,14 +62,20 @@ const updateManejoDeAlmacen = async (
   }
 
   const {
-    listaManejoDeAlmacen = manejoDeAlmacenToUpdate.listaManejoDeAlmacen,
+    materiaPrima = manejoDeAlmacenToUpdate.materiaPrima,
+    unidades = manejoDeAlmacenToUpdate.unidades,
+    temperatura = manejoDeAlmacenToUpdate.temperatura,
+    cantidad = manejoDeAlmacenToUpdate.cantidad,
   } = req.body;
 
   try {
     const updatedManejoDeAlmacen = await ManejoDeAlmacen.findByIdAndUpdate(
       id,
       {
-        listaManejoDeAlmacen,
+        materiaPrima,
+        unidades,
+        temperatura,
+        cantidad,
       },
       { runValidators: true, new: true }
     );

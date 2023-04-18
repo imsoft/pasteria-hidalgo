@@ -123,8 +123,8 @@ const tasksList = [
       {
         title: "Manejo de almacen",
         tasks: [
-          "⚒️ Que no se dupliquen productos en almacén.",
-          "⚒️ Actualizar productos segun reporte de entrada.",
+          "🔵 Que no se dupliquen productos en almacén.",
+          "🔵 Actualizar productos segun reporte de entrada.",
         ],
       },
       {

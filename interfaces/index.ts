@@ -28,7 +28,6 @@ export * from './listaReporteDeSalida';
 export * from './sucursalYFranquicia';
 export * from './materiaPrima';
 export * from './manejoDeAlmacen';
-export * from './listaManejoDeAlmacen';
 
 // Recursos Humanos
 

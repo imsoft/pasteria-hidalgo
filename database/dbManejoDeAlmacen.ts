@@ -1,10 +1,10 @@
 import { isValidObjectId } from "mongoose";
-import { IListaManejoDeAlmacen, ManejoDeAlmacen } from "../models";
+import { IManejoDeAlmacen, ManejoDeAlmacen } from "../models";
 import { db } from "./";
 
 export const getManejoDeAlmacenById = async (
   id: string
-): Promise<IListaManejoDeAlmacen | null> => {
+): Promise<IManejoDeAlmacen | null> => {
   if (!isValidObjectId(id)) return null;
 
   await db.connect();

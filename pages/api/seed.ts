@@ -8,6 +8,7 @@ import {
   Candidato,
   CheckInDePersonal,
   ClienteFrecuente,
+  ManejoDeAlmacen,
   Mantenimiento,
   MateriaPrima,
   PersonalActivo,
@@ -98,6 +99,8 @@ export default async function handler(
 
   await AsignarComision.deleteMany(); //Borra todo de la DB
   await AsignarComision.insertMany(seedDatabase.initialData.asignarComision);
+
+  await ManejoDeAlmacen.deleteMany(); //Borra todo de la DB
 
   await db.disconnect();
 

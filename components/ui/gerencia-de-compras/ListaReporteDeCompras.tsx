@@ -11,7 +11,6 @@ const ListaReportesDeCompras: FC<Props> = ({ reporteDeCompra }) => {
   // };
   
   return (
-    
     <tbody className="divide-y divide-gray-200 bg-white">
       <tr
         key={reporteDeCompra._id}

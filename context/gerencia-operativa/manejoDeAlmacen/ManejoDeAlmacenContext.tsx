@@ -1,22 +1,25 @@
 import { createContext } from "react";
-import { ListaManejoDeAlmacen } from "../../../interfaces";
+import { ManejoDeAlmacen } from "../../../interfaces";
 
 interface ContextProps {
-  manejosDeAlmacen: ListaManejoDeAlmacen[];
+  manejosDeAlmacen: ManejoDeAlmacen[];
 
   //Métodos
   agregarNuevoManejoDeAlmacen: (
-    listaManejoDeAlmacen: ListaManejoDeAlmacen[],
+    materiaPrima: string,
+    unidades: string,
+    temperatura: string,
+    cantidad: number,
     showNotificacion?: boolean
   ) => void;
 
   actualizarManejoDeAlmacen: (
-    manejoDeAlmacen: ListaManejoDeAlmacen,
+    manejoDeAlmacen: ManejoDeAlmacen,
     showNotificacion?: boolean
   ) => void;
 
   eliminarManejoDeAlmacen: (
-    manejoDeAlmacen: ListaManejoDeAlmacen,
+    manejoDeAlmacen: ManejoDeAlmacen,
     showNotificacion?: boolean
   ) => void;
 }
