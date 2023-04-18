@@ -101,6 +101,7 @@ export default async function handler(
   await AsignarComision.insertMany(seedDatabase.initialData.asignarComision);
 
   await ManejoDeAlmacen.deleteMany(); //Borra todo de la DB
+  await ManejoDeAlmacen.insertMany(seedDatabase.initialData.manejoDeAlmacen);
 
   await db.disconnect();
 

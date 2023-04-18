@@ -1,6 +1,7 @@
 import { FC } from "react";
 import router from "next/router";
 import { Mantenimiento } from "../../../interfaces";
+import { cambiarFormatoFecha } from "../../../utils";
 
 interface Props {
   mantenimiento: Mantenimiento;
@@ -40,12 +41,12 @@ const ListaMantenimientos: FC<Props> = ({ mantenimiento }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {mantenimiento.fechaDeGarantia}
+            {cambiarFormatoFecha(mantenimiento.fechaDeGarantia)}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {mantenimiento.fechaDeMantenimiento}
+            {cambiarFormatoFecha(mantenimiento.fechaDeMantenimiento)}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

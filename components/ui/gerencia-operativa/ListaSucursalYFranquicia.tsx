@@ -1,6 +1,7 @@
 import { FC } from "react";
 import router from "next/router";
 import { SucursalYFranquicia } from "../../../interfaces";
+import { cambiarFormatoFecha } from "../../../utils";
 
 interface Props {
   sucursalYFranquicia: SucursalYFranquicia;
@@ -42,7 +43,7 @@ const ListaSucursalesYFranquicias: FC<Props> = ({ sucursalYFranquicia }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {sucursalYFranquicia.fechaDePago}
+            {cambiarFormatoFecha(sucursalYFranquicia.fechaDePago)}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

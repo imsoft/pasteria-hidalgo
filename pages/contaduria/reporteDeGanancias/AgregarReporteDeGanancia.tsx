@@ -3,6 +3,7 @@ import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/
 import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras";
 import ListaReporteDeGanancias from "../../../components/ui/contaduria/ListaReporteDeGanancias";
 import { AsignarComisionContext } from "../../../context/contaduria/asignarComision";
+import { ReportesVentasIndividualContext } from '../../../context/gerencia-de-ventas/reporteVentasIndividual/ReportesVentasIndividualContext';
 
 const mesesDelAno: string[] = [
   "Enero",
@@ -33,10 +34,10 @@ export default function ReporteGanancias() {
     [reportesDeCompras]
   );
 
-  const { asignarComisiones } = useContext(AsignarComisionContext);
-  const asignarComisionesMemo = useMemo(
-    () => asignarComisiones,
-    [asignarComisiones]
+  const { reportesVentasIndividual } = useContext(ReportesVentasIndividualContext);
+  const reportesVentasIndividualMemo = useMemo(
+    () => reportesVentasIndividual,
+    [reportesVentasIndividual]
   );
 
   const onTextFieldChangedMes = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -51,18 +52,18 @@ export default function ReporteGanancias() {
     setChange(false);
   };
 
-  useEffect(() => {
-    setChange(true);
-    asignarComisionesMemo
-      .filter((asignarComision) => asignarComision.mes === inputMes)
-      .filter((asignarComision) => asignarComision.anio === inputAnio)
-      .map((asignarComision) => (
-        <ListaReporteDeGanancias
-          key={asignarComision._id}
-          asignarComision={asignarComision}
-        />
-      ));
-  }, [inputMes, inputAnio]);
+  // useEffect(() => {
+  //   setChange(true);
+  //   reportesDeComprasMemo
+  //     .filter((reportesDeCompras) => reportesDeCompras.mes === inputMes)
+  //     .filter((reportesDeCompras) => reportesDeCompras.anio === inputAnio)
+  //     .map((reportesDeCompras) => (
+  //       <ListaReporteDeGanancias
+  //         key={reportesDeCompras._id}
+  //         reportesDeCompras={reportesDeCompras}
+  //       />
+  //     ));
+  // }, [inputMes, inputAnio]);
 
   useEffect(() => {
     setChange(false);
@@ -151,27 +152,6 @@ export default function ReporteGanancias() {
                 <table className="min-w-full divide-y divide-gray-300">
                   <thead className="bg-gray-50">
                     <tr>
-                      {/* <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Franquicia o Sucursal
-                      </th>
-
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Franquicia
-                      </th>
-
-                      <th
-                        scope="col"
-                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                      >
-                        Sucursal
-                      </th> */}
-
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
@@ -216,7 +196,16 @@ export default function ReporteGanancias() {
                     </tr>
                   </thead>
 
-                  {!change
+                  {/* {
+                    asignarComisionesMemo.map((asignarComision) => (
+                      <ListaReporteDeGanancias
+                        key={asignarComision._id}
+                        asignarComision={asignarComision}
+                      />
+                    ))
+                  } */}
+
+                  {/* {!change
                     ? asignarComisionesMemo.map((asignarComision) => (
                         <ListaReporteDeGanancias
                           key={asignarComision._id}
@@ -236,7 +225,7 @@ export default function ReporteGanancias() {
                             key={asignarComision._id}
                             asignarComision={asignarComision}
                           />
-                        ))}
+                        ))} */}
                 </table>
               </div>
             </div>

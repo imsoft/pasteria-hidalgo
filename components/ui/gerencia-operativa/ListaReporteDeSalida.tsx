@@ -1,6 +1,7 @@
 import { FC } from "react";
 import router from "next/router";
 import { ReporteDeSalida } from "../../../interfaces";
+import { cambiarFormatoFecha } from "../../../utils";
 
 interface Props {
   reporteDeSalida: ReporteDeSalida;
@@ -56,7 +57,7 @@ const ListaReportesDeSalida: FC<Props> = ({ reporteDeSalida }) => {
                 className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
               >
                 <div className="font-medium text-gray-900">
-                  <strong>Fecha:</strong> {listado.fecha}
+                  <strong>Fecha:</strong> {cambiarFormatoFecha(listado.fecha)}
                 </div>
                 <div className="font-medium text-gray-900">
                   <strong>Tipo de producto:</strong> {listado.tipoDeProducto}

@@ -180,6 +180,13 @@ interface SeedAsignarComision {
   minimoDeLaMeta: number;
 }
 
+interface SeedManejoDeAlmacen {
+  materiaPrima: string;
+  unidades: string;
+  temperatura: string;
+  cantidad: number;
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -198,6 +205,7 @@ interface SeedData {
   reporteDeSalida: SeedReporteDeSalida[];
   materiaPrima: SeedMateriaPrima[];
   asignarComision: SeedAsignarComision[];
+  manejoDeAlmacen: SeedManejoDeAlmacen[];
 }
 
 export const initialData: SeedData = {
@@ -2604,6 +2612,78 @@ export const initialData: SeedData = {
       nombreSucursalOFranquicia: "Reforma",
       mes: "Agosto",
       anio: "2025",
+    },
+  ],
+  manejoDeAlmacen: [
+    {
+      // 1
+      materiaPrima: "Tomate",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+      cantidad: 250,
+    },
+    {
+      // 2
+      materiaPrima: "Papa",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+      cantidad: 500,
+    },
+    {
+      // 3
+      materiaPrima: "Zanahoria",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+      cantidad: 150,
+    },
+    {
+      // 4
+      materiaPrima: "Lechuga",
+      unidades: "Kilogramos",
+      temperatura: "Refrigerado",
+      cantidad: 50,
+    },
+    {
+      // 5
+      materiaPrima: "Brócoli",
+      unidades: "Kilogramos",
+      temperatura: "Refrigerado",
+      cantidad: 100,
+    },
+    {
+      // 6
+      materiaPrima: "Ajo",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+      cantidad: 20,
+    },
+    {
+      // 7
+      materiaPrima: "Pimiento",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+      cantidad: 80,
+    },
+    {
+      // 8
+      materiaPrima: "Coliflor",
+      unidades: "Kilogramos",
+      temperatura: "Refrigerado",
+      cantidad: 75,
+    },
+    {
+      // 9
+      materiaPrima: "Espinaca",
+      unidades: "Kilogramos",
+      temperatura: "Refrigerado",
+      cantidad: 30,
+    },
+    {
+      // 10
+      materiaPrima: "Pepino",
+      unidades: "Kilogramos",
+      temperatura: "Ambiente",
+      cantidad: 40,
     },
   ],
 };

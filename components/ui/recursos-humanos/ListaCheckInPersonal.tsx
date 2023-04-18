@@ -1,6 +1,7 @@
 import { FC } from "react";
 import router from "next/router";
 import { CheckInPersonal } from "../../../interfaces";
+import { cambiarFormatoFecha } from "../../../utils";
 
 interface Props {
   checkInPersonal: CheckInPersonal;
@@ -35,7 +36,7 @@ const ListaChecksInPersonal: FC<Props> = ({ checkInPersonal }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {checkInPersonal.fecha}
+            {cambiarFormatoFecha(checkInPersonal.fecha)}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

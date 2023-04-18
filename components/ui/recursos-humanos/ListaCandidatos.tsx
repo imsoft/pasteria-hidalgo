@@ -1,7 +1,7 @@
 import { FC } from "react";
 import router from "next/router";
 import { Candidato } from "../../../interfaces";
-import { phoneNumberFormat } from "../../../utils";
+import { cambiarFormatoFecha, phoneNumberFormat } from "../../../utils";
 
 interface Props {
   candidato: Candidato;
@@ -28,7 +28,7 @@ const ListaCandidatos: FC<Props> = ({ candidato }) => {
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
-            {candidato.fechaDeNacimiento}
+            {cambiarFormatoFecha(candidato.fechaDeNacimiento)}
           </div>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
