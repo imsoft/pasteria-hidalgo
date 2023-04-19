@@ -15,7 +15,7 @@ const tasksList = [
       {
         title: "Reporte de ganancias",
         tasks: [
-          "⚒️ En reporte de ganancias, hacer la suma de compras y ventas según el mes y la sucursal.",
+          "🔵 En reporte de ganancias, hacer la suma de compras y ventas según el mes y la sucursal.",
         ],
       },
       {

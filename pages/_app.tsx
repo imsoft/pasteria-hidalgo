@@ -5,6 +5,7 @@ import { AppProps } from "next/app";
 // Contaduria
 
 import { AsignarComisionProvider } from "../context/contaduria/asignarComision";
+import { ReporteDeGananciaProvider } from "../context/contaduria/reporteDeGanancia";
 
 // Gerencia de compras
 
@@ -72,7 +73,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                                       <ReporteVentasAmbulantesIndividualProvider>
                                         <AsignarComisionProvider>
                                           <ManejosDeAlmacenProvider>
-                                            <Component {...pageProps} />
+                                            <ReporteDeGananciaProvider>
+                                              <Component {...pageProps} />
+                                            </ReporteDeGananciaProvider>
                                           </ManejosDeAlmacenProvider>
                                         </AsignarComisionProvider>
                                       </ReporteVentasAmbulantesIndividualProvider>

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { AsignarComision } from "../../../interfaces/asignarComision";
+import { AsignarComision } from "../../../interfaces";
 
 interface ContextProps {
   asignarComisiones: AsignarComision[];

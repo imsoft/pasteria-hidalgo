@@ -30,17 +30,17 @@ export const asignarComisionesReducer = (
     case "[Asignar Comision] Actualizar-Asignar Comision":
       return {
         ...state,
-        asignarComisiones: state.asignarComisiones.map((checkInPersonal) => {
-          if (checkInPersonal._id === action.payload._id) {
-            checkInPersonal.sucursalOFranquicia =
+        asignarComisiones: state.asignarComisiones.map((asignarComision) => {
+          if (asignarComision._id === action.payload._id) {
+            asignarComision.sucursalOFranquicia =
               action.payload.sucursalOFranquicia;
-            checkInPersonal.nombreSucursalOFranquicia =
+            asignarComision.nombreSucursalOFranquicia =
               action.payload.nombreSucursalOFranquicia;
-            checkInPersonal.mes = action.payload.mes;
-            checkInPersonal.anio = action.payload.anio;
-            checkInPersonal.minimoDeLaMeta = action.payload.minimoDeLaMeta;
+            asignarComision.mes = action.payload.mes;
+            asignarComision.anio = action.payload.anio;
+            asignarComision.minimoDeLaMeta = action.payload.minimoDeLaMeta;
           }
-          return checkInPersonal;
+          return asignarComision;
         }),
       };
 

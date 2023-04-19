@@ -16,13 +16,8 @@ import {
 import { useRouter } from "next/router";
 import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
 import { ManejosDeAlmacenContext } from "../../../context/gerencia-operativa/manejoDeAlmacen";
-
-const tiempoTranscurrido = Date.now();
-const hoy = new Date(tiempoTranscurrido);
-
-const anio = hoy.getFullYear();
-const mes = hoy.getMonth() + 1;
-const dia = hoy.getDate();
+import { ReporteDeGananciaContext } from "../../../context/contaduria/reporteDeGanancia";
+import { dividirFecha } from "../../../utils";
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
@@ -30,6 +25,7 @@ export default function ReporteDeCompras() {
   const router = useRouter();
   const { agregarReporteDeCompra } = useContext(ReporteDeCompraContext);
   const { agregarNuevoManejoDeAlmacen } = useContext(ManejosDeAlmacenContext);
+  const { agregarNuevoReporteDeGanancia } = useContext(ReporteDeGananciaContext);
 
   const { proveedores } = useContext(ProveedoresContext);
   const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
@@ -38,9 +34,7 @@ export default function ReporteDeCompras() {
   const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
 
   const [inputUuid, setInputUuid] = useState(1);
-  const [inputFechaDeCompra, setInputFechaDeCompra] = useState(
-    `${dia < 10 ? "0" + dia : dia}/${mes < 10 ? "0" + mes : mes}/${anio}`
-  );
+  const [inputFechaDeCompra, setInputFechaDeCompra] = useState("");
   const [inputCredito, setInputCredito] = useState("");
   const [inputMateriaPrima, setInputMateriaPrima] = useState("");
   const [inputUnidades, setInputUnidades] = useState("");
@@ -238,6 +232,17 @@ export default function ReporteDeCompras() {
         listaManejoDeAlmacen.cantidad,
         true
       )
+    );
+
+    const [ , mes, anio] = dividirFecha(inputFechaDeCompra);
+
+    agregarNuevoReporteDeGanancia(
+      mes,
+      anio,
+      "",
+      0,
+      inputPrecioTotalDelCompra,
+      0,
     );
 
     agregarReporteDeCompra(

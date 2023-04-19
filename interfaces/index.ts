@@ -1,6 +1,7 @@
 // Contaduria
 
 export * from './asignarComision';
+export * from './reporteDeGanancia';
 
 // Gerencia de compras
 

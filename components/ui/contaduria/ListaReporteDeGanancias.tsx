@@ -1,149 +1,58 @@
-import React, { FC, useContext, useMemo } from "react";
-import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras";
-import { ReportesVentasAmbulantesIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual";
-import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasIndividual";
-import { AsignarComision } from "../../../interfaces";
+import React, { FC } from "react";
+import { ReporteDeGanancia } from "../../../interfaces";
 
 interface Props {
-  asignarComision: AsignarComision;
+  reporteDeGanancia: ReporteDeGanancia;
 }
 
-const ListaReporteDeGanancias: FC<Props> = ({ asignarComision }) => {
-  const { reportesVentasIndividual } = useContext(
-    ReportesVentasIndividualContext
-  );
-  const reportesVentasIndividualMemo = useMemo(
-    () => reportesVentasIndividual,
-    [reportesVentasIndividual]
-  );
-
-  const { reportesVentasAmbulantesIndividual } = useContext(
-    ReportesVentasAmbulantesIndividualContext
-  );
-  const reportesVentasAmbulantesIndividualMemo = useMemo(
-    () => reportesVentasAmbulantesIndividual,
-    [reportesVentasAmbulantesIndividual]
-  );
-
-  const { reportesDeCompras } = useContext(ReporteDeCompraContext);
-  const reportesDeComprasMemo = useMemo(
-    () => reportesDeCompras,
-    [reportesDeCompras]
-  );
-
-  const totalVentasIndividual = reportesVentasIndividualMemo
-    .filter(
-      (reporteVentasIndividual) =>
-        reporteVentasIndividual.lugarDeVenta === "Sucursal"
-    )
-    .reduce(
-      (total, reporteVentasIndividual) =>
-        total + reporteVentasIndividual.totalDeLaVenta,
-      0
-    );
-
-  const totalDeCompras = reportesDeComprasMemo.reduce(
-    (total, reportesDeCompras) =>
-      total + reportesDeCompras.precioTotalDelCompra,
-    0
-  );
-
-  let diferencia = totalVentasIndividual - totalDeCompras;
-
-  const obtenerNombreMes = (mes: number): string => {
-    const meses = [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ];
-    return meses[mes];
-  };
-
-  let partesFecha: string[] = reportesDeComprasMemo.map((reporteDeCompras) => {
-    const fecha = new Date(reporteDeCompras.fechaDeCompra);
-    const mes = fecha.getMonth();
-    const anio = fecha.getFullYear();
-    const mesTexto = obtenerNombreMes(mes);
-    return `${mesTexto} ${anio}`;
-  });
-
+const ListaReporteDeGanancias: FC<Props> = ({ reporteDeGanancia }) => {
   return (
     <>
       <tbody className="divide-y divide-gray-200 bg-white">
         <tr
-          key={asignarComision._id}
+          key={reporteDeGanancia._id}
           className="cursor-pointer hover:bg-yellow-100"
         >
-          {/* <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.sucursalOFranquicia}
+              {reporteDeGanancia.mes}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.franquicias || "-"}
+              {reporteDeGanancia.anio}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {asignarComision.sucursales || "-"}
-            </div>
-          </td> */}
-          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <div className="font-medium text-gray-900">
-              {reportesVentasIndividualMemo
-                .filter((sucursales) => sucursales.lugarDeVenta === "Sucursal")
-                .map((reportesVentasIndividual) => (
-                  <div
-                    key={reportesVentasIndividual._id}
-                    className="font-medium text-gray-900 py-4"
-                  >
-                    {reportesVentasIndividual.fecha}
-                  </div>
-                ))}
-            </div>
-          </td>
-          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <div className="font-medium text-gray-900">
-              {reportesVentasIndividualMemo
-                .filter((sucursales) => sucursales.lugarDeVenta === "Sucursal")
-                .map((reportesVentasIndividual) => (
-                  <div
-                    key={reportesVentasIndividual._id}
-                    className="font-medium text-gray-900 py-4"
-                  >
-                    {reportesVentasIndividual.nombreLugarDeVenta}
-                  </div>
-                ))}
-            </div>
-          </td>
-          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <div className="font-medium text-gray-900">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2 sm:col-span-1">
-                  $ {totalVentasIndividual}
+              {reporteDeGanancia.sucursal.map((listado) => (
+                <div
+                  key={listado}
+                  className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                >
+                  <div className="font-medium text-gray-900">{listado}</div>
                 </div>
-              </div>
+              ))}
             </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <div className="font-medium text-gray-900">$ {totalDeCompras}</div>
-          </td>
-          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-            <div className="font-medium text-gray-900">$ {diferencia}</div>
+            <div className="font-medium text-gray-900">
+              $ {reporteDeGanancia.totalVentas}
+            </div>
           </td>
           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
             <div className="font-medium text-gray-900">
-              {diferencia >= 0
+              $ {reporteDeGanancia.totalCompras}
+            </div>
+          </td>
+          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <div className="font-medium text-gray-900">
+              $ {reporteDeGanancia.balance}
+            </div>
+          </td>
+          <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <div className="font-medium text-gray-900">
+              {reporteDeGanancia.balance >= 0
                 ? "✅ Se vendio más de lo que se compro"
                 : "❌ Se compro más de lo que se vendio"}
             </div>

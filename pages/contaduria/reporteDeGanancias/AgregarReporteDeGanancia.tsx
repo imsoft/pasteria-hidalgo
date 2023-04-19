@@ -3,7 +3,8 @@ import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/
 import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras";
 import ListaReporteDeGanancias from "../../../components/ui/contaduria/ListaReporteDeGanancias";
 import { AsignarComisionContext } from "../../../context/contaduria/asignarComision";
-import { ReportesVentasIndividualContext } from '../../../context/gerencia-de-ventas/reporteVentasIndividual/ReportesVentasIndividualContext';
+import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasIndividual/ReportesVentasIndividualContext";
+import { ReporteDeGananciaContext } from "../../../context/contaduria/reporteDeGanancia";
 
 const mesesDelAno: string[] = [
   "Enero",
@@ -28,16 +29,12 @@ export default function ReporteGanancias() {
 
   const [change, setChange] = useState(false);
 
-  const { reportesDeCompras } = useContext(ReporteDeCompraContext);
-  const reportesDeComprasMemo = useMemo(
-    () => reportesDeCompras,
-    [reportesDeCompras]
+  const { reportesDeGanancias } = useContext(
+    ReporteDeGananciaContext
   );
-
-  const { reportesVentasIndividual } = useContext(ReportesVentasIndividualContext);
-  const reportesVentasIndividualMemo = useMemo(
-    () => reportesVentasIndividual,
-    [reportesVentasIndividual]
+  const reportesDeGananciasMemo = useMemo(
+    () => reportesDeGanancias,
+    [reportesDeGanancias]
   );
 
   const onTextFieldChangedMes = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -52,18 +49,18 @@ export default function ReporteGanancias() {
     setChange(false);
   };
 
-  // useEffect(() => {
-  //   setChange(true);
-  //   reportesDeComprasMemo
-  //     .filter((reportesDeCompras) => reportesDeCompras.mes === inputMes)
-  //     .filter((reportesDeCompras) => reportesDeCompras.anio === inputAnio)
-  //     .map((reportesDeCompras) => (
-  //       <ListaReporteDeGanancias
-  //         key={reportesDeCompras._id}
-  //         reportesDeCompras={reportesDeCompras}
-  //       />
-  //     ));
-  // }, [inputMes, inputAnio]);
+  useEffect(() => {
+    setChange(true);
+    reportesDeGananciasMemo
+      .filter((reporteDeGanancia) => reporteDeGanancia.mes === inputMes)
+      .filter((reporteDeGanancia) => reporteDeGanancia.anio === inputAnio)
+      .map((reporteDeGanancia) => (
+        <ListaReporteDeGanancias
+          key={reporteDeGanancia._id}
+          reporteDeGanancia={reporteDeGanancia}
+        />
+      ));
+  }, [inputMes, inputAnio]);
 
   useEffect(() => {
     setChange(false);
@@ -156,28 +153,35 @@ export default function ReporteGanancias() {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Fecha
+                        Mes
                       </th>
 
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Sucursal
+                        Año
                       </th>
 
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Total ventas
+                        Sucursales
                       </th>
 
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Total compras
+                        Total Venta
+                      </th>
+
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Total Compra
                       </th>
 
                       <th
@@ -196,36 +200,27 @@ export default function ReporteGanancias() {
                     </tr>
                   </thead>
 
-                  {/* {
-                    asignarComisionesMemo.map((asignarComision) => (
-                      <ListaReporteDeGanancias
-                        key={asignarComision._id}
-                        asignarComision={asignarComision}
-                      />
-                    ))
-                  } */}
-
-                  {/* {!change
-                    ? asignarComisionesMemo.map((asignarComision) => (
+                  {!change
+                    ? reportesDeGananciasMemo.map((reporteDeGanancia) => (
                         <ListaReporteDeGanancias
-                          key={asignarComision._id}
-                          asignarComision={asignarComision}
+                          key={reporteDeGanancia._id}
+                          reporteDeGanancia={reporteDeGanancia}
                         />
                       ))
-                    : asignarComisionesMemo
+                    : reportesDeGananciasMemo
                         .filter(
-                          (asignarComision) => asignarComision.mes === inputMes
+                          (reporteDeGanancia) => reporteDeGanancia.mes === inputMes
                         )
                         .filter(
-                          (asignarComision) =>
-                            asignarComision.anio === inputAnio
+                          (reporteDeGanancia) =>
+                            reporteDeGanancia.anio === inputAnio
                         )
-                        .map((asignarComision) => (
+                        .map((reporteDeGanancia) => (
                           <ListaReporteDeGanancias
-                            key={asignarComision._id}
-                            asignarComision={asignarComision}
+                            key={reporteDeGanancia._id}
+                            reporteDeGanancia={reporteDeGanancia}
                           />
-                        ))} */}
+                        ))}
                 </table>
               </div>
             </div>

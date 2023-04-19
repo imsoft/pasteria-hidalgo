@@ -14,6 +14,8 @@ import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ve
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente/ClientesFrecuentesContext";
 import { useRouter } from "next/router";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
+import { ReporteDeGananciaContext } from "../../../context/contaduria/reporteDeGanancia";
+import { dividirFecha } from "../../../utils";
 
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
@@ -216,6 +218,10 @@ const AgregarReporteDeVentasIndividual = () => {
   const router = useRouter();
   const { agregarNuevoReporteVentasIndividual } = useContext(
     ReportesVentasIndividualContext
+  );
+
+  const { agregarNuevoReporteDeGanancia } = useContext(
+    ReporteDeGananciaContext
   );
 
   const { clientesFrecuentes, actualizarClienteFrecuente } = useContext(
@@ -470,6 +476,17 @@ const AgregarReporteDeVentasIndividual = () => {
       inputPuntosClienteFrecuente === 0
     )
       return;
+
+    const [ , mes, anio] = dividirFecha(hoy.toLocaleDateString());
+
+    agregarNuevoReporteDeGanancia(
+      mes,
+      anio,
+      inputNombreSucursalOFranquicia,
+      inputSumaTotal,
+      0,
+      0,
+    );
 
     agregarNuevoReporteVentasIndividual(
       inputFecha,
