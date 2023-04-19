@@ -20,7 +20,7 @@
 // };
 
 export const dividirFecha = (fecha: string): [string, string, string] => {
-  const regex = /^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/;
+  const regex = /^(\d{1,4})[-\/](\d{1,2})[-\/](\d{1,4})$/;
   const match = fecha.match(regex);
 
   if (!match) {
@@ -48,5 +48,9 @@ export const dividirFecha = (fecha: string): [string, string, string] => {
 
   const anio = anioStr;
 
-  return [anio, mes, dia];
+  if (anio.length > dia.length) {
+    return [dia, mes, anio];
+  } else {
+    return [anio, mes, dia];
+  }
 };

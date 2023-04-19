@@ -62,6 +62,7 @@ export default function ReporteDeCompras() {
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setInputFechaDeCompra(event.target.value);
+    console.log(event.target.value);
   };
 
   const onTextFieldChangedCredito = (event: ChangeEvent<HTMLSelectElement>) => {
