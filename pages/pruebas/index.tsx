@@ -37,8 +37,8 @@ const PruebasPdf = () => {
   doc.setFontSize(10);
 
   doc.addImage(
-    "/static/Imagen-ticket.png",
-    "PNG",
+    "/static/Imagen-ticket.jpg",
+    "JPEG",
     5,
     5,
     60,
