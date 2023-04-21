@@ -45,15 +45,12 @@ const postCheckInPersonal = async (
     horaDeSalida = "",
   } = req.body;
 
-  const tiempoActual = Date.now();
-  const hoy = new Date(tiempoActual);
-
   const newCheckInDePersonal = new CheckInDePersonal({
     sucursalOFranquicia,
     nombreSucursalOFranquicia,
     nombre,
     fecha,
-    horaDeIngreso: hoy.toLocaleDateString(),
+    horaDeIngreso,
     horaDeSalida,
   });
 
