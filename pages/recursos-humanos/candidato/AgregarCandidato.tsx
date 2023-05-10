@@ -8,6 +8,83 @@ import { PuestosEmpresa } from "../../../interfaces";
 
 import { useRouter } from "next/router";
 
+import { Resolver } from "react-hook-form";
+
+type FormData = {
+  nombre: string;
+  puesto: PuestosEmpresa;
+  descripcionDelPuesto: string;
+  fechaDeNacimiento: string;
+  domicilio: string;
+  curp: string;
+  noImss?: string;
+  noCartaDePolicia: string;
+  celular: string;
+  contactoDeEmergencia: string;
+  correoElectronico: string;
+  referencia1Nombre: string;
+  referencia1Empresa: string;
+  referencia1NumeroTelefonico: string;
+  referencia1Observaciones: string;
+  referencia2Nombre: string;
+  referencia2Empresa: string;
+  referencia2NumeroTelefonico: string;
+  referencia2Observaciones: string;
+  referencia3Nombre?: string;
+  referencia3Empresa?: string;
+  referencia3NumeroTelefonico?: string;
+  referencia3Observaciones?: string;
+};
+
+// const resolver: Resolver<FormData> = async (values) => {
+//   return {
+//     values,
+//     errors: !values.nombre
+//       ? {
+//           nombre: {
+//             type: "required",
+//             message: "El campo nombre es requerido.",
+//           },
+//         }
+//       : !values.oficio
+//       ? {
+//           oficio: {
+//             type: "required",
+//             message: "El campo oficio es requerido.",
+//           },
+//         }
+//       : !values.direccion
+//       ? {
+//           direccion: {
+//             type: "required",
+//             message: "El campo dirección es requerido.",
+//           },
+//         }
+//       : !values.telefono
+//       ? {
+//           telefono: {
+//             type: "required",
+//             message: "El campo télefono es requerido.",
+//           },
+//         }
+//       : values.sucursalOFranquicia === "Seleccione una opción..."
+//       ? {
+//           sucursalOFranquicia: {
+//             type: "required",
+//             message: "El campo sucursal o franquicia es requerido.",
+//           },
+//         }
+//       : !values.fecha
+//       ? {
+//           fecha: {
+//             type: "required",
+//             message: "El campo fecha es requerido.",
+//           },
+//         }
+//       : {},
+//   };
+// };
+
 const puestosValidos: PuestosEmpresa[] = [
   "Administrador",
   "Contaduria",
@@ -315,11 +392,11 @@ export default function AgregarCandidato() {
                   id="CmbPuesto"
                   name="CmbPuesto"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
+                  defaultValue="Seleccione una opción..."
                   onChange={onTextFieldChangedPuesto}
                   onBlur={() => setTouched(true)}
                 >
-                  <option hidden>Selecciona un producto...</option>
+                  <option hidden>Seleccione una opción...</option>
                   {puestosValidos.map((puesto) => (
                     <option key={puesto} value={puesto}>
                       {puesto}

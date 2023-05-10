@@ -124,11 +124,11 @@ export default function AgregarPersonalActivo() {
                   id="CmbNombre"
                   name="CmbNombre"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
+                  defaultValue="Seleccione una opción..."
                   onChange={onTextFieldChangedNombre}
                   onBlur={() => setTouched(true)}
                 >
-                  <option hidden>Seleccione el nombre...</option>
+                  <option hidden>Seleccione una opción...</option>
                   {candidatosMemo.map((candidato) => (
                     <option key={candidato._id}> {candidato.nombre} </option>
                   ))}

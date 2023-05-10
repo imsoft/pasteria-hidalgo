@@ -64,7 +64,7 @@ const resolver: Resolver<FormData> = async (values) => {
   };
 };
 
-const pruebas = () => {
+const Pruebas = () => {
   const router = useRouter();
 
   const {
@@ -375,4 +375,4 @@ const pruebas = () => {
   );
 };
 
-export default pruebas;
+export default Pruebas;
