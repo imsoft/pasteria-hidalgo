@@ -4,6 +4,62 @@ import { useRouter } from "next/router";
 
 import { AsignarComisionContext } from "../../../context/contaduria/asignarComision/AsignarComisionContext";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
+import { Resolver, useForm } from "react-hook-form";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
+
+type FormData = {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  mes: string;
+  anio: string;
+  minimoDeLaMeta: number;
+};
+
+const resolver: Resolver<FormData> = async (values) => {
+  return {
+    values,
+    errors:
+      values.sucursalOFranquicia === "Seleccione una opción..."
+        ? {
+            sucursalOFranquicia: {
+              type: "required",
+              message: "El campo sucursal o franquicia es requerido.",
+            },
+          }
+        : values.nombreSucursalOFranquicia ===
+            "Seleccione primero seleccione si es franquicia o sucursal..." ||
+          values.nombreSucursalOFranquicia === "Seleccione Sucursal..." ||
+          values.nombreSucursalOFranquicia === "Seleccione Franquicia..."
+        ? {
+            nombreSucursalOFranquicia: {
+              type: "required",
+              message: "El campo nombre sucursal o franquicia es requerido.",
+            },
+          }
+        : values.mes === "Seleccione una opción..."
+        ? {
+            mes: {
+              type: "required",
+              message: "El campo mes es requerido.",
+            },
+          }
+        : !values.anio
+        ? {
+            anio: {
+              type: "required",
+              message: "El campo año es requerido.",
+            },
+          }
+        : !values.minimoDeLaMeta
+        ? {
+            minimoDeLaMeta: {
+              type: "required",
+              message: "El campo minimo de la meta es requerido.",
+            },
+          }
+        : {},
+  };
+};
 
 const mesesDelAno: string[] = [
   "Enero",
@@ -26,6 +82,13 @@ const currentYear = today.getFullYear();
 export default function AgregarAsignarComisiones() {
   const router = useRouter();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<FormData>({ resolver });
+
   const { agregarNuevoAsignarComision } = useContext(AsignarComisionContext);
 
   const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
@@ -34,72 +97,30 @@ export default function AgregarAsignarComisiones() {
     [sucursalesYFranquicias]
   );
 
-  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
-    useState("");
-  const [inputMes, setInputMes] = useState("");
-  const [inputAnio, setInputAnio] = useState(currentYear.toString());
-  const [inputMinimoDeLaMeta, setInputMinimoDeLaMeta] = useState(0);
+  const watchSucursalOFranquicia = watch("sucursalOFranquicia");
 
-  const [touched, setTouched] = useState(false);
-
-  const onSave = () => {
-    if (
-      inputSucursalOFranquicia.length === 0 &&
-      inputNombreSucursalOFranquicia.length === 0 &&
-      inputMinimoDeLaMeta === 0 &&
-      inputMes.length === 0 &&
-      inputAnio.length === 0
-    )
-      return;
-
+  const onSave = ({
+    sucursalOFranquicia,
+    nombreSucursalOFranquicia,
+    mes,
+    anio,
+    minimoDeLaMeta,
+  }: FormData) => {
     agregarNuevoAsignarComision(
-      inputSucursalOFranquicia,
-      inputNombreSucursalOFranquicia,
-      inputMes,
-      inputAnio,
-      inputMinimoDeLaMeta,
+      sucursalOFranquicia,
+      nombreSucursalOFranquicia,
+      mes,
+      anio,
+      minimoDeLaMeta,
       true
     );
 
     router.push("/contaduria/asignarComisiones/VerAsignarComisiones");
-
-    setInputSucursalOFranquicia("");
-    setInputNombreSucursalOFranquicia("");
-    setInputMinimoDeLaMeta(0);
-    setInputMes("");
-    setInputAnio("");
-  };
-
-  const onTextFieldChangedNombreSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputNombreSucursalOFranquicia(event.target.value);
-  };
-
-  const onTextFieldChangedSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursalOFranquicia(event.target.value);
-  };
-
-  const onTextFieldChangedMes = (event: ChangeEvent<HTMLSelectElement>) => {
-    setInputMes(event.target.value);
-  };
-
-  const onTextFieldChangedAnio = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputAnio(event.target.value);
-  };
-
-  const onTextFieldChangedMinimoDeLaMeta = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputMinimoDeLaMeta(parseInt(event.target.value));
   };
 
   return (
     <SidebarLayoutContaduria>
-      <form>
+      <form onSubmit={handleSubmit(onSave)}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -109,94 +130,162 @@ export default function AgregarAsignarComisiones() {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
-              <div className="col-span-6 sm:col-span-3">
+            <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="CmbSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   ¿Sucursal o Franquicia?
                 </label>
 
-                <div className="col-span-6 sm:col-span-3">
+                <div className="relative rounded-md shadow-sm">
                   <select
-                    id="CmbNombre"
-                    name="CmbNombre"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    id="CmbSucursalOFranquicia"
+                    className={`${
+                      errors?.sucursalOFranquicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
                     defaultValue="Selecciona un producto..."
-                    onChange={onTextFieldChangedSucursalOFranquicia}
-                    onBlur={() => setTouched(true)}
+                    {...register("sucursalOFranquicia")}
                   >
-                    <option hidden>Seleccione una opción...</option>
-                    <option>Sucursal</option>
-                    <option>Franquicia</option>
+                    <option value={"Seleccione una opción..."} hidden>
+                      Seleccione una opción...
+                    </option>
+                    <option value={"Sucursal"}>Sucursal</option>
+                    <option value={"Franquicia"}>Franquicia</option>
                   </select>
+
+                  {errors?.sucursalOFranquicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
+                {errors?.sucursalOFranquicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.sucursalOFranquicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="CmbNombreSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {inputSucursalOFranquicia === "Sucursal"
+                  {watchSucursalOFranquicia === "Sucursal"
                     ? "Sucursal"
-                    : inputSucursalOFranquicia === "Franquicia"
+                    : watchSucursalOFranquicia === "Franquicia"
                     ? "Franquicia"
                     : "Primero seleccione si es franquicia o sucursal"}
                 </label>
-                <select
-                  id="CmbFranquicia"
-                  name="CmbFranquicia"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>
-                    Seleccione la{" "}
-                    {inputSucursalOFranquicia === "Sucursal"
-                      ? "Sucursal"
-                      : inputSucursalOFranquicia === "Franquicia"
-                      ? "Franquicia"
-                      : "Primero seleccione si es franquicia o sucursal"}
-                    ...
-                  </option>
-                  {sucursalesYFranquiciasMemo
-                    .filter(
-                      (sucursalesYFranquicias) =>
-                        sucursalesYFranquicias.sucursalOFranquicia ===
-                        inputSucursalOFranquicia
-                    )
-                    .map((sucursalesYFranquicias) => (
-                      <option
-                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
-                      >
-                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
-                      </option>
-                    ))}
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbNombreSucursalOFranquicia"
+                    className={`${
+                      errors?.nombreSucursalOFranquicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Selecciona un producto..."
+                    {...register("nombreSucursalOFranquicia")}
+                  >
+                    <option hidden>
+                      Seleccione{" "}
+                      {watchSucursalOFranquicia === "Sucursal"
+                        ? "Sucursal"
+                        : watchSucursalOFranquicia === "Franquicia"
+                        ? "Franquicia"
+                        : "primero seleccione si es franquicia o sucursal"}
+                      ...
+                    </option>
+                    {sucursalesYFranquiciasMemo
+                      .filter(
+                        (sucursalesYFranquicias) =>
+                          sucursalesYFranquicias.sucursalOFranquicia ===
+                          watchSucursalOFranquicia
+                      )
+                      .map((sucursalesYFranquicias) => (
+                        <option
+                          key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                        >
+                          {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                        </option>
+                      ))}
+                  </select>
+
+                  {errors?.nombreSucursalOFranquicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombreSucursalOFranquicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombreSucursalOFranquicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbSucursal"
+                  htmlFor="CmbMes"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Mes
                 </label>
-                <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedMes}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Seleccione una opción...</option>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbMes"
+                    className={`${
+                      errors?.mes
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Selecciona un producto..."
+                    {...register("mes")}
+                  >
+                    <option hidden>Seleccione una opción...</option>
                   {mesesDelAno.map((mes) => (
                     <option key={mes}>{mes}</option>
                   ))}
-                </select>
+                  </select>
+
+                  {errors?.mes && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.mes && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.mes.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -206,18 +295,37 @@ export default function AgregarAsignarComisiones() {
                 >
                   Año
                 </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
+                <div className="relative rounded-md shadow-sm">
                   <input
                     type="text"
-                    name="TxtAnio"
                     id="TxtAnio"
-                    onChange={onTextFieldChangedAnio}
-                    value={inputAnio}
-                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full sm:text-sm border-gray-300 rounded-md"
-                    aria-describedby="price-currency"
-                    readOnly
+                    autoComplete="off"
+                    value={currentYear.toString()}
+                    className={`${
+                      errors?.anio
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("anio")}
                   />
+                  {errors?.anio && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
+                {errors?.anio && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.anio.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -227,17 +335,17 @@ export default function AgregarAsignarComisiones() {
                 >
                   Mínimo de la meta
                 </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 sm:text-sm">$</span>
-                  </div>
+                <div className="relative rounded-md shadow-sm">
                   <input
                     type="text"
-                    name="TxtMinimoDeLaMeta"
                     id="TxtMinimoDeLaMeta"
-                    onChange={onTextFieldChangedMinimoDeLaMeta}
-                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                    aria-describedby="price-currency"
+                    autoComplete="off"
+                    className={`${
+                      errors?.minimoDeLaMeta
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("minimoDeLaMeta")}
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <span
@@ -247,16 +355,34 @@ export default function AgregarAsignarComisiones() {
                       MXN
                     </span>
                   </div>
+                  {errors?.minimoDeLaMeta && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-12">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
+                {errors?.minimoDeLaMeta && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.minimoDeLaMeta.message}
+                    </p>
+                  </>
+                )}
               </div>
+
+
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="button"
+              type='submit'
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={onSave}
-            >
+              >
               Guardar
             </button>
           </div>
