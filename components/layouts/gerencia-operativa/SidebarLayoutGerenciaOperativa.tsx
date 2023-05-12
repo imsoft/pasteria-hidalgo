@@ -111,8 +111,8 @@ const navigation = [
 ];
 
 const userNavigation = [
-  { name: "Perfil", href: "#" },
-  { name: "Salir", href: "#" },
+  // { name: "Perfil", href: "#" },
+  { name: "Salir", href: "/login" },
 ];
 
 function classNames(...classes: string[]) {
