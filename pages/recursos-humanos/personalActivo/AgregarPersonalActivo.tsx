@@ -7,103 +7,121 @@ import { CandidatosContext } from "../../../context/recursos-humanos/candidatos"
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
 import { PuestosEmpresa } from "../../../interfaces";
+import { Resolver, useForm } from "react-hook-form";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
 
 const puestosValidos: PuestosEmpresa[] = ["Administrador", "Chef", "Operador"];
+
+type FormData = {
+  nombre: string;
+  puesto: PuestosEmpresa;
+  fechaDeContratacion: string;
+  noContrato: string;
+  noExpediente: string;
+  bajaTemporal: string;
+  comentarios: string;
+};
+
+const resolver: Resolver<FormData> = async (values) => {
+  return {
+    values,
+    errors:
+      values.nombre === "Seleccione una opción..."
+        ? {
+            nombre: {
+              type: "required",
+              message: "El campo nombre es requerido.",
+            },
+          }
+        : values.puesto === "Seleccione una opción..."
+        ? {
+            puesto: {
+              type: "required",
+              message: "El campo puesto es requerido.",
+            },
+          }
+        : !values.fechaDeContratacion
+        ? {
+            fechaDeContratacion: {
+              type: "required",
+              message: "El campo fecha de contratación es requerido.",
+            },
+          }
+        : !values.noContrato
+        ? {
+            noContrato: {
+              type: "required",
+              message: "El campo No contrato es requerido.",
+            },
+          }
+        : !values.noExpediente
+        ? {
+            noExpediente: {
+              type: "required",
+              message: "El campo No expediente es requerido.",
+            },
+          }
+        : values.bajaTemporal !== "No"
+        ? {
+            bajaTemporal: {
+              type: "required",
+              message: "El campo baja temporal es requerido.",
+            },
+          }
+        : !values.comentarios
+        ? {
+            comentarios: {
+              type: "required",
+              message: "El campo comentarios es requerido.",
+            },
+          }
+        : {},
+  };
+};
 
 export default function AgregarPersonalActivo() {
   const router = useRouter();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<FormData>({ resolver });
+
   const { agregarPersonalActivo } = useContext(PersonalActivoContext);
-
-  const [inputNombre, setInputNombre] = useState("");
-  const [inputPuesto, setInputDescripcionDelPuesto] = useState("");
-  const [inputFechaDeContratacion, setInputFechaDeNacimiento] = useState("");
-  const [inputNoContrato, setInputNoContrato] = useState("");
-  const [inputNoExpediente, setInputNoExpediente] = useState("");
-  const [inputBajaTemporal, setInputBajaTemporal] = useState("No");
-  const [inputComentarios, setInputComentarios] = useState("");
-
-  const [touched, setTouched] = useState(false);
 
   const { candidatos } = useContext(CandidatosContext);
   const candidatosMemo = useMemo(() => candidatos, [candidatos]);
 
-  const onTextFieldChangedNombre = (event: ChangeEvent<HTMLSelectElement>) => {
-    setInputNombre(event.target.value);
-  };
+  const watchNombre = watch("nombre");
 
-  const onTextFieldChangedPuesto = (event: ChangeEvent<HTMLSelectElement>) => {
-    setInputDescripcionDelPuesto(event.target.value as PuestosEmpresa);
-  };
-
-  const onTextFieldChangedFechaDeContratacion = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputFechaDeNacimiento(event.target.value);
-  };
-
-  const onTextFieldChangedNoContrato = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputNoContrato(event.target.value);
-  };
-
-  const onTextFieldChangedNoExpediente = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputNoExpediente(event.target.value);
-  };
-
-  const onTextFieldChangedBajaTemporal = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputBajaTemporal(event.target.value);
-  };
-
-  const onTextFieldChangedComentarios = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputComentarios(event.target.value);
-  };
-
-  const onSave = () => {
-    if (
-      inputNombre.length === 0 &&
-      inputPuesto.length === 0 &&
-      inputFechaDeContratacion.length === 0 &&
-      inputNoContrato.length === 0 &&
-      inputNoExpediente.length === 0 &&
-      inputComentarios.length === 0 &&
-      inputBajaTemporal.length === 0
-    )
-      return;
-
+  const onSave = ({
+    nombre,
+    puesto,
+    fechaDeContratacion,
+    noContrato,
+    noExpediente,
+    bajaTemporal,
+    comentarios,
+  }: FormData) => {
     agregarPersonalActivo(
-      inputNombre,
-      inputPuesto,
-      inputFechaDeContratacion,
-      inputNoContrato,
-      inputNoExpediente,
-      inputBajaTemporal,
-      inputComentarios,
+      nombre,
+      puesto,
+      fechaDeContratacion,
+      noContrato,
+      noExpediente,
+      bajaTemporal,
+      comentarios,
       true
     );
 
     router.push("/recursos-humanos/personalActivo/VerPersonalActivo");
-
-    setTouched(false);
-    setInputNombre("");
-    setInputDescripcionDelPuesto("");
-    setInputFechaDeNacimiento("");
-    setInputNoContrato("");
-    setInputNoExpediente("");
-    setInputBajaTemporal("");
-    setInputComentarios("");
   };
 
   return (
     <SidebarLayoutRecursosHumanos>
-      <form>
+      <form onSubmit={handleSubmit(onSave)}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -120,43 +138,91 @@ export default function AgregarPersonalActivo() {
                 >
                   Nombre
                 </label>
-                <select
-                  id="CmbNombre"
-                  name="CmbNombre"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Seleccione una opción..."
-                  onChange={onTextFieldChangedNombre}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Seleccione una opción...</option>
-                  {candidatosMemo.map((candidato) => (
-                    <option key={candidato._id}> {candidato.nombre} </option>
-                  ))}
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbNombre"
+                    className={`${
+                      errors?.nombre
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Seleccione una opción..."
+                    {...register("nombre")}
+                  >
+                    <option hidden>Seleccione una opción...</option>
+                    {candidatosMemo.map((candidato) => (
+                      <option key={candidato._id}> {candidato.nombre} </option>
+                    ))}
+                  </select>
+
+                  {errors?.nombre && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombre && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombre.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDPuesto"
+                  htmlFor="CmbPuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Puesto
                 </label>
-                <select
-                  id="CmbPuesto"
-                  name="CmbPuesto"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedPuesto}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Selecciona una opción...</option>
-                  {candidatosMemo
-                    .filter((candidato) => candidato.nombre === inputNombre)
-                    .map((candidato) => (
-                      <option key={candidato.puesto}>{candidato.puesto}</option>
-                    ))}
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbPuesto"
+                    className={`${
+                      errors?.puesto
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Seleccione una opción..."
+                    {...register("puesto")}
+                  >
+                    <option hidden>Seleccione una opción...</option>
+                    {candidatosMemo
+                      .filter((candidato) => candidato.nombre === watchNombre)
+                      .map((candidato) => (
+                        <option key={candidato.puesto}>
+                          {candidato.puesto}
+                        </option>
+                      ))}
+                  </select>
+
+                  {errors?.puesto && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.puesto && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.puesto.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -166,15 +232,36 @@ export default function AgregarPersonalActivo() {
                 >
                   Fecha de contratación
                 </label>
-                <input
-                  type="date"
-                  name="TxtFechaDeContratacion"
-                  id="TxtFechaDeContratacion"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedFechaDeContratacion}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="date"
+                    id="TxtFechaDeContratacion"
+                    autoComplete="off"
+                    className={`${
+                      errors?.fechaDeContratacion
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("fechaDeContratacion")}
+                  />
+                  {errors?.fechaDeContratacion && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.fechaDeContratacion && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.fechaDeContratacion.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -184,15 +271,36 @@ export default function AgregarPersonalActivo() {
                 >
                   No. De Contrato
                 </label>
-                <input
-                  type="text"
-                  name="TxtNoDeContrato"
-                  id="TxtNoDeContrato"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNoContrato}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNoDeContrato"
+                    autoComplete="off"
+                    className={`${
+                      errors?.noContrato
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("noContrato")}
+                  />
+                  {errors?.noContrato && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.noContrato && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.noContrato.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -202,15 +310,36 @@ export default function AgregarPersonalActivo() {
                 >
                   No. Expediente
                 </label>
-                <input
-                  type="text"
-                  name="TxtNoExpediente"
-                  id="TxtNoExpediente"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNoExpediente}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNoExpediente"
+                    autoComplete="off"
+                    className={`${
+                      errors?.noExpediente
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("noExpediente")}
+                  />
+                  {errors?.noExpediente && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.noExpediente && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.noExpediente.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -220,17 +349,39 @@ export default function AgregarPersonalActivo() {
                 >
                   Baja Temporal
                 </label>
-                <select
-                  id="CmbBajaTemporal"
-                  name="CmbBajaTemporal"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  onBlur={() => setTouched(true)}
-                  onChange={onTextFieldChangedBajaTemporal}
-                  defaultValue="Selecciona un producto..."
-                  // disabled={true}
-                >
-                  <option>No</option>
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbBajaTemporal"
+                    className={`${
+                      errors?.bajaTemporal
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Seleccione una opción..."
+                    {...register("bajaTemporal")}
+                  >
+                    <option>No</option>
+                  </select>
+
+                  {errors?.bajaTemporal && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.bajaTemporal && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.bajaTemporal.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -240,23 +391,43 @@ export default function AgregarPersonalActivo() {
                 >
                   Comentarios
                 </label>
-                <input
-                  type="text"
-                  name="TxtComentarios"
-                  id="TxtComentarios"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedComentarios}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtComentarios"
+                    autoComplete="off"
+                    className={`${
+                      errors?.comentarios
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("comentarios")}
+                  />
+                  {errors?.comentarios && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.comentarios && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.comentarios.message}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="button"
+              type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={onSave}
             >
               Guardar
             </button>

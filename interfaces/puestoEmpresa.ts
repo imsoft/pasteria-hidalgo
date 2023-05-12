@@ -1,4 +1,5 @@
 export type PuestosEmpresa =
+  | "Seleccione una opción..."
   | "Administrador"
   | "Contaduria"
   | "Gerencia de compras"

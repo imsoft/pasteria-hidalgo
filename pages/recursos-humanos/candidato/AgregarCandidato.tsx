@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { useContext } from "react";
 
 import { CandidatosContext } from "../../../context/recursos-humanos/candidatos";
 
@@ -8,7 +8,21 @@ import { PuestosEmpresa } from "../../../interfaces";
 
 import { useRouter } from "next/router";
 
-import { Resolver } from "react-hook-form";
+import { Resolver, useForm } from "react-hook-form";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
+
+const puestosValidos: PuestosEmpresa[] = [
+  "Seleccione una opción...",
+  "Administrador",
+  "Contaduria",
+  "Gerencia de compras",
+  "Gerencia operativa",
+  "Gerencia de ventas",
+  "Recursos Humanos",
+];
+
+const emailRegex =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 type FormData = {
   nombre: string;
@@ -36,324 +50,215 @@ type FormData = {
   referencia3Observaciones?: string;
 };
 
-// const resolver: Resolver<FormData> = async (values) => {
-//   return {
-//     values,
-//     errors: !values.nombre
-//       ? {
-//           nombre: {
-//             type: "required",
-//             message: "El campo nombre es requerido.",
-//           },
-//         }
-//       : !values.oficio
-//       ? {
-//           oficio: {
-//             type: "required",
-//             message: "El campo oficio es requerido.",
-//           },
-//         }
-//       : !values.direccion
-//       ? {
-//           direccion: {
-//             type: "required",
-//             message: "El campo dirección es requerido.",
-//           },
-//         }
-//       : !values.telefono
-//       ? {
-//           telefono: {
-//             type: "required",
-//             message: "El campo télefono es requerido.",
-//           },
-//         }
-//       : values.sucursalOFranquicia === "Seleccione una opción..."
-//       ? {
-//           sucursalOFranquicia: {
-//             type: "required",
-//             message: "El campo sucursal o franquicia es requerido.",
-//           },
-//         }
-//       : !values.fecha
-//       ? {
-//           fecha: {
-//             type: "required",
-//             message: "El campo fecha es requerido.",
-//           },
-//         }
-//       : {},
-//   };
-// };
-
-const puestosValidos: PuestosEmpresa[] = [
-  "Administrador",
-  "Contaduria",
-  "Gerencia de compras",
-  "Gerencia operativa",
-  "Gerencia de ventas",
-  "Recursos Humanos",
-];
+const resolver: Resolver<FormData> = async (values) => {
+  return {
+    values,
+    errors: !values.nombre
+      ? {
+          nombre: {
+            type: "required",
+            message: "El campo nombre es requerido.",
+          },
+        }
+      : values.puesto === "Seleccione una opción..."
+      ? {
+          puesto: {
+            type: "required",
+            message: "El campo puesto es requerido.",
+          },
+        }
+      : !values.descripcionDelPuesto
+      ? {
+          descripcionDelPuesto: {
+            type: "required",
+            message: "El campo descripción del puesto es requerido.",
+          },
+        }
+      : !values.fechaDeNacimiento
+      ? {
+          fechaDeNacimiento: {
+            type: "required",
+            message: "El campo fecha de nacimiento es requerido.",
+          },
+        }
+      : !values.domicilio
+      ? {
+          domicilio: {
+            type: "required",
+            message: "El campo domicilio es requerido.",
+          },
+        }
+      : !values.curp
+      ? {
+          curp: {
+            type: "required",
+            message: "El campo CURP es requerido.",
+          },
+        }
+      : !values.noCartaDePolicia
+      ? {
+          noCartaDePolicia: {
+            type: "required",
+            message: "El campo No carta de policia es requerido.",
+          },
+        }
+      : !values.celular
+      ? {
+          celular: {
+            type: "required",
+            message: "El campo celular es requerido.",
+          },
+        }
+      : !values.contactoDeEmergencia
+      ? {
+          contactoDeEmergencia: {
+            type: "required",
+            message: "El campo contacto de emergencia es requerido.",
+          },
+        }
+      : !values.correoElectronico
+      ? {
+          correoElectronico: {
+            type: "required",
+            message: "El campo correo electrónico es requerido.",
+          },
+        }
+      : !emailRegex.test(values.correoElectronico)
+      ? {
+          correoElectronico: {
+            type: "pattern",
+            message: "Correo electrónico no valido.",
+          },
+        }
+      : !values.referencia1Nombre
+      ? {
+          referencia1Nombre: {
+            type: "required",
+            message: "El campo nombre es requerido.",
+          },
+        }
+      : !values.referencia1Empresa
+      ? {
+          referencia1Empresa: {
+            type: "required",
+            message: "El campo empresa es requerido.",
+          },
+        }
+      : !values.referencia1NumeroTelefonico
+      ? {
+          referencia1NumeroTelefonico: {
+            type: "required",
+            message: "El campo número telefónico es requerido.",
+          },
+        }
+      : !values.referencia1Observaciones
+      ? {
+          referencia1Observaciones: {
+            type: "required",
+            message: "El campo observaciones es requerido.",
+          },
+        }
+      : !values.referencia2Nombre
+      ? {
+          referencia2Nombre: {
+            type: "required",
+            message: "El campo nombre es requerido.",
+          },
+        }
+      : !values.referencia2Empresa
+      ? {
+          referencia2Empresa: {
+            type: "required",
+            message: "El campo empresa es requerido.",
+          },
+        }
+      : !values.referencia2NumeroTelefonico
+      ? {
+          referencia2NumeroTelefonico: {
+            type: "required",
+            message: "El campo número telefónico es requerido.",
+          },
+        }
+      : !values.referencia2Observaciones
+      ? {
+          referencia2Observaciones: {
+            type: "required",
+            message: "El campo observaciones es requerido.",
+          },
+        }
+      : {},
+  };
+};
 
 export default function AgregarCandidato() {
   const router = useRouter();
+
   const { agregarNuevoCandidato } = useContext(CandidatosContext);
 
-  const [inputNombre, setInputNombre] = useState("");
-  const [inputPuesto, setInputPuesto] = useState("");
-  const [inputDescripcionDelPuesto, setInputDescripcionDelPuesto] =
-    useState("");
-  const [inputFechaDeNacimiento, setInputFechaDeNacimiento] = useState("");
-  const [inputDomicilio, setInputDomicilio] = useState("");
-  const [inputCurp, setInputCurp] = useState("");
-  const [inputNoImss, setInputNoImss] = useState("");
-  const [inputNoCartaDePolicia, setInputNoCartaDePolicia] = useState("");
-  const [inputCelular, setInputCelular] = useState("");
-  const [inputContactoDeEmergencia, setInputContactoDeEmergencia] =
-    useState("");
-  const [inputCorreoElectronico, setInputCorreoElectronico] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({ resolver });
 
-  const [inputReferencia1Nombre, setInputReferencia1Nombre] = useState("");
-  const [inputReferencia1Empresa, setInputReferencia1Empresa] = useState("");
-  const [
-    inputReferencia1NumeroTelefonico,
-    setInputReferencia1NumeroTelefonico,
-  ] = useState("");
-  const [inputReferencia1Observaciones, setInputReferencia1Observaciones] =
-    useState("");
-  const [inputReferencia2Nombre, setInputReferencia2Nombre] = useState("");
-  const [inputReferencia2Empresa, setInputReferencia2Empresa] = useState("");
-  const [
-    inputReferencia2NumeroTelefonico,
-    setInputReferencia2NumeroTelefonico,
-  ] = useState("");
-  const [inputReferencia2Observaciones, setInputReferencia2Observaciones] =
-    useState("");
-  const [inputReferencia3Nombre, setInputReferencia3Nombre] = useState("");
-  const [inputReferencia3Empresa, setInputReferencia3Empresa] = useState("");
-  const [
-    inputReferencia3NumeroTelefonico,
-    setInputReferencia3NumeroTelefonico,
-  ] = useState("");
-  const [inputReferencia3Observaciones, setInputReferencia3Observaciones] =
-    useState("");
-
-  const [touched, setTouched] = useState(false);
-
-  const onTextFieldChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputNombre(event.target.value);
-  };
-
-  const onTextFieldChangedPuesto = (event: ChangeEvent<HTMLSelectElement>) => {
-    setInputPuesto(event.target.value as PuestosEmpresa);
-  };
-
-  const onTextFieldChangedDescripcionDelPuesto = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputDescripcionDelPuesto(event.target.value);
-  };
-
-  const onTextFieldChangedFechaDeNacimiento = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputFechaDeNacimiento(event.target.value);
-  };
-
-  const onTextFieldChangedDomicilio = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputDomicilio(event.target.value);
-  };
-
-  const onTextFieldChangedCurp = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputCurp(event.target.value);
-  };
-
-  const onTextFieldChangedNoImss = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputNoImss(event.target.value);
-  };
-
-  const onTextFieldChangedNoCartaDePolicia = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputNoCartaDePolicia(event.target.value);
-  };
-
-  const onTextFieldChangedCelular = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputCelular(event.target.value);
-  };
-
-  const onTextFieldChangedContactoDeEmergencia = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputContactoDeEmergencia(event.target.value);
-  };
-
-  const onTextFieldChangedCorreoElectronico = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCorreoElectronico(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia1Nombre = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia1Nombre(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia1Empresa = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia1Empresa(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia1NumeroTelefonico = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia1NumeroTelefonico(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia1Observaciones = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia1Observaciones(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia2Nombre = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia2Nombre(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia2Empresa = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia2Empresa(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia2NumeroTelefonico = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia2NumeroTelefonico(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia2Observaciones = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia2Observaciones(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia3Nombre = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia3Nombre(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia3Empresa = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia3Empresa(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia3NumeroTelefonico = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia3NumeroTelefonico(event.target.value);
-  };
-
-  const onTextFieldChangedReferencia3Observaciones = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputReferencia3Observaciones(event.target.value);
-  };
-
-  const onSave = () => {
-    if (
-      inputNombre.length === 0 &&
-      inputPuesto.length === 0 &&
-      inputDescripcionDelPuesto.length === 0 &&
-      inputFechaDeNacimiento.length === 0 &&
-      inputDomicilio.length === 0 &&
-      inputCurp.length === 0 &&
-      inputNoImss.length === 0 &&
-      inputNoCartaDePolicia.length === 0 &&
-      inputCelular.length === 0 &&
-      inputContactoDeEmergencia.length === 0 &&
-      inputCorreoElectronico.length === 0 &&
-      inputReferencia1Nombre.length === 0 &&
-      inputReferencia1Empresa.length === 0 &&
-      inputReferencia1NumeroTelefonico.length === 0 &&
-      inputReferencia1Observaciones.length === 0 &&
-      inputReferencia2Nombre.length === 0 &&
-      inputReferencia2Empresa.length === 0 &&
-      inputReferencia2NumeroTelefonico.length === 0 &&
-      inputReferencia2Observaciones.length === 0 &&
-      inputReferencia3Nombre.length === 0 &&
-      inputReferencia3Empresa.length === 0 &&
-      inputReferencia3NumeroTelefonico.length === 0 &&
-      inputReferencia3Observaciones.length === 0
-    )
-      return;
-
+  const onSave = ({
+    nombre,
+    puesto,
+    descripcionDelPuesto,
+    fechaDeNacimiento,
+    domicilio,
+    curp,
+    noImss = "",
+    noCartaDePolicia,
+    celular,
+    contactoDeEmergencia,
+    correoElectronico,
+    referencia1Nombre,
+    referencia1Empresa,
+    referencia1NumeroTelefonico,
+    referencia1Observaciones,
+    referencia2Nombre,
+    referencia2Empresa,
+    referencia2NumeroTelefonico,
+    referencia2Observaciones,
+    referencia3Nombre,
+    referencia3Empresa,
+    referencia3NumeroTelefonico,
+    referencia3Observaciones,
+  }: FormData) => {
     agregarNuevoCandidato(
-      inputNombre,
-      inputPuesto,
-      inputDescripcionDelPuesto,
-      inputFechaDeNacimiento,
-      inputDomicilio,
-      inputCurp,
-      inputNoImss,
-      inputNoCartaDePolicia,
-      inputCelular,
-      inputContactoDeEmergencia,
-      inputCorreoElectronico,
-      inputReferencia1Nombre,
-      inputReferencia1Empresa,
-      inputReferencia1NumeroTelefonico,
-      inputReferencia1Observaciones,
-      inputReferencia2Nombre,
-      inputReferencia2Empresa,
-      inputReferencia2NumeroTelefonico,
-      inputReferencia2Observaciones,
-      inputReferencia3Nombre,
-      inputReferencia3Empresa,
-      inputReferencia3NumeroTelefonico,
-      inputReferencia3Observaciones,
+      nombre,
+      puesto,
+      descripcionDelPuesto,
+      fechaDeNacimiento,
+      domicilio,
+      curp,
+      noImss,
+      noCartaDePolicia,
+      celular,
+      contactoDeEmergencia,
+      correoElectronico,
+      referencia1Nombre,
+      referencia1Empresa,
+      referencia1NumeroTelefonico,
+      referencia1Observaciones,
+      referencia2Nombre,
+      referencia2Empresa,
+      referencia2NumeroTelefonico,
+      referencia2Observaciones,
+      referencia3Nombre,
+      referencia3Empresa,
+      referencia3NumeroTelefonico,
+      referencia3Observaciones,
       true
     );
 
     router.push("/recursos-humanos/candidato/VerCandidatos");
-
-    setTouched(false);
-    setInputNombre("");
-    setInputPuesto("");
-    setInputDescripcionDelPuesto("");
-    setInputFechaDeNacimiento("");
-    setInputDomicilio("");
-    setInputCurp("");
-    setInputNoImss("");
-    setInputNoCartaDePolicia("");
-    setInputCelular("");
-    setInputContactoDeEmergencia("");
-    setInputCorreoElectronico("");
-
-    setInputReferencia1Nombre("");
-    setInputReferencia1Empresa("");
-    setInputReferencia1NumeroTelefonico("");
-    setInputReferencia1Observaciones("");
-    setInputReferencia2Nombre("");
-    setInputReferencia2Empresa("");
-    setInputReferencia2NumeroTelefonico("");
-    setInputReferencia2Observaciones("");
-    setInputReferencia3Nombre("");
-    setInputReferencia3Empresa("");
-    setInputReferencia3NumeroTelefonico("");
-    setInputReferencia3Observaciones("");
   };
 
   return (
     <SidebarLayoutRecursosHumanos>
-      <form>
+      <form onSubmit={handleSubmit(onSave)}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -370,39 +275,83 @@ export default function AgregarCandidato() {
                 >
                   Nombre
                 </label>
-                <input
-                  type="text"
-                  name="TxtNombre"
-                  id="TxtNombre"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNombre}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNombre"
+                    autoComplete="off"
+                    className={`${
+                      errors?.nombre
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("nombre")}
+                  />
+                  {errors?.nombre && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombre && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombre.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDPuesto"
+                  htmlFor="CmbPuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Puesto
                 </label>
-                <select
-                  id="CmbPuesto"
-                  name="CmbPuesto"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Seleccione una opción..."
-                  onChange={onTextFieldChangedPuesto}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Seleccione una opción...</option>
-                  {puestosValidos.map((puesto) => (
-                    <option key={puesto} value={puesto}>
-                      {puesto}
-                    </option>
-                  ))}
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbPuesto"
+                    className={`${
+                      errors?.puesto
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Seleccione una opción..."
+                    {...register("puesto")}
+                  >
+                    <option hidden>Seleccione una opción...</option>
+                    {puestosValidos.map((puesto) => (
+                      <option key={puesto} value={puesto}>
+                        {puesto}
+                      </option>
+                    ))}
+                  </select>
+
+                  {errors?.puesto && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.puesto && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.puesto.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -412,15 +361,36 @@ export default function AgregarCandidato() {
                 >
                   Descripción y funciones de puesto
                 </label>
-                <input
-                  type="text"
-                  name="TxtDescripcionPuesto"
-                  id="TxtDescripcionPuesto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedDescripcionDelPuesto}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtDescripcionProducto"
+                    autoComplete="off"
+                    className={`${
+                      errors?.descripcionDelPuesto
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("descripcionDelPuesto")}
+                  />
+                  {errors?.descripcionDelPuesto && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.descripcionDelPuesto && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.descripcionDelPuesto.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -430,15 +400,36 @@ export default function AgregarCandidato() {
                 >
                   Fecha de nacimiento
                 </label>
-                <input
-                  type="date"
-                  name="TxtFechaNacimiento"
-                  id="TxtFechaNacimiento"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedFechaDeNacimiento}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="date"
+                    id="TxtFechaDeNacimiento"
+                    autoComplete="off"
+                    className={`${
+                      errors?.fechaDeNacimiento
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("fechaDeNacimiento")}
+                  />
+                  {errors?.fechaDeNacimiento && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.fechaDeNacimiento && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.fechaDeNacimiento.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -448,15 +439,36 @@ export default function AgregarCandidato() {
                 >
                   Domicilio
                 </label>
-                <input
-                  type="text"
-                  name="TxtDomicilio"
-                  id="TxtDomicilio"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedDomicilio}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtDomicilio"
+                    autoComplete="off"
+                    className={`${
+                      errors?.domicilio
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("domicilio")}
+                  />
+                  {errors?.domicilio && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.domicilio && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.domicilio.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -464,17 +476,38 @@ export default function AgregarCandidato() {
                   htmlFor="TxtCurp"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  C.U.R.P.
+                  CURP
                 </label>
-                <input
-                  type="text"
-                  name="TxtCurp"
-                  id="TxtCurp"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCurp}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtCurp"
+                    autoComplete="off"
+                    className={`${
+                      errors?.curp
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("curp")}
+                  />
+                  {errors?.curp && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.curp && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.curp.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -482,35 +515,77 @@ export default function AgregarCandidato() {
                   htmlFor="TxtNoImss"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  No. IMSS
+                  No. Imss
                 </label>
-                <input
-                  type="text"
-                  name="TxtNoImss"
-                  id="TxtNoImss"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNoImss}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNoImss"
+                    autoComplete="off"
+                    className={`${
+                      errors?.noImss
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("noImss")}
+                  />
+                  {errors?.noImss && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.noImss && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.noImss.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtNoCartaPolicia"
+                  htmlFor="TxtNoCartaDePolicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   No. Carta de policía
                 </label>
-                <input
-                  type="text"
-                  name="TxtNoCartaPolicia"
-                  id="TxtNoCartaPolicia"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNoCartaDePolicia}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNoCartaDePolicia"
+                    autoComplete="off"
+                    className={`${
+                      errors?.noCartaDePolicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("noCartaDePolicia")}
+                  />
+                  {errors?.noCartaDePolicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.noCartaDePolicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.noCartaDePolicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -520,15 +595,36 @@ export default function AgregarCandidato() {
                 >
                   Celular
                 </label>
-                <input
-                  type="tel"
-                  name="TxtCelular"
-                  id="TxtCelular"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCelular}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="tel"
+                    id="TxtCelular"
+                    autoComplete="off"
+                    className={`${
+                      errors?.celular
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("celular")}
+                  />
+                  {errors?.celular && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.celular && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.celular.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -538,15 +634,36 @@ export default function AgregarCandidato() {
                 >
                   Contacto de emergencia
                 </label>
-                <input
-                  type="tel"
-                  name="TxtContactoDeEmergencia"
-                  id="TxtContactoDeEmergencia"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedContactoDeEmergencia}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtContactoDeEmergencia"
+                    autoComplete="off"
+                    className={`${
+                      errors?.contactoDeEmergencia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("contactoDeEmergencia")}
+                  />
+                  {errors?.contactoDeEmergencia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.contactoDeEmergencia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.contactoDeEmergencia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -556,15 +673,37 @@ export default function AgregarCandidato() {
                 >
                   Correo electrónico
                 </label>
-                <input
-                  type="email"
-                  name="TxtCorreoElectronico"
-                  id="TxtCorreoElectronico"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCorreoElectronico}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="email"
+                    id="TxtCorreoElectronico"
+                    autoComplete="off"
+                    className={`${
+                      errors?.correoElectronico
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("correoElectronico")}
+                  />
+                  {errors?.correoElectronico &&
+                    errors?.correoElectronico.type === "pattern" && (
+                      <>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                          <ExclamationCircleIcon
+                            className="h-5 w-5 text-red-500"
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </>
+                    )}
+                </div>
+                {errors?.correoElectronico && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.correoElectronico.message}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
 
@@ -592,15 +731,39 @@ export default function AgregarCandidato() {
                     >
                       Nombre
                     </label>
-                    <input
-                      type="text"
-                      name="TxtNombre"
-                      id="TxtNombre"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia1Nombre}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtNombre"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia1Nombre
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia1Nombre")}
+                      />
+                      {errors?.referencia1Nombre && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia1Nombre && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia1Nombre.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -610,15 +773,39 @@ export default function AgregarCandidato() {
                     >
                       Empresa
                     </label>
-                    <input
-                      type="text"
-                      name="TxtEmpresa"
-                      id="TxtEmpresa"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia1Empresa}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtEmpresa"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia1Empresa
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia1Empresa")}
+                      />
+                      {errors?.referencia1Empresa && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia1Empresa && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia1Empresa.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -626,17 +813,41 @@ export default function AgregarCandidato() {
                       htmlFor="TxtNumeroTelefonico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Número Teléfonico
+                      Número Telefónico
                     </label>
-                    <input
-                      type="tel"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia1NumeroTelefonico}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="tel"
+                        id="TxtNumeroTelefonico"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia1NumeroTelefonico
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia1NumeroTelefonico")}
+                      />
+                      {errors?.referencia1NumeroTelefonico && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia1NumeroTelefonico && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia1NumeroTelefonico.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -646,15 +857,39 @@ export default function AgregarCandidato() {
                     >
                       Observaciones
                     </label>
-                    <input
-                      type="tel"
-                      name="TxtObservaciones"
-                      id="TxtObservaciones"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia1Observaciones}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtObservaciones"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia1Observaciones
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia1Observaciones")}
+                      />
+                      {errors?.referencia1Observaciones && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia1Observaciones && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia1Observaciones.message}
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -671,15 +906,39 @@ export default function AgregarCandidato() {
                     >
                       Nombre
                     </label>
-                    <input
-                      type="text"
-                      name="TxtNombre"
-                      id="TxtNombre"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia2Nombre}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtNombre"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia2Nombre
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia2Nombre")}
+                      />
+                      {errors?.referencia2Nombre && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia2Nombre && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia2Nombre.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -689,15 +948,39 @@ export default function AgregarCandidato() {
                     >
                       Empresa
                     </label>
-                    <input
-                      type="text"
-                      name="TxtEmpresa"
-                      id="TxtEmpresa"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia2Empresa}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtEmpresa"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia2Empresa
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia2Empresa")}
+                      />
+                      {errors?.referencia2Empresa && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia2Empresa && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia2Empresa.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -705,17 +988,41 @@ export default function AgregarCandidato() {
                       htmlFor="TxtNumeroTelefonico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Número Teléfonico
+                      Número Telefónico
                     </label>
-                    <input
-                      type="tel"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia2NumeroTelefonico}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="tel"
+                        id="TxtNumeroTelefonico"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia2NumeroTelefonico
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia2NumeroTelefonico")}
+                      />
+                      {errors?.referencia2NumeroTelefonico && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia2NumeroTelefonico && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia2NumeroTelefonico.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -725,15 +1032,39 @@ export default function AgregarCandidato() {
                     >
                       Observaciones
                     </label>
-                    <input
-                      type="tel"
-                      name="TxtObservaciones"
-                      id="TxtObservaciones"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia2Observaciones}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtObservaciones"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia2Observaciones
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia2Observaciones")}
+                      />
+                      {errors?.referencia2Observaciones && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia2Observaciones && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia2Observaciones.message}
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -750,15 +1081,39 @@ export default function AgregarCandidato() {
                     >
                       Nombre
                     </label>
-                    <input
-                      type="text"
-                      name="TxtNombre"
-                      id="TxtNombre"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia3Nombre}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtNombre"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia3Nombre
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia3Nombre")}
+                      />
+                      {errors?.referencia3Nombre && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia3Nombre && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia3Nombre.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -768,15 +1123,39 @@ export default function AgregarCandidato() {
                     >
                       Empresa
                     </label>
-                    <input
-                      type="text"
-                      name="TxtEmpresa"
-                      id="TxtEmpresa"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia3Empresa}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtEmpresa"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia3Empresa
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia3Empresa")}
+                      />
+                      {errors?.referencia3Empresa && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia3Empresa && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia3Empresa.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -784,17 +1163,41 @@ export default function AgregarCandidato() {
                       htmlFor="TxtNumeroTelefonico"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      Número Teléfonico
+                      Número Telefónico
                     </label>
-                    <input
-                      type="tel"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia3NumeroTelefonico}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="tel"
+                        id="TxtNumeroTelefonico"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia3NumeroTelefonico
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia3NumeroTelefonico")}
+                      />
+                      {errors?.referencia3NumeroTelefonico && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia3NumeroTelefonico && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia3NumeroTelefonico.message}
+                        </p>
+                      </>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -804,15 +1207,39 @@ export default function AgregarCandidato() {
                     >
                       Observaciones
                     </label>
-                    <input
-                      type="tel"
-                      name="TxtObservaciones"
-                      id="TxtObservaciones"
-                      autoComplete="off"
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                      onChange={onTextFieldChangedReferencia3Observaciones}
-                      onBlur={() => setTouched(true)}
-                    />
+                    <div className="relative rounded-md shadow-sm">
+                      <input
+                        type="text"
+                        id="TxtObservaciones"
+                        autoComplete="off"
+                        className={`${
+                          errors?.referencia3Observaciones
+                            ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                            : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                        }`}
+                        {...register("referencia3Observaciones")}
+                      />
+                      {errors?.referencia3Observaciones && (
+                        <>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <ExclamationCircleIcon
+                              className="h-5 w-5 text-red-500"
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    {errors?.referencia3Observaciones && (
+                      <>
+                        <p
+                          className="mt-2 text-sm text-red-600"
+                          id="email-error"
+                        >
+                          {errors.referencia3Observaciones.message}
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -820,9 +1247,8 @@ export default function AgregarCandidato() {
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="button"
+              type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={onSave}
             >
               Guardar
             </button>

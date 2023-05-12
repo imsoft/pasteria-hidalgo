@@ -7,14 +7,87 @@ import { PersonalActivoContext } from "../../../context/recursos-humanos/persona
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
+import { Resolver, useForm } from "react-hook-form";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
+import { cambiarFormatoFecha } from "../../../utils";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
 
+type FormData = {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  nombre: string;
+  fecha: string;
+  horaDeIngreso: string;
+  horaDeSalida: string;
+};
+
+const resolver: Resolver<FormData> = async (values) => {
+  return {
+    values,
+    errors:
+      values.sucursalOFranquicia === "Seleccione una opción..."
+        ? {
+            sucursalOFranquicia: {
+              type: "required",
+              message: "El campo sucursal o franquicia es requerido.",
+            },
+          }
+        : values.nombreSucursalOFranquicia ===
+            "Seleccione primero seleccione si es franquicia o sucursal..." ||
+          values.nombreSucursalOFranquicia === "Seleccione Sucursal..." ||
+          values.nombreSucursalOFranquicia === "Seleccione Franquicia..."
+        ? {
+            nombreSucursalOFranquicia: {
+              type: "required",
+              message: "El campo nombre sucursal o franquicia es requerido.",
+            },
+          }
+        : values.nombre === "Seleccione una opción..."
+        ? {
+            nombre: {
+              type: "required",
+              message: "El campo nombre es requerido.",
+            },
+          }
+        : !values.fecha
+        ? {
+            fecha: {
+              type: "required",
+              message: "El campo fecha es requerido.",
+            },
+          }
+        : !values.horaDeIngreso
+        ? {
+            horaDeIngreso: {
+              type: "required",
+              message: "El campo hora de ingreso es requerido.",
+            },
+          }
+        : !values.horaDeSalida
+        ? {
+            horaDeSalida: {
+              type: "required",
+              message: "El campo hora de salida es requerido.",
+            },
+          }
+        : {},
+  };
+};
+
 export default function CheckInDePersonal() {
   const router = useRouter();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<FormData>({ resolver });
+
   const { agregarCheckInPersonal } = useContext(CheckInPersonalContext);
+
   const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
@@ -24,84 +97,32 @@ export default function CheckInDePersonal() {
   const { personasActivas } = useContext(PersonalActivoContext);
   const personasActivasMemo = useMemo(() => personasActivas, [personasActivas]);
 
-  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
-    useState("");
-  const [inputNombre, setInputNombre] = useState("");
-  const [inputFecha, setInputFecha] = useState(hoy.toLocaleDateString());
-  const [inputHoraDeIngreso, setInputHoraDeIngreso] = useState(
-    hoy.toLocaleTimeString()
-  );
-  const [inputHoraDeSalida, setInputHoraDeSalida] = useState("");
+  const watchSucursalOFranquicia = watch("sucursalOFranquicia");
 
-  const [touched, setTouched] = useState(false);
-
-  const onTextFieldChangedNombreSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputNombreSucursalOFranquicia(event.target.value);
-  };
-
-  const onTextFieldChangedNombre = (event: ChangeEvent<HTMLSelectElement>) => {
-    setInputNombre(event.target.value);
-  };
-
-  const onTextFieldChangedFecha = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputFecha(event.target.value);
-  };
-
-  const onTextFieldChangedHoraDeIngreso = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputHoraDeIngreso(event.target.value);
-  };
-
-  const onTextFieldChangedHoraDeSalida = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputHoraDeSalida(event.target.value);
-  };
-
-  const onTextFieldChangedSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursalOFranquicia(event.target.value);
-  };
-
-  const onSave = () => {
-    if (
-      inputNombreSucursalOFranquicia.length === 0 &&
-      inputNombre.length === 0 &&
-      inputFecha.length === 0 &&
-      inputHoraDeIngreso.length === 0 &&
-      inputHoraDeSalida.length === 0 &&
-      inputSucursalOFranquicia.length === 0
-    )
-      return;
-
+  const onSave = ({
+    sucursalOFranquicia,
+    nombreSucursalOFranquicia,
+    nombre,
+    fecha,
+    horaDeIngreso,
+    horaDeSalida,
+  }: FormData) => {
     agregarCheckInPersonal(
-      inputSucursalOFranquicia,
-      inputNombreSucursalOFranquicia,
-      inputNombre,
-      inputFecha,
-      inputHoraDeIngreso,
-      inputHoraDeSalida,
+      sucursalOFranquicia,
+      nombreSucursalOFranquicia,
+      nombre,
+      fecha,
+      horaDeIngreso,
+      horaDeSalida,
       true
     );
 
     router.push("/recursos-humanos/checkInPersonal/VerCheckInPersonal");
-
-    setInputSucursalOFranquicia("");
-    setInputNombreSucursalOFranquicia("");
-    setInputNombre("");
-    setInputFecha("");
-    setInputHoraDeIngreso("");
-    setInputHoraDeSalida("");
   };
 
   return (
     <SidebarLayoutRecursosHumanos>
-      <form>
+      <form onSubmit={handleSubmit(onSave)}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -114,70 +135,115 @@ export default function CheckInDePersonal() {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="CmbSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   ¿Sucursal o Franquicia?
                 </label>
 
-                <div className="col-span-6 sm:col-span-3">
+                <div className="relative rounded-md shadow-sm">
                   <select
-                    id="CmbNombre"
-                    name="CmbNombre"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    id="CmbSucursalOFranquicia"
+                    className={`${
+                      errors?.sucursalOFranquicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
                     defaultValue="Selecciona un producto..."
-                    onChange={onTextFieldChangedSucursalOFranquicia}
-                    onBlur={() => setTouched(true)}
+                    {...register("sucursalOFranquicia")}
                   >
-                    <option hidden>Seleccione una opción...</option>
-                    <option>Sucursal</option>
-                    <option>Franquicia</option>
+                    <option value={"Seleccione una opción..."} hidden>
+                      Seleccione una opción...
+                    </option>
+                    <option value={"Sucursal"}>Sucursal</option>
+                    <option value={"Franquicia"}>Franquicia</option>
                   </select>
+
+                  {errors?.sucursalOFranquicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
+                {errors?.sucursalOFranquicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.sucursalOFranquicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="CmbNombreSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {inputSucursalOFranquicia === "Sucursal"
+                  {watchSucursalOFranquicia === "Sucursal"
                     ? "Sucursal"
-                    : inputSucursalOFranquicia === "Franquicia"
+                    : watchSucursalOFranquicia === "Franquicia"
                     ? "Franquicia"
                     : "Primero seleccione si es franquicia o sucursal"}
                 </label>
-                <select
-                  id="CmbFranquicia"
-                  name="CmbFranquicia"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>
-                    Seleccione la{" "}
-                    {inputSucursalOFranquicia === "Sucursal"
-                      ? "Sucursal"
-                      : inputSucursalOFranquicia === "Franquicia"
-                      ? "Franquicia"
-                      : "Primero seleccione si es franquicia o sucursal"}
-                    ...
-                  </option>
-                  {sucursalesYFranquiciasMemo
-                    .filter(
-                      (sucursalesYFranquicias) =>
-                        sucursalesYFranquicias.sucursalOFranquicia ===
-                        inputSucursalOFranquicia
-                    )
-                    .map((sucursalesYFranquicias) => (
-                      <option
-                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
-                      >
-                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
-                      </option>
-                    ))}
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbNombreSucursalOFranquicia"
+                    className={`${
+                      errors?.nombreSucursalOFranquicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Selecciona un producto..."
+                    {...register("nombreSucursalOFranquicia")}
+                  >
+                    <option hidden>
+                      Seleccione{" "}
+                      {watchSucursalOFranquicia === "Sucursal"
+                        ? "Sucursal"
+                        : watchSucursalOFranquicia === "Franquicia"
+                        ? "Franquicia"
+                        : "primero seleccione si es franquicia o sucursal"}
+                      ...
+                    </option>
+                    {sucursalesYFranquiciasMemo
+                      .filter(
+                        (sucursalesYFranquicias) =>
+                          sucursalesYFranquicias.sucursalOFranquicia ===
+                          watchSucursalOFranquicia
+                      )
+                      .map((sucursalesYFranquicias) => (
+                        <option
+                          key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                        >
+                          {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                        </option>
+                      ))}
+                  </select>
+
+                  {errors?.nombreSucursalOFranquicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombreSucursalOFranquicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombreSucursalOFranquicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -187,21 +253,44 @@ export default function CheckInDePersonal() {
                 >
                   Nombre
                 </label>
-                <select
-                  id="CmbNombre"
-                  name="CmbNombre"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombre}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>Seleccione el nombre...</option>
-                  {personasActivasMemo.map((personaActiva) => (
-                    <option key={personaActiva._id}>
-                      {personaActiva.nombre}
-                    </option>
-                  ))}
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbNombre"
+                    className={`${
+                      errors?.nombre
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Seleccione una opción..."
+                    {...register("nombre")}
+                  >
+                    <option hidden>Seleccione una opción...</option>
+                    {personasActivasMemo.map((personaActiva) => (
+                      <option key={personaActiva._id}>
+                        {personaActiva.nombre}
+                      </option>
+                    ))}
+                  </select>
+
+                  {errors?.nombre && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombre && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombre.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -211,16 +300,37 @@ export default function CheckInDePersonal() {
                 >
                   Fecha
                 </label>
-                <input
-                  type="text"
-                  name="TxtFecha"
-                  id="TxtFecha"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputFecha}
-                  onBlur={() => setTouched(true)}
-                  readOnly
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtFecha"
+                    autoComplete="off"
+                    value={cambiarFormatoFecha(hoy.toLocaleDateString())}
+                    className={`${
+                      errors?.fecha
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("fecha")}
+                  />
+                  {errors?.fecha && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.fecha && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.fecha.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -230,15 +340,37 @@ export default function CheckInDePersonal() {
                 >
                   Hora De Ingreso
                 </label>
-                <input
-                  type="text"
-                  name="TxtHoraDeIngreso"
-                  id="TxtHoraDeIngreso"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputHoraDeIngreso}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtHoraDeIngreso"
+                    autoComplete="off"
+                    value={hoy.toLocaleTimeString()}
+                    className={`${
+                      errors?.horaDeIngreso
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("horaDeIngreso")}
+                  />
+                  {errors?.horaDeIngreso && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.horaDeIngreso && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.horaDeIngreso.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -248,23 +380,45 @@ export default function CheckInDePersonal() {
                 >
                   Hora De Salida
                 </label>
-                <input
-                  type="time"
-                  name="TxtHoraDeSalida"
-                  id="TxtHoraDeSalida"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedHoraDeSalida}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtHoraDeSalida"
+                    autoComplete="off"
+                    value={'00:00:00'}
+                    className={`${
+                      errors?.horaDeSalida
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("horaDeSalida")}
+                    readOnly
+                  />
+                  {errors?.horaDeSalida && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.horaDeSalida && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.horaDeSalida.message}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="button"
+              type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={onSave}
             >
               Guardar
             </button>
