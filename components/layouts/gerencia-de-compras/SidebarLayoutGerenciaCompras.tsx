@@ -197,7 +197,7 @@ export const SidebarLayoutGerenciaCompras: React.FC<Props> = ({ children }) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4">
-            <Link href="/">
+            <Link href="/gerencia-de-compras">
               <a>
                 <Image
                   className="h-8 w-auto"
