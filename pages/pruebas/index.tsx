@@ -71,6 +71,7 @@ const Pruebas = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch
   } = useForm<FormData>({ resolver });
 
   const { agregarNuevoPersonalDeMantenimiento } = useContext(

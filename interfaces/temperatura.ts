@@ -1,1 +1,1 @@
-export type Temperatura = "Ambiente" | "Refrigerado" | "Congelado";
+export type Temperatura = "Seleccione una opción..." | "Ambiente" | "Refrigerado" | "Congelado";

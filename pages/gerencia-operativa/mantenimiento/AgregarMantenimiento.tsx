@@ -5,9 +5,89 @@ import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gere
 
 import { useRouter } from "next/router";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
+import { Resolver, useForm } from "react-hook-form";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
+
+type FormData = {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  nombreMaquina: string;
+  proveedor: string;
+  fechaDeGarantia: string;
+  fechaDeMantenimiento: string;
+  modificacionDeMantenimiento: string;
+};
+
+const resolver: Resolver<FormData> = async (values) => {
+  return {
+    values,
+    errors:
+      values.sucursalOFranquicia === "Seleccione una opción..."
+        ? {
+            sucursalOFranquicia: {
+              type: "required",
+              message: "El campo sucursal o franquicia es requerido.",
+            },
+          }
+        : values.nombreSucursalOFranquicia ===
+            "Seleccione primero seleccione si es franquicia o sucursal..." ||
+          values.nombreSucursalOFranquicia === "Seleccione Sucursal..." ||
+          values.nombreSucursalOFranquicia === "Seleccione Franquicia..."
+        ? {
+            nombreSucursalOFranquicia: {
+              type: "required",
+              message: "El campo nombre sucursal o franquicia es requerido.",
+            },
+          }
+        : !values.nombreMaquina
+        ? {
+            nombreMaquina: {
+              type: "required",
+              message: "El campo nombre maquina es requerido.",
+            },
+          }
+        : !values.proveedor
+        ? {
+            proveedor: {
+              type: "required",
+              message: "El campo proveedor es requerido.",
+            },
+          }
+        : !values.fechaDeGarantia
+        ? {
+            fechaDeGarantia: {
+              type: "required",
+              message: "El campo fecha de garantia es requerido.",
+            },
+          }
+        : !values.fechaDeMantenimiento
+        ? {
+            fechaDeMantenimiento: {
+              type: "required",
+              message: "El campo fecha de mantenimiento es requerido.",
+            },
+          }
+        : !values.modificacionDeMantenimiento
+        ? {
+            modificacionDeMantenimiento: {
+              type: "required",
+              message: "El campo modificacion de mantenimiento es requerido.",
+            },
+          }
+        : {},
+  };
+};
 
 export default function AgregarMantenimiento() {
   const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<FormData>({ resolver });
+
   const { agregarNuevoMantenimiento } = useContext(MantenimientosContext);
   const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
@@ -15,101 +95,34 @@ export default function AgregarMantenimiento() {
     [sucursalesYFranquicias]
   );
 
-  const [inputNombreMaquina, setInputNombreMaquina] = useState("");
-  const [inputProveedor, setInputProveedor] = useState("");
-  const [inputFechaDeGarantia, setInputFechaDeGarantia] = useState("");
-  const [inputFechaDeMantenimiento, setInputFechaDeMantenimiento] =
-    useState("");
-  const [
-    inputModificacionDeMantenimiento,
-    setInputModificacionDeMantenimiento,
-  ] = useState("");
-  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
-    useState("");
+  const watchSucursalOFranquicia = watch("sucursalOFranquicia");
 
-  const [touched, setTouched] = useState(false);
-
-  const onTextFieldChangedNombreMaquina = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputNombreMaquina(event.target.value);
-  };
-
-  const onTextFieldChangedProveedor = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputProveedor(event.target.value);
-  };
-
-  const onTextFieldChangedFechaDeGarantia = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputFechaDeGarantia(event.target.value);
-  };
-
-  const onTextFieldChangedFechaDeMantenimiento = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputFechaDeMantenimiento(event.target.value);
-  };
-
-  const onTextFieldChangedModificacionDeMantenimiento = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputModificacionDeMantenimiento(event.target.value);
-  };
-
-  const onTextFieldChangedSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursalOFranquicia(event.target.value);
-  };
-
-  const onTextFieldChangedNombreSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputNombreSucursalOFranquicia(event.target.value);
-  };
-
-  const onSave = () => {
-    if (
-      inputSucursalOFranquicia.length === 0 &&
-      inputNombreSucursalOFranquicia.length === 0 &&
-      inputNombreMaquina.length === 0 &&
-      inputProveedor.length === 0 &&
-      inputFechaDeGarantia.length === 0 &&
-      inputFechaDeMantenimiento.length === 0 &&
-      inputModificacionDeMantenimiento.length === 0
-    )
-      return;
-
+  const onSave = ({
+    sucursalOFranquicia,
+    nombreSucursalOFranquicia,
+    nombreMaquina,
+    proveedor,
+    fechaDeGarantia,
+    fechaDeMantenimiento,
+    modificacionDeMantenimiento,
+  }: FormData) => {
     agregarNuevoMantenimiento(
-      inputSucursalOFranquicia,
-      inputNombreSucursalOFranquicia,
-      inputNombreMaquina,
-      inputProveedor,
-      inputFechaDeGarantia,
-      inputFechaDeMantenimiento,
-      inputModificacionDeMantenimiento,
+      sucursalOFranquicia,
+      nombreSucursalOFranquicia,
+      nombreMaquina,
+      proveedor,
+      fechaDeGarantia,
+      fechaDeMantenimiento,
+      modificacionDeMantenimiento,
       true
     );
 
     router.push("/gerencia-operativa/mantenimiento/VerMantenimiento");
-
-    setTouched(false);
-    setInputSucursalOFranquicia("");
-    setInputNombreSucursalOFranquicia("");
-    setInputNombreMaquina("");
-    setInputProveedor("");
-    setInputFechaDeGarantia("");
-    setInputFechaDeMantenimiento("");
-    setInputModificacionDeMantenimiento("");
   };
 
   return (
     <SidebarLayoutGerenciaOperativa>
-      <form>
+      <form onSubmit={handleSubmit(onSave)}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -122,70 +135,115 @@ export default function AgregarMantenimiento() {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="CmbSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   ¿Sucursal o Franquicia?
                 </label>
 
-                <div className="col-span-6 sm:col-span-3">
+                <div className="relative rounded-md shadow-sm">
                   <select
-                    id="CmbNombre"
-                    name="CmbNombre"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    id="CmbSucursalOFranquicia"
+                    className={`${
+                      errors?.sucursalOFranquicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
                     defaultValue="Selecciona un producto..."
-                    onChange={onTextFieldChangedSucursalOFranquicia}
-                    onBlur={() => setTouched(true)}
+                    {...register("sucursalOFranquicia")}
                   >
-                    <option hidden>Seleccione una opción...</option>
-                    <option>Sucursal</option>
-                    <option>Franquicia</option>
+                    <option value={"Seleccione una opción..."} hidden>
+                      Seleccione una opción...
+                    </option>
+                    <option value={"Sucursal"}>Sucursal</option>
+                    <option value={"Franquicia"}>Franquicia</option>
                   </select>
+
+                  {errors?.sucursalOFranquicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
+                {errors?.sucursalOFranquicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.sucursalOFranquicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="CmbNombreSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  {inputSucursalOFranquicia === "Sucursal"
+                  {watchSucursalOFranquicia === "Sucursal"
                     ? "Sucursal"
-                    : inputSucursalOFranquicia === "Franquicia"
+                    : watchSucursalOFranquicia === "Franquicia"
                     ? "Franquicia"
                     : "Primero seleccione si es franquicia o sucursal"}
                 </label>
-                <select
-                  id="CmbFranquicia"
-                  name="CmbFranquicia"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  defaultValue="Selecciona un producto..."
-                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                >
-                  <option hidden>
-                    Seleccione la{" "}
-                    {inputSucursalOFranquicia === "Sucursal"
-                      ? "Sucursal"
-                      : inputSucursalOFranquicia === "Franquicia"
-                      ? "Franquicia"
-                      : "Primero seleccione si es franquicia o sucursal"}
-                    ...
-                  </option>
-                  {sucursalesYFranquiciasMemo
-                    .filter(
-                      (sucursalesYFranquicias) =>
-                        sucursalesYFranquicias.sucursalOFranquicia ===
-                        inputSucursalOFranquicia
-                    )
-                    .map((sucursalesYFranquicias) => (
-                      <option
-                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
-                      >
-                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
-                      </option>
-                    ))}
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbNombreSucursalOFranquicia"
+                    className={`${
+                      errors?.nombreSucursalOFranquicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Selecciona un producto..."
+                    {...register("nombreSucursalOFranquicia")}
+                  >
+                    <option hidden>
+                      Seleccione{" "}
+                      {watchSucursalOFranquicia === "Sucursal"
+                        ? "Sucursal"
+                        : watchSucursalOFranquicia === "Franquicia"
+                        ? "Franquicia"
+                        : "primero seleccione si es franquicia o sucursal"}
+                      ...
+                    </option>
+                    {sucursalesYFranquiciasMemo
+                      .filter(
+                        (sucursalesYFranquicias) =>
+                          sucursalesYFranquicias.sucursalOFranquicia ===
+                          watchSucursalOFranquicia
+                      )
+                      .map((sucursalesYFranquicias) => (
+                        <option
+                          key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                        >
+                          {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                        </option>
+                      ))}
+                  </select>
+
+                  {errors?.nombreSucursalOFranquicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombreSucursalOFranquicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombreSucursalOFranquicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -195,15 +253,36 @@ export default function AgregarMantenimiento() {
                 >
                   Nombre Maquina
                 </label>
-                <input
-                  type="text"
-                  name="TxtNombreMaquina"
-                  id="TxtNombreMaquina"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNombreMaquina}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNombreMaquina"
+                    autoComplete="off"
+                    className={`${
+                      errors?.nombreMaquina
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("nombreMaquina")}
+                  />
+                  {errors?.nombreMaquina && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombreMaquina && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombreMaquina.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -213,15 +292,36 @@ export default function AgregarMantenimiento() {
                 >
                   Proveedor
                 </label>
-                <input
-                  type="text"
-                  name="TxtProveedor"
-                  id="TxtProveedor"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedProveedor}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtProveedor"
+                    autoComplete="off"
+                    className={`${
+                      errors?.proveedor
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("proveedor")}
+                  />
+                  {errors?.proveedor && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.proveedor && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.proveedor.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -231,15 +331,36 @@ export default function AgregarMantenimiento() {
                 >
                   Fecha De Garantía
                 </label>
-                <input
-                  type="date"
-                  name="TxtFechaDeGarantia"
-                  id="TxtFechaDeGarantia"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedFechaDeGarantia}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="date"
+                    id="TxtFechaDeGarantia"
+                    autoComplete="off"
+                    className={`${
+                      errors?.fechaDeGarantia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("fechaDeGarantia")}
+                  />
+                  {errors?.fechaDeGarantia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.fechaDeGarantia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.fechaDeGarantia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -249,15 +370,36 @@ export default function AgregarMantenimiento() {
                 >
                   Fecha De Mantenimiento
                 </label>
-                <input
-                  type="date"
-                  name="TxtFechaDeMantenimiento"
-                  id="TxtFechaDeMantenimiento"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedFechaDeMantenimiento}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="date"
+                    id="TxtFechaDeMantenimiento"
+                    autoComplete="off"
+                    className={`${
+                      errors?.fechaDeMantenimiento
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("fechaDeMantenimiento")}
+                  />
+                  {errors?.fechaDeMantenimiento && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.fechaDeMantenimiento && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.fechaDeMantenimiento.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -267,23 +409,43 @@ export default function AgregarMantenimiento() {
                 >
                   Modificación De Mantenimiento
                 </label>
-                <input
-                  type="text"
-                  name="TxtModificacionDeMantenimiento"
-                  id="TxtModificacionDeMantenimiento"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedModificacionDeMantenimiento}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtModificacionDeMantenimiento"
+                    autoComplete="off"
+                    className={`${
+                      errors?.modificacionDeMantenimiento
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("modificacionDeMantenimiento")}
+                  />
+                  {errors?.modificacionDeMantenimiento && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.modificacionDeMantenimiento && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.modificacionDeMantenimiento.message}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="button"
+              type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={onSave}
             >
               Guardar
             </button>

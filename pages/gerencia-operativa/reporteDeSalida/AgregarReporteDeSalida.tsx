@@ -20,6 +20,15 @@ const validProductType: TipoDeProducto[] = [
   "Extra",
 ];
 
+type FormData = {
+  sucursalAEnviar: string;
+  nombreDelRepartidor: string;
+  datosDeLaRuta: string;
+  kilometrajeDeEntrada: string;
+  kilometrajeDeSalida: string;
+  listadoReporteDeSalida: IListadoReporteDeSalida[];  
+}
+
 const validCakeFlavors: Paste[] = [
   {
     _id: "PD_ACL",

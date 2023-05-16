@@ -1,1 +1,1 @@
-export type Unidades = "Gramos" | "Kilogramos" | "Mililitros" | "Litros";
+export type Unidades = "Seleccione una opción..." | "Gramos" | "Kilogramos" | "Mililitros" | "Litros";

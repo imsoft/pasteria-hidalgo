@@ -4,133 +4,148 @@ import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operati
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
 import { useRouter } from "next/router";
+import { Resolver, useForm } from "react-hook-form";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
+
+type FormData = {
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
+  direccion: string;
+  distancia: string;
+  fechaDePago: string;
+  montoDePago: string;
+  cuentaBancaria: string;
+  banco: string;
+  nombreDelBeneficiario: string;
+  rfc: string;
+};
+
+const resolver: Resolver<FormData> = async (values) => {
+  return {
+    values,
+    errors:
+      values.sucursalOFranquicia === "Seleccione una opción..."
+        ? {
+            sucursalOFranquicia: {
+              type: "required",
+              message: "El campo sucursal o franquicia es requerido.",
+            },
+          }
+        : !values.nombreSucursalOFranquicia
+        ? {
+            nombreSucursalOFranquicia: {
+              type: "required",
+              message: "El campo nombre sucursal o franquicia es requerido.",
+            },
+          }
+        : !values.direccion
+        ? {
+            direccion: {
+              type: "required",
+              message: "El campo dirección es requerido.",
+            },
+          }
+        : !values.distancia
+        ? {
+            distancia: {
+              type: "required",
+              message: "El campo distancia es requerido.",
+            },
+          }
+        : !values.fechaDePago
+        ? {
+            fechaDePago: {
+              type: "required",
+              message: "El campo fecha de pago es requerido.",
+            },
+          }
+        : !values.montoDePago
+        ? {
+            montoDePago: {
+              type: "required",
+              message: "El campo monto de pago es requerido.",
+            },
+          }
+        : !values.cuentaBancaria
+        ? {
+            cuentaBancaria: {
+              type: "required",
+              message: "El campo cuenta bancaria es requerido.",
+            },
+          }
+        : !values.banco
+        ? {
+            banco: {
+              type: "required",
+              message: "El campo banco es requerido.",
+            },
+          }
+        : !values.nombreDelBeneficiario
+        ? {
+            nombreDelBeneficiario: {
+              type: "required",
+              message: "El campo nombre del beneficiario es requerido.",
+            },
+          }
+        : !values.rfc
+        ? {
+            rfc: {
+              type: "required",
+              message: "El campo rfc es requerido.",
+            },
+          }
+        : {},
+  };
+};
 
 export default function ManejoSucursalesFranquicias() {
   const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<FormData>({ resolver });
+
   const { agregarSucursalYFranquicia } = useContext(
     SucursalesYFranquiciasContext
   );
 
-  const [inputSucursalOFranquicia, setInputSucursalOFranquicia] = useState("");
-  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
-    useState("");
-  const [inputDireccion, setInputDireccion] = useState("");
-  const [inputDistancia, setInputDistancia] = useState("");
-  const [inputFechaDePago, setInputFechaDePago] = useState("");
-  const [inputMontoDePago, setInputMontoDePago] = useState("");
-  const [inputCuentaBancaria, setInputCuentaBancaria] = useState("");
-  const [inputBanco, setInputBanco] = useState("");
-  const [inputNombreDelBeneficiario, setInputNombreDelBeneficiario] =
-    useState("");
-  const [inputRfc, setInputRfc] = useState("");
-
-  const [touched, setTouched] = useState(false);
-
-  const onTextFieldChangedSucursalOFranquicia = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputSucursalOFranquicia(event.target.value);
-  };
-
-  const onTextFieldChangedNombreSucursalOFranquicia = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputNombreSucursalOFranquicia(event.target.value);
-  };
-
-  const onTextFieldChangedDireccion = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputDireccion(event.target.value);
-  };
-
-  const onTextFieldChangedDistancia = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputDistancia(event.target.value);
-  };
-
-  const onTextFieldChangedFechaDePago = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputFechaDePago(event.target.value);
-  };
-
-  const onTextFieldChangedMontoDePago = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputMontoDePago(event.target.value);
-  };
-
-  const onTextFieldChangedCuentaBancaria = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputCuentaBancaria(event.target.value);
-  };
-
-  const onTextFieldChangedBanco = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputBanco(event.target.value);
-  };
-
-  const onTextFieldChangedNombreDelBeneficiario = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputNombreDelBeneficiario(event.target.value);
-  };
-
-  const onTextFieldChangedRfc = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputRfc(event.target.value);
-  };
-
-  const onSave = () => {
-    if (
-      inputSucursalOFranquicia.length === 0 &&
-      inputNombreSucursalOFranquicia.length === 0 &&
-      inputDireccion.length === 0 &&
-      inputDistancia.length === 0 &&
-      inputFechaDePago.length === 0 &&
-      inputMontoDePago.length === 0 &&
-      inputCuentaBancaria.length === 0 &&
-      inputBanco.length === 0 &&
-      inputNombreDelBeneficiario.length === 0 &&
-      inputRfc.length === 0
-    )
-      return;
-
+  const onSave = ({
+    sucursalOFranquicia,
+    nombreSucursalOFranquicia,
+    direccion,
+    distancia,
+    fechaDePago,
+    montoDePago,
+    cuentaBancaria,
+    banco,
+    nombreDelBeneficiario,
+    rfc,
+  }: FormData) => {
     agregarSucursalYFranquicia(
-      inputSucursalOFranquicia,
-      inputNombreSucursalOFranquicia,
-      inputDireccion,
-      inputDistancia,
-      inputFechaDePago,
-      inputMontoDePago,
-      inputCuentaBancaria,
-      inputBanco,
-      inputNombreDelBeneficiario,
-      inputRfc,
+      sucursalOFranquicia,
+      nombreSucursalOFranquicia,
+      direccion,
+      distancia,
+      fechaDePago,
+      montoDePago,
+      cuentaBancaria,
+      banco,
+      nombreDelBeneficiario,
+      rfc,
       true
     );
-    
+
     router.push(
       "/gerencia-operativa/sucursalYFranquicia/VerSucursalesYFranquicias"
     );
-
-    setTouched(false);
-    setInputSucursalOFranquicia("");
-    setInputNombreSucursalOFranquicia("");
-    setInputDireccion("");
-    setInputDistancia("");
-    setInputFechaDePago("");
-    setInputMontoDePago("");
-    setInputCuentaBancaria("");
-    setInputBanco("");
-    setInputNombreDelBeneficiario("");
-    setInputRfc("");
   };
 
   return (
     <SidebarLayoutGerenciaOperativa>
-      <form>
+      <form onSubmit={handleSubmit(onSave)}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -142,42 +157,88 @@ export default function ManejoSucursalesFranquicias() {
 
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
-                <label className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="CmbSucursalOFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   ¿Sucursal o Franquicia?
                 </label>
 
-                <div className="col-span-6 sm:col-span-3">
+                <div className="relative rounded-md shadow-sm">
                   <select
-                    id="CmbNombre"
-                    name="CmbNombre"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    id="CmbSucursalOFranquicia"
+                    className={`${
+                      errors?.sucursalOFranquicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
                     defaultValue="Selecciona un producto..."
-                    onChange={onTextFieldChangedSucursalOFranquicia}
-                    onBlur={() => setTouched(true)}
+                    {...register("sucursalOFranquicia")}
                   >
-                    <option hidden>Seleccione una opción...</option>
-                    <option>Sucursal</option>
-                    <option>Franquicia</option>
+                    <option value={"Seleccione una opción..."} hidden>
+                      Seleccione una opción...
+                    </option>
+                    <option value={"Sucursal"}>Sucursal</option>
+                    <option value={"Franquicia"}>Franquicia</option>
                   </select>
+
+                  {errors?.sucursalOFranquicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
+                {errors?.sucursalOFranquicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.sucursalOFranquicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtNombre"
+                  htmlFor="TxtNombreDeLaSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre de la sucursal o franquicia
                 </label>
-                <input
-                  type="text"
-                  name="TxtNombre"
-                  id="TxtNombre"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNombreSucursalOFranquicia}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNombreDeLaSucursalOFranquicia"
+                    autoComplete="off"
+                    className={`${
+                      errors?.nombreSucursalOFranquicia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("nombreSucursalOFranquicia")}
+                  />
+                  {errors?.nombreSucursalOFranquicia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombreSucursalOFranquicia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombreSucursalOFranquicia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -187,34 +248,56 @@ export default function ManejoSucursalesFranquicias() {
                 >
                   Dirección
                 </label>
-                <input
-                  type="text"
-                  name="TxtDireccion"
-                  id="TxtDireccion"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedDireccion}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtDireccion"
+                    autoComplete="off"
+                    className={`${
+                      errors?.direccion
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("direccion")}
+                  />
+                  {errors?.direccion && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.direccion && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.direccion.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDistancia"
+                  htmlFor="DistanciaDeLaFabricaALaSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Distancia de la fabrica a la sucursal o franquicia
                 </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
+                <div className="relative rounded-md shadow-sm">
                   <input
                     type="text"
-                    name="TxtDistancia"
-                    id="TxtDistancia"
-                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                    onChange={onTextFieldChangedDistancia}
-                    onBlur={() => setTouched(true)}
-                    placeholder="0"
-                    aria-describedby="price-currency"
+                    id="DistanciaDeLaFabricaALaSucursalOFranquicia"
+                    autoComplete="off"
+                    className={`${
+                      errors?.distancia
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("distancia")}
                   />
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <span
@@ -224,7 +307,24 @@ export default function ManejoSucursalesFranquicias() {
                       KM
                     </span>
                   </div>
+                  {errors?.distancia && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-10">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
+                {errors?.distancia && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.distancia.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -234,15 +334,36 @@ export default function ManejoSucursalesFranquicias() {
                 >
                   Fecha de pago
                 </label>
-                <input
-                  type="date"
-                  name="TxtFechaDePago"
-                  id="TxtFechaDePago"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedFechaDePago}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="date"
+                    id="TxtFechaDePago"
+                    autoComplete="off"
+                    className={`${
+                      errors?.fechaDePago
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("fechaDePago")}
+                  />
+                  {errors?.fechaDePago && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.fechaDePago && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.fechaDePago.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -252,29 +373,36 @@ export default function ManejoSucursalesFranquicias() {
                 >
                   Monto de pago
                 </label>
-                <div className="mt-1 relative rounded-md shadow-sm">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-500 sm:text-sm">$</span>
-                  </div>
+                <div className="relative rounded-md shadow-sm">
                   <input
                     type="text"
-                    name="TxtMontoDePago"
                     id="TxtMontoDePago"
-                    className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
-                    onChange={onTextFieldChangedMontoDePago}
-                    onBlur={() => setTouched(true)}
-                    placeholder="0"
-                    aria-describedby="price-currency"
+                    autoComplete="off"
+                    className={`${
+                      errors?.montoDePago
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("montoDePago")}
                   />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <span
-                      className="text-gray-500 sm:text-sm"
-                      id="price-currency"
-                    >
-                      MXN
-                    </span>
-                  </div>
+                  {errors?.montoDePago && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
+                {errors?.montoDePago && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.montoDePago.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -284,15 +412,36 @@ export default function ManejoSucursalesFranquicias() {
                 >
                   Cuenta Bancaria
                 </label>
-                <input
-                  type="text"
-                  name="TxtCuentaBancaria"
-                  id="TxtCuentaBancaria"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedCuentaBancaria}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtCuentaBancaria"
+                    autoComplete="off"
+                    className={`${
+                      errors?.cuentaBancaria
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("cuentaBancaria")}
+                  />
+                  {errors?.cuentaBancaria && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.cuentaBancaria && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.cuentaBancaria.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -302,59 +451,121 @@ export default function ManejoSucursalesFranquicias() {
                 >
                   Banco
                 </label>
-                <input
-                  type="text"
-                  name="TxtBanco"
-                  id="TxtBanco"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedBanco}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtBanco"
+                    autoComplete="off"
+                    className={`${
+                      errors?.banco
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("banco")}
+                  />
+                  {errors?.banco && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.banco && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.banco.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtNombreDelNeneficiario"
+                  htmlFor="TxtNombreDelBeneficiario"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Nombre del beneficiario
+                  Nombre del beneficiario del beneficiario
                 </label>
-                <input
-                  type="text"
-                  name="TxtNombreDelNeneficiario"
-                  id="TxtNombreDelNeneficiario"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNombreDelBeneficiario}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNombre"
+                    autoComplete="off"
+                    className={`${
+                      errors?.nombreDelBeneficiario
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("nombreDelBeneficiario")}
+                  />
+                  {errors?.nombreDelBeneficiario && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombreDelBeneficiario && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombreDelBeneficiario.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtRfc"
+                  htmlFor="TxtRFC"
                   className="block text-sm font-medium text-gray-700"
                 >
                   RFC
                 </label>
-                <input
-                  type="text"
-                  name="TxtRfc"
-                  id="TxtRfc"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedRfc}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtRFC"
+                    autoComplete="off"
+                    className={`${
+                      errors?.rfc
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("rfc")}
+                  />
+                  {errors?.rfc && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.rfc && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.rfc.message}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="button"
+              type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={onSave}
             >
               Guardar
             </button>

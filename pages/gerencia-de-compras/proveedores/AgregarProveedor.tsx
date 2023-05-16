@@ -6,109 +6,125 @@ import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerenc
 import { ProveedoresContext } from "../../../context/gerencia-de-compras/manejoDeProveedores/ManejoDeProveedoresContext";
 
 import { YesNo } from "../../../interfaces";
+import { Resolver, useForm } from "react-hook-form";
+import { ExclamationCircleIcon } from "@heroicons/react/outline";
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
+
+type FormData = {
+  nombre: string;
+  direccion: string;
+  telefono: string;
+  horarioDeApertura: string;
+  horarioDeCierre: string;
+  productosQueSeCompran: string;
+  entregasADomicilio: string;
+  rfc: string;
+};
+
+const resolver: Resolver<FormData> = async (values) => {
+  return {
+    values,
+    errors: !values.nombre
+      ? {
+          nombre: {
+            type: "required",
+            message: "El campo nombre es requerido.",
+          },
+        }
+      : !values.direccion
+      ? {
+          direccion: {
+            type: "required",
+            message: "El campo dirección es requerido.",
+          },
+        }
+      : !values.telefono
+      ? {
+          telefono: {
+            type: "required",
+            message: "El campo teléfono es requerido.",
+          },
+        }
+      : !values.horarioDeApertura
+      ? {
+          horarioDeApertura: {
+            type: "required",
+            message: "El campo horario de apertura es requerido.",
+          },
+        }
+      : !values.horarioDeCierre
+      ? {
+          horarioDeCierre: {
+            type: "required",
+            message: "El campo horario de cierre es requerido.",
+          },
+        }
+      : !values.productosQueSeCompran
+      ? {
+          productosQueSeCompran: {
+            type: "required",
+            message: "El campo productos que se compran es requerido.",
+          },
+        }
+      : values.entregasADomicilio === "Seleccione una opción..."
+      ? {
+          entregasADomicilio: {
+            type: "required",
+            message: "El campo entregas a domicilio es requerido.",
+          },
+        }
+      : !values.rfc
+      ? {
+          rfc: {
+            type: "required",
+            message: "El campo rfc es requerido.",
+          },
+        }
+      : {},
+  };
+};
 
 export default function ManejoDeProveedores() {
   const router = useRouter();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<FormData>({ resolver });
+
   const { agregarNuevoProveedor } = useContext(ProveedoresContext);
 
-  const [inputNombre, setInputNombre] = useState("");
-  const [inputDireccion, setInputDireccion] = useState("");
-  const [inputTelefono, setInputTelefono] = useState("");
-  const [inputHorarioDeApertura, setInputHorarioDeApertura] = useState("");
-  const [inputHorarioDeCierre, setInputHorarioDeCierre] = useState("");
-  const [inputProductosQueSeCompran, setInputProductosQueSeCompran] =
-    useState("");
-  const [inputEntregasADomicilio, setInputEntregasADomicilio] = useState("");
-  const [inputRfc, setInputRfc] = useState("");
-
-  const [touched, setTouched] = useState(false);
-
-  const onTextFieldChangedNombre = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputNombre(event.target.value);
-  };
-
-  const onTextFieldChangedDireccion = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputDireccion(event.target.value);
-  };
-
-  const onTextFieldChangedTelefono = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputTelefono(event.target.value);
-  };
-
-  const onTextFieldChangedHorarioDeApertura = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputHorarioDeApertura(event.target.value);
-  };
-
-  const onTextFieldChangedHorarioDeCierre = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputHorarioDeCierre(event.target.value);
-  };
-
-  const onTextFieldChangedProductosQueSeCompran = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputProductosQueSeCompran(event.target.value);
-  };
-
-  const onTextFieldChangedEntregasADomicilio = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
-    setInputEntregasADomicilio(event.target.value);
-  };
-
-  const onTextFieldChangedRfc = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputRfc(event.target.value);
-  };
-
-  const onSave = () => {
-    if (
-      inputNombre.length === 0 &&
-      inputDireccion.length === 0 &&
-      inputTelefono.length === 0 &&
-      inputHorarioDeApertura.length === 0 &&
-      inputHorarioDeCierre.length === 0 &&
-      inputProductosQueSeCompran.length === 0 &&
-      inputEntregasADomicilio.length === 0 &&
-      inputRfc.length === 0
-    )
-      return;
-
+  const onSave = ({
+    nombre,
+    direccion,
+    telefono,
+    horarioDeApertura,
+    horarioDeCierre,
+    productosQueSeCompran,
+    entregasADomicilio,
+    rfc,
+  }: FormData) => {
     agregarNuevoProveedor(
-      inputNombre,
-      inputDireccion,
-      inputTelefono,
-      inputHorarioDeApertura,
-      inputHorarioDeCierre,
-      inputProductosQueSeCompran,
-      inputEntregasADomicilio,
-      inputRfc,
+      nombre,
+      direccion,
+      telefono,
+      horarioDeApertura,
+      horarioDeCierre,
+      productosQueSeCompran,
+      entregasADomicilio,
+      rfc,
       true
     );
 
     router.push("/gerencia-de-compras/proveedores/VerProveedores");
-
-    setTouched(false);
-    setInputNombre("");
-    setInputDireccion("");
-    setInputTelefono("");
-    setInputHorarioDeApertura("");
-    setInputHorarioDeCierre("");
-    setInputProductosQueSeCompran("");
-    setInputEntregasADomicilio("");
-    setInputRfc("");
   };
 
   return (
     <SidebarLayoutGerenciaCompras>
-      <form>
+      <form onSubmit={handleSubmit(onSave)}>
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
@@ -124,17 +140,38 @@ export default function ManejoDeProveedores() {
                   htmlFor="TxtNombre"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Nombre&#40;s&#41;
+                  Nombre(s)
                 </label>
-                <input
-                  type="text"
-                  name="TxtNombre"
-                  id="TxtNombre"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedNombre}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtNombre"
+                    autoComplete="off"
+                    className={`${
+                      errors?.nombre
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("nombre")}
+                  />
+                  {errors?.nombre && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.nombre && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.nombre.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -144,15 +181,36 @@ export default function ManejoDeProveedores() {
                 >
                   Dirección
                 </label>
-                <input
-                  type="text"
-                  name="TxtDireccion"
-                  id="TxtDireccion"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedDireccion}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtDireccion"
+                    autoComplete="off"
+                    className={`${
+                      errors?.direccion
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("direccion")}
+                  />
+                  {errors?.direccion && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.direccion && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.direccion.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -162,15 +220,36 @@ export default function ManejoDeProveedores() {
                 >
                   Teléfono
                 </label>
-                <input
-                  type="tel"
-                  name="TxtTelefono"
-                  id="TxtTelefono"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedTelefono}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtTelefono"
+                    autoComplete="off"
+                    className={`${
+                      errors?.telefono
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("telefono")}
+                  />
+                  {errors?.telefono && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.telefono && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.telefono.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -180,15 +259,36 @@ export default function ManejoDeProveedores() {
                 >
                   Horario de apertura
                 </label>
-                <input
-                  type="time"
-                  name="TxtHorarioDeApertura"
-                  id="TxtHorarioDeApertura"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedHorarioDeApertura}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="time"
+                    id="TxtHorarioDeApertura"
+                    autoComplete="off"
+                    className={`${
+                      errors?.horarioDeApertura
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("horarioDeApertura")}
+                  />
+                  {errors?.horarioDeApertura && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.horarioDeApertura && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.horarioDeApertura.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -198,15 +298,36 @@ export default function ManejoDeProveedores() {
                 >
                   Horario de cierre
                 </label>
-                <input
-                  type="time"
-                  name="TxtHorarioDeCierre"
-                  id="TxtHorarioDeCierre"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedHorarioDeCierre}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="time"
+                    id="TxtHorarioDeCierre"
+                    autoComplete="off"
+                    className={`${
+                      errors?.horarioDeCierre
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("horarioDeCierre")}
+                  />
+                  {errors?.horarioDeCierre && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.horarioDeCierre && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.horarioDeCierre.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -216,37 +337,81 @@ export default function ManejoDeProveedores() {
                 >
                   Tipos de productos que se compran
                 </label>
-                <input
-                  type="text"
-                  name="TxtTiposDeProductosQueSeCompran"
-                  id="TxtTiposDeProductosQueSeCompran"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedProductosQueSeCompran}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtTiposDeProductosQueSeCompran"
+                    autoComplete="off"
+                    className={`${
+                      errors?.productosQueSeCompran
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("productosQueSeCompran")}
+                  />
+                  {errors?.productosQueSeCompran && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.productosQueSeCompran && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.productosQueSeCompran.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtTiposDeProductosQueSeCompran"
+                  htmlFor="CmbEntregaADomicilio"
                   className="block text-sm font-medium text-gray-700"
                 >
                   ¿Entrega a domicilio?
                 </label>
-                <select
-                  id="CmbTiposDeProductosQueSeCompran"
-                  name="CmbTiposDeProductosQueSeCompran"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  onChange={onTextFieldChangedEntregasADomicilio}
-                  onBlur={() => setTouched(true)}
-                  defaultValue="Selecciona un producto..."
-                >
-                  <option hidden>Selecciona una opción...</option>
-                  {validYesNoOptions.map((yesNoOptions) => (
-                    <option key={yesNoOptions}>{yesNoOptions}</option>
-                  ))}
-                </select>
+
+                <div className="relative rounded-md shadow-sm">
+                  <select
+                    id="CmbEntregaADomicilio"
+                    className={`${
+                      errors?.entregasADomicilio
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    defaultValue="Seleccione un producto..."
+                    {...register("entregasADomicilio")}
+                  >
+                    <option hidden>Seleccione una opción...</option>
+                    {validYesNoOptions.map((yesNoOptions) => (
+                      <option key={yesNoOptions}>{yesNoOptions}</option>
+                    ))}
+                  </select>
+
+                  {errors?.entregasADomicilio && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-9">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.entregasADomicilio && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.entregasADomicilio.message}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -256,23 +421,43 @@ export default function ManejoDeProveedores() {
                 >
                   RFC
                 </label>
-                <input
-                  type="text"
-                  name="TxtRfc"
-                  id="TxtRfc"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  onChange={onTextFieldChangedRfc}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="relative rounded-md shadow-sm">
+                  <input
+                    type="text"
+                    id="TxtRfc"
+                    autoComplete="off"
+                    className={`${
+                      errors?.rfc
+                        ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
+                        : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    }`}
+                    {...register("rfc")}
+                  />
+                  {errors?.rfc && (
+                    <>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                        <ExclamationCircleIcon
+                          className="h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+                {errors?.rfc && (
+                  <>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {errors.rfc.message}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
-              type="button"
+              type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={onSave}
             >
               Guardar
             </button>

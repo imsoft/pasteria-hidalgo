@@ -1,1 +1,1 @@
-export type YesNo = "Si" | "No";
+export type YesNo = "Seleccione una opción..." | "Si" | "No";
