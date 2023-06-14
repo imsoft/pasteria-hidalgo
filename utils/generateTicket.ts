@@ -85,6 +85,7 @@ export const generateTicket = (
     y + lineHeight * 3 - 10
   );
 
-  doc.save("Ticket de venta.pdf");
   doc.autoPrint();
+  doc.autoPrint({variant: 'non-conform'});
+  doc.save("Ticket de venta.pdf");
 };
