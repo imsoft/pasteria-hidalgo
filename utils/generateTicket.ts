@@ -34,14 +34,7 @@ export const generateTicket = (
   doc.setLineHeightFactor(1.2);
   doc.setFontSize(10);
 
-  doc.addImage(
-    "/static/Imagen-ticket.jpg",
-    "JPEG",
-    5,
-    5,
-    60,
-    60
-  );
+  doc.addImage("/static/Imagen-ticket.jpg", "JPEG", 5, 5, 60, 60);
 
   doc.setFont("helvetica", "normal");
   doc.text("Av. Conchita #3180", 19, 70);
@@ -86,6 +79,10 @@ export const generateTicket = (
   );
 
   doc.autoPrint();
-  doc.autoPrint({variant: 'non-conform'});
+  doc.autoPrint({ variant: "non-conform" });
+
+  var blob = doc.output("blob");
+  window.open(URL.createObjectURL(blob));
+
   doc.save("Ticket de venta.pdf");
 };
