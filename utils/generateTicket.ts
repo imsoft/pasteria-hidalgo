@@ -27,7 +27,7 @@ export const generateTicket = (
 
   const doc = new jsPDF({
     unit: "mm",
-    format: [ticketHeight, 70],
+    format: [ticketHeight + 50, 70],
     putOnlyUsedFonts: true,
   });
 
