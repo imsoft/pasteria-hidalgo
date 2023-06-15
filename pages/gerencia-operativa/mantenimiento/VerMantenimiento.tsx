@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { MantenimientosContext } from "../../../context/gerencia-operativa/mantenimiento/MantenimientoContext";
@@ -9,6 +9,12 @@ import ListaMantenimientos from "../../../components/ui/gerencia-operativa/Lista
 const VerMantenimientos = () => {
   const { mantenimientos } = useContext(MantenimientosContext);
   const mantenimientosMemo = useMemo(() => mantenimientos, [mantenimientos]);
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+  }, [mantenimientosMemo]);
 
   return (
     <SidebarLayoutGerenciaOperativa>
@@ -35,6 +41,9 @@ const VerMantenimientos = () => {
             </button>
           </div>
         </div>
+
+        {loading ? <> Cargando. </> : <> Cargando... </>}
+
         <div className="mt-8 flex flex-col">
           <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
