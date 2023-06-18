@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, Suspense } from "react";
+import { ReactElement, ReactNode, Suspense, lazy } from "react";
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 
