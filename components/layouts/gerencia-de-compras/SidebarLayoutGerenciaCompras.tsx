@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useContext } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +14,8 @@ import {
   CurrencyDollarIcon,
   EyeIcon,
 } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
+import { AuthContext } from "../../../context/auth";
 
 type Props = {
   children?: React.ReactNode;
@@ -72,7 +74,7 @@ const navigation = [
 
 const userNavigation = [
   // { name: "Perfil", href: "#" },
-  { name: "Salir", href: "/login" },
+  { name: "Salir", href: "/" },
 ];
 
 function classNames(...classes: string[]) {
@@ -80,7 +82,10 @@ function classNames(...classes: string[]) {
 }
 
 export const SidebarLayoutGerenciaCompras: React.FC<Props> = ({ children }) => {
+  const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { user, isLoggedIn, logout } = useContext(AuthContext);
 
   return (
     <>
@@ -287,6 +292,7 @@ export const SidebarLayoutGerenciaCompras: React.FC<Props> = ({ children }) => {
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
+                            onClick={logout}
                           >
                             {item.name}
                           </Link>

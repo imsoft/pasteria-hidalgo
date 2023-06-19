@@ -1,3 +1,5 @@
+import bcrypt from "bcryptjs";
+
 import {
   IListadoDeReporteDeCompra,
   IListadoReporteDeSalida,
@@ -187,6 +189,19 @@ interface SeedManejoDeAlmacen {
   cantidad: number;
 }
 
+interface SeedUsuario {
+  nombre: string;
+  correoElectronico: string;
+  contrasenia: string;
+  role:
+    | "admin"
+    | "contaduria"
+    | "gerencia de compras"
+    | "gerencia de ventas"
+    | "gerencia operativa"
+    | "recursos humanos";
+}
+
 interface SeedData {
   candidatos: SeedCandidato[];
   personalActivo: SeedPersonalActivo[];
@@ -206,6 +221,7 @@ interface SeedData {
   materiaPrima: SeedMateriaPrima[];
   asignarComision: SeedAsignarComision[];
   manejoDeAlmacen: SeedManejoDeAlmacen[];
+  usuario: SeedUsuario[];
 }
 
 export const initialData: SeedData = {
@@ -2684,6 +2700,44 @@ export const initialData: SeedData = {
       unidades: "Kilogramos",
       temperatura: "Ambiente",
       cantidad: 40,
+    },
+  ],
+  usuario: [
+    {
+      nombre: "Juan Pérez",
+      correoElectronico: "juan@admin.com",
+      contrasenia: bcrypt.hashSync("admin123"),
+      role: "admin",
+    },
+    {
+      nombre: "María Rodríguez",
+      correoElectronico: "maria@contaduria.com",
+      contrasenia: bcrypt.hashSync("contaduria456"),
+      role: "contaduria",
+    },
+    {
+      nombre: "Luis Gómez",
+      correoElectronico: "luis@compras.com",
+      contrasenia: bcrypt.hashSync("compras789"),
+      role: "gerencia de compras",
+    },
+    {
+      nombre: "Ana Martínez",
+      correoElectronico: "ana@ventas.com",
+      contrasenia: bcrypt.hashSync("ventas321"),
+      role: "gerencia de ventas",
+    },
+    {
+      nombre: "Carlos Sánchez",
+      correoElectronico: "carlos@operativa.com",
+      contrasenia: bcrypt.hashSync("operativa654"),
+      role: "gerencia operativa",
+    },
+    {
+      nombre: "Laura López",
+      correoElectronico: "laura@rrhh.com",
+      contrasenia: bcrypt.hashSync("rrhh987"),
+      role: "recursos humanos",
     },
   ],
 };

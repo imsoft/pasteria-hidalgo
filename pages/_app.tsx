@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode, Suspense, lazy } from "react";
 import { NextPage } from "next";
 import { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react"
 
 // Contaduria
 
@@ -40,10 +41,10 @@ import { PersonalActivoProvider } from "../context/recursos-humanos/personalActi
 // Miscelaneos
 
 import "../styles/globals.css";
+import { AuthProvider } from "../context/auth";
 
 // TODO: Checar de donde viene esto:
 import { ProductosYaCompradosProvider } from "../context/gerencia-de-compras/productosYaComprados/ProductosYaCompradosProvider";
-
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -57,47 +58,51 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
   return getLayout(
     <Suspense fallback={<div>Loading...</div>}>
-      <CandidatosProvider>
-        <ChecksInPersonalProvider>
-          <ClientesFrecuentesProvider>
-            <ManejosDePersonalProvider>
-              <PersonalActivoProvider>
-                  <ProveedoresProvider>
-                    <ReportesDeComprasProvider>
-                      <SucursalesYFranquiciasProvider>
-                        <AcondicionamientoDeSucursalesProvider>
-                          <AsignarPreciosProvider>
-                            <ApartadosJuridicosProvider>
-                              <ReportesDeSalidaProvider>
-                                <MantenimientosProvider>
-                                  <PersonalesDeMantenimientoProvider>
-                                    <ReportesVentasIndividualProvider>
-                                      <MateriasPrimasProvider>
-                                        <ReporteVentasAmbulantesIndividualProvider>
-                                          <AsignarComisionProvider>
-                                            <ManejosDeAlmacenProvider>
-                                              <ReporteDeGananciaProvider>
-                                                <Component {...pageProps} />
-                                              </ReporteDeGananciaProvider>
-                                            </ManejosDeAlmacenProvider>
-                                          </AsignarComisionProvider>
-                                        </ReporteVentasAmbulantesIndividualProvider>
-                                      </MateriasPrimasProvider>
-                                    </ReportesVentasIndividualProvider>
-                                  </PersonalesDeMantenimientoProvider>
-                                </MantenimientosProvider>
-                              </ReportesDeSalidaProvider>
-                            </ApartadosJuridicosProvider>
-                          </AsignarPreciosProvider>
-                        </AcondicionamientoDeSucursalesProvider>
-                      </SucursalesYFranquiciasProvider>
-                    </ReportesDeComprasProvider>
-                  </ProveedoresProvider>
-              </PersonalActivoProvider>
-            </ManejosDePersonalProvider>
-          </ClientesFrecuentesProvider>
-        </ChecksInPersonalProvider>
-      </CandidatosProvider>
+      <SessionProvider>
+        <AuthProvider>
+          <CandidatosProvider>
+            <ChecksInPersonalProvider>
+              <ClientesFrecuentesProvider>
+                <ManejosDePersonalProvider>
+                  <PersonalActivoProvider>
+                    <ProveedoresProvider>
+                      <ReportesDeComprasProvider>
+                        <SucursalesYFranquiciasProvider>
+                          <AcondicionamientoDeSucursalesProvider>
+                            <AsignarPreciosProvider>
+                              <ApartadosJuridicosProvider>
+                                <ReportesDeSalidaProvider>
+                                  <MantenimientosProvider>
+                                    <PersonalesDeMantenimientoProvider>
+                                      <ReportesVentasIndividualProvider>
+                                        <MateriasPrimasProvider>
+                                          <ReporteVentasAmbulantesIndividualProvider>
+                                            <AsignarComisionProvider>
+                                              <ManejosDeAlmacenProvider>
+                                                <ReporteDeGananciaProvider>
+                                                  <Component {...pageProps} />
+                                                </ReporteDeGananciaProvider>
+                                              </ManejosDeAlmacenProvider>
+                                            </AsignarComisionProvider>
+                                          </ReporteVentasAmbulantesIndividualProvider>
+                                        </MateriasPrimasProvider>
+                                      </ReportesVentasIndividualProvider>
+                                    </PersonalesDeMantenimientoProvider>
+                                  </MantenimientosProvider>
+                                </ReportesDeSalidaProvider>
+                              </ApartadosJuridicosProvider>
+                            </AsignarPreciosProvider>
+                          </AcondicionamientoDeSucursalesProvider>
+                        </SucursalesYFranquiciasProvider>
+                      </ReportesDeComprasProvider>
+                    </ProveedoresProvider>
+                  </PersonalActivoProvider>
+                </ManejosDePersonalProvider>
+              </ClientesFrecuentesProvider>
+            </ChecksInPersonalProvider>
+          </CandidatosProvider>
+        </AuthProvider>
+      </SessionProvider>
     </Suspense>
   );
 }

@@ -36,4 +36,4 @@ export { default as PersonalActivo, type IPersonalActivo } from './personalActiv
 
 // Miscelaneos
 
-
+export { default as Usuario, type IUsuario } from './usuario';

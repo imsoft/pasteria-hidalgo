@@ -46,3 +46,4 @@ export * from './tipoDeProducto';
 export * from './lugarDeVenta';
 export * from './paste';
 export * from './listadoDeProductos';
+export * from './usuario';

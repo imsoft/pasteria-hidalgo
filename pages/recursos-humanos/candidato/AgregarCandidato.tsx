@@ -268,6 +268,7 @@ export default function AgregarCandidato() {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
+              
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"

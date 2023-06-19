@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useContext, useEffect } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +14,9 @@ import {
   MenuAlt2Icon,
   XIcon,
 } from "@heroicons/react/outline";
+import { AuthContext } from "../../context/auth";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 type Props = {
   children?: React.ReactNode;
@@ -25,36 +28,48 @@ const navigation = [
     href: "/contaduria",
     icon: CalculatorIcon,
     current: false,
+    role: "contaduria",
   },
   {
-    name: "Gerencia de Compras",
+    name: "Gerencia de compras",
     href: "/gerencia-de-compras",
     icon: ShoppingBagIcon,
     current: false,
+    role: "gerencia de compras",
   },
   {
     name: "Gerencia de ventas",
     href: "/gerencia-de-ventas",
     icon: CurrencyDollarIcon,
     current: false,
+    role: "gerencia de ventas",
   },
   {
     name: "Gerencia operativa",
     href: "/gerencia-operativa",
     icon: AdjustmentsIcon,
     current: false,
+    role: "Gerencia operativa",
   },
   {
     name: "Recursos humanos",
     href: "/recursos-humanos",
     icon: DocumentTextIcon,
     current: false,
+    role: "Recursos humanos",
+  },
+  {
+    name: "Iniciar sesión",
+    href: "/usuario/login",
+    icon: DocumentTextIcon,
+    current: false,
+    role: undefined,
   },
 ];
 
 const userNavigation = [
   // { name: "Perfil", href: "#" },
-  { name: "Salir", href: "/login" },
+  { name: "Salir", href: "/" },
 ];
 
 function classNames(...classes: string[]) {
@@ -63,6 +78,8 @@ function classNames(...classes: string[]) {
 
 export const SidebarLayout: React.FC<Props> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { user, isLoggedIn, logout } = useContext(AuthContext);
 
   return (
     <>
@@ -124,33 +141,41 @@ export const SidebarLayout: React.FC<Props> = ({ children }) => {
                       className="h-8 w-auto"
                       src={"/static/LogoPasteria.jpg"}
                       alt="Logo Pasteria"
+                      width={24}
+                      height={24}
                     />
                   </Link>
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <Link
-                        href={item.href}
+                      <div
                         key={item.name}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-100 text-gray-900"
-                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                          "group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                        )}
+                        className={`${
+                          user?.role === item.role ? "" : "hidden"
+                        }`}
                       >
-                        <item.icon
+                        <Link
+                          href={item.href}
                           className={classNames(
                             item.current
-                              ? "text-gray-500"
-                              : "text-gray-400 group-hover:text-gray-500",
-                            "mr-4 flex-shrink-0 h-6 w-6"
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                            "group flex items-center px-2 py-2 text-base font-medium rounded-md"
                           )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </Link>
+                        >
+                          <item.icon
+                            className={classNames(
+                              item.current
+                                ? "text-gray-500"
+                                : "text-gray-400 group-hover:text-gray-500",
+                              "mr-4 flex-shrink-0 h-6 w-6"
+                            )}
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </Link>
+                      </div>
                     ))}
                   </nav>
                 </div>
@@ -181,27 +206,31 @@ export const SidebarLayout: React.FC<Props> = ({ children }) => {
           <div className="mt-5 flex-grow flex flex-col">
             <nav className="flex-1 px-2 pb-4 space-y-1">
               {navigation.map((item) => (
-                <Link
+                <div
                   key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-100 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                  )}
+                  className={`${user?.role === item.role ? "" : "hidden"}`}
                 >
-                  <item.icon
+                  <Link
+                    href={item.href}
                     className={classNames(
                       item.current
-                        ? "text-gray-500"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
+                        ? "bg-gray-100 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                     )}
-                    aria-hidden="true"
-                  />
-                  {item.name}
-                </Link>
+                  >
+                    <item.icon
+                      className={classNames(
+                        item.current
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
+                      )}
+                      aria-hidden="true"
+                    />
+                    {item.name}
+                  </Link>
+                </div>
               ))}
             </nav>
           </div>
@@ -234,7 +263,6 @@ export const SidebarLayout: React.FC<Props> = ({ children }) => {
                     <span className="sr-only">Open user menu</span>
                     <Image
                       className="h-8 w-8 rounded-full"
-                      // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       src={"/static/LogoPasteria.jpg"}
                       alt=""
                       width={24}
@@ -242,33 +270,38 @@ export const SidebarLayout: React.FC<Props> = ({ children }) => {
                     />
                   </Menu.Button>
                 </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    {userNavigation.map((item) => (
-                      <Menu.Item key={item.name}>
-                        {({ active }) => (
-                          <Link
-                            href={item.href}
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                {isLoggedIn && (
+                  <>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        {userNavigation.map((item) => (
+                          <Menu.Item key={item.name}>
+                            {({ active }) => (
+                              <Link
+                                href={item.href}
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                                onClick={logout}
+                              >
+                                {item.name}
+                              </Link>
                             )}
-                          >
-                            {item.name}
-                          </Link>
-                        )}
-                      </Menu.Item>
-                    ))}
-                  </Menu.Items>
-                </Transition>
+                          </Menu.Item>
+                        ))}
+                      </Menu.Items>
+                    </Transition>
+                  </>
+                )}
               </Menu>
             </div>
           </div>
