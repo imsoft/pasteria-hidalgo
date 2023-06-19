@@ -35,7 +35,7 @@ const VerReportesDeSalida = () => {
                   "/gerencia-operativa/reporteDeSalida/AgregarReporteDeSalida"
                 }
               >
-                <a>Agregar Reporte De Salida</a>
+                Agregar Reporte De Salida
               </Link>
             </button>
           </div>

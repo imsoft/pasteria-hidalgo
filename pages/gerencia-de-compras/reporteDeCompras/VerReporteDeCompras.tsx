@@ -73,7 +73,7 @@ const VerReportesDeCompras = () => {
                   "/gerencia-de-compras/reporteDeCompras/AgregarReporteDeCompras"
                 }
               >
-                <a>Agregar Reporte de compra</a>
+                Agregar Reporte de compra
               </Link>
             </button>
           </div>

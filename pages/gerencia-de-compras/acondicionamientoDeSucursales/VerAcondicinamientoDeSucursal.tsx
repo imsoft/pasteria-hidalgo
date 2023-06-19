@@ -39,7 +39,7 @@ const VerAcondicionamientoDeSucursales = () => {
                   "/gerencia-de-compras/acondicionamientoDeSucursales/AgregarAcondicionamientoDeSucursal"
                 }
               >
-                <a>Agregar Acondicionamiento de sucursal</a>
+                Agregar Acondicionamiento de sucursal
               </Link>
             </button>
           </div>

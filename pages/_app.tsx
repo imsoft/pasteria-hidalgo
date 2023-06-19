@@ -11,7 +11,6 @@ import { ReporteDeGananciaProvider } from "../context/contaduria/reporteDeGananc
 
 import { AcondicionamientoDeSucursalesProvider } from "../context/gerencia-de-compras/acondicionamientoDeSucursales";
 import { AsignarPreciosProvider } from "../context/gerencia-de-compras/asignarPrecios";
-import { ProductosYaCompradosProvider } from "../context/gerencia-de-compras/productosYaComprados/ProductosYaCompradosProvider";
 import { ProveedoresProvider } from "../context/gerencia-de-compras/manejoDeProveedores";
 import { ReportesDeComprasProvider } from "../context/gerencia-de-compras/reporteDeCompras";
 import { ReporteVentasAmbulantesIndividualProvider } from "../context/gerencia-de-ventas/reporteVentasAmbulantesIndividual";
@@ -26,7 +25,7 @@ import { ReportesVentasIndividualProvider } from "../context/gerencia-de-ventas/
 import { ApartadosJuridicosProvider } from "../context/gerencia-operativa/apartadoJuridico";
 import { ManejosDePersonalProvider } from "../context/gerencia-operativa/manejoDePersonal";
 import { MantenimientosProvider } from "../context/gerencia-operativa/mantenimiento";
-import { PersonalesDeMantenimientoProvider } from "../context/gerencia-operativa/personalDeMantenimiento/PersonalDeMantenimientoProvider";
+import { PersonalesDeMantenimientoProvider } from "../context/gerencia-operativa/personalDeMantenimiento";
 import { ReportesDeSalidaProvider } from "../context/gerencia-operativa/reporteDeSalida";
 import { SucursalesYFranquiciasProvider } from "../context/gerencia-operativa/sucursalYFranquicia";
 import { MateriasPrimasProvider } from "../context/gerencia-operativa/materiaPrima";
@@ -41,6 +40,10 @@ import { PersonalActivoProvider } from "../context/recursos-humanos/personalActi
 // Miscelaneos
 
 import "../styles/globals.css";
+
+// TODO: Checar de donde viene esto:
+import { ProductosYaCompradosProvider } from "../context/gerencia-de-compras/productosYaComprados/ProductosYaCompradosProvider";
+
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -59,7 +62,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           <ClientesFrecuentesProvider>
             <ManejosDePersonalProvider>
               <PersonalActivoProvider>
-                <ProductosYaCompradosProvider>
                   <ProveedoresProvider>
                     <ReportesDeComprasProvider>
                       <SucursalesYFranquiciasProvider>
@@ -91,7 +93,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
                       </SucursalesYFranquiciasProvider>
                     </ReportesDeComprasProvider>
                   </ProveedoresProvider>
-                </ProductosYaCompradosProvider>
               </PersonalActivoProvider>
             </ManejosDePersonalProvider>
           </ClientesFrecuentesProvider>

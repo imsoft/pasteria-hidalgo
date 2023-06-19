@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/outline";
 
 import { SidebarLayoutRecursosHumanos } from "../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
+import Link from "next/link";
 
 const actions = [
   {
@@ -70,7 +71,7 @@ export default function IndexRecursosHumanos() {
       <div className="flex justify-center items-center">
         <div>
           <Image
-            className="h-8 w-auto"
+            className="h-full w-auto"
             src={"/static/LCPLIGHTVERTICAL.jpg"}
             width={600}
             height={600}
@@ -113,11 +114,11 @@ export default function IndexRecursosHumanos() {
                 </div>
                 <div className="mt-8">
                   <h3 className="text-lg font-medium">
-                    <a href={action.href} className="focus:outline-none">
+                    <Link href={action.href} className="focus:outline-none">
                       {/* Extend touch target to entire panel */}
                       <span className="absolute inset-0" aria-hidden="true" />
                       {action.title}
-                    </a>
+                    </Link>
                   </h3>
                   <p className="mt-2 text-sm text-gray-500">
                     {action.description}

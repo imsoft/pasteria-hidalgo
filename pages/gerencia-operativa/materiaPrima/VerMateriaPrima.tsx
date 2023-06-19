@@ -24,7 +24,7 @@ const VerMateriasPrimas = () => {
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
             >
               <Link href={"/gerencia-operativa/materiaPrima/AgregarMateriaPrima"}>
-                <a>Agregar Materia Prima</a>
+                Agregar Materia Prima
               </Link>
             </button>
           </div>

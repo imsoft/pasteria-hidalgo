@@ -35,7 +35,7 @@ const VerApartadosJuridicos = () => {
                   "/gerencia-operativa/apartadoJuridico/AgregarApartadoJuridico"
                 }
               >
-                <a>Agregar Apartado Juridico</a>
+                Agregar Apartado Juridico
               </Link>
             </button>
           </div>

@@ -6,7 +6,7 @@ export default function Home() {
     <SidebarLayout>
       <div className="flex justify-center">
         <Image
-          className="h-8 w-auto"
+          className="h-full w-auto"
           src={"/static/LCPLIGHTVERTICAL.jpg"}
           width={600}
           height={600}

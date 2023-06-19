@@ -83,7 +83,7 @@ export default function VerAsignarComisiones() {
               <Link
                 href={"/contaduria/asignarComisiones/AgregarAsignarComisiones"}
               >
-                <a>Agregar Asignar Comisión</a>
+                Agregar Asignar Comisión
               </Link>
             </button>
           </div>

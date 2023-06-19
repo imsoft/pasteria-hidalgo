@@ -119,7 +119,9 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) => {
+export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({
+  children,
+}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -186,39 +188,36 @@ export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) =>
                 </Transition.Child>
                 <div className="flex-shrink-0 flex items-center px-4">
                   <Link href="/">
-                    <a>
-                      <Image
-                        className="h-8 w-auto"
-                        src={"/static/LogoPasteria.jpg"}
-                        alt="Logo Pasteria"
-                      />
-                    </a>
+                    <Image
+                      className="h-8 w-auto"
+                      src={"/static/LogoPasteria.jpg"}
+                      alt="Logo Pasteria"
+                    />
                   </Link>
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <Link href={item.href} key={ item.name }>
-                        <a
-                          key={item.name}
+                      <Link
+                        href={item.href}
+                        key={item.name}
+                        className={classNames(
+                          item.current
+                            ? "bg-gray-100 text-gray-900"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                          "group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                        )}
+                      >
+                        <item.icon
                           className={classNames(
                             item.current
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                            "group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                              ? "text-gray-500"
+                              : "text-gray-400 group-hover:text-gray-500",
+                            "mr-4 flex-shrink-0 h-6 w-6"
                           )}
-                        >
-                          <item.icon
-                            className={classNames(
-                              item.current
-                                ? "text-gray-500"
-                                : "text-gray-400 group-hover:text-gray-500",
-                              "mr-4 flex-shrink-0 h-6 w-6"
-                            )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </a>
+                          aria-hidden="true"
+                        />
+                        {item.name}
                       </Link>
                     ))}
                   </nav>
@@ -238,21 +237,19 @@ export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) =>
         <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4">
             <Link href="/gerencia-operativa">
-              <a>
-                <Image
-                  className="h-8 w-auto"
-                  src={"/static/LogoPasteria.jpg"}
-                  width={32}
-                  height={32}
-                  alt="Workflow"
-                />
-              </a>
+              <Image
+                className="h-8 w-auto"
+                src={"/static/LogoPasteria.jpg"}
+                width={32}
+                height={32}
+                alt="Workflow"
+              />
             </Link>
           </div>
           <div className="mt-5 flex-grow flex flex-col">
             <nav className="flex-1 px-2 pb-4 space-y-1">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className={classNames(
@@ -272,7 +269,7 @@ export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) =>
                     aria-hidden="true"
                   />
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
@@ -326,7 +323,7 @@ export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) =>
                     {userNavigation.map((item) => (
                       <Menu.Item key={item.name}>
                         {({ active }) => (
-                          <a
+                          <Link
                             href={item.href}
                             className={classNames(
                               active ? "bg-gray-100" : "",
@@ -334,7 +331,7 @@ export const SidebarLayoutGerenciaOperativa: React.FC<Props> = ({ children }) =>
                             )}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                     ))}

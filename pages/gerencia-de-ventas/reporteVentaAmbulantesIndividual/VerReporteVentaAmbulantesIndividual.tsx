@@ -77,7 +77,7 @@ const VerReporteVentaAmbulantesIndividual = () => {
                   "/gerencia-de-ventas/reporteDeVentasIndividual/AgregarReporteDeVentasIndividual"
                 }
               >
-                <a>Agregar Reporte de ventas individual</a>
+                Agregar Reporte de ventas individual
               </Link>
             </button>
           </div>

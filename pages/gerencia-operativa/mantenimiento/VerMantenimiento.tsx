@@ -36,7 +36,7 @@ const VerMantenimientos = () => {
               <Link
                 href={"/gerencia-operativa/mantenimiento/AgregarMantenimiento"}
               >
-                <a>Agregar Mantenimiento</a>
+                Agregar Mantenimiento
               </Link>
             </button>
           </div>

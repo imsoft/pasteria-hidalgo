@@ -33,7 +33,7 @@ const VerCheckInPersonal = () => {
               <Link
                 href={"/recursos-humanos/checkInPersonal/CheckInDePersonal"}
               >
-                <a>Agregar Check In Personal</a>
+                Agregar Check In Personal
               </Link>
             </button>
           </div>
