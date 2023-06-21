@@ -8,7 +8,7 @@ import { validations } from "../../utils";
 import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
 import { getSession, signIn } from "next-auth/react";
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps } from "next";
 
 type FormData = {
   correoElectronico: string;
@@ -104,7 +104,6 @@ export default function Login() {
                   type="email"
                   id="TxtCorreoElectronico"
                   autoComplete="off"
-                  value={"luis@compras.com"}
                   className={`${
                     errors?.correoElectronico
                       ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
@@ -144,7 +143,6 @@ export default function Login() {
                   type="password"
                   id="TxtContrasenia"
                   autoComplete="off"
-                  value={"compras789"}
                   className={`${
                     errors?.contrasenia
                       ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
@@ -201,21 +199,19 @@ export default function Login() {
 
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
-export const getServerSideProps: GetServerSideProps = async ({req}) => {
-  const session = await getSession({req});
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
 
   if (session) {
     return {
       redirect: {
-        destination: '/',
+        destination: "/",
         permanent: false,
-      }
-    }
+      },
+    };
   }
 
   return {
-    props: {
-      
-    }
-  }
-}
+    props: {},
+  };
+};
