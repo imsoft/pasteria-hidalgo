@@ -152,7 +152,7 @@ export const SidebarLayout: React.FC<Props> = ({ children }) => {
                       <div
                         key={item.name}
                         className={`${
-                          user?.role === item.role ? "" : "hidden"
+                          user?.role === item.role || 'admin' ? "" : "hidden"
                         }`}
                       >
                         <Link
@@ -208,7 +208,7 @@ export const SidebarLayout: React.FC<Props> = ({ children }) => {
               {navigation.map((item) => (
                 <div
                   key={item.name}
-                  className={`${user?.role === item.role ? "" : "hidden"}`}
+                  className={`${user?.role === item.role || 'admin' ? "" : "hidden"}`}
                 >
                   <Link
                     href={item.href}
