@@ -47,21 +47,21 @@ const navigation = [
     href: "/gerencia-operativa",
     icon: AdjustmentsIcon,
     current: false,
-    role: "Gerencia operativa",
+    role: "gerencia operativa",
   },
   {
     name: "Recursos humanos",
     href: "/recursos-humanos",
     icon: DocumentTextIcon,
     current: false,
-    role: "Recursos humanos",
+    role: "recursos humanos",
   },
   {
     name: "Iniciar sesión",
     href: "/usuario/login",
     icon: DocumentTextIcon,
     current: false,
-    role: undefined,
+    role: null,
   },
 ];
 
@@ -150,7 +150,8 @@ export const SidebarLayout: React.FC<Props> = ({ children }) => {
                       <div
                         key={item.name}
                         className={`${
-                          user?.role === item.role || user?.role === "admin"
+                          user?.role.includes(item.role!) ||
+                          (item.role === null && !isLoggedIn)
                             ? ""
                             : "hidden"
                         }`}
@@ -209,7 +210,8 @@ export const SidebarLayout: React.FC<Props> = ({ children }) => {
                 <div
                   key={item.name}
                   className={`${
-                    user?.role === item.role || user?.role === "admin"
+                    user?.role.includes(item.role!) ||
+                    (item.role === null && !isLoggedIn)
                       ? ""
                       : "hidden"
                   }`}

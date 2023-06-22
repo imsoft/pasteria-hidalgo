@@ -3,7 +3,7 @@ export interface Usuario {
   nombre: string;
   correoElectronico: string;
   contrasenia: string;
-  role: string;
+  role: string[];
 
   createdAt?: Date;
   updatedAt?: Date;

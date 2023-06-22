@@ -12,7 +12,7 @@ type Data =
       usuario: {
         nombre: string;
         correoElectronico: string;
-        role: string;
+        role: string[];
       };
     };
 

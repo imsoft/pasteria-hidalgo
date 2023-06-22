@@ -8,7 +8,7 @@ const usuarioSchema = new Schema(
     nombre: { type: String, required: true },
     correoElectronico: { type: String, required: true, unique: true },
     contrasenia: { type: String, required: true },
-    role: {
+    role: [{
       type: String,
       enum: {
         values: [
@@ -22,7 +22,7 @@ const usuarioSchema = new Schema(
         message: "{VALUE} no es un rol valido",
         required: true,
       },
-    },
+    }],
   },
   { timestamps: true }
 );
