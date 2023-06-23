@@ -11,6 +11,7 @@ export default function Home() {
           width={600}
           height={600}
           alt="Pasteleria La Hidalguense"
+          priority
         />
       </div>
     </SidebarLayout>

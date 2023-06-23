@@ -2701,7 +2701,7 @@ export const initialData: SeedData = {
       nombre: "Juan Pérez",
       correoElectronico: "juan@admin.com",
       contrasenia: bcrypt.hashSync("admin123"),
-      role: ["admin"],
+      role: ["contaduria", "gerencia de compras", "gerencia de ventas", "gerencia operativa", "recursos humanos"],
     },
     {
       nombre: "María Rodríguez",
