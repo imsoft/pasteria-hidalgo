@@ -16,6 +16,9 @@ import { useRouter } from "next/router";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 import { ReporteDeGananciaContext } from "../../../context/contaduria/reporteDeGanancia";
 import { dividirFecha, generateTicket } from "../../../utils";
+import { useSession } from "next-auth/react";
+import { MinusIcon, PlusIcon, UserAddIcon } from "@heroicons/react/outline";
+import Swal from "sweetalert2";
 
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
@@ -318,6 +321,9 @@ const validCakeFlavors: Paste[] = [
 
 const AgregarReporteDeVentasIndividual = () => {
   const router = useRouter();
+
+  const session = useSession();
+
   const { agregarNuevoReporteVentasIndividual } = useContext(
     ReportesVentasIndividualContext
   );
@@ -351,7 +357,7 @@ const AgregarReporteDeVentasIndividual = () => {
   const [inputCantidad, setInputCantidad] = useState(0);
   const [inputPrecioProducto, setInputPrecioProducto] = useState(0);
   const [inputMonto, setInputMonto] = useState(0);
-  const [inputSumaTotal, setInputSumaTotal] = useState(0);
+  let [inputSumaTotal, setInputSumaTotal] = useState(0);
   const [inputCorreoClienteFrecuente, setInputCorreoClienteFrecuente] =
     useState("");
   const [inputPuntosClienteFrecuente, setInputPuntosClienteFrecuente] =
@@ -364,6 +370,7 @@ const AgregarReporteDeVentasIndividual = () => {
   >([]);
 
   const [inputUsarPuntos, setInputUsarPuntos] = useState("");
+  const [inputPromocion, setInputPromocion] = useState("No");
 
   const [touched, setTouched] = useState(false);
 
@@ -441,6 +448,12 @@ const AgregarReporteDeVentasIndividual = () => {
     setInputUsarPuntos(event.target.value);
   };
 
+  const onTextFieldChangedPromocion = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputPromocion(event.target.value);
+  };
+
   const lookUpProductPrice = () => {
     const result = validCakeFlavors.find(
       (cakeFlavors) => cakeFlavors.saborDelPaste === inputSaborProducto
@@ -481,6 +494,30 @@ const AgregarReporteDeVentasIndividual = () => {
   useEffect(() => {
     usoDePuntosClienteFrecuente();
   }, [inputPuntosClienteFrecuente, inputCorreoClienteFrecuente]);
+
+  useEffect(() => {
+    switch (inputPromocion) {
+      case "No":
+        setInputSumaTotal((inputSumaTotal = -0));
+        break;
+      case "Compra 6 pastes y llevate 1":
+        setInputSumaTotal((inputSumaTotal = -30));
+        break;
+      case "Compra 10 pastes y llevate 2":
+        setInputSumaTotal((inputSumaTotal = -60));
+        break;
+
+      default:
+        return;
+    }
+  }, [inputPromocion]);
+
+  const addProductQuantity = () => setInputCantidad(inputCantidad + 1);
+
+  const removeProductQuantity = () => {
+    if (inputCantidad <= 1) return;
+    setInputCantidad(inputCantidad - 1);
+  };
 
   const agregarALaLista = () => {
     const nuevaListaProductos = {
@@ -789,6 +826,27 @@ const AgregarReporteDeVentasIndividual = () => {
                 </div>
               )}
 
+              <div className={"col-span-6 sm:col-span-3"}>
+                <label
+                  htmlFor="CmbSaboresDulces"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Promoción
+                </label>
+                <select
+                  id="CmbSaboresDulces"
+                  name="CmbSaboresDulces"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  value={inputPromocion || ""}
+                  onChange={onTextFieldChangedPromocion}
+                  onBlur={() => setTouched(true)}
+                >
+                  <option>No</option>
+                  <option>Compra 6 pastes y llevate 1</option>
+                  <option>Compra 10 pastes y llevate 2</option>
+                </select>
+              </div>
+
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtTipoDeProducto"
@@ -867,17 +925,35 @@ const AgregarReporteDeVentasIndividual = () => {
                 >
                   Cantidad de producto
                 </label>
-                <input
-                  type="number"
-                  min={1}
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
-                  autoComplete="off"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                  value={inputCantidad || ""}
-                  onChange={onTextFieldChangedCantidad}
-                  onBlur={() => setTouched(true)}
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="number"
+                    min={1}
+                    name="TxtDescripcionProducto"
+                    id="TxtDescripcionProducto"
+                    autoComplete="off"
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                    value={inputCantidad || ""}
+                    onChange={onTextFieldChangedCantidad}
+                    onBlur={() => setTouched(true)}
+                  />
+
+                  <button
+                    type="button"
+                    className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-10 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-primary-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+                    onClick={addProductQuantity}
+                  >
+                    <PlusIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+
+                  <button
+                    type="button"
+                    className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-10 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-primary-blue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+                    onClick={removeProductQuantity}
+                  >
+                    <MinusIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                </div>
               </div>
 
               <div className="col-span-6 sm:col-span-3">

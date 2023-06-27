@@ -3,19 +3,12 @@ import { useContext, useMemo } from "react";
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 import ListaManejosDeAlmacen from "../../../components/ui/gerencia-operativa/ListaManejoDeAlmacen";
 import { ManejosDeAlmacenContext } from "../../../context/gerencia-operativa/manejoDeAlmacen";
-import { ReporteDeCompraContext } from "../../../context/gerencia-de-compras/reporteDeCompras";
 
 const VerReportesDeCompras = () => {
   const { manejosDeAlmacen } = useContext(ManejosDeAlmacenContext);
   const manejosDeAlmacenMemo = useMemo(
     () => manejosDeAlmacen,
     [manejosDeAlmacen]
-  );
-
-  const { reportesDeCompras } = useContext(ReporteDeCompraContext);
-  const reportesDeComprasMemo = useMemo(
-    () => reportesDeCompras,
-    [reportesDeCompras]
   );
 
   return (

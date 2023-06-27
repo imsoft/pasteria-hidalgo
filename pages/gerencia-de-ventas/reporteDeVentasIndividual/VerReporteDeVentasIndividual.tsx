@@ -5,9 +5,13 @@ import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ve
 import ListaReportesVentasIndividual from "../../../components/ui/gerencia-de-ventas/ListaReportesDeVentaIndividual";
 
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
+import { LugarDeVenta } from "../../../interfaces";
+import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
+
+const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
 const VerReporteDeVentasIndividual = () => {
   const [inputFecha, setInputFecha] = useState(hoy.toLocaleDateString());
@@ -16,12 +20,22 @@ const VerReporteDeVentasIndividual = () => {
   );
   const [change, setChange] = useState(false);
 
+  const [inputLugarDeLaVenta, setInputLugarDeLaVenta] = useState("");
+  const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
+    useState("");
+
   const { reportesVentasIndividual } = useContext(
     ReportesVentasIndividualContext
   );
   const reportesVentasIndividualMemo = useMemo(
     () => reportesVentasIndividual,
     [reportesVentasIndividual]
+  );
+
+  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const sucursalesYFranquiciasMemo = useMemo(
+    () => sucursalesYFranquicias,
+    [sucursalesYFranquicias]
   );
 
   const onTextFieldChangedFecha = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,10 +48,25 @@ const VerReporteDeVentasIndividual = () => {
     setChange(true);
   };
 
+  const onTextFieldChangedLugarDeLaVenta = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputLugarDeLaVenta(event.target.value as LugarDeVenta);
+    console.log(event.target.value as LugarDeVenta);
+  };
+
+  const onTextFieldChangedNombreSucursalOFranquicia = (
+    event: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputNombreSucursalOFranquicia(event.target.value);
+  };
+
   const mostrarTodos = () => {
     setChange(false);
     setInputFecha(hoy.toLocaleDateString());
     setInputNuevaFecha(hoy.toLocaleDateString());
+    setInputLugarDeLaVenta("");
+    setInputNombreSucursalOFranquicia("");
   };
 
   useEffect(() => {
@@ -46,13 +75,24 @@ const VerReporteDeVentasIndividual = () => {
         (reporteVentasIndividual) =>
           reporteVentasIndividual.fecha === inputNuevaFecha
       )
+      .filter(
+        (reporteVentasIndividual) =>
+          reporteVentasIndividual.lugarDeVenta === inputLugarDeLaVenta
+      )
+      .filter(
+        (reporteVentasIndividual) =>
+          reporteVentasIndividual.nombreLugarDeVenta ===
+          inputNombreSucursalOFranquicia
+      )
       .map((reporteVentasIndividual) => (
         <ListaReportesVentasIndividual
           key={reporteVentasIndividual._id}
           reporteVentasIndividual={reporteVentasIndividual}
         />
       ));
-  }, [inputFecha]);
+
+    // reportesVentasIndividualMemo.map((lista) => console.log(lista.lugarDeVenta));
+  }, [inputFecha, inputLugarDeLaVenta, inputNombreSucursalOFranquicia]);
 
   return (
     <SidebarLayoutGerenciaVentas>
@@ -83,12 +123,12 @@ const VerReporteDeVentasIndividual = () => {
         </div>
 
         <div className="grid grid-cols-6 gap-6 mt-6">
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6 sm:col-span-2">
             <label
               htmlFor="TxtFecha"
               className="block text-sm font-medium text-gray-700"
             >
-              Filtrado por fecha
+              Fecha
             </label>
             <input
               type="date"
@@ -101,7 +141,73 @@ const VerReporteDeVentasIndividual = () => {
             />
           </div>
 
-          <div className="mt-3 px-4 py-3 bg-white text-right sm:px-2">
+          <div className="col-span-6 sm:col-span-2">
+            <label
+              htmlFor="TxtEspecificacionDeLugarDeVenta"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Especificación de lugar de venta
+            </label>
+            <select
+              id="TxtEspecificacionDeLugarDeVenta"
+              name="TxtEspecificacionDeLugarDeVenta"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+              value={inputLugarDeLaVenta || ""}
+              onChange={onTextFieldChangedLugarDeLaVenta}
+            >
+              <option hidden>Selecciona un lugar de venta...</option>
+              {validSalesPlace.map((salesPlace) => (
+                <option key={salesPlace}>{salesPlace}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="col-span-6 sm:col-span-2">
+            <label
+              htmlFor="CmbFranquicia"
+              className="block text-sm font-medium text-gray-700"
+            >
+              {inputLugarDeLaVenta === "Sucursal"
+                ? "Sucursal"
+                : inputLugarDeLaVenta === "Franquicia"
+                ? "Franquicia"
+                : "Primero seleccione franquicia, sucursal o evento"}
+            </label>
+            <select
+              id="CmbFranquicia"
+              name="CmbFranquicia"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+              defaultValue="Selecciona un producto..."
+              onChange={onTextFieldChangedNombreSucursalOFranquicia}
+            >
+              <option hidden>
+                Seleccione la{" "}
+                {inputLugarDeLaVenta === "Sucursal"
+                  ? "Sucursal"
+                  : inputLugarDeLaVenta === "Franquicia"
+                  ? "Franquicia"
+                  : inputLugarDeLaVenta === "Evento"
+                  ? ""
+                  : "Primero seleccione franquicia, sucursal o evento"}
+                ...
+              </option>
+              {sucursalesYFranquiciasMemo
+                .filter(
+                  (sucursalesYFranquicias) =>
+                    sucursalesYFranquicias.sucursalOFranquicia ===
+                    inputLugarDeLaVenta
+                )
+                .map((sucursalesYFranquicias) => (
+                  <option
+                    key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                  >
+                    {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                  </option>
+                ))}
+            </select>
+          </div>
+
+          <div className="bg-white">
             <button
               type="submit"
               className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
@@ -183,6 +289,16 @@ const VerReporteDeVentasIndividual = () => {
                         .filter(
                           (reporteVentasIndividual) =>
                             reporteVentasIndividual.fecha === inputNuevaFecha
+                        )
+                        .filter(
+                          (reporteVentasIndividual) =>
+                            reporteVentasIndividual.lugarDeVenta ===
+                            inputLugarDeLaVenta
+                        )
+                        .filter(
+                          (reporteVentasIndividual) =>
+                            reporteVentasIndividual.nombreLugarDeVenta ===
+                            inputNombreSucursalOFranquicia
                         )
                         .map((reporteVentasIndividual) => (
                           <ListaReportesVentasIndividual

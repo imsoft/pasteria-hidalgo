@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia/SucursalYFranquiciaContext";
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
@@ -6,6 +6,7 @@ import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gere
 import { useRouter } from "next/router";
 import { Resolver, useForm } from "react-hook-form";
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
+import { moneyFormat } from "../../../utils/moneyFormat";
 
 type FormData = {
   sucursalOFranquicia: string;
@@ -107,6 +108,12 @@ export default function ManejoSucursalesFranquicias() {
     formState: { errors },
     watch,
   } = useForm<FormData>({ resolver });
+
+  const [montoDePago, setMontoDePago] = useState("");
+
+  useEffect(() => {
+    setMontoDePago(moneyFormat(parseFloat(watch("montoDePago"))));
+  }, [watch("montoDePago")]);
 
   const { agregarSucursalYFranquicia } = useContext(
     SucursalesYFranquiciasContext
@@ -383,8 +390,17 @@ export default function ManejoSucursalesFranquicias() {
                         ? "block mt-1 w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6"
                         : "block mt-1 w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                     }`}
-                    {...register("montoDePago")}
+                    {...(register("montoDePago"))}
                   />
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span
+                      className="text-gray-500 sm:text-sm"
+                      id="price-currency"
+                    >
+                      MXN
+                    </span>
+                  </div>
+
                   {errors?.montoDePago && (
                     <>
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -396,6 +412,9 @@ export default function ManejoSucursalesFranquicias() {
                     </>
                   )}
                 </div>
+                <span className="text-sm text-gray-500">
+                  $ {isNaN(parseFloat(montoDePago)) ? "" : montoDePago}
+                </span>
                 {errors?.montoDePago && (
                   <>
                     <p className="mt-2 text-sm text-red-600" id="email-error">

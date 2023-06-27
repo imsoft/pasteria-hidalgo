@@ -1747,7 +1747,7 @@ export const initialData: SeedData = {
     },
     {
       // 8
-      fecha: "5/5/2023",
+      fecha: "05/05/2023",
       nombreDelVendedor: "Ana",
       lugarDeVenta: "Franquicia",
       nombreLugarDeVenta: "Providencia",
@@ -1775,7 +1775,7 @@ export const initialData: SeedData = {
     },
     {
       // 9
-      fecha: "10/3/2023",
+      fecha: "10/03/2023",
       nombreDelVendedor: "Sofía",
       lugarDeVenta: "Sucursal",
       nombreLugarDeVenta: "Condesa",
@@ -1803,7 +1803,7 @@ export const initialData: SeedData = {
     },
     {
       // 10
-      fecha: "7/6/2023",
+      fecha: "07/06/2023",
       nombreDelVendedor: "Pedro",
       lugarDeVenta: "Franquicia",
       nombreLugarDeVenta: "Polanco",

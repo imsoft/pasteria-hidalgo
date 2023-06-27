@@ -12,7 +12,13 @@ const validTemperature: Temperatura[] = [
   "Congelado",
 ];
 
-const validUnits: Unidades[] = ["Gramos", "Kilogramos", "Mililitros", "Litros"];
+const validUnits: Unidades[] = [
+  "Gramos",
+  "Kilogramos",
+  "Mililitros",
+  "Litros",
+  "Por pieza",
+];
 
 type FormData = {
   materiaPrima: string;

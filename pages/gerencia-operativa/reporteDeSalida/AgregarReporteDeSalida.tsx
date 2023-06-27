@@ -26,8 +26,8 @@ type FormData = {
   datosDeLaRuta: string;
   kilometrajeDeEntrada: string;
   kilometrajeDeSalida: string;
-  listadoReporteDeSalida: IListadoReporteDeSalida[];  
-}
+  listadoReporteDeSalida: IListadoReporteDeSalida[];
+};
 
 const validCakeFlavors: Paste[] = [
   {
@@ -81,6 +81,12 @@ const validCakeFlavors: Paste[] = [
   {
     _id: "PD_PCP",
     saborDelPaste: "Piña con philadelphia",
+    precio: 30,
+    tipoDeProducto: "Paste Dulce",
+  },
+  {
+    _id: "PD_FRCP",
+    saborDelPaste: "Frutos rojos con philadelphia",
     precio: 30,
     tipoDeProducto: "Paste Dulce",
   },
@@ -139,8 +145,8 @@ const validCakeFlavors: Paste[] = [
     tipoDeProducto: "Paste Salado",
   },
   {
-    _id: "PS_RCE",
-    saborDelPaste: "Requeson con espinacas",
+    _id: "PS_ECR",
+    saborDelPaste: "Espinacas con requeson",
     precio: 30,
     tipoDeProducto: "Paste Salado",
   },
@@ -157,8 +163,26 @@ const validCakeFlavors: Paste[] = [
     tipoDeProducto: "Paste Salado",
   },
   {
-    _id: "O_A",
-    saborDelPaste: "Agua",
+    _id: "PS_P",
+    saborDelPaste: "Pastor",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_T",
+    saborDelPaste: "Tapatio",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "PS_C",
+    saborDelPaste: "Choriqueso",
+    precio: 30,
+    tipoDeProducto: "Paste Salado",
+  },
+  {
+    _id: "O_AN",
+    saborDelPaste: "Agua natural",
     precio: 10,
     tipoDeProducto: "Otros",
   },
@@ -187,21 +211,99 @@ const validCakeFlavors: Paste[] = [
     tipoDeProducto: "Otros",
   },
   {
-    _id: "O_R",
-    saborDelPaste: "Refresco",
+    _id: "O_GCC",
+    saborDelPaste: "Galletas caja chica",
+    precio: 60,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_GCG",
+    saborDelPaste: "Galletas caja grande",
+    precio: 70,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_CCCT",
+    saborDelPaste: "Coca cola con taparrosca",
     precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_CCDL",
+    saborDelPaste: "Coca cola de lata",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_CCDLL",
+    saborDelPaste: "Coca cola de lata light",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_AM",
+    saborDelPaste: "Agua mineral",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_FT",
+    saborDelPaste: "Fuze tea",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_S",
+    saborDelPaste: "Sprite",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_F",
+    saborDelPaste: "Fanta",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_M",
+    saborDelPaste: "Mundet",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_J",
+    saborDelPaste: "Jarritos",
+    precio: 20,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_P4M",
+    saborDelPaste: "Pepsi 400 ml",
+    precio: 10,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_CCSA",
+    saborDelPaste: "Coca cola sin azucar",
+    precio: 15,
+    tipoDeProducto: "Otros",
+  },
+  {
+    _id: "O_J",
+    saborDelPaste: "Jumex",
+    precio: 12,
     tipoDeProducto: "Otros",
   },
   {
     _id: "O_SR",
     saborDelPaste: "Salsa roja",
-    precio: 4,
+    precio: 5,
     tipoDeProducto: "Otros",
   },
   {
     _id: "O_SV",
     saborDelPaste: "Salsa verde",
-    precio: 4,
+    precio: 5,
     tipoDeProducto: "Otros",
   },
 ];
@@ -273,7 +375,7 @@ export default function ReportesSalida() {
   };
 
   const onTextFieldChangedDatosDeLaRuta = (
-    event: ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLSelectElement>
   ) => {
     setInputDatosDeLaRuta(event.target.value);
   };
@@ -569,23 +671,45 @@ export default function ReportesSalida() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="CmbDistanciaDeLaFabricaAlDestino"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Distancia de la fábrica al destino
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
-                  <input
+                  {/* <input
                     type="text"
-                    name="TxtDescripcionProducto"
-                    id="TxtDescripcionProducto"
+                    name="CmbDistanciaDeLaFabricaAlDestino"
+                    id="CmbDistanciaDeLaFabricaAlDestino"
                     autoComplete="off"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                     value={inputDatosDeLaRuta || ""}
                     onChange={onTextFieldChangedDatosDeLaRuta}
                     onBlur={() => setTouched(true)}
-                  />
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  /> */}
+
+                  <select
+                    id="CmbUnidades"
+                    name="CmbUnidades"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                    onChange={onTextFieldChangedDatosDeLaRuta}
+                    onBlur={() => setTouched(true)}
+                  >
+                    <option hidden>Selecciona una opción...</option>
+                    {sucursalesYFranquiciasMemo
+                      .filter(
+                        (distance) =>
+                          distance.nombreSucursalOFranquicia ===
+                          inputSucursalAEnviar
+                      )
+                      .map((distance) => (
+                        <option key={distance.distancia}>
+                          {distance.distancia}
+                        </option>
+                      ))}
+                  </select>
+
+                  <div className="absolute inset-y-0 right-0 pr-9 flex items-center pointer-events-none">
                     <span
                       className="text-gray-500 sm:text-sm"
                       id="price-currency"

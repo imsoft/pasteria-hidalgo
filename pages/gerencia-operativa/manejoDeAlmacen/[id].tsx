@@ -2,48 +2,33 @@ import { ChangeEvent, FC, useContext, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
+import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { Temperatura, Unidades } from "../../../interfaces";
-import { MateriaPrima } from "../../../interfaces/materiaPrima";
-import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
-import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
-import { dbMateriaPrima } from "../../../database";
-
-const validTemperature: Temperatura[] = [
-  "Ambiente",
-  "Refrigerado",
-  "Congelado",
-];
-
-const validUnits: Unidades[] = [
-  "Gramos",
-  "Kilogramos",
-  "Mililitros",
-  "Litros",
-  "Por pieza",
-];
+import { ManejoDeAlmacen } from "../../../interfaces";
+import { ManejosDeAlmacenContext } from "../../../context/gerencia-operativa/manejoDeAlmacen";
+import { dbManejoDeAlmacen } from "../../../database";
 
 interface Props {
-  materiaPrima: MateriaPrima;
+  manejoDeAlmacen: ManejoDeAlmacen;
 }
 
-export const MateriaPrimaPage: FC<Props> = ({ materiaPrima }) => {
+export const ManejoDeAlmacenPage: FC<Props> = ({ manejoDeAlmacen }) => {
   const router = useRouter();
 
-  const { actualizarMateriaPrima, eliminarMateriaPrima } = useContext(
-    MateriasPrimasContext
+  const { actualizarManejoDeAlmacen, eliminarManejoDeAlmacen } = useContext(
+    ManejosDeAlmacenContext
   );
 
   const [inputMateriaPrima, setInputMateriaPrima] = useState(
-    materiaPrima.materiaPrima
+    manejoDeAlmacen.materiaPrima
   );
-  const [inputUnidades, setInputUnidades] = useState<Unidades>(
-    materiaPrima.unidades
+  const [inputUnidades, setInputUnidades] = useState(manejoDeAlmacen.unidades);
+  const [inputTemperatura, setInputTemperatura] = useState(
+    manejoDeAlmacen.temperatura
   );
-  const [inputTemperatura, setInputTemperatura] = useState<Temperatura>(
-    materiaPrima.temperatura
-  );
+  const [inputCantidad, setInputCantidad] = useState(manejoDeAlmacen.cantidad);
 
   const MySwal = withReactContent(Swal);
 
@@ -54,27 +39,34 @@ export const MateriaPrimaPage: FC<Props> = ({ materiaPrima }) => {
   };
 
   const onInputValueChangedUnidades = (
-    event: ChangeEvent<HTMLSelectElement>
+    event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputUnidades(event.target.value as Unidades);
+    setInputUnidades(event.target.value);
   };
 
   const onInputValueChangedTemperatura = (
-    event: ChangeEvent<HTMLSelectElement>
+    event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputTemperatura(event.target.value as Temperatura);
+    setInputTemperatura(event.target.value);
+  };
+
+  const onInputValueChangedCantidad = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInputCantidad(parseInt(event.target.value));
   };
 
   const onSave = () => {
     if (
       inputMateriaPrima.trim().length === 0 &&
       inputUnidades.trim().length === 0 &&
-      inputTemperatura.trim().length === 0
+      inputTemperatura.trim().length === 0 &&
+      inputCantidad === 0
     )
       return;
 
     MySwal.fire({
-      title: "¿Quieres actualizar la información a esta materia prima?",
+      title: "¿Quieres actualizar la información a este manejo de almacen?",
       text: "Verifica los datos antes de la operación",
       icon: "warning",
       showCancelButton: true,
@@ -84,22 +76,23 @@ export const MateriaPrimaPage: FC<Props> = ({ materiaPrima }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        const actualizadoMateriaPrima: MateriaPrima = {
-          ...materiaPrima,
+        const actualizadoManejoDeAlmacen: ManejoDeAlmacen = {
+          ...manejoDeAlmacen,
           materiaPrima: inputMateriaPrima,
           unidades: inputUnidades,
           temperatura: inputTemperatura,
+          cantidad: inputCantidad,
         };
 
-        actualizarMateriaPrima(actualizadoMateriaPrima, true);
-        router.push("/gerencia-operativa/materiaPrima/VerMateriaPrima");
+        actualizarManejoDeAlmacen(actualizadoManejoDeAlmacen, true);
+        router.push("/gerencia-operativa/manejoDeAlmacen/VerManejoDeAlmacen");
       }
     });
   };
 
   const onDelete = () => {
     MySwal.fire({
-      title: "¿Quieres eliminar a esta materia prima?",
+      title: "¿Quieres eliminar a esta manejo de almancen?",
       text: "Verifica los datos antes de la operación",
       icon: "warning",
       showCancelButton: true,
@@ -109,8 +102,8 @@ export const MateriaPrimaPage: FC<Props> = ({ materiaPrima }) => {
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        eliminarMateriaPrima(materiaPrima, true);
-        router.push("/gerencia-operativa/materiaPrima/VerMateriaPrima");
+        eliminarManejoDeAlmacen(manejoDeAlmacen, true);
+        router.push("/gerencia-operativa/manejoDeAlmacen/VerManejoDeAlmacen");
       }
     });
   };
@@ -122,22 +115,22 @@ export const MateriaPrimaPage: FC<Props> = ({ materiaPrima }) => {
           <div className="bg-white py-6 px-4 space-y-6 sm:p-6">
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Materia Prima
+                Manejo de almacen
               </h3>
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
-              <div className="col-span-6 sm:col-span-3">
+              {/* <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtNombreMateriaPrima"
+                  htmlFor="TxtMateriaPrima"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Nombre Materia Prima
+                  Materia Prima
                 </label>
                 <input
                   type="text"
-                  name="TxtNombreMateriaPrima"
-                  id="TxtNombreMateriaPrima"
+                  name="TxtMateriaPrima"
+                  id="TxtMateriaPrima"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputMateriaPrima}
@@ -147,48 +140,56 @@ export const MateriaPrimaPage: FC<Props> = ({ materiaPrima }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbTemperatura"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Temperatura
-                </label>
-                <select
-                  id="CmbTemperatura"
-                  name="CmbTemperatura"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  value={inputTemperatura}
-                  onChange={onInputValueChangedTemperatura}
-                >
-                  <option hidden>Seleccione la temperatura...</option>
-                  {validTemperature.map((temperatura) => (
-                    <option key={temperatura} value={temperatura}>
-                      {temperatura}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
                   htmlFor="TxtUnidades"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Unidades
                 </label>
-                <select
-                  id="CmbUnidades"
-                  name="CmbUnidades"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                <input
+                  type="text"
+                  name="TxtUnidades"
+                  id="TxtUnidades"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputUnidades}
                   onChange={onInputValueChangedUnidades}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtTemperatura"
+                  className="block text-sm font-medium text-gray-700"
                 >
-                  <option hidden>Seleccione la unidad...</option>
-                  {validUnits.map((unidad) => (
-                    <option key={unidad} value={unidad}>
-                      {unidad}
-                    </option>
-                  ))}
-                </select>
+                  Temperatura
+                </label>
+                <input
+                  type="text"
+                  name="TxtTemperatura"
+                  id="TxtTemperatura"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputTemperatura}
+                  onChange={onInputValueChangedTemperatura}
+                />
+              </div> */}
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtCantidad"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Cantidad de {inputMateriaPrima}
+                </label>
+                <input
+                  type="text"
+                  name="TxtCantidad"
+                  id="TxtCantidad"
+                  autoComplete="off"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputCantidad}
+                  onChange={onInputValueChangedCantidad}
+                />
               </div>
             </div>
           </div>
@@ -219,9 +220,9 @@ export const MateriaPrimaPage: FC<Props> = ({ materiaPrima }) => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params as { id: string };
 
-  const materiaPrima = await dbMateriaPrima.getMateriaPrimaById(id);
+  const manejoDeAlmacen = await dbManejoDeAlmacen.getManejoDeAlmacenById(id);
 
-  if (!materiaPrima) {
+  if (!manejoDeAlmacen) {
     return {
       redirect: {
         destination: "/",
@@ -232,9 +233,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
-      materiaPrima,
+      manejoDeAlmacen,
     },
   };
 };
 
-export default MateriaPrimaPage;
+export default ManejoDeAlmacenPage;

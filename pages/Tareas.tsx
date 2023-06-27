@@ -14,57 +14,39 @@ const tasksList = [
       },
       {
         title: "Reporte de ganancias",
-        tasks: [
-          "🔵 En reporte de ganancias, hacer la suma de compras y ventas según el mes y la sucursal.",
-        ],
+        tasks: [""],
       },
       {
         title: "Ver Acondicionamiento de sucursales",
-        tasks: [
-          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
-        ],
+        tasks: [""],
       },
       {
         title: "Ver Check In",
-        tasks: [
-          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
-        ],
+        tasks: [""],
       },
       {
         title: "Ver Materia Prima",
-        tasks: [
-          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
-        ],
+        tasks: [""],
       },
       {
         title: "Ver Precio Maximo",
-        tasks: [
-          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
-        ],
+        tasks: [""],
       },
       {
         title: "Ver Reporte de compras",
-        tasks: [
-          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
-        ],
+        tasks: [""],
       },
       {
         title: "Ver Reporte de salida",
-        tasks: [
-          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
-        ],
+        tasks: [""],
       },
       {
         title: "Ver Reporte de venta ambulantes individual",
-        tasks: [
-          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
-        ],
+        tasks: [""],
       },
       {
         title: "Ver Reporte Ventas Individual",
-        tasks: [
-          "🔵 En contaduría checar que sólo pueda ver y no editar o agregar.",
-        ],
+        tasks: [""],
       },
     ],
   },
@@ -77,19 +59,15 @@ const tasksList = [
       },
       {
         title: "Asignar Precios",
-        tasks: [
-          "🔵 Poner leyenda en asignar precios, de verificar si el producto ya está registrado.",
-        ],
+        tasks: [""],
       },
       {
         title: "Proveedores",
-        tasks: ["🔵 Animación y cambio de ventana en proveedores."],
+        tasks: [""],
       },
       {
         title: "Reporte de compras",
-        tasks: [
-          "🔵 Filtrado en reporte de compras por fecha, como en reporte de ventas individual.",
-        ],
+        tasks: [""],
       },
     ],
   },
@@ -106,10 +84,7 @@ const tasksList = [
       },
       {
         title: "Reporte Ventas Individual",
-        tasks: [
-          "🔵 Checar el guardado de reporte de ventas individual.",
-          "🔵 Actualizar puntos del cliente frecuente segun la compra",
-        ],
+        tasks: [""],
       },
     ],
   },
@@ -122,10 +97,7 @@ const tasksList = [
       },
       {
         title: "Manejo de almacen",
-        tasks: [
-          "🔵 Que no se dupliquen productos en almacén.",
-          "🔵 Actualizar productos segun reporte de entrada.",
-        ],
+        tasks: [""],
       },
       {
         title: "Manejo de personal",
@@ -145,14 +117,11 @@ const tasksList = [
       },
       {
         title: "Reporte Salida",
-        tasks: [
-          "🔵 Cambiar datos de la ruta en reporte de salida por distancia de la fábrica al destino.",
-          "🔵 Corregir el click en ver salidas.",
-        ],
+        tasks: [""],
       },
       {
         title: "Sucursales y Franquicias",
-        tasks: ["🔵 Cambio de ventana en sucursales y franquicias."],
+        tasks: [""],
       },
     ],
   },
@@ -176,10 +145,18 @@ const tasksList = [
   {
     topic: "💻 Miscelaneos",
     subtopics: [
-      { title: "Caja registradora", tasks: ["⚒️ Ver caja registradora"] },
       {
         title: "General",
-        tasks: ["⚒️ Incorporar el login"],
+        tasks: [
+          "🔵 cuando se presiona el icono, no se regresa al menú principal",
+          "🔵 En el campo, monto de pago, en sucursales y franquicias, poner de tipo cantidad dinero (con comas)",
+          "🔵 Reporte de compras no se filtra por fecha",
+          "🔵 Distancia de la fábrica no se autopopula",
+          "🔵 No se puede acceder a el reporte de salida para modificar/ eliminar",
+          "🔵 En unidades de materia prima, agregar “por pieza”",
+          "🔵 Esconder lo que se venden en las demás sucursales",
+          "🔵 Agregar las promociones",
+        ],
       },
     ],
   },

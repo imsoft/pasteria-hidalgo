@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ReporteDeCompra } from "../../../interfaces";
+import { cambiarFormatoFecha } from "../../../utils";
 
 interface Props {
   reporteDeCompra: ReporteDeCompra;

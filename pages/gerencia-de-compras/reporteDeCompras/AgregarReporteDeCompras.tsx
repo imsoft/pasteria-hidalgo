@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
 import { ManejosDeAlmacenContext } from "../../../context/gerencia-operativa/manejoDeAlmacen";
 import { ReporteDeGananciaContext } from "../../../context/contaduria/reporteDeGanancia";
-import { dividirFecha } from "../../../utils";
+import { cambiarFormatoFecha, dividirFecha } from "../../../utils";
 
 const validYesNoOptions: YesNo[] = ["Si", "No"];
 
@@ -61,8 +61,8 @@ export default function ReporteDeCompras() {
   const onTextFieldChangedFechaDeCompra = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    setInputFechaDeCompra(event.target.value);
-    console.log(event.target.value);
+    setInputFechaDeCompra(cambiarFormatoFecha(event.target.value));
+    console.log(cambiarFormatoFecha(event.target.value));
   };
 
   const onTextFieldChangedCredito = (event: ChangeEvent<HTMLSelectElement>) => {
