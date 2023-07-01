@@ -85,7 +85,7 @@ export default function Login() {
         </div>
 
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Pastería la Hidalguense
+          La Casa Del Paste
         </h2>
       </div>
 

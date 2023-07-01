@@ -2737,7 +2737,7 @@ export const initialData: SeedData = {
       nombre: "Elvira Alcazar",
       correoElectronico: "elvira@alcazar.com",
       contrasenia: bcrypt.hashSync("elviraalcazar987"),
-      role: ["gerencia de compras", "gerencia de ventas", "gerencia operativa"],
+      role: ["gerencia de compras", "gerencia de ventas", "gerencia operativa", "recursos humanos"],
     },
   ],
 };
