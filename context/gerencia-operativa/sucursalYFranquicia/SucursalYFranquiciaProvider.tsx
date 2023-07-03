@@ -162,9 +162,9 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    refreshSucursalesYFranquicias();
-  }, []);
+  // useEffect(() => {
+  //   refreshSucursalesYFranquicias();
+  // }, []);
 
   return (
     <SucursalesYFranquiciasContext.Provider
@@ -175,6 +175,7 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
         agregarSucursalYFranquicia,
         actualizarSucursalYFranquicia,
         eliminarSucursalYFranquicia,
+        refreshSucursalesYFranquicias,
       }}
     >
       {children}

@@ -22,6 +22,8 @@ interface ContextProps {
     apartadoJuridico: ApartadoJuridico,
     showNotificacion?: boolean
   ) => void;
+
+  refreshApartadosJuridicos: () => Promise<void>;
 }
 
 export const ApartadosJuridicosContext = createContext({} as ContextProps);

@@ -21,7 +21,7 @@ const ApartadoJuridico = () => {
     ApartadosJuridicosContext
   );
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -69,6 +69,10 @@ const ApartadoJuridico = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   useEffect(() => {
     onSave();

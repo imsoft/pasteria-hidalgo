@@ -24,6 +24,8 @@ interface ContextProps {
     checksInPersonal: CheckInPersonal,
     showNotificacion?: boolean
   ) => void;
+
+  refreshCheckInPersonal: () => Promise<void>;
 }
 
 export const CheckInPersonalContext = createContext({} as ContextProps);

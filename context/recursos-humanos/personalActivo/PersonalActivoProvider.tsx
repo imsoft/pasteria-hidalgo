@@ -138,15 +138,15 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const refreshCandidatos = async () => {
+  const refreshPersonalActivo = async () => {
     const { data } = await entriesApi.get<PersonalActivo[]>("/personalActivo");
     // console.log(data);
     dispatch({ type: "[Personal Activo] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshCandidatos();
-  }, []);
+  // useEffect(() => {
+  //   refreshPersonalActivo();
+  // }, []);
 
   return (
     <PersonalActivoContext.Provider
@@ -157,6 +157,7 @@ export const PersonalActivoProvider: FC<Props> = ({ children }) => {
         agregarPersonalActivo,
         actualizarPersonalActivo,
         eliminarPersonalActivo,
+        refreshPersonalActivo,
       }}
     >
       {children}

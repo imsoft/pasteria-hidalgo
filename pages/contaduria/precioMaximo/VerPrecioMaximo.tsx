@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC, useContext, useMemo } from "react";
+import { FC, useContext, useEffect, useMemo } from "react";
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 import { AsignarPreciosContext } from "../../../context/gerencia-de-compras/asignarPrecios";
 import { AsignarPrecio } from "../../../interfaces/asignarPrecio";
@@ -10,8 +10,12 @@ interface Props {
 }
 
 const VerPrecioMaximo: FC<Props> = ({ asignarPrecio }) => {
-  const { asignarPrecios } = useContext(AsignarPreciosContext);
+  const { asignarPrecios, refreshAsignarPrecio } = useContext(AsignarPreciosContext);
   const asignarPreciosMemo = useMemo(() => asignarPrecios, [asignarPrecios]);
+
+  useEffect(() => {
+    refreshAsignarPrecio();
+  }, []);
 
   return (
     <>

@@ -7,7 +7,7 @@ interface Props {
 
 const ListaReportesDeSalidaContaduria: FC<Props> = ({ reporteDeSalida }) => {
   return (
-    <tbody className="divide-y divide-gray-200 bg-white">
+    <tbody key={reporteDeSalida._id} className="divide-y divide-gray-200 bg-white">
       <tr
         key={reporteDeSalida._id}
         className="cursor-pointer hover:bg-yellow-100"
@@ -46,7 +46,7 @@ const ListaReportesDeSalidaContaduria: FC<Props> = ({ reporteDeSalida }) => {
           <div className="font-medium text-gray-900">
             {reporteDeSalida.listadoReporteDeSalida.map((listado) => (
               <div
-                key={listado.uuid}
+                key={listado.codigoDelProducto}
                 className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
               >
                 <div className="font-medium text-gray-900">

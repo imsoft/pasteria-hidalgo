@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
@@ -7,11 +7,15 @@ import ListaReportesDeSalida from "../../../components/ui/gerencia-operativa/Lis
 import { ReportesDeSalidaContext } from "../../../context/gerencia-operativa/reporteDeSalida/ReportesDeSalidaContext";
 
 const VerReportesDeSalida = () => {
-  const { reportesDeSalida } = useContext(ReportesDeSalidaContext);
+  const { reportesDeSalida, refreshReportesDeSalida } = useContext(ReportesDeSalidaContext);
   const reportesDeSalidaMemo = useMemo(
     () => reportesDeSalida,
     [reportesDeSalida]
   );
+
+  useEffect(() => {
+    refreshReportesDeSalida();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaOperativa>

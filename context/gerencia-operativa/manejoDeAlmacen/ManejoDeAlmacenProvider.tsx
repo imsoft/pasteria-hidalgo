@@ -129,9 +129,9 @@ export const ManejosDeAlmacenProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Manejo De Almacen] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshManejosDeAlmacen();
-  }, []);
+  // useEffect(() => {
+  //   refreshManejosDeAlmacen();
+  // }, []);
 
   return (
     <ManejosDeAlmacenContext.Provider
@@ -142,6 +142,7 @@ export const ManejosDeAlmacenProvider: FC<Props> = ({ children }) => {
         agregarNuevoManejoDeAlmacen,
         actualizarManejoDeAlmacen,
         eliminarManejoDeAlmacen,
+        refreshManejosDeAlmacen,
       }}
     >
       {children}

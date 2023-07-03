@@ -33,7 +33,7 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
 }) => {
   const router = useRouter();
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -44,7 +44,7 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
     eliminarAcondicionamientoDeSucursal,
   } = useContext(AcondicionamientoDeSucursalesContext);
 
-  const { proveedores } = useContext(ProveedoresContext);
+  const { proveedores, refreshProveedores } = useContext(ProveedoresContext);
   const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
 
   const [inputProducto, setInputProducto] = useState(
@@ -151,6 +151,11 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
   const precioTotalDelProducto = () => {
     setInputTotalAcomulado(inputCantidad * inputPrecioDeCompra);
   };
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+    refreshProveedores();
+  }, []);
 
   useEffect(() => {
     precioTotalDelProducto();

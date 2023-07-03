@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useMemo, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkInPersonal";
@@ -88,16 +88,21 @@ export default function CheckInDePersonal() {
 
   const { agregarCheckInPersonal } = useContext(CheckInPersonalContext);
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
   );
 
-  const { personasActivas } = useContext(PersonalActivoContext);
+  const { personasActivas, refreshPersonalActivo } = useContext(PersonalActivoContext);
   const personasActivasMemo = useMemo(() => personasActivas, [personasActivas]);
 
   const watchSucursalOFranquicia = watch("sucursalOFranquicia");
+
+  useEffect(() => {
+    refreshPersonalActivo();
+    refreshSucursalesYFranquicias();
+  }, []);
 
   const onSave = ({
     sucursalOFranquicia,

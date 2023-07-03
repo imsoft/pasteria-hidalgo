@@ -312,7 +312,7 @@ export default function ReportesSalida() {
   const router = useRouter();
   const { agregarNuevoReporteDeSalida } = useContext(ReportesDeSalidaContext);
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -398,6 +398,10 @@ export default function ReportesSalida() {
     );
     setInputCodigoProducto(result?._id!);
   };
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   useEffect(() => {
     lookUpProductId();

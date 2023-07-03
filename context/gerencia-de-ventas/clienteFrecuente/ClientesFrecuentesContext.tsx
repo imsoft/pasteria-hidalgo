@@ -24,6 +24,8 @@ interface ContextProps {
     clienteFrecuente: ClienteFrecuente,
     showNotificacion?: boolean
   ) => void;
+
+  refreshClientesFrecuentes: () => Promise<void>;
 }
 
 export const ClientesFrecuentesContext = createContext({} as ContextProps);

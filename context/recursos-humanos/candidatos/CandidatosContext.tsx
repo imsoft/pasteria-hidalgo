@@ -38,6 +38,8 @@ interface ContextProps {
   ) => void;
 
   eliminarCandidato: (candidato: Candidato, showNotificacion?: boolean) => void;
+
+  refreshCandidatos: () => Promise<void>;
 }
 
 export const CandidatosContext = createContext({} as ContextProps);

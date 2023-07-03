@@ -22,6 +22,8 @@ interface ContextProps {
     manejoDeAlmacen: ManejoDeAlmacen,
     showNotificacion?: boolean
   ) => void;
+
+  refreshManejosDeAlmacen: () => Promise<void>;
 }
 
 export const ManejosDeAlmacenContext = createContext({} as ContextProps);

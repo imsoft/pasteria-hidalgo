@@ -23,6 +23,8 @@ interface ContextProps {
   ) => void;
 
   eliminarProveedor: (proveedor: Proveedor, showNotificacion?: boolean) => void;
+
+  refreshProveedores: () => Promise<void>;
 }
 
 export const ProveedoresContext = createContext({} as ContextProps);

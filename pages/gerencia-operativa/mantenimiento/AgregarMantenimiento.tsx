@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 
 import { MantenimientosContext } from "../../../context/gerencia-operativa/mantenimiento/MantenimientoContext";
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
@@ -89,13 +89,17 @@ export default function AgregarMantenimiento() {
   } = useForm<FormData>({ resolver });
 
   const { agregarNuevoMantenimiento } = useContext(MantenimientosContext);
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
   );
 
   const watchSucursalOFranquicia = watch("sucursalOFranquicia");
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   const onSave = ({
     sucursalOFranquicia,

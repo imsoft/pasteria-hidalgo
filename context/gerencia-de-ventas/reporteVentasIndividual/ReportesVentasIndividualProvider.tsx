@@ -161,9 +161,9 @@ export const ReportesVentasIndividualProvider: FC<Props> = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    refreshReportesVentasIndividual();
-  }, []);
+  // useEffect(() => {
+  //   refreshReportesVentasIndividual();
+  // }, []);
 
   return (
     <ReportesVentasIndividualContext.Provider
@@ -174,6 +174,7 @@ export const ReportesVentasIndividualProvider: FC<Props> = ({ children }) => {
         eliminarReporteVentasIndividual,
         agregarNuevoReporteVentasIndividual,
         actualizarReporteVentasIndividual,
+        refreshReportesVentasIndividual,
       }}
     >
       {children}

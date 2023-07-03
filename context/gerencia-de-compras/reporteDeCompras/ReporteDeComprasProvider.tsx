@@ -142,9 +142,9 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Reporte De Compra] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshReportesDeCompras();
-  }, []);
+  // useEffect(() => {
+  //   refreshReportesDeCompras();
+  // }, []);
 
   return (
     <ReporteDeCompraContext.Provider
@@ -155,6 +155,7 @@ export const ReportesDeComprasProvider: FC<Props> = ({ children }) => {
         agregarReporteDeCompra,
         actualizarReporteDeCompra,
         eliminarReporteDeCompra,
+        refreshReportesDeCompras,
       }}
     >
       {children}

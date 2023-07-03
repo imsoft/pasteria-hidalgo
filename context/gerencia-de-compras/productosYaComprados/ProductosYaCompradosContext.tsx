@@ -25,6 +25,8 @@ interface ContextProps {
     productoYaComprado: ProductoYaComprado,
     showNotificacion?: boolean
   ) => void;
+
+  refreshProductosYaComprados: () => Promise<void>;
 }
 
 export const ProductosYaCompradosContext = createContext({} as ContextProps);

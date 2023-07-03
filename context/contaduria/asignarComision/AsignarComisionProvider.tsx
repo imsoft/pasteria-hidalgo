@@ -131,7 +131,7 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const refreshCandidatos = async () => {
+  const refreshAsignarComision = async () => {
     const { data } = await entriesApi.get<AsignarComision[]>(
       "/asignarComisiones"
     );
@@ -139,9 +139,9 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Asignar Comision] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshCandidatos();
-  }, []);
+  // useEffect(() => {
+  //   refreshAsignarComision();
+  // }, []);
 
   return (
     <AsignarComisionContext.Provider
@@ -152,6 +152,7 @@ export const AsignarComisionProvider: FC<Props> = ({ children }) => {
         agregarNuevoAsignarComision,
         actualizarAsignarComision,
         eliminarAsignarComision,
+        refreshAsignarComision,
       }}
     >
       {children}

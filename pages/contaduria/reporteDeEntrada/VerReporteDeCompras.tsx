@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 import ListaReporteDeComprasContaduria from "../../../components/ui/contaduria/ListaReporteDeComprasContaduria";
@@ -6,8 +6,12 @@ import ListaReporteDeComprasContaduria from "../../../components/ui/contaduria/L
 import { ReporteDeCompraContext } from '../../../context/gerencia-de-compras/reporteDeCompras/ReporteDeComprasContext';
 
 const VerReportesDeCompras = () => {
-  const { reportesDeCompras } = useContext(ReporteDeCompraContext);
+  const { reportesDeCompras, refreshReportesDeCompras } = useContext(ReporteDeCompraContext);
   const reportesDeComprasMemo = useMemo(() => reportesDeCompras, [reportesDeCompras]);
+
+  useEffect(() => {
+    refreshReportesDeCompras();
+  }, []);
 
   return (
     <SidebarLayoutContaduria>

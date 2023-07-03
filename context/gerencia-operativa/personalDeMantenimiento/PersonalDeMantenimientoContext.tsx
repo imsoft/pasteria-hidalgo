@@ -22,6 +22,8 @@ interface ContextProps {
     personalDeMantenimiento: PersonalDeMantenimiento,
     showNotificacion?: boolean
   ) => void;
+
+  refreshPersonalesDeMantenimiento: () => Promise<void>;
 }
 
 export const PersonalesDeMantenimientoContext = createContext(

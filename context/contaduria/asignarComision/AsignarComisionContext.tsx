@@ -23,6 +23,8 @@ interface ContextProps {
     asignarComision: AsignarComision,
     showNotificacion?: boolean
   ) => void;
+
+  refreshAsignarComision: () => Promise<void>;
 }
 
 export const AsignarComisionContext = createContext({} as ContextProps);

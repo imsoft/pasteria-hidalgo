@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { CheckInPersonalContext } from "../../../context/recursos-humanos/checkInPersonal/checkInPersonalContext";
@@ -7,11 +7,17 @@ import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recurs
 import ListaChecksInPersonal from "../../../components/ui/recursos-humanos/ListaCheckInPersonal";
 
 const VerCheckInPersonal = () => {
-  const { checksInPersonal } = useContext(CheckInPersonalContext);
+  const { checksInPersonal, refreshCheckInPersonal } = useContext(
+    CheckInPersonalContext
+  );
   const checksInPersonalMemo = useMemo(
     () => checksInPersonal,
     [checksInPersonal]
   );
+
+  useEffect(() => {
+    refreshCheckInPersonal();
+  }, []);
 
   return (
     <SidebarLayoutRecursosHumanos>

@@ -129,7 +129,7 @@ export default function AcondicionamientoDeSucursales() {
 
   const [inputTotalAcomulado, setInputTotalAcomulado] = useState(0);
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -139,7 +139,7 @@ export default function AcondicionamientoDeSucursales() {
     AcondicionamientoDeSucursalesContext
   );
 
-  const { proveedores } = useContext(ProveedoresContext);
+  const { proveedores, refreshProveedores } = useContext(ProveedoresContext);
   const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
 
   const watchSucursalOFranquicia = watch("sucursalOFranquicia");
@@ -149,6 +149,11 @@ export default function AcondicionamientoDeSucursales() {
   const precioTotalDelProducto = () => {
     setValue("totalAcomulado", watchCantidad * watchPrecioDeCompra);
   };
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+    refreshProveedores();
+  }, []);
 
   useEffect(() => {
     precioTotalDelProducto();

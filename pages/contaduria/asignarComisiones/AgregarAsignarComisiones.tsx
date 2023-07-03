@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 import { useRouter } from "next/router";
 
@@ -91,13 +91,17 @@ export default function AgregarAsignarComisiones() {
 
   const { agregarNuevoAsignarComision } = useContext(AsignarComisionContext);
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
   );
 
   const watchSucursalOFranquicia = watch("sucursalOFranquicia");
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   const onSave = ({
     sucursalOFranquicia,

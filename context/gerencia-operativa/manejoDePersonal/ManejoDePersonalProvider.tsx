@@ -115,7 +115,7 @@ export const ManejosDePersonalProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const refreshCandidatos = async () => {
+  const refreshManejoDePersonal = async () => {
     const { data } = await entriesApi.get<ManejoPersonal[]>(
       "/manejosDePersonal"
     );
@@ -123,9 +123,9 @@ export const ManejosDePersonalProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Manejo De Personal] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshCandidatos();
-  }, []);
+  // useEffect(() => {
+  //   refreshManejoDePersonal();
+  // }, []);
 
   return (
     <ManejosDePersonalContext.Provider
@@ -136,6 +136,7 @@ export const ManejosDePersonalProvider: FC<Props> = ({ children }) => {
         eliminarManejoDePersonal,
         agregarNuevoManejoDePersonal,
         actualizarManejoDePersonal,
+        refreshManejoDePersonal,
       }}
     >
       {children}

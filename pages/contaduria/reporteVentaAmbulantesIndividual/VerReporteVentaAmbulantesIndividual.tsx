@@ -16,7 +16,7 @@ const VerReporteVentaAmbulantesIndividual = () => {
   );
   const [change, setChange] = useState(false);
 
-  const { reportesVentasAmbulantesIndividual } = useContext(
+  const { reportesVentasAmbulantesIndividual, refreshReporteVentasAmbulantesIndividual } = useContext(
     ReportesVentasAmbulantesIndividualContext
   );
 
@@ -40,6 +40,10 @@ const VerReporteVentaAmbulantesIndividual = () => {
     setInputFecha(hoy.toLocaleDateString());
     setInputNuevaFecha(hoy.toLocaleDateString());
   };
+
+  useEffect(() => {
+    refreshReporteVentasAmbulantesIndividual();
+  }, []);
 
   useEffect(() => {
     reportesVentasAmbulantesIndividualMemo

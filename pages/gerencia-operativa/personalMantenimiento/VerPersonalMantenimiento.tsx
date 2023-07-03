@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
@@ -7,8 +7,12 @@ import ListaPersonalesDeMantenimiento from '../../../components/ui/gerencia-oper
 import { PersonalesDeMantenimientoContext } from '../../../context/gerencia-operativa/personalDeMantenimiento/PersonalDeMantenimientoContext';
 
 const VerPersonalesDeMantenimiento = () => {
-  const { personalesDeMantenimiento } = useContext(PersonalesDeMantenimientoContext);
+  const { personalesDeMantenimiento, refreshPersonalesDeMantenimiento } = useContext(PersonalesDeMantenimientoContext);
   const personalesDeMantenimientoMemo = useMemo(() => personalesDeMantenimiento, [personalesDeMantenimiento]);
+
+  useEffect(() => {
+    refreshPersonalesDeMantenimiento();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaOperativa>

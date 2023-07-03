@@ -20,6 +20,8 @@ interface ContextProps {
     manejoDePersonal: ManejoPersonal,
     showNotificacion?: boolean
   ) => void;
+
+  refreshManejoDePersonal: () => Promise<void>;
 }
 
 export const ManejosDePersonalContext = createContext({} as ContextProps);

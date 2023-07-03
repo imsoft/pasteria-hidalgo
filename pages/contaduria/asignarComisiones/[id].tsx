@@ -1,5 +1,5 @@
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
-import { ChangeEvent, FC, useContext, useMemo, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { AsignarComision } from "../../../interfaces/asignarComision";
 import { AsignarComisionContext } from "../../../context/contaduria/asignarComision/AsignarComisionContext";
@@ -36,7 +36,7 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
     AsignarComisionContext
   );
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -79,6 +79,10 @@ export const AsignarComisionesPage: FC<Props> = ({ asignarComision }) => {
   ) => {
     setInputMinimoDeLaMeta(parseInt(event.target.value));
   };
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   const onSave = () => {
     if (

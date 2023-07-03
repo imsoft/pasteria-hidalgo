@@ -25,6 +25,8 @@ interface ContextProps {
     personalActivo: PersonalActivo,
     showNotification?: boolean
   ) => void;
+
+  refreshPersonalActivo: () => Promise<void>;
 }
 
 export const PersonalActivoContext = createContext({} as ContextProps);

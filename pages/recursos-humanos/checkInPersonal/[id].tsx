@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useContext, useMemo, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useMemo, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
@@ -25,7 +25,7 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
     CheckInPersonalContext
   );
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -78,6 +78,10 @@ export const CheckInPersonalPage: FC<Props> = ({ checkInDePersonal }) => {
   ) => {
     setInputSucursalOFranquicia(event.target.value);
   };
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   const onSave = () => {
     if (

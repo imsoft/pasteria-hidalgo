@@ -197,9 +197,9 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Candidato] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshCandidatos();
-  }, []);
+  // useEffect(() => {
+  //   refreshCandidatos();
+  // }, []);
 
   return (
     <CandidatosContext.Provider
@@ -210,6 +210,7 @@ export const CandidatosProvider: FC<Props> = ({ children }) => {
         agregarNuevoCandidato,
         actualizarCandidato,
         eliminarCandidato,
+        refreshCandidatos,
       }}
     >
       {children}

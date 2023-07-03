@@ -18,6 +18,8 @@ interface ContextProps {
   ) => void;
 
   eliminarMateriaPrima: (materiaPrima: MateriaPrima, showNotificacion?: boolean) => void;
+
+  refreshMateriasPrimas: () => Promise<void>
 }
 
 export const MateriasPrimasContext = createContext({} as ContextProps);

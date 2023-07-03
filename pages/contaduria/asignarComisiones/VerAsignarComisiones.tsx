@@ -27,7 +27,7 @@ export default function VerAsignarComisiones() {
 
   const [change, setChange] = useState(false);
 
-  const { asignarComisiones } = useContext(AsignarComisionContext);
+  const { asignarComisiones, refreshAsignarComision } = useContext(AsignarComisionContext);
   const asignarComisionesMemo = useMemo(
     () => asignarComisiones,
     [asignarComisiones]
@@ -59,6 +59,7 @@ export default function VerAsignarComisiones() {
   }, [inputMes, inputAnio]);
 
   useEffect(() => {
+    refreshAsignarComision();
     setChange(false);
   }, []);
 

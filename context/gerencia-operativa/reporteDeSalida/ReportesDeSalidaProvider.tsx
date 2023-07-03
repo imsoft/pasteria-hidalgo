@@ -147,9 +147,9 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Reporte De Salida] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshReportesDeSalida();
-  }, []);
+  // useEffect(() => {
+  //   refreshReportesDeSalida();
+  // }, []);
 
   return (
     <ReportesDeSalidaContext.Provider
@@ -160,6 +160,7 @@ export const ReportesDeSalidaProvider: FC<Props> = ({ children }) => {
         eliminarReporteDeSalida,
         agregarNuevoReporteDeSalida,
         actualizarReporteDeSalida,
+        refreshReportesDeSalida,
       }}
     >
       {children}

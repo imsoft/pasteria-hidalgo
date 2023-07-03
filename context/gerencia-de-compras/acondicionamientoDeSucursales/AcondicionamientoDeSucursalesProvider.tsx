@@ -172,9 +172,9 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
     });
   };
 
-  useEffect(() => {
-    refreshAcondicionamientoDeSucursales();
-  }, []);
+  // useEffect(() => {
+  //   refreshAcondicionamientoDeSucursales();
+  // }, []);
 
   return (
     <AcondicionamientoDeSucursalesContext.Provider
@@ -185,6 +185,7 @@ export const AcondicionamientoDeSucursalesProvider: FC<Props> = ({
         agregarNuevoAcondicionamientoDeSucursal,
         eliminarAcondicionamientoDeSucursal,
         actualizarAcondicionamientoDeSucursal,
+        refreshAcondicionamientoDeSucursales,
       }}
     >
       {children}

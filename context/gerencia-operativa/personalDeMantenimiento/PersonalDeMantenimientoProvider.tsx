@@ -136,9 +136,9 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    refreshPersonalesDeMantenimiento();
-  }, []);
+  // useEffect(() => {
+  //   refreshPersonalesDeMantenimiento();
+  // }, []);
 
   return (
     <PersonalesDeMantenimientoContext.Provider
@@ -149,6 +149,7 @@ export const PersonalesDeMantenimientoProvider: FC<Props> = ({ children }) => {
         agregarNuevoPersonalDeMantenimiento,
         actualizarPersonalDeMantenimiento,
         eliminarPersonalDeMantenimiento,
+        refreshPersonalesDeMantenimiento,
       }}
     >
       {children}

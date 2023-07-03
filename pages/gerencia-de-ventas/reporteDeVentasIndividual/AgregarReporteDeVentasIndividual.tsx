@@ -332,7 +332,7 @@ const AgregarReporteDeVentasIndividual = () => {
     ReporteDeGananciaContext
   );
 
-  const { clientesFrecuentes, actualizarClienteFrecuente } = useContext(
+  const { clientesFrecuentes, actualizarClienteFrecuente, refreshClientesFrecuentes } = useContext(
     ClientesFrecuentesContext
   );
   const clientesFrecuentesMemo = useMemo(
@@ -340,7 +340,7 @@ const AgregarReporteDeVentasIndividual = () => {
     [clientesFrecuentes]
   );
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -475,6 +475,11 @@ const AgregarReporteDeVentasIndividual = () => {
   const usoDePuntosClienteFrecuente = () => {
     setInputSumaTotal(inputSumaTotal - inputPuntosClienteFrecuente);
   };
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+    refreshClientesFrecuentes();
+  }, []);
 
   useEffect(() => {
     setInputCodigoProducto("");

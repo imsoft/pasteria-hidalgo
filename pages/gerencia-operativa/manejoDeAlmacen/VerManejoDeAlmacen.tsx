@@ -1,15 +1,19 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 import ListaManejosDeAlmacen from "../../../components/ui/gerencia-operativa/ListaManejoDeAlmacen";
 import { ManejosDeAlmacenContext } from "../../../context/gerencia-operativa/manejoDeAlmacen";
 
 const VerReportesDeCompras = () => {
-  const { manejosDeAlmacen } = useContext(ManejosDeAlmacenContext);
+  const { manejosDeAlmacen, refreshManejosDeAlmacen } = useContext(ManejosDeAlmacenContext);
   const manejosDeAlmacenMemo = useMemo(
     () => manejosDeAlmacen,
     [manejosDeAlmacen]
   );
+
+  useEffect(() => {
+    refreshManejosDeAlmacen();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaOperativa>

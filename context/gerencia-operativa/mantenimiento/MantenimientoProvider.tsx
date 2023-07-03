@@ -142,9 +142,9 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Mantenimiento] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshMantenimientos();
-  }, []);
+  // useEffect(() => {
+  //   refreshMantenimientos();
+  // }, []);
 
   return (
     <MantenimientosContext.Provider
@@ -155,6 +155,7 @@ export const MantenimientosProvider: FC<Props> = ({ children }) => {
         agregarNuevoMantenimiento,
         actualizarMantenimiento,
         eliminarMantenimiento,
+        refreshMantenimientos,
       }}
     >
       {children}

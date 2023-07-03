@@ -53,7 +53,7 @@ const ListaReportesDeSalida: FC<Props> = ({ reporteDeSalida }) => {
           <div className="font-medium text-gray-900">
             {reporteDeSalida.listadoReporteDeSalida.map((listado) => (
               <div
-                key={listado.uuid}
+                key={listado.codigoDelProducto}
                 className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
               >
                 <div className="font-medium text-gray-900">

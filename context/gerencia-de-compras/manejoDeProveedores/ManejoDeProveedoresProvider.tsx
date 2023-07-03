@@ -137,9 +137,9 @@ export const ProveedoresProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Proveedor] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshProveedores();
-  }, []);
+  // useEffect(() => {
+  //   refreshProveedores();
+  // }, []);
 
   return (
     <ProveedoresContext.Provider
@@ -150,6 +150,7 @@ export const ProveedoresProvider: FC<Props> = ({ children }) => {
         agregarNuevoProveedor,
         actualizarProveedor,
         eliminarProveedor,
+        refreshProveedores,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
@@ -25,7 +25,7 @@ export default function AgregarManejoDePersonal() {
 
   const [touched, setTouched] = useState(false);
 
-  const { candidatos } = useContext(CandidatosContext);
+  const { candidatos, refreshCandidatos } = useContext(CandidatosContext);
   const candidatosMemo = useMemo(() => candidatos, [candidatos]);
 
   const onTextFieldChangedNombre = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -65,6 +65,10 @@ export default function AgregarManejoDePersonal() {
   ) => {
     setInputComentarios(event.target.value);
   };
+
+  useEffect(() => {
+    refreshCandidatos();
+  }, []);
 
   const onSave = () => {
     if (

@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 
@@ -6,11 +6,15 @@ import { ReportesDeSalidaContext } from "../../../context/gerencia-operativa/rep
 import ListaReportesDeSalidaContaduria from "../../../components/ui/contaduria/ListaReporteDeSalidaContaduria";
 
 const VerReportesDeSalida = () => {
-  const { reportesDeSalida } = useContext(ReportesDeSalidaContext);
+  const { reportesDeSalida, refreshReportesDeSalida } = useContext(ReportesDeSalidaContext);
   const reportesDeSalidaMemo = useMemo(
     () => reportesDeSalida,
     [reportesDeSalida]
   );
+
+  useEffect(() => {
+    refreshReportesDeSalida();
+  }, []);
 
   return (
     <SidebarLayoutContaduria>

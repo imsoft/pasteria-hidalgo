@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { ProveedoresContext } from '../../../context/gerencia-de-compras/manejoDeProveedores/ManejoDeProveedoresContext';
@@ -7,8 +7,12 @@ import { SidebarLayoutGerenciaCompras } from '../../../components/layouts/gerenc
 import ListaProveedores from '../../../components/ui/gerencia-de-compras/ListaManejoDeProveedores';
 
 const VerCandidatos = () => {
-  const { proveedores } = useContext(ProveedoresContext);
+  const { proveedores, refreshProveedores } = useContext(ProveedoresContext);
   const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
+
+  useEffect(() => {
+    refreshProveedores();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaCompras>

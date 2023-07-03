@@ -7,14 +7,12 @@ import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gere
 import ListaMantenimientos from "../../../components/ui/gerencia-operativa/ListaMantenimiento";
 
 const VerMantenimientos = () => {
-  const { mantenimientos } = useContext(MantenimientosContext);
+  const { mantenimientos, refreshMantenimientos } = useContext(MantenimientosContext);
   const mantenimientosMemo = useMemo(() => mantenimientos, [mantenimientos]);
 
-  const [loading, setLoading] = useState(false);
-
   useEffect(() => {
-    setLoading(true);
-  }, [mantenimientosMemo]);
+    refreshMantenimientos();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaOperativa>

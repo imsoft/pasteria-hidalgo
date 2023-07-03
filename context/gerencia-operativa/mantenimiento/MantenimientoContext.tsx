@@ -25,6 +25,8 @@ interface ContextProps {
     mantenimiento: Mantenimiento,
     showNotificacion?: boolean
   ) => void;
+
+  refreshMantenimientos: () => Promise<void>;
 }
 
 export const MantenimientosContext = createContext({} as ContextProps);

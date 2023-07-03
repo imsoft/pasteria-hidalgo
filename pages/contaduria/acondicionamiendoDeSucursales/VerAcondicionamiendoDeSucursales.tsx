@@ -1,16 +1,21 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import ListaAcondicionamientoDeSucursales from "../../../components/ui/contaduria/ListaAcondicionamientoDeSucursales";
 import { AcondicionamientoDeSucursalesContext } from "../../../context/gerencia-de-compras/acondicionamientoDeSucursales/AcondicionamientoDeSucursalesContext";
-import { SidebarLayoutContaduria } from '../../../components/layouts/contaduria/SidebarLayoutContaduria';
+import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 
 const VerAcondicionamiendoDeSucursales = () => {
-  const { acondicionamientoDeSucursales } = useContext(
-    AcondicionamientoDeSucursalesContext
-  );
+  const {
+    acondicionamientoDeSucursales,
+    refreshAcondicionamientoDeSucursales,
+  } = useContext(AcondicionamientoDeSucursalesContext);
   const acondicionamientoDeSucursalesMemo = useMemo(
     () => acondicionamientoDeSucursales,
     [acondicionamientoDeSucursales]
   );
+
+  useEffect(() => {
+    refreshAcondicionamientoDeSucursales();
+  }, []);
 
   return (
     <>

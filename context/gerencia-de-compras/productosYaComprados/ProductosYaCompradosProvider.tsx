@@ -147,9 +147,9 @@ export const ProductosYaCompradosProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Producto Ya Comprado] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshProductosYaComprados();
-  }, []);
+  // useEffect(() => {
+  //   refreshProductosYaComprados();
+  // }, []);
 
   return (
     <ProductosYaCompradosContext.Provider
@@ -160,6 +160,7 @@ export const ProductosYaCompradosProvider: FC<Props> = ({ children }) => {
         agregarNuevoProductoYaComprado,
         actualizarProductoYaComprado,
         eliminarProductoYaComprado,
+        refreshProductosYaComprados,
       }}
     >
       {children}

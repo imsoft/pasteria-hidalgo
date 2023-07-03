@@ -135,7 +135,7 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const refreshCandidatos = async () => {
+  const refreshCheckInPersonal = async () => {
     const { data } = await entriesApi.get<CheckInPersonal[]>(
       "/checksInPersonal"
     );
@@ -143,9 +143,9 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Check In Personal] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshCandidatos();
-  }, []);
+  // useEffect(() => {
+  //   refreshCheckInPersonal();
+  // }, []);
 
   return (
     <CheckInPersonalContext.Provider
@@ -156,6 +156,7 @@ export const ChecksInPersonalProvider: FC<Props> = ({ children }) => {
         agregarCheckInPersonal,
         actualizarCheckInPersonal,
         eliminarCheckInPersonal,
+        refreshCheckInPersonal,
       }}
     >
       {children}

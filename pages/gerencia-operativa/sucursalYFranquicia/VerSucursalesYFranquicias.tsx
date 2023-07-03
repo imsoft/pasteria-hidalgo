@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { SucursalesYFranquiciasContext } from '../../../context/gerencia-operativa/sucursalYFranquicia/SucursalYFranquiciaContext';
@@ -7,8 +7,12 @@ import ListaSucursalesYFranquicias from '../../../components/ui/gerencia-operati
 import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
 
 const VerSucursalesYFranquicias = () => {
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(() => sucursalesYFranquicias, [sucursalesYFranquicias]);
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaOperativa>

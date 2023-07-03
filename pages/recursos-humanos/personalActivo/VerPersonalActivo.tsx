@@ -1,21 +1,32 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useEffect } from "react";
 import Link from "next/link";
 
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
-import ListaPersonalesActivos from '../../../components/ui/recursos-humanos/ListaPersonalActivo';
+import ListaPersonalesActivos from "../../../components/ui/recursos-humanos/ListaPersonalActivo";
 
-import { PersonalActivoContext } from '../../../context/recursos-humanos/personalActivo/PersonalActivoContext';
+import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
 
 const VerPersonalesActivos = () => {
-  const { personasActivas } = useContext(PersonalActivoContext);
-  const personalesActivosMemo = useMemo(() => personasActivas, [personasActivas]);
+  const { personasActivas, refreshPersonalActivo } = useContext(
+    PersonalActivoContext
+  );
+  const personalesActivosMemo = useMemo(
+    () => personasActivas,
+    [personasActivas]
+  );
+
+  useEffect(() => {
+    refreshPersonalActivo();
+  }, []);
 
   return (
     <SidebarLayoutRecursosHumanos>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Personal Activo</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Personal Activo
+            </h1>
             <p className="mt-2 text-sm text-gray-700">
               Aquí podras ver las personas activas para la empresa.
             </p>
@@ -25,7 +36,9 @@ const VerPersonalesActivos = () => {
               type="button"
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-yellow px-4 py-2 text-sm font-medium text-gray-600 shadow-sm hover:bg-primary-blue hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-yellow focus:ring-offset-2 sm:w-auto"
             >
-              <Link href={"/recursos-humanos/personalActivo/AgregarPersonalActivo"}>
+              <Link
+                href={"/recursos-humanos/personalActivo/AgregarPersonalActivo"}
+              >
                 Agregar Personal Activo
               </Link>
             </button>

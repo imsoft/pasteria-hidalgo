@@ -29,7 +29,7 @@ export default function ReporteGanancias() {
 
   const [change, setChange] = useState(false);
 
-  const { reportesDeGanancias } = useContext(
+  const { reportesDeGanancias, refreshReporteDeGanancia } = useContext(
     ReporteDeGananciaContext
   );
   const reportesDeGananciasMemo = useMemo(
@@ -63,6 +63,7 @@ export default function ReporteGanancias() {
   }, [inputMes, inputAnio]);
 
   useEffect(() => {
+    refreshReporteDeGanancia();
     setChange(false);
   }, []);
 

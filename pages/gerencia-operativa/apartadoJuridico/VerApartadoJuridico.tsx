@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { ApartadosJuridicosContext } from "../../../context/gerencia-operativa/apartadoJuridico/ApartadosJuridicosContext";
@@ -7,11 +7,15 @@ import ListaApartadosJuridicos from "../../../components/ui/gerencia-operativa/L
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
 
 const VerApartadosJuridicos = () => {
-  const { apartadosJuridicos } = useContext(ApartadosJuridicosContext);
+  const { apartadosJuridicos, refreshApartadosJuridicos } = useContext(ApartadosJuridicosContext);
   const apartadosJuridicosMemo = useMemo(
     () => apartadosJuridicos,
     [apartadosJuridicos]
   );
+
+  useEffect(() => {
+    refreshApartadosJuridicos();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaOperativa>

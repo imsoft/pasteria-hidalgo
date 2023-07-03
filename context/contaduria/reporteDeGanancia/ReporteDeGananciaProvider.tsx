@@ -135,7 +135,7 @@ export const ReporteDeGananciaProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const refreshCandidatos = async () => {
+  const refreshReporteDeGanancia = async () => {
     const { data } = await entriesApi.get<ReporteDeGanancia[]>(
       "/reportesDeGanancias"
     );
@@ -143,9 +143,9 @@ export const ReporteDeGananciaProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Reporte De Ganancia] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshCandidatos();
-  }, []);
+  // useEffect(() => {
+  //   refreshReporteDeGanancia();
+  // }, []);
 
   return (
     <ReporteDeGananciaContext.Provider
@@ -156,6 +156,7 @@ export const ReporteDeGananciaProvider: FC<Props> = ({ children }) => {
         agregarNuevoReporteDeGanancia,
         actualizarReporteDeGanancia,
         eliminarReporteDeGanancia,
+        refreshReporteDeGanancia,
       }}
     >
       {children}

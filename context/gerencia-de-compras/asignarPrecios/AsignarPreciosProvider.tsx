@@ -112,15 +112,15 @@ export const AsignarPreciosProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const refreshCandidatos = async () => {
+  const refreshAsignarPrecio = async () => {
     const { data } = await entriesApi.get<AsignarPrecio[]>("/asignarPrecios");
     // console.log(data);
     dispatch({ type: "[Asignar Precios] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshCandidatos();
-  }, []);
+  // useEffect(() => {
+  //   refreshAsignarPrecio();
+  // }, []);
 
   return (
     <AsignarPreciosContext.Provider
@@ -131,6 +131,7 @@ export const AsignarPreciosProvider: FC<Props> = ({ children }) => {
         eliminarAsignarPrecio,
         agregarNuevoAsignarPrecio,
         actualizarAsignarPrecio,
+        refreshAsignarPrecio,
       }}
     >
       {children}

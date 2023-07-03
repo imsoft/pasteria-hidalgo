@@ -143,9 +143,9 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Cliente Frecuente] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshClientesFrecuentes();
-  }, []);
+  // useEffect(() => {
+  //   refreshClientesFrecuentes();
+  // }, []);
 
   return (
     <ClientesFrecuentesContext.Provider
@@ -156,6 +156,7 @@ export const ClientesFrecuentesProvider: FC<Props> = ({ children }) => {
         eliminarClienteFrecuente,
         agregarClienteFrecuente,
         actualizarClienteFrecuente,
+        refreshClientesFrecuentes,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { CandidatosContext } from "../../../context/recursos-humanos/candidatos/CandidatosContext";
@@ -7,8 +7,12 @@ import ListaCandidatos from "../../../components/ui/recursos-humanos/ListaCandid
 import { SidebarLayoutRecursosHumanos } from "../../../components/layouts/recursos-humanos/SidebarLayoutRecursosHumanos";
 
 const VerCandidatos = () => {
-  const { candidatos } = useContext(CandidatosContext);
+  const { candidatos, refreshCandidatos } = useContext(CandidatosContext);
   const candidatosMemo = useMemo(() => candidatos, [candidatos]);
+
+  useEffect(() => {
+    refreshCandidatos();
+  }, []);
 
   return (
     <SidebarLayoutRecursosHumanos>

@@ -27,10 +27,10 @@ export default function ReporteDeCompras() {
   const { agregarNuevoManejoDeAlmacen } = useContext(ManejosDeAlmacenContext);
   const { agregarNuevoReporteDeGanancia } = useContext(ReporteDeGananciaContext);
 
-  const { proveedores } = useContext(ProveedoresContext);
+  const { proveedores, refreshProveedores } = useContext(ProveedoresContext);
   const proveedoresMemo = useMemo(() => proveedores, [proveedores]);
 
-  const { materiasPrimas } = useContext(MateriasPrimasContext);
+  const { materiasPrimas, refreshMateriasPrimas } = useContext(MateriasPrimasContext);
   const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
 
   const [inputUuid, setInputUuid] = useState(1);
@@ -128,6 +128,11 @@ export default function ReporteDeCompras() {
   const precioTotalDelProducto = () => {
     setInputPrecioTotalDelProducto(inputCantidad * inputPrecioPorUnidad);
   };
+
+  useEffect(() => {
+    refreshMateriasPrimas();
+    refreshProveedores();
+  }, []);
 
   useEffect(() => {
     precioTotalDelProducto();

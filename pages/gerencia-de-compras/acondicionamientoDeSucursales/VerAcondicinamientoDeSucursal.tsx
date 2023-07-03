@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import Link from "next/link";
 
@@ -8,13 +8,17 @@ import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerenc
 import ListaAcondicionamientoDeSucursales from "../../../components/ui/gerencia-de-compras/ListaAcondicionamientoDeSucursales";
 
 const VerAcondicionamientoDeSucursales = () => {
-  const { acondicionamientoDeSucursales } = useContext(
+  const { acondicionamientoDeSucursales, refreshAcondicionamientoDeSucursales } = useContext(
     AcondicionamientoDeSucursalesContext
   );
   const acondicionamientoDeSucursalesMemo = useMemo(
     () => acondicionamientoDeSucursales,
     [acondicionamientoDeSucursales]
   );
+
+  useEffect(() => {
+    refreshAcondicionamientoDeSucursales();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaCompras>

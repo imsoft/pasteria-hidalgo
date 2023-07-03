@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente";
@@ -92,13 +92,17 @@ export default function AgregarCandidato() {
 
   const { agregarClienteFrecuente } = useContext(ClientesFrecuentesContext);
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
   );
 
   const watchSucursalOFranquicia = watch("sucursalOFranquicia");
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   const onSave = ({
     nombre,

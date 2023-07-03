@@ -35,7 +35,7 @@ export const ApartadoJuridicoPage: FC<Props> = ({ apartadoJuridico }) => {
     ApartadosJuridicosContext
   );
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -88,6 +88,10 @@ export const ApartadoJuridicoPage: FC<Props> = ({ apartadoJuridico }) => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    refreshSucursalesYFranquicias();
+  }, []);
 
   useEffect(() => {
     flag ? onSave() : true;

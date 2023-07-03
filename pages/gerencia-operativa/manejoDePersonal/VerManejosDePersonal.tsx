@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { SidebarLayoutGerenciaOperativa } from "../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa";
@@ -7,11 +7,15 @@ import { PersonalActivoContext } from "../../../context/recursos-humanos/persona
 import ListaManejoDePersonal from "../../../components/ui/gerencia-operativa/ListaManejoDePersonal";
 
 const VerCandidatos = () => {
-  const { personasActivas } = useContext(PersonalActivoContext);
+  const { personasActivas, refreshPersonalActivo } = useContext(PersonalActivoContext);
   const personalesActivosMemo = useMemo(
     () => personasActivas,
     [personasActivas]
   );
+
+  useEffect(() => {
+    refreshPersonalActivo();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaOperativa>

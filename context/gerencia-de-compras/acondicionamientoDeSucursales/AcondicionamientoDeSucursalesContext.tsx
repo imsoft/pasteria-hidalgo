@@ -29,6 +29,8 @@ interface ContextProps {
     acondicionamientoDeSucursal: AcondicionamientoDeSucursal,
     showNotificacion?: boolean
   ) => void;
+
+  refreshAcondicionamientoDeSucursales: () => Promise<void>;
 }
 
 export const AcondicionamientoDeSucursalesContext = createContext(

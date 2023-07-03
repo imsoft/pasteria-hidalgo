@@ -24,6 +24,8 @@ interface ContextProps {
     reporteDeSalida: ReporteDeSalida,
     showNotificacion?: boolean
   ) => void;
+
+  refreshReportesDeSalida: () => Promise<void>;
 }
 
 export const ReportesDeSalidaContext = createContext({} as ContextProps);

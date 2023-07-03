@@ -117,9 +117,9 @@ export const MateriasPrimasProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Materia Prima] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshMateriasPrimas();
-  }, []);
+  // useEffect(() => {
+  //   refreshMateriasPrimas();
+  // }, []);
 
   return (
     <MateriasPrimasContext.Provider
@@ -130,6 +130,7 @@ export const MateriasPrimasProvider: FC<Props> = ({ children }) => {
         agregarNuevaMateriaPrima,
         actualizarMateriaPrima,
         eliminarMateriaPrima,
+        refreshMateriasPrimas,
       }}
     >
       {children}

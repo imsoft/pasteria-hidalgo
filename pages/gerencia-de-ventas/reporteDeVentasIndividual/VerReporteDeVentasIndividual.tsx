@@ -24,15 +24,16 @@ const VerReporteDeVentasIndividual = () => {
   const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
     useState("");
 
-  const { reportesVentasIndividual } = useContext(
-    ReportesVentasIndividualContext
-  );
+  const { reportesVentasIndividual, refreshReportesVentasIndividual } =
+    useContext(ReportesVentasIndividualContext);
   const reportesVentasIndividualMemo = useMemo(
     () => reportesVentasIndividual,
     [reportesVentasIndividual]
   );
 
-  const { sucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(
+    SucursalesYFranquiciasContext
+  );
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -68,6 +69,11 @@ const VerReporteDeVentasIndividual = () => {
     setInputLugarDeLaVenta("");
     setInputNombreSucursalOFranquicia("");
   };
+
+  useEffect(() => {
+    refreshReportesVentasIndividual();
+    refreshSucursalesYFranquicias();
+  }, []);
 
   useEffect(() => {
     reportesVentasIndividualMemo

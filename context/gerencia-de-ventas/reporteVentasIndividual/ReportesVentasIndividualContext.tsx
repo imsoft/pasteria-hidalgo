@@ -29,6 +29,8 @@ interface ContextProps {
     reporteVentasIndividual: ReporteVentasIndividual,
     showNotificacion?: boolean
   ) => void;
+
+  refreshReportesVentasIndividual: () => Promise<void>;
 }
 
 export const ReportesVentasIndividualContext = createContext(

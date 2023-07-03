@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 
 import { AsignarPreciosContext } from '../../../context/gerencia-de-compras/asignarPrecios/AsignarPreciosContext';
@@ -7,8 +7,12 @@ import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerenc
 import ListaAsignarPrecio from '../../../components/ui/gerencia-de-compras/ListaAsignarPrecios';
 
 const VerAsignarPrecios = () => {
-  const { asignarPrecios } = useContext(AsignarPreciosContext);
+  const { asignarPrecios, refreshAsignarPrecio } = useContext(AsignarPreciosContext);
   const asignarPreciosMemo = useMemo(() => asignarPrecios, [asignarPrecios]);
+
+  useEffect(() => {
+    refreshAsignarPrecio();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaCompras>

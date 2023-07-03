@@ -24,6 +24,8 @@ interface ContextProps {
     reporteDeGanancia: ReporteDeGanancia,
     showNotificacion?: boolean
   ) => void;
+
+  refreshReporteDeGanancia: () => Promise<void>;
 }
 
 export const ReporteDeGananciaContext = createContext({} as ContextProps);

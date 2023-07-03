@@ -10,7 +10,7 @@ const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
 
 const VerReportesDeCompras = () => {
-  const { reportesDeCompras } = useContext(ReporteDeCompraContext);
+  const { reportesDeCompras, refreshReportesDeCompras } = useContext(ReporteDeCompraContext);
   const reportesDeComprasMemo = useMemo(
     () => reportesDeCompras,
     [reportesDeCompras]
@@ -37,6 +37,10 @@ const VerReportesDeCompras = () => {
     setInputFecha(hoy.toLocaleDateString());
     setInputNuevaFecha(hoy.toLocaleDateString());
   };
+
+  useEffect(() => {
+    refreshReportesDeCompras();
+  }, []);
 
   useEffect(() => {
     reportesDeComprasMemo

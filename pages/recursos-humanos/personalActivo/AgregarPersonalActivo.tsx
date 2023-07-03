@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { PersonalActivoContext } from "../../../context/recursos-humanos/personalActivo/PersonalActivoContext";
@@ -91,8 +91,12 @@ export default function AgregarPersonalActivo() {
 
   const { agregarPersonalActivo } = useContext(PersonalActivoContext);
 
-  const { candidatos } = useContext(CandidatosContext);
+  const { candidatos, refreshCandidatos } = useContext(CandidatosContext);
   const candidatosMemo = useMemo(() => candidatos, [candidatos]);
+
+  useEffect(() => {
+    refreshCandidatos();
+  }, []);
 
   const watchNombre = watch("nombre");
 

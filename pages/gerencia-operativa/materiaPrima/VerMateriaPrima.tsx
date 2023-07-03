@@ -1,12 +1,16 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { MateriasPrimasContext } from '../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext';
 import { SidebarLayoutGerenciaOperativa } from '../../../components/layouts/gerencia-operativa/SidebarLayoutGerenciaOperativa';
 import ListaMateriasPrimas from '../../../components/ui/gerencia-operativa/ListaMateriaPrima';
 
 const VerMateriasPrimas = () => {
-  const { materiasPrimas } = useContext(MateriasPrimasContext);
+  const { materiasPrimas, refreshMateriasPrimas } = useContext(MateriasPrimasContext);
   const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
+
+  useEffect(() => {
+    refreshMateriasPrimas();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaOperativa>

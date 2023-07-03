@@ -20,6 +20,8 @@ interface ContextProps {
     asignarPrecio: AsignarPrecio,
     showNotificacion?: boolean
   ) => void;
+
+  refreshAsignarPrecio: () => Promise<void>;
 }
 
 export const AsignarPreciosContext = createContext({} as ContextProps);

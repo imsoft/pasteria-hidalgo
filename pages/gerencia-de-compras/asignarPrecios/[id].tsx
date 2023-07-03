@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useContext, useMemo, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useMemo, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 
@@ -25,7 +25,7 @@ export const AsignarPrecioPage: FC<Props> = ({ asignarPrecio }) => {
     AsignarPreciosContext
   );
 
-  const { materiasPrimas } = useContext(MateriasPrimasContext);
+  const { materiasPrimas, refreshMateriasPrimas } = useContext(MateriasPrimasContext);
   const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
 
   const [inputProducto, setInputProducto] = useState(asignarPrecio.producto);
@@ -46,6 +46,10 @@ export const AsignarPrecioPage: FC<Props> = ({ asignarPrecio }) => {
   ) => {
     setInputPrecioMaximo(event.target.value);
   };
+
+  useEffect(() => {
+    refreshMateriasPrimas();
+  }, []);
 
   const onSave = () => {
     if (

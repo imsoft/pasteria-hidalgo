@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import Link from "next/link";
 import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/clienteFrecuente";
@@ -6,8 +6,12 @@ import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerenci
 import ListaClientesFrecuentes from '../../../components/ui/gerencia-de-ventas/ListaClienteFrecuente';
 
 const VerClientesFrecuentes = () => {
-  const { clientesFrecuentes } = useContext(ClientesFrecuentesContext);
+  const { clientesFrecuentes, refreshClientesFrecuentes } = useContext(ClientesFrecuentesContext);
   const clientesFrecuentesMemo = useMemo(() => clientesFrecuentes, [clientesFrecuentes]);
+
+  useEffect(() => {
+    refreshClientesFrecuentes();
+  }, []);
 
   return (
     <SidebarLayoutGerenciaVentas>

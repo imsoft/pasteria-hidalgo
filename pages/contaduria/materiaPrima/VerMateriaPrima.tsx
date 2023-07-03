@@ -1,18 +1,26 @@
-import { useContext, useMemo } from "react";
-import { MateriasPrimasContext } from '../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext';
-import { SidebarLayoutContaduria } from '../../../components/layouts/contaduria/SidebarLayoutContaduria';
+import { useContext, useEffect, useMemo } from "react";
+import { MateriasPrimasContext } from "../../../context/gerencia-operativa/materiaPrima/MateriaPrimaContext";
+import { SidebarLayoutContaduria } from "../../../components/layouts/contaduria/SidebarLayoutContaduria";
 import ListaMateriaPrima from "../../../components/ui/contaduria/ListaMateriaPrima";
 
 const VerMateriaPrima = () => {
-  const { materiasPrimas } = useContext(MateriasPrimasContext);
+  const { materiasPrimas, refreshMateriasPrimas } = useContext(
+    MateriasPrimasContext
+  );
   const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
+
+  useEffect(() => {
+    refreshMateriasPrimas();
+  }, []);
 
   return (
     <SidebarLayoutContaduria>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
-            <h1 className="text-xl font-semibold text-gray-900">Materia prima</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Materia prima
+            </h1>
             <p className="mt-2 text-sm text-gray-700">
               Aquí podras ver los materias primas para la empresa.
             </p>

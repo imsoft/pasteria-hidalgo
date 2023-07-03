@@ -135,9 +135,9 @@ export const ApartadosJuridicosProvider: FC<Props> = ({ children }) => {
     dispatch({ type: "[Apartado Juridico] Refrescar-Datos", payload: data });
   };
 
-  useEffect(() => {
-    refreshApartadosJuridicos();
-  }, []);
+  // useEffect(() => {
+  //   refreshApartadosJuridicos();
+  // }, []);
 
   return (
     <ApartadosJuridicosContext.Provider
@@ -148,6 +148,7 @@ export const ApartadosJuridicosProvider: FC<Props> = ({ children }) => {
         agregarNuevoApartadoJuridico,
         actualizarApartadoJuridico,
         eliminarApartadoJuridico,
+        refreshApartadosJuridicos,
       }}
     >
       {children}

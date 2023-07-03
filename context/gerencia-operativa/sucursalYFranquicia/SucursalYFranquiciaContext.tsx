@@ -28,6 +28,8 @@ interface ContextProps {
     sucursalYFranquicia: SucursalYFranquicia,
     showNotificacion?: boolean
   ) => void;
+
+  refreshSucursalesYFranquicias: () => Promise<void>;
 }
 
 export const SucursalesYFranquiciasContext = createContext({} as ContextProps);

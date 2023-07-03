@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useMemo, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { SidebarLayoutGerenciaCompras } from "../../../components/layouts/gerencia-de-compras/SidebarLayoutGerenciaCompras";
@@ -47,8 +47,12 @@ export default function AgregarCandidato() {
 
   const { agregarNuevoAsignarPrecio } = useContext(AsignarPreciosContext);
 
-  const { materiasPrimas } = useContext(MateriasPrimasContext);
+  const { materiasPrimas, refreshMateriasPrimas } = useContext(MateriasPrimasContext);
   const materiasPrimasMemo = useMemo(() => materiasPrimas, [materiasPrimas]);
+
+  useEffect(() => {
+    refreshMateriasPrimas();
+  }, []);
 
   const onSave = ({ producto, precioMaximo }: FormData) => {
     agregarNuevoAsignarPrecio(producto, precioMaximo, true);
