@@ -153,7 +153,7 @@ export const SucursalesYFranquiciasProvider: FC<Props> = ({ children }) => {
 
   const refreshSucursalesYFranquicias = async () => {
     const { data } = await entriesApi.get<SucursalYFranquicia[]>(
-      "/sucursalesYFranquicias"
+      "/sucursalesYFranquicias", {timeout: 10000}
     );
     // console.log(data);
     dispatch({
