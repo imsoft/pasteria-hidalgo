@@ -1,10 +1,6 @@
 import {
   ReactElement,
   ReactNode,
-  Suspense,
-  lazy,
-  useEffect,
-  useState,
 } from "react";
 import { NextPage } from "next";
 import { AppProps } from "next/app";
@@ -64,12 +60,7 @@ type AppPropsWithLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
 
-  function Loading() {
-    return <h2>🌀 Loading...</h2>;
-  }
-
   return getLayout(
-    // <Suspense fallback={<Loading />}>
     <SessionProvider>
       <AuthProvider>
         <SucursalesYFranquiciasProvider>
@@ -113,7 +104,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         </SucursalesYFranquiciasProvider>
       </AuthProvider>
     </SessionProvider>
-    // </Suspense>
   );
 }
 
