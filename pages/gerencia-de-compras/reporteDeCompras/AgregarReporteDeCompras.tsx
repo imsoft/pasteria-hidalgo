@@ -489,8 +489,8 @@ export default function ReporteDeCompras() {
                   </div>
                   <input
                     type="text"
-                    name="price"
-                    id="price"
+                    name="TxtPrecioCompra"
+                    id="TxtPrecioCompra"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                     value={
                       isNaN(inputPrecioPorUnidad) ? 0 : inputPrecioPorUnidad

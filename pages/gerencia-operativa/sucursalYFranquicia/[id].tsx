@@ -191,14 +191,17 @@ export const SucursalYFranquiciaPage: FC<Props> = ({ sucursalYFranquicia }) => {
 
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
-                <label className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="TxtSucursalOFranquicia"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   ¿Sucursal o Franquicia?
                 </label>
 
                 <div className="col-span-6 sm:col-span-3">
                   <select
-                    id="CmbNombre"
-                    name="CmbNombre"
+                    id="TxtSucursalOFranquicia"
+                    name="TxtSucursalOFranquicia"
                     className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                     defaultValue="Selecciona un producto..."
                     value={inputSucursalOFranquicia}
@@ -214,15 +217,15 @@ export const SucursalYFranquiciaPage: FC<Props> = ({ sucursalYFranquicia }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDireccion"
+                  htmlFor="TxtNombreDeLaSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre de la sucursal o franquicia
                 </label>
                 <input
                   type="text"
-                  name="TxtDireccion"
-                  id="TxtDireccion"
+                  name="TxtNombreDeLaSucursalOFranquicia"
+                  id="TxtNombreDeLaSucursalOFranquicia"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputDireccion}
@@ -372,15 +375,15 @@ export const SucursalYFranquiciaPage: FC<Props> = ({ sucursalYFranquicia }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtNombreDelNeneficiario"
+                  htmlFor="TxtNombreDelBeneficiario"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre del beneficiario
                 </label>
                 <input
                   type="text"
-                  name="TxtNombreDelNeneficiario"
-                  id="TxtNombreDelNeneficiario"
+                  name="TxtNombreDelBeneficiario"
+                  id="TxtNombreDelBeneficiario"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputNombreDelBeneficiario}

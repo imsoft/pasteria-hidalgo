@@ -255,7 +255,7 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="CmbSucursalOFranquicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   ¿Sucursal o Franquicia?
@@ -263,8 +263,8 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
 
                 <div className="col-span-6 sm:col-span-3">
                   <select
-                    id="CmbNombre"
-                    name="CmbNombre"
+                    id="CmbSucursalOFranquicia"
+                    name="CmbSucursalOFranquicia"
                     className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                     defaultValue="Selecciona un producto..."
                     value={inputSucursalOFranquicia}
@@ -458,8 +458,8 @@ export const AcondicionamientoDeSucursalPage: FC<Props> = ({
                   </div>
                   <input
                     type="text"
-                    name="price"
-                    id="price"
+                    name="TxtPrecioCompra"
+                    id="TxtPrecioCompra"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                     value={isNaN(inputPrecioDeCompra) ? 0 : inputPrecioDeCompra}
                     onChange={onInputValueChangedPrecioDeCompra}

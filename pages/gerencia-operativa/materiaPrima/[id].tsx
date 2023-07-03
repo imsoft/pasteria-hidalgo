@@ -170,7 +170,7 @@ export const MateriaPrimaPage: FC<Props> = ({ materiaPrima }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtUnidades"
+                  htmlFor="CmbUnidades"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Unidades

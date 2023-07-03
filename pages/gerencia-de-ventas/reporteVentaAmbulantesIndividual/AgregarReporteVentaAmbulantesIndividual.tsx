@@ -541,15 +541,15 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNombreDelVendedor"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre del vendedor
                 </label>
                 <input
                   type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
+                  name="TxtNombreDelVendedor"
+                  id="TxtNombreDelVendedor"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   onChange={onTextFieldChangedNombreVendedor}
@@ -583,14 +583,14 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
 
               <div className={"col-span-6 sm:col-span-3"}>
                 <label
-                  htmlFor="CmbSaboresDulces"
+                  htmlFor="CmbProducto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Producto
                 </label>
                 <select
-                  id="CmbSaboresDulces"
-                  name="CmbSaboresDulces"
+                  id="CmbProducto"
+                  name="CmbProducto"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   value={inputSaborProducto || ""}
                   onChange={onTextFieldChangedSaborProducto}
@@ -632,7 +632,7 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtCantidadDeProducto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Cantidad de producto
@@ -640,8 +640,8 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
                 <input
                   type="number"
                   min={1}
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
+                  name="TxtCantidadDeProducto"
+                  id="TxtCantidadDeProducto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputCantidad || ""}
@@ -652,7 +652,7 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPrecioCompra"
+                  htmlFor="TxtPrecioPorProductoIndividual"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Precio por producto individual
@@ -663,8 +663,8 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
                   </div>
                   <input
                     type="text"
-                    name="price"
-                    id="price"
+                    name="TxtPrecioPorProductoIndividual"
+                    id="TxtPrecioPorProductoIndividual"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                     placeholder="0"
                     aria-describedby="price-currency"
@@ -720,7 +720,7 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtPrecioCompra"
+                  htmlFor="TxtSumaTotalDeProductos"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Suma total de productos
@@ -731,8 +731,8 @@ const AgregarReporteVentaAmbulantesIndividual = () => {
                   </div>
                   <input
                     type="text"
-                    name="price"
-                    id="price"
+                    name="TxtSumaTotalDeProductos"
+                    id="TxtSumaTotalDeProductos"
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                     placeholder="0"
                     aria-describedby="price-currency"

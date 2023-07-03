@@ -86,14 +86,14 @@ export default function ReporteGanancias() {
             <div className="grid grid-cols-3 gap-6">
               <div className="col-span-3 sm:col-span-1">
                 <label
-                  htmlFor="CmbSucursal"
+                  htmlFor="CmbMes"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Mes
                 </label>
                 <select
-                  id="CmbSucursal"
-                  name="CmbSucursal"
+                  id="CmbMes"
+                  name="CmbMes"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   defaultValue="Selecciona un producto..."
                   onChange={onTextFieldChangedMes}
@@ -108,15 +108,15 @@ export default function ReporteGanancias() {
 
               <div className="col-span-3 sm:col-span-1">
                 <label
-                  htmlFor="TxtAnio"
+                  htmlFor="CmdAnio"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Año
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <select
-                    id="CmbSucursal"
-                    name="CmbSucursal"
+                    id="CmdAnio"
+                    name="CmdAnio"
                     className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                     defaultValue="Selecciona un producto..."
                     onChange={onTextFieldChangedAnio}

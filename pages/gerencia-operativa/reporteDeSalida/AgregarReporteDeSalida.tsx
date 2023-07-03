@@ -499,15 +499,15 @@ export default function ReportesSalida() {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtFecha"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Fecha
                 </label>
                 <input
                   type="date"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
+                  name="TxtFecha"
+                  id="TxtFecha"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputFecha || ""}
@@ -542,15 +542,15 @@ export default function ReportesSalida() {
 
               <div className={"col-span-6 sm:col-span-3"}>
                 <label
-                  htmlFor="CmbSaboresDulces"
+                  htmlFor="CmbProducto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Producto
                 </label>
                 {inputTipoDeProducto !== "Extra" ? (
                   <select
-                    id="CmbSaboresDulces"
-                    name="CmbSaboresDulces"
+                    id="CmbProducto"
+                    name="CmbProducto"
                     className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                     value={inputSaborProducto || ""}
                     onChange={onTextFieldChangedSaborProducto}
@@ -604,7 +604,7 @@ export default function ReportesSalida() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtCantidadDeProducto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Cantidad de producto
@@ -612,8 +612,8 @@ export default function ReportesSalida() {
                 <input
                   type="number"
                   min={1}
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
+                  name="TxtCantidadDeProducto"
+                  id="TxtCantidadDeProducto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputCantidad || ""}
@@ -624,14 +624,14 @@ export default function ReportesSalida() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="CmbFranquicia"
+                  htmlFor="CmbSucursalAEnviar"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Sucursal a enviar
                 </label>
                 <select
-                  id="CmbFranquicia"
-                  name="CmbFranquicia"
+                  id="CmbSucursalAEnviar"
+                  name="CmbSucursalAEnviar"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                   defaultValue="Selecciona un producto..."
                   onChange={onTextFieldChangedSucursalAEnviar}
@@ -656,15 +656,15 @@ export default function ReportesSalida() {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNombreDelRepartidor"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre del Repartidor
                 </label>
                 <input
                   type="text"
-                  name="TxtDescripcionProducto"
-                  id="TxtDescripcionProducto"
+                  name="TxtNombreDelRepartidor"
+                  id="TxtNombreDelRepartidor"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputDatosDeRepartidor || ""}
@@ -693,8 +693,8 @@ export default function ReportesSalida() {
                   /> */}
 
                   <select
-                    id="CmbUnidades"
-                    name="CmbUnidades"
+                    id="CmbDistanciaDeLaFabricaAlDestino"
+                    name="CmbDistanciaDeLaFabricaAlDestino"
                     className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
                     onChange={onTextFieldChangedDatosDeLaRuta}
                     onBlur={() => setTouched(true)}

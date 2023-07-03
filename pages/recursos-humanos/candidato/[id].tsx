@@ -334,7 +334,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNombre"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Nombre
@@ -353,7 +353,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="CmbPuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Puesto
@@ -377,15 +377,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtDescripcionYFuncionesDePuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Descripción y funciones de puesto
                 </label>
                 <input
                   type="text"
-                  name="TxtDescripcionPuesto"
-                  id="TxtDescripcionPuesto"
+                  name="TxtDescripcionYFuncionesDePuesto"
+                  id="TxtDescripcionYFuncionesDePuesto"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                   value={inputDescripcionDelPuesto}
@@ -396,7 +396,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtFechaNacimiento"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Fecha de nacimiento
@@ -415,7 +415,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtDomicilio"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Domicilio
@@ -434,7 +434,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtCurp"
                   className="block text-sm font-medium text-gray-700"
                 >
                   C.U.R.P.
@@ -453,7 +453,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNoImss"
                   className="block text-sm font-medium text-gray-700"
                 >
                   No. IMSS
@@ -472,7 +472,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDescripcionProducto"
+                  htmlFor="TxtNoCartaPolicia"
                   className="block text-sm font-medium text-gray-700"
                 >
                   No. Carta de policía
@@ -566,15 +566,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNombre"
+                      htmlFor="TxtNombreReferencia1"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Nombre
                     </label>
                     <input
                       type="text"
-                      name="TxtNombre"
-                      id="TxtNombre"
+                      name="TxtNombreReferencia1"
+                      id="TxtNombreReferencia1"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia1Nombre}
@@ -585,15 +585,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtEmpresa"
+                      htmlFor="TxtEmpresaReferencia1"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Empresa
                     </label>
                     <input
                       type="text"
-                      name="TxtEmpresa"
-                      id="TxtEmpresa"
+                      name="TxtEmpresaReferencia1"
+                      id="TxtEmpresaReferencia1"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia1Empresa}
@@ -604,15 +604,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtNumeroTelefonicoReferencia1"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Número Télefonico
                     </label>
                     <input
                       type="email"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
+                      name="TxtNumeroTelefonicoReferencia1"
+                      id="TxtNumeroTelefonicoReferencia1"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia1NumeroTelefonico}
@@ -623,15 +623,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtObservaciones"
+                      htmlFor="TxtObservacionesReferencia1"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Observaciones
                     </label>
                     <input
                       type="email"
-                      name="TxtObservaciones"
-                      id="TxtObservaciones"
+                      name="TxtObservacionesReferencia1"
+                      id="TxtObservacionesReferencia1"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia1Observaciones}
@@ -649,15 +649,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNombre"
+                      htmlFor="TxtNombreReferencia2"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Nombre
                     </label>
                     <input
                       type="text"
-                      name="TxtNombre"
-                      id="TxtNombre"
+                      name="TxtNombreReferencia2"
+                      id="TxtNombreReferencia2"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia2Nombre}
@@ -668,15 +668,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtEmpresa"
+                      htmlFor="TxtEmpresaReferencia2"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Empresa
                     </label>
                     <input
                       type="text"
-                      name="TxtEmpresa"
-                      id="TxtEmpresa"
+                      name="TxtEmpresaReferencia2"
+                      id="TxtEmpresaReferencia2"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia2Empresa}
@@ -687,15 +687,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtNumeroTelefonicoReferencia2"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Número Télefonico
                     </label>
                     <input
                       type="email"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
+                      name="TxtNumeroTelefonicoReferencia2"
+                      id="TxtNumeroTelefonicoReferencia2"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia2NumeroTelefonico}
@@ -706,7 +706,7 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtObservaciones"
+                      htmlFor="TxtObservacionesReferencia2"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Observaciones
@@ -732,15 +732,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNombre"
+                      htmlFor="TxtNombreReferencia3"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Nombre
                     </label>
                     <input
                       type="text"
-                      name="TxtNombre"
-                      id="TxtNombre"
+                      name="TxtNombreReferencia3"
+                      id="TxtNombreReferencia3"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia3Nombre}
@@ -751,15 +751,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtEmpresa"
+                      htmlFor="TxtEmpresaReferencia3"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Empresa
                     </label>
                     <input
                       type="text"
-                      name="TxtEmpresa"
-                      id="TxtEmpresa"
+                      name="TxtEmpresaReferencia3"
+                      id="TxtEmpresaReferencia3"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia3Empresa}
@@ -770,15 +770,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtNumeroTelefonicoReferencia3"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Número Télefonico
                     </label>
                     <input
                       type="email"
-                      name="TxtNumeroTelefonico"
-                      id="TxtNumeroTelefonico"
+                      name="TxtNumeroTelefonicoReferencia3"
+                      id="TxtNumeroTelefonicoReferencia3"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia3NumeroTelefonico}
@@ -789,15 +789,15 @@ export const CandidatoPage: FC<Props> = ({ candidato }) => {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtObservaciones"
+                      htmlFor="TxtObservacionesReferencia3"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Observaciones
                     </label>
                     <input
                       type="email"
-                      name="TxtObservaciones"
-                      id="TxtObservaciones"
+                      name="TxtObservacionesReferencia3"
+                      id="TxtObservacionesReferencia3"
                       autoComplete="off"
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
                       onChange={onInputValueChangedReferencia3Observaciones}

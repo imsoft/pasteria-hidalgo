@@ -512,7 +512,7 @@ export default function ManejoSucursalesFranquicias() {
                 <div className="relative rounded-md shadow-sm">
                   <input
                     type="text"
-                    id="TxtNombre"
+                    id="TxtNombreDelBeneficiario"
                     autoComplete="off"
                     className={`${
                       errors?.nombreDelBeneficiario

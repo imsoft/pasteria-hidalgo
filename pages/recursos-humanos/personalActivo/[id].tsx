@@ -187,7 +187,7 @@ export const PersonalActivoPage: FC<Props> = ({ personalActivo }) => {
 
               <div className="col-span-6 sm:col-span-3">
                 <label
-                  htmlFor="TxtDPuesto"
+                  htmlFor="CmbPuesto"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Puesto

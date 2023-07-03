@@ -268,7 +268,6 @@ export default function AgregarCandidato() {
               <p className="mt-1 text-sm text-gray-500">¡Hola!</p>
             </div>
             <div className="grid grid-cols-6 gap-6">
-              
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="TxtNombre"
@@ -727,7 +726,7 @@ export default function AgregarCandidato() {
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNombre"
+                      htmlFor="TxtNombreReferencia1"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Nombre
@@ -735,7 +734,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtNombre"
+                        id="TxtNombreReferencia1"
                         autoComplete="off"
                         className={`${
                           errors?.referencia1Nombre
@@ -769,7 +768,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtEmpresa"
+                      htmlFor="TxtEmpresaReferencia1"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Empresa
@@ -777,7 +776,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtEmpresa"
+                        id="TxtEmpresaReferencia1"
                         autoComplete="off"
                         className={`${
                           errors?.referencia1Empresa
@@ -811,7 +810,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtNumeroTelefonicoReferencia1"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Número Telefónico
@@ -819,7 +818,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="tel"
-                        id="TxtNumeroTelefonico"
+                        id="TxtNumeroTelefonicoReferencia1"
                         autoComplete="off"
                         className={`${
                           errors?.referencia1NumeroTelefonico
@@ -853,7 +852,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtObservaciones"
+                      htmlFor="TxtObservacionesReferencia1"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Observaciones
@@ -861,7 +860,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtObservaciones"
+                        id="TxtObservacionesReferencia1"
                         autoComplete="off"
                         className={`${
                           errors?.referencia1Observaciones
@@ -902,7 +901,7 @@ export default function AgregarCandidato() {
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNombre"
+                      htmlFor="TxtNombreReferencia2"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Nombre
@@ -910,7 +909,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtNombre"
+                        id="TxtNombreReferencia2"
                         autoComplete="off"
                         className={`${
                           errors?.referencia2Nombre
@@ -944,7 +943,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtEmpresa"
+                      htmlFor="TxtEmpresaReferencia2"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Empresa
@@ -952,7 +951,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtEmpresa"
+                        id="TxtEmpresaReferencia2"
                         autoComplete="off"
                         className={`${
                           errors?.referencia2Empresa
@@ -986,7 +985,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtNumeroTelefonicoReferencia2"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Número Telefónico
@@ -994,7 +993,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="tel"
-                        id="TxtNumeroTelefonico"
+                        id="TxtNumeroTelefonicoReferencia2"
                         autoComplete="off"
                         className={`${
                           errors?.referencia2NumeroTelefonico
@@ -1028,7 +1027,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtObservaciones"
+                      htmlFor="TxtObservacionesReferencia2"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Observaciones
@@ -1036,7 +1035,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtObservaciones"
+                        id="TxtObservacionesReferencia2"
                         autoComplete="off"
                         className={`${
                           errors?.referencia2Observaciones
@@ -1077,7 +1076,7 @@ export default function AgregarCandidato() {
                 <div className="grid grid-cols-6 gap-6">
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNombre"
+                      htmlFor="TxtNombreReferencia3"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Nombre
@@ -1085,7 +1084,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtNombre"
+                        id="TxtNombreReferencia3"
                         autoComplete="off"
                         className={`${
                           errors?.referencia3Nombre
@@ -1119,7 +1118,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtEmpresa"
+                      htmlFor="TxtEmpresaReferencia3"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Empresa
@@ -1127,7 +1126,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtEmpresa"
+                        id="TxtEmpresaReferencia3"
                         autoComplete="off"
                         className={`${
                           errors?.referencia3Empresa
@@ -1161,7 +1160,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtNumeroTelefonico"
+                      htmlFor="TxtNumeroTelefonicoReferencia3"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Número Telefónico
@@ -1169,7 +1168,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="tel"
-                        id="TxtNumeroTelefonico"
+                        id="TxtNumeroTelefonicoReferencia3"
                         autoComplete="off"
                         className={`${
                           errors?.referencia3NumeroTelefonico
@@ -1203,7 +1202,7 @@ export default function AgregarCandidato() {
 
                   <div className="col-span-6 sm:col-span-3">
                     <label
-                      htmlFor="TxtObservaciones"
+                      htmlFor="TxtObservacionesReferencia3"
                       className="block text-sm font-medium text-gray-700"
                     >
                       Observaciones
@@ -1211,7 +1210,7 @@ export default function AgregarCandidato() {
                     <div className="relative rounded-md shadow-sm">
                       <input
                         type="text"
-                        id="TxtObservaciones"
+                        id="TxtObservacionesReferencia3"
                         autoComplete="off"
                         className={`${
                           errors?.referencia3Observaciones
