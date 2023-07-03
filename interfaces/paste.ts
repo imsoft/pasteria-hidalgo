@@ -1,6 +1,6 @@
 import { TipoDeProducto } from '.';
 
-export interface Paste {
+export interface Menu {
     _id: string;
     saborDelPaste: string;
     precio: number;

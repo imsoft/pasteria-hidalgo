@@ -6,7 +6,6 @@ import {
   ClienteFrecuente,
   ListadoDeProductos,
   LugarDeVenta,
-  Paste,
   TipoDeProducto,
 } from "../../../interfaces";
 
@@ -15,18 +14,11 @@ import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/c
 import { useRouter } from "next/router";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 import { ReporteDeGananciaContext } from "../../../context/contaduria/reporteDeGanancia";
-import { dividirFecha, generateTicket } from "../../../utils";
+import { dividirFecha, generateTicket, validMenuProducts, validProductType } from "../../../utils";
 import { useSession } from "next-auth/react";
-import { MinusIcon, PlusIcon, UserAddIcon } from "@heroicons/react/outline";
-import Swal from "sweetalert2";
+import { MinusIcon, PlusIcon } from "@heroicons/react/outline";
 
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
-
-const validProductType: TipoDeProducto[] = [
-  "Paste Dulce",
-  "Paste Salado",
-  "Otros",
-];
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
@@ -38,285 +30,6 @@ const dia = hoy.getDate();
 const useClientPoints = [
   { id: "si", title: "Si" },
   { id: "no", title: "No" },
-];
-
-const validCakeFlavors: Paste[] = [
-  {
-    _id: "PD_ACL",
-    saborDelPaste: "Arroz con leche",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_CP",
-    saborDelPaste: "Crema pastelera",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_FCP",
-    saborDelPaste: "Frambuesa con philadelphia",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_FRCP",
-    saborDelPaste: "Frutos rojos con philadelphia",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_GCP",
-    saborDelPaste: "Guayaba con philadelphia",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_H",
-    saborDelPaste: "Hawaiano",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_MCP",
-    saborDelPaste: "Manzana con philadelphia",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_NCP",
-    saborDelPaste: "Nutella con philadelphia",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_PCP",
-    saborDelPaste: "Piña con philadelphia",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PD_FRCP",
-    saborDelPaste: "Frutos rojos con philadelphia",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
-  {
-    _id: "PS_A",
-    saborDelPaste: "Atun",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_FCC",
-    saborDelPaste: "Frijol con chorizo",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_H",
-    saborDelPaste: "Hidalguense",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_M",
-    saborDelPaste: "Marlin",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_MR",
-    saborDelPaste: "Mole rojo",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_MV",
-    saborDelPaste: "Mole Verde",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_PCC",
-    saborDelPaste: "Papa con carne",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_P",
-    saborDelPaste: "Pepperoni",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_RCC",
-    saborDelPaste: "Rajas con champiñon",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_ECR",
-    saborDelPaste: "Espinacas con requeson",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_S",
-    saborDelPaste: "Salchicha",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_TCP",
-    saborDelPaste: "Tocino con papas",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_P",
-    saborDelPaste: "Pastor",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_T",
-    saborDelPaste: "Tapatio",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "PS_C",
-    saborDelPaste: "Choriqueso",
-    precio: 30,
-    tipoDeProducto: "Paste Salado",
-  },
-  {
-    _id: "O_AN",
-    saborDelPaste: "Agua natural",
-    precio: 10,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_CC",
-    saborDelPaste: "Café chico",
-    precio: 25,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_C12O",
-    saborDelPaste: "Café 12 Onz",
-    precio: 30,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_C16O",
-    saborDelPaste: "Café 16 Onz",
-    precio: 35,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_G",
-    saborDelPaste: "Galletas",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_GCC",
-    saborDelPaste: "Galletas caja chica",
-    precio: 60,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_GCG",
-    saborDelPaste: "Galletas caja grande",
-    precio: 70,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_CCCT",
-    saborDelPaste: "Coca cola con taparrosca",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_CCDL",
-    saborDelPaste: "Coca cola de lata",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_CCDLL",
-    saborDelPaste: "Coca cola de lata light",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_AM",
-    saborDelPaste: "Agua mineral",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_FT",
-    saborDelPaste: "Fuze tea",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_S",
-    saborDelPaste: "Sprite",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_F",
-    saborDelPaste: "Fanta",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_M",
-    saborDelPaste: "Mundet",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_J",
-    saborDelPaste: "Jarritos",
-    precio: 20,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_P4M",
-    saborDelPaste: "Pepsi 400 ml",
-    precio: 10,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_CCSA",
-    saborDelPaste: "Coca cola sin azucar",
-    precio: 15,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_J",
-    saborDelPaste: "Jumex",
-    precio: 12,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_SR",
-    saborDelPaste: "Salsa roja",
-    precio: 5,
-    tipoDeProducto: "Otros",
-  },
-  {
-    _id: "O_SV",
-    saborDelPaste: "Salsa verde",
-    precio: 5,
-    tipoDeProducto: "Otros",
-  },
 ];
 
 const AgregarReporteDeVentasIndividual = () => {
@@ -455,15 +168,15 @@ const AgregarReporteDeVentasIndividual = () => {
   };
 
   const lookUpProductPrice = () => {
-    const result = validCakeFlavors.find(
-      (cakeFlavors) => cakeFlavors.saborDelPaste === inputSaborProducto
+    const result = validMenuProducts.find(
+      (menuProducts) => menuProducts.tipoDeProducto === inputTipoDeProducto
     );
     setInputPrecioProducto(result?.precio!);
   };
 
   const lookUpProductId = () => {
-    const result = validCakeFlavors.find(
-      (cakeFlavors) => cakeFlavors.saborDelPaste === inputSaborProducto
+    const result = validMenuProducts.find(
+      (menuProducts) => menuProducts.tipoDeProducto === inputTipoDeProducto && menuProducts.saborDelPaste === inputSaborProducto
     );
     setInputCodigoProducto(result?._id!);
   };
@@ -890,14 +603,14 @@ const AgregarReporteDeVentasIndividual = () => {
                   onBlur={() => setTouched(true)}
                 >
                   <option hidden>Selecciona un producto...</option>
-                  {validCakeFlavors
+                  {validMenuProducts
                     .filter(
-                      (cakeFlavors) =>
-                        cakeFlavors.tipoDeProducto === inputTipoDeProducto
+                      (menuProducts) =>
+                        menuProducts.tipoDeProducto === inputTipoDeProducto
                     )
-                    .map((cakeFlavors) => (
-                      <option key={cakeFlavors.saborDelPaste}>
-                        {cakeFlavors.saborDelPaste}
+                    .map((menuProducts) => (
+                      <option key={menuProducts.saborDelPaste}>
+                        {menuProducts.saborDelPaste}
                       </option>
                     ))}
                 </select>
