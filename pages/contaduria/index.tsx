@@ -9,8 +9,6 @@ import {
 
 import { SidebarLayoutContaduria } from "../../components/layouts/contaduria/SidebarLayoutContaduria";
 import Link from "next/link";
-import { useEffect } from 'react';
-import { useRouter } from "next/router";
 
 const actions = [
   {
@@ -97,12 +95,6 @@ function classNames(...classes: any[]) {
 }
 
 export default function IndexContaduria() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.reload();
-  }, []);
-
   return (
     <SidebarLayoutContaduria>
       <div className="flex justify-center items-center">
