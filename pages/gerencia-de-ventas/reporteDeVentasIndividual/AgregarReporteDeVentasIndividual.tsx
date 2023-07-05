@@ -14,7 +14,12 @@ import { ClientesFrecuentesContext } from "../../../context/gerencia-de-ventas/c
 import { useRouter } from "next/router";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 import { ReporteDeGananciaContext } from "../../../context/contaduria/reporteDeGanancia";
-import { dividirFecha, generateTicket, validMenuProducts, validProductType } from "../../../utils";
+import {
+  dividirFecha,
+  generateTicket,
+  validMenuProducts,
+  validProductType,
+} from "../../../utils";
 import { useSession } from "next-auth/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/outline";
 
@@ -45,15 +50,19 @@ const AgregarReporteDeVentasIndividual = () => {
     ReporteDeGananciaContext
   );
 
-  const { clientesFrecuentes, actualizarClienteFrecuente, refreshClientesFrecuentes } = useContext(
-    ClientesFrecuentesContext
-  );
+  const {
+    clientesFrecuentes,
+    actualizarClienteFrecuente,
+    refreshClientesFrecuentes,
+  } = useContext(ClientesFrecuentesContext);
   const clientesFrecuentesMemo = useMemo(
     () => clientesFrecuentes,
     [clientesFrecuentes]
   );
 
-  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(SucursalesYFranquiciasContext);
+  const { sucursalesYFranquicias, refreshSucursalesYFranquicias } = useContext(
+    SucursalesYFranquiciasContext
+  );
   const sucursalesYFranquiciasMemo = useMemo(
     () => sucursalesYFranquicias,
     [sucursalesYFranquicias]
@@ -168,17 +177,28 @@ const AgregarReporteDeVentasIndividual = () => {
   };
 
   const lookUpProductPrice = () => {
-    const result = validMenuProducts.find(
-      (menuProducts) => menuProducts.tipoDeProducto === inputTipoDeProducto
-    );
-    setInputPrecioProducto(result?.precio!);
+    try {
+      const result = validMenuProducts.find(
+        (menuProducts) => menuProducts.tipoDeProducto === inputTipoDeProducto &&
+        menuProducts.saborDelPaste === inputSaborProducto
+      );
+      setInputPrecioProducto(result?.precio!);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const lookUpProductId = () => {
-    const result = validMenuProducts.find(
-      (menuProducts) => menuProducts.tipoDeProducto === inputTipoDeProducto && menuProducts.saborDelPaste === inputSaborProducto
-    );
-    setInputCodigoProducto(result?._id!);
+    try {
+      const result = validMenuProducts.find(
+        (menuProducts) =>
+          menuProducts.tipoDeProducto === inputTipoDeProducto &&
+          menuProducts.saborDelPaste === inputSaborProducto
+      );
+      setInputCodigoProducto(result?._id!);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const calculateAmount = () => {
