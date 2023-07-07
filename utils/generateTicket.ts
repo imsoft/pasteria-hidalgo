@@ -22,7 +22,7 @@ export const generateTicket = (
   });
 
   if (cantidadProductos >= 1) {
-    ticketHeight = cantidadProductos * 15 + 155;
+    ticketHeight = cantidadProductos * 15 + 155 + 35;
   }
 
   const doc = new jsPDF({
