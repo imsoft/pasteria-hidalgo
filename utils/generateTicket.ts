@@ -48,12 +48,13 @@ export const generateTicket = (
 
   let y = 110;
 
-  listaProductos.map(({ cantidad, saborProducto, precioProducto }) => {
+  listaProductos.map(({ cantidad, saborProducto, monto }) => {
     const itemText = `${cantidad} x ${saborProducto}`;
-    const itemPrice = `$ ${precioProducto}`;
+    const itemPrice = `$ ${monto}`;
 
     doc.text(itemText, 5, y);
-    doc.text(itemPrice, 48, y + 5);
+    // doc.text(itemPrice, 48, y + 5);
+    doc.text(itemPrice, 58, y);
 
     y += lineHeight;
   });
