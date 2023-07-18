@@ -22,7 +22,7 @@ export const generateTicket = (
   });
 
   if (cantidadProductos >= 1) {
-    ticketHeight = cantidadProductos * 15 + 155 + 35;
+    ticketHeight = cantidadProductos * 15 + 155;
   }
 
   const doc = new jsPDF({
@@ -34,19 +34,19 @@ export const generateTicket = (
   doc.setLineHeightFactor(1.2);
   doc.setFontSize(10);
 
-  doc.addImage("/static/Imagen-ticket.jpg", "JPEG", 5, 5, 60, 60);
+  doc.addImage("/static/Imagen-ticket.jpg", "JPEG", 14, 5, 40, 40);
 
   doc.setFont("helvetica", "normal");
-  doc.text("Av. Conchita #3180", 19, 70);
-  doc.text("Col. Loma Bonita C.P.45086", 12, 75);
-  doc.text("Zapopan,Jal.", 24, 80);
+  doc.text("Av. Conchita #3180", 19, 50);
+  doc.text("Col. Loma Bonita C.P.45086", 12, 55);
+  doc.text("Zapopan,Jal.", 24, 60);
 
-  doc.text("Cel: 33 2967 6329", 20, 90);
-  doc.text("Tel: 33 9688 9088", 20, 95);
+  doc.text("Cel: 33 2967 6329", 20, 70);
+  doc.text("Tel: 33 9688 9088", 20, 75);
 
-  doc.line(3, 100, 67, 100);
+  doc.line(3, 80, 67, 80);
 
-  let y = 110;
+  let y = 90;
 
   listaProductos.map(({ cantidad, saborProducto, monto }) => {
     const itemText = `${cantidad} x ${saborProducto}`;

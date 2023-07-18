@@ -66,12 +66,6 @@ export const validMenuProducts: Menu[] = [
     precio: 30,
     tipoDeProducto: "Paste Dulce",
   },
-  {
-    _id: "PD_FRCP",
-    saborDelPaste: "Frutos rojos con philadelphia",
-    precio: 30,
-    tipoDeProducto: "Paste Dulce",
-  },
   // Pastes salados
   {
     _id: "PS_A",
@@ -345,12 +339,6 @@ export const validMenuProducts: Menu[] = [
     precio: 18,
     tipoDeProducto: "Paste Mini Dulce",
   },
-  {
-    _id: "PMD_FRCP",
-    saborDelPaste: "Frutos rojos con philadelphia",
-    precio: 18,
-    tipoDeProducto: "Paste Mini Dulce",
-  },
   // Pastes minis salados
   {
     _id: "PMS_A",
@@ -494,12 +482,6 @@ export const validMenuProducts: Menu[] = [
   {
     _id: "PED_PCP",
     saborDelPaste: "Piña con philadelphia",
-    precio: 25,
-    tipoDeProducto: "Paste Empleado Dulce",
-  },
-  {
-    _id: "PED_FRCP",
-    saborDelPaste: "Frutos rojos con philadelphia",
     precio: 25,
     tipoDeProducto: "Paste Empleado Dulce",
   },
