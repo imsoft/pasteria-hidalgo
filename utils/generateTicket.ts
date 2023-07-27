@@ -22,7 +22,7 @@ export const generateTicket = (
   });
 
   if (cantidadProductos >= 1) {
-    ticketHeight = cantidadProductos * 15 + 155;
+    ticketHeight = cantidadProductos * 15 + 135;
   }
 
   const doc = new jsPDF({
@@ -44,7 +44,7 @@ export const generateTicket = (
   doc.text("Cel: 33 2967 6329", 20, 70);
   doc.text("Tel: 33 9688 9088", 20, 75);
 
-  doc.line(3, 80, 67, 80);
+  doc.line(3, 85, 67, 85);
 
   let y = 90;
 
@@ -56,7 +56,7 @@ export const generateTicket = (
     // doc.text(itemPrice, 48, y + 5);
     doc.text(itemPrice, 58, y);
 
-    y += lineHeight;
+    y += lineHeight - 10;
   });
 
   doc.line(3, y - 2, 67, y - 2);
