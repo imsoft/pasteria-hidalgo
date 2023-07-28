@@ -22,7 +22,7 @@ export const generateTicket = (
   });
 
   if (cantidadProductos >= 1) {
-    ticketHeight = cantidadProductos * 15 + 135;
+    ticketHeight = cantidadProductos * 15 + 115;
   }
 
   const doc = new jsPDF({
@@ -41,12 +41,12 @@ export const generateTicket = (
   doc.text("Col. Loma Bonita C.P.45086", 12, 55);
   doc.text("Zapopan,Jal.", 24, 60);
 
-  doc.text("Cel: 33 2967 6329", 20, 70);
-  doc.text("Tel: 33 9688 9088", 20, 75);
+  doc.text("Cel: 33 2967 6329", 20, 65);
+  doc.text("Tel: 33 9688 9088", 20, 70);
 
-  doc.line(3, 85, 67, 85);
+  doc.line(3, 75, 67, 75);
 
-  let y = 90;
+  let y = 80;
 
   listaProductos.map(({ cantidad, saborProducto, monto }) => {
     const itemText = `${cantidad} x ${saborProducto}`;
@@ -68,15 +68,15 @@ export const generateTicket = (
   doc.line(3, y + lineHeight - 5, 67, y + lineHeight - 5);
 
   doc.setFont("helvetica", "normal");
-  doc.text("¡Gracias por tu compra!", 16, y + lineHeight * 2 - 10);
-  doc.text("Vuelve pronto", 24, y + lineHeight * 2 - 5);
+  doc.text("¡Gracias por tu compra!", 16, y + lineHeight * 2 - 15);
+  doc.text("Vuelve pronto", 24, y + lineHeight * 2 - 10);
 
   doc.text(
     `${dia < 10 ? "0" + dia : dia}/${
       mes < 10 ? "0" + mes : mes
     }/${anio}  ${timeString}`,
     17,
-    y + lineHeight * 3 - 10
+    y + lineHeight * 3 - 20
   );
 
   doc.autoPrint();
