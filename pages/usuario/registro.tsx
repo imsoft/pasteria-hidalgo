@@ -8,7 +8,7 @@ import { validations } from "../../utils";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context/auth";
 import { getSession, signIn } from "next-auth/react";
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps } from "next";
 
 const rolesValidos = [
   //   "Seleccione una opción...",
@@ -95,6 +95,9 @@ export default function Registro() {
       nombre,
       correoElectronico,
       contrasenia,
+      role,
+      //TODO: CORREGIR ESTO A SUCURSALYFRANQUICIA Y NOMBREDESUCURSALYFRANQUICIA
+      role,
       role
     );
 
@@ -106,7 +109,7 @@ export default function Registro() {
     }
 
     // router.replace("/");
-    await signIn('credentials', {correoElectronico, contrasenia});
+    await signIn("credentials", { correoElectronico, contrasenia });
   };
 
   return (
@@ -323,21 +326,19 @@ export default function Registro() {
 
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
-export const getServerSideProps: GetServerSideProps = async ({req}) => {
-  const session = await getSession({req});
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
 
   if (session) {
     return {
       redirect: {
-        destination: '/',
+        destination: "/",
         permanent: false,
-      }
-    }
+      },
+    };
   }
 
   return {
-    props: {
-      
-    }
-  }
-}
+    props: {},
+  };
+};
