@@ -7,22 +7,33 @@ import ListaReportesVentasIndividual from "../../../components/ui/gerencia-de-ve
 import { SidebarLayoutGerenciaVentas } from "../../../components/layouts/gerencia-de-ventas/SidebarLayoutGerenciaVentas";
 import { LugarDeVenta } from "../../../interfaces";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
+import { AuthContext } from "../../../context/auth";
+import { cambiarFormatoFecha } from "../../../utils";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
 
+const anio = hoy.getFullYear();
+const mes = hoy.getMonth() + 1;
+const dia = hoy.getDate();
+
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
 const VerReporteDeVentasIndividual = () => {
-  const [inputFecha, setInputFecha] = useState(hoy.toLocaleDateString());
+  const { user } = useContext(AuthContext);
+  const [inputFecha, setInputFecha] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
   const [inputNuevaFecha, setInputNuevaFecha] = useState(
-    hoy.toLocaleDateString()
+    cambiarFormatoFecha(inputFecha)
   );
   const [change, setChange] = useState(false);
 
-  const [inputLugarDeLaVenta, setInputLugarDeLaVenta] = useState("");
+  const [inputLugarDeLaVenta, setInputLugarDeLaVenta] = useState(
+    user?.sucursalOFranquicia
+  );
   const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
-    useState("");
+    useState(user?.nombreSucursalOFranquicia);
 
   const { reportesVentasIndividual, refreshReportesVentasIndividual } =
     useContext(ReportesVentasIndividualContext);
@@ -73,6 +84,8 @@ const VerReporteDeVentasIndividual = () => {
   useEffect(() => {
     refreshReportesVentasIndividual();
     refreshSucursalesYFranquicias();
+    console.log("Fecha: " + inputFecha);
+    console.log("Nueva Fecha: " + inputNuevaFecha);
   }, []);
 
   useEffect(() => {
@@ -96,8 +109,6 @@ const VerReporteDeVentasIndividual = () => {
           reporteVentasIndividual={reporteVentasIndividual}
         />
       ));
-
-    // reportesVentasIndividualMemo.map((lista) => console.log(lista.lugarDeVenta));
   }, [inputFecha, inputLugarDeLaVenta, inputNombreSucursalOFranquicia]);
 
   return (
@@ -158,13 +169,20 @@ const VerReporteDeVentasIndividual = () => {
               id="TxtEspecificacionDeLugarDeVenta"
               name="TxtEspecificacionDeLugarDeVenta"
               className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-              value={inputLugarDeLaVenta || ""}
               onChange={onTextFieldChangedLugarDeLaVenta}
             >
-              <option hidden>Selecciona un lugar de venta...</option>
-              {validSalesPlace.map((salesPlace) => (
-                <option key={salesPlace}>{salesPlace}</option>
-              ))}
+              {user?.role.includes("admin") ? (
+                <>
+                  <option hidden>Selecciona un lugar de venta...</option>
+                  {validSalesPlace.map((salesPlace) => (
+                    <option key={salesPlace}>{salesPlace}</option>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <option>{inputLugarDeLaVenta}</option>
+                </>
+              )}
             </select>
           </div>
 
@@ -186,42 +204,52 @@ const VerReporteDeVentasIndividual = () => {
               defaultValue="Selecciona un producto..."
               onChange={onTextFieldChangedNombreSucursalOFranquicia}
             >
-              <option hidden>
-                Seleccione la{" "}
-                {inputLugarDeLaVenta === "Sucursal"
-                  ? "Sucursal"
-                  : inputLugarDeLaVenta === "Franquicia"
-                  ? "Franquicia"
-                  : inputLugarDeLaVenta === "Evento"
-                  ? ""
-                  : "Primero seleccione franquicia, sucursal o evento"}
-                ...
-              </option>
-              {sucursalesYFranquiciasMemo
-                .filter(
-                  (sucursalesYFranquicias) =>
-                    sucursalesYFranquicias.sucursalOFranquicia ===
-                    inputLugarDeLaVenta
-                )
-                .map((sucursalesYFranquicias) => (
-                  <option
-                    key={sucursalesYFranquicias.nombreSucursalOFranquicia}
-                  >
-                    {sucursalesYFranquicias.nombreSucursalOFranquicia}
+              {user?.role.includes("admin") ? (
+                <>
+                  <option hidden>
+                    Seleccione la{" "}
+                    {inputLugarDeLaVenta === "Sucursal"
+                      ? "Sucursal"
+                      : inputLugarDeLaVenta === "Franquicia"
+                      ? "Franquicia"
+                      : inputLugarDeLaVenta === "Evento"
+                      ? ""
+                      : "Primero seleccione franquicia, sucursal o evento"}
+                    ...
                   </option>
-                ))}
+                  {sucursalesYFranquiciasMemo
+                    .filter(
+                      (sucursalesYFranquicias) =>
+                        sucursalesYFranquicias.sucursalOFranquicia ===
+                        inputLugarDeLaVenta
+                    )
+                    .map((sucursalesYFranquicias) => (
+                      <option
+                        key={sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      >
+                        {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                      </option>
+                    ))}
+                </>
+              ) : (
+                <>
+                  <option>{inputNombreSucursalOFranquicia}</option>
+                </>
+              )}
             </select>
           </div>
 
-          <div className="bg-white">
-            <button
-              type="submit"
-              className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
-              onClick={mostrarTodos}
-            >
-              Mostrar todos
-            </button>
-          </div>
+          {user?.role.includes("admin") && (
+            <div className="bg-white">
+              <button
+                type="submit"
+                className="bg-primary-blue border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-primary-yellow hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-yellow"
+                onClick={mostrarTodos}
+              >
+                Mostrar todos
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="mt-8 flex flex-col">
@@ -282,7 +310,7 @@ const VerReporteDeVentasIndividual = () => {
                     </tr>
                   </thead>
 
-                  {!change
+                  {!change && user?.role.includes("admin")
                     ? reportesVentasIndividualMemo.map(
                         (reporteVentasIndividual) => (
                           <ListaReportesVentasIndividual

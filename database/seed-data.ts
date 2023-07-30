@@ -194,6 +194,8 @@ interface SeedUsuario {
   correoElectronico: string;
   contrasenia: string;
   role: string[];
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
 }
 
 interface SeedData {
@@ -2701,43 +2703,102 @@ export const initialData: SeedData = {
       nombre: "Juan Pérez",
       correoElectronico: "juan@admin.com",
       contrasenia: bcrypt.hashSync("admin123"),
-      role: ["contaduria", "gerencia de compras", "gerencia de ventas", "gerencia operativa", "recursos humanos"],
+      role: [
+        "admin",
+        "contaduria",
+        "gerencia de compras",
+        "gerencia de ventas",
+        "gerencia operativa",
+        "recursos humanos",
+      ],
+      sucursalOFranquicia: "SucursalYFranquicia",
+      nombreSucursalOFranquicia: "General",
     },
     {
       nombre: "María Rodríguez",
       correoElectronico: "maria@contaduria.com",
       contrasenia: bcrypt.hashSync("contaduria456"),
       role: ["contaduria"],
+      sucursalOFranquicia: "SucursalYFranquicia",
+      nombreSucursalOFranquicia: "General",
     },
     {
       nombre: "Luis Gómez",
       correoElectronico: "luis@compras.com",
       contrasenia: bcrypt.hashSync("compras789"),
       role: ["gerencia de compras"],
+      sucursalOFranquicia: "SucursalYFranquicia",
+      nombreSucursalOFranquicia: "General",
     },
     {
       nombre: "Ana Martínez",
       correoElectronico: "ana@ventas.com",
       contrasenia: bcrypt.hashSync("ventas321"),
       role: ["gerencia de ventas"],
+      sucursalOFranquicia: "SucursalYFranquicia",
+      nombreSucursalOFranquicia: "General",
     },
     {
       nombre: "Carlos Sánchez",
       correoElectronico: "carlos@operativa.com",
       contrasenia: bcrypt.hashSync("operativa654"),
       role: ["gerencia operativa"],
+      sucursalOFranquicia: "SucursalYFranquicia",
+      nombreSucursalOFranquicia: "General",
     },
     {
       nombre: "Laura López",
       correoElectronico: "laura@rrhh.com",
       contrasenia: bcrypt.hashSync("rrhh987"),
       role: ["recursos humanos"],
+      sucursalOFranquicia: "SucursalYFranquicia",
+      nombreSucursalOFranquicia: "General",
     },
     {
       nombre: "Elvira Alcazar",
       correoElectronico: "elvira@alcazar.com",
       contrasenia: bcrypt.hashSync("elviraalcazar987"),
-      role: ["gerencia de compras", "gerencia de ventas", "gerencia operativa", "recursos humanos"],
+      role: [
+        "admin",
+        "gerencia de compras",
+        "gerencia de ventas",
+        "gerencia operativa",
+        "recursos humanos",
+      ],
+      sucursalOFranquicia: "SucursalYFranquicia",
+      nombreSucursalOFranquicia: "General",
+    },
+    {
+      nombre: "Colaborador - Loma Bonita",
+      correoElectronico: "colaborador@lomabonita.com",
+      contrasenia: bcrypt.hashSync("lomabonita123"),
+      role: ["gerencia de ventas"],
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Loma Bonita",
+    },
+    {
+      nombre: "Colaborador - Chapala",
+      correoElectronico: "colaborador@chapala.com",
+      contrasenia: bcrypt.hashSync("chapala123"),
+      role: ["gerencia de ventas"],
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Chapala",
+    },
+    {
+      nombre: "Colaborador - Santa Tere",
+      correoElectronico: "colaborador@santatere.com",
+      contrasenia: bcrypt.hashSync("santatere123"),
+      role: ["gerencia de ventas"],
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Santa Tere",
+    },
+    {
+      nombre: "Colaborador - Plaza #14",
+      correoElectronico: "colaborador@plaza14.com",
+      contrasenia: bcrypt.hashSync("plaza14123"),
+      role: ["gerencia de ventas"],
+      sucursalOFranquicia: "Sucursal",
+      nombreSucursalOFranquicia: "Plaza #14",
     },
   ],
 };

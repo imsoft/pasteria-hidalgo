@@ -13,6 +13,8 @@ type Data =
         nombre: string;
         correoElectronico: string;
         role: string[];
+        sucursalOFranquicia: string;
+        nombreSucursalOFranquicia: string;
       };
     };
 
@@ -50,10 +52,23 @@ const checkJWT = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     return res.status(400).json({ message: "No existe un usuario con ese id" });
   }
 
-  const { _id, nombre, correoElectronico, role } = user;
+  const {
+    _id,
+    nombre,
+    correoElectronico,
+    role,
+    sucursalOFranquicia,
+    nombreSucursalOFranquicia,
+  } = user;
 
   return res.status(200).json({
     token: jwt.signToken(_id, correoElectronico),
-    usuario: { nombre, correoElectronico, role },
+    usuario: {
+      nombre,
+      correoElectronico,
+      role,
+      sucursalOFranquicia,
+      nombreSucursalOFranquicia,
+    },
   });
 };

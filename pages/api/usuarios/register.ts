@@ -14,6 +14,8 @@ type Data =
         nombre: string;
         correoElectronico: string;
         role: string;
+        sucursalOFranquicia: string;
+        nombreSucursalOFranquicia: string;
       };
     };
 
@@ -39,11 +41,15 @@ const registerUser = async (
     correoElectronico = "",
     contrasenia = "",
     role = "",
+    sucursalOFranquicia = "",
+    nombreSucursalOFranquicia = "",
   } = req.body as {
     nombre: string;
     correoElectronico: string;
     contrasenia: string;
     role: string;
+    sucursalOFranquicia: string;
+    nombreSucursalOFranquicia: string;
   };
 
   if (contrasenia.length < 6) {
@@ -74,6 +80,8 @@ const registerUser = async (
     correoElectronico: correoElectronico.toLowerCase(),
     contrasenia: bcrypt.hashSync(contrasenia),
     role,
+    sucursalOFranquicia,
+    nombreSucursalOFranquicia,
   });
 
   try {
@@ -88,5 +96,14 @@ const registerUser = async (
 
   return res
     .status(200)
-    .json({ token, usuario: { nombre, correoElectronico, role } });
+    .json({
+      token,
+      usuario: {
+        nombre,
+        correoElectronico,
+        role,
+        sucursalOFranquicia,
+        nombreSucursalOFranquicia,
+      },
+    });
 };

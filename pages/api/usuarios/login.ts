@@ -14,6 +14,8 @@ type Data =
         nombre: string;
         correoElectronico: string;
         role: string[];
+        sucursalOFranquicia: string;
+        nombreSucursalOFranquicia: string;
       };
     };
 
@@ -49,10 +51,20 @@ const loginUser = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       .json({ message: "Correo o contraseña no validos - PASSWORD" });
   }
 
-  const { _id, nombre, role } = user;
+  const { _id, nombre, role, sucursalOFranquicia, nombreSucursalOFranquicia } =
+    user;
   const token = jwt.signToken(_id, correoElectronico);
 
   return res
     .status(200)
-    .json({ token, usuario: { nombre, correoElectronico, role } });
+    .json({
+      token,
+      usuario: {
+        nombre,
+        correoElectronico,
+        role,
+        sucursalOFranquicia,
+        nombreSucursalOFranquicia,
+      },
+    });
 };

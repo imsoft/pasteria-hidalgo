@@ -14,7 +14,9 @@ interface ContextProps {
     nombre: string,
     correoElectronico: string,
     contrasenia: string,
-    role: string
+    role: string,
+    sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string
   ) => Promise<{
     hasError: boolean;
     message?: string;

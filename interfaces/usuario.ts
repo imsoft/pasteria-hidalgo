@@ -4,6 +4,8 @@ export interface Usuario {
   correoElectronico: string;
   contrasenia: string;
   role: string[];
+  sucursalOFranquicia: string;
+  nombreSucursalOFranquicia: string;
 
   createdAt?: Date;
   updatedAt?: Date;

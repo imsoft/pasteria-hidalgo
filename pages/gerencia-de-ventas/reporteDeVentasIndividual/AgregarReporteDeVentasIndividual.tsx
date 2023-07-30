@@ -20,8 +20,8 @@ import {
   validMenuProducts,
   validProductType,
 } from "../../../utils";
-import { useSession } from "next-auth/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/outline";
+import { AuthContext } from "../../../context/auth";
 
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
@@ -40,7 +40,7 @@ const useClientPoints = [
 const AgregarReporteDeVentasIndividual = () => {
   const router = useRouter();
 
-  const session = useSession();
+  const { user } = useContext(AuthContext);
 
   const { agregarNuevoReporteVentasIndividual } = useContext(
     ReportesVentasIndividualContext
@@ -72,8 +72,10 @@ const AgregarReporteDeVentasIndividual = () => {
   const [inputFecha, setInputFecha] = useState(
     `${dia < 10 ? "0" + dia : dia}/${mes < 10 ? "0" + mes : mes}/${anio}`
   );
-  const [inputNombreVendedor, setInputNombreVendedor] = useState("");
-  const [inputLugarDeLaVenta, setInputLugarDeLaVenta] = useState("");
+  const [inputNombreVendedor, setInputNombreVendedor] = useState(user?.nombre);
+  const [inputLugarDeLaVenta, setInputLugarDeLaVenta] = useState(
+    user?.sucursalOFranquicia
+  );
   const [inputTipoDeProducto, setInputTipoDeProducto] = useState("");
   const [inputSaborProducto, setInputSaborProducto] = useState("");
   const [inputCantidad, setInputCantidad] = useState(0);
@@ -85,7 +87,7 @@ const AgregarReporteDeVentasIndividual = () => {
   const [inputPuntosClienteFrecuente, setInputPuntosClienteFrecuente] =
     useState(0);
   const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
-    useState("");
+    useState(user?.nombreSucursalOFranquicia);
 
   const [inputListaDeProductos, setInputListaDeProductos] = useState<
     ListadoDeProductos[]
@@ -105,7 +107,7 @@ const AgregarReporteDeVentasIndividual = () => {
   const onTextFieldChangedLugarDeLaVenta = (
     event: ChangeEvent<HTMLSelectElement>
   ) => {
-    setInputLugarDeLaVenta(event.target.value as LugarDeVenta);
+    setInputLugarDeLaVenta(event.target.value);
   };
 
   const onTextFieldChangedNombreSucursalOFranquicia = (
@@ -179,8 +181,9 @@ const AgregarReporteDeVentasIndividual = () => {
   const lookUpProductPrice = () => {
     try {
       const result = validMenuProducts.find(
-        (menuProducts) => menuProducts.tipoDeProducto === inputTipoDeProducto &&
-        menuProducts.saborDelPaste === inputSaborProducto
+        (menuProducts) =>
+          menuProducts.tipoDeProducto === inputTipoDeProducto &&
+          menuProducts.saborDelPaste === inputSaborProducto
       );
       setInputPrecioProducto(result?.precio!);
     } catch (error) {
@@ -344,9 +347,9 @@ const AgregarReporteDeVentasIndividual = () => {
   const onSave = () => {
     if (
       inputFecha.length === 0 &&
-      inputNombreVendedor.length === 0 &&
-      inputLugarDeLaVenta.length === 0 &&
-      inputNombreSucursalOFranquicia.length === 0 &&
+      inputNombreVendedor!.length === 0 &&
+      inputLugarDeLaVenta!.length === 0 &&
+      inputNombreSucursalOFranquicia!.length === 0 &&
       inputSumaTotal === 0 &&
       inputListaDeProductos.length === 0 &&
       inputCorreoClienteFrecuente.length === 0 &&
@@ -359,7 +362,7 @@ const AgregarReporteDeVentasIndividual = () => {
     agregarNuevoReporteDeGanancia(
       mes,
       anio,
-      inputNombreSucursalOFranquicia,
+      inputNombreSucursalOFranquicia!,
       inputSumaTotal,
       0,
       0
@@ -367,9 +370,9 @@ const AgregarReporteDeVentasIndividual = () => {
 
     agregarNuevoReporteVentasIndividual(
       inputFecha,
-      inputNombreVendedor,
-      inputLugarDeLaVenta,
-      inputNombreSucursalOFranquicia,
+      inputNombreVendedor!,
+      inputLugarDeLaVenta!,
+      inputNombreSucursalOFranquicia!,
       inputSumaTotal,
       inputListaDeProductos,
       inputCorreoClienteFrecuente,
@@ -448,8 +451,10 @@ const AgregarReporteDeVentasIndividual = () => {
                   id="TxtNombreDelVendedor"
                   autoComplete="off"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
+                  value={inputNombreVendedor || ""}
                   onChange={onTextFieldChangedNombreVendedor}
                   onBlur={() => setTouched(true)}
+                  readOnly
                 />
               </div>
 
@@ -460,18 +465,26 @@ const AgregarReporteDeVentasIndividual = () => {
                 >
                   Especificación de lugar de venta
                 </label>
+
                 <select
                   id="TxtEspecificacionDeLugarDeVenta"
                   name="TxtEspecificacionDeLugarDeVenta"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  value={inputLugarDeLaVenta || ""}
                   onChange={onTextFieldChangedLugarDeLaVenta}
                   onBlur={() => setTouched(true)}
                 >
-                  <option hidden>Selecciona un lugar de venta...</option>
-                  {validSalesPlace.map((salesPlace) => (
-                    <option key={salesPlace}>{salesPlace}</option>
-                  ))}
+                  {user?.role.includes("admin") ? (
+                    <>
+                      <option hidden>Selecciona un lugar de venta...</option>
+                      {validSalesPlace.map((salesPlace) => (
+                        <option key={salesPlace}>{salesPlace}</option>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      <option>{inputLugarDeLaVenta}</option>
+                    </>
+                  )}
                 </select>
               </div>
 
@@ -496,30 +509,40 @@ const AgregarReporteDeVentasIndividual = () => {
                     onChange={onTextFieldChangedNombreSucursalOFranquicia}
                     onBlur={() => setTouched(true)}
                   >
-                    <option hidden>
-                      Seleccione la{" "}
-                      {inputLugarDeLaVenta === "Sucursal"
-                        ? "Sucursal"
-                        : inputLugarDeLaVenta === "Franquicia"
-                        ? "Franquicia"
-                        : inputLugarDeLaVenta === "Evento"
-                        ? ""
-                        : "Primero seleccione si es franquicia, sucursal o evento"}
-                      ...
-                    </option>
-                    {sucursalesYFranquiciasMemo
-                      .filter(
-                        (sucursalesYFranquicias) =>
-                          sucursalesYFranquicias.sucursalOFranquicia ===
-                          inputLugarDeLaVenta
-                      )
-                      .map((sucursalesYFranquicias) => (
-                        <option
-                          key={sucursalesYFranquicias.nombreSucursalOFranquicia}
-                        >
-                          {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                    {user?.role.includes("admin") ? (
+                      <>
+                        <option hidden>
+                          Seleccione la{" "}
+                          {inputLugarDeLaVenta === "Sucursal"
+                            ? "Sucursal"
+                            : inputLugarDeLaVenta === "Franquicia"
+                            ? "Franquicia"
+                            : inputLugarDeLaVenta === "Evento"
+                            ? ""
+                            : "Primero seleccione si es franquicia, sucursal o evento"}
+                          ...
                         </option>
-                      ))}
+                        {sucursalesYFranquiciasMemo
+                          .filter(
+                            (sucursalesYFranquicias) =>
+                              sucursalesYFranquicias.sucursalOFranquicia ===
+                              inputLugarDeLaVenta
+                          )
+                          .map((sucursalesYFranquicias) => (
+                            <option
+                              key={
+                                sucursalesYFranquicias.nombreSucursalOFranquicia
+                              }
+                            >
+                              {sucursalesYFranquicias.nombreSucursalOFranquicia}
+                            </option>
+                          ))}
+                      </>
+                    ) : (
+                      <>
+                        <option>{inputNombreSucursalOFranquicia}</option>
+                      </>
+                    )}
                   </select>
                 </div>
               ) : inputLugarDeLaVenta === "Evento" ? (

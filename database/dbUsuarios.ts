@@ -18,12 +18,14 @@ export const checkUserEmailPassword = async (
     return null;
   }
 
-  const {role, nombre, _id} =  user;
+  const {role, nombre, _id, sucursalOFranquicia, nombreSucursalOFranquicia} =  user;
 
   return{
     id: _id,
     nombre,
     correoElectronico: correoElectronico.toLocaleLowerCase(),
     role,
+    sucursalOFranquicia,
+    nombreSucursalOFranquicia
   }
 };

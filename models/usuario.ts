@@ -8,21 +8,25 @@ const usuarioSchema = new Schema(
     nombre: { type: String, required: true },
     correoElectronico: { type: String, required: true, unique: true },
     contrasenia: { type: String, required: true },
-    role: [{
-      type: String,
-      enum: {
-        values: [
-          "admin",
-          "contaduria",
-          "gerencia de compras",
-          "gerencia de ventas",
-          "gerencia operativa",
-          "recursos humanos",
-        ],
-        message: "{VALUE} no es un rol valido",
-        required: true,
+    sucursalOFranquicia: { type: String, required: true },
+    nombreSucursalOFranquicia: { type: String, required: true },
+    role: [
+      {
+        type: String,
+        enum: {
+          values: [
+            "admin",
+            "contaduria",
+            "gerencia de compras",
+            "gerencia de ventas",
+            "gerencia operativa",
+            "recursos humanos",
+          ],
+          message: "{VALUE} no es un rol valido",
+          required: true,
+        },
       },
-    }],
+    ],
   },
   { timestamps: true }
 );

@@ -73,7 +73,9 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     nombre: string,
     correoElectronico: string,
     contrasenia: string,
-    role: string
+    role: string,
+    sucursalOFranquicia: string,
+    nombreSucursalOFranquicia: string
   ): Promise<{ hasError: boolean; message?: string }> => {
     try {
       const { data } = await entriesApi.post("/usuarios/register", {
@@ -81,6 +83,8 @@ export const AuthProvider: FC<Props> = ({ children }) => {
         correoElectronico,
         contrasenia,
         role,
+        sucursalOFranquicia,
+        nombreSucursalOFranquicia,
       });
       const { token, user } = data;
       Cookies.set("token", token);
@@ -103,7 +107,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     }
   };
 
-  const logout = async() => {
+  const logout = async () => {
     // Cookies.remove("token");
     // router.replace("/");
     Cookies.remove("next-auth.callback-url");
