@@ -64,7 +64,6 @@ const VerReporteDeVentasIndividual = () => {
     event: ChangeEvent<HTMLSelectElement>
   ) => {
     setInputLugarDeLaVenta(event.target.value as LugarDeVenta);
-    console.log(event.target.value as LugarDeVenta);
   };
 
   const onTextFieldChangedNombreSucursalOFranquicia = (
@@ -84,8 +83,6 @@ const VerReporteDeVentasIndividual = () => {
   useEffect(() => {
     refreshReportesVentasIndividual();
     refreshSucursalesYFranquicias();
-    console.log("Fecha: " + inputFecha);
-    console.log("Nueva Fecha: " + inputNuevaFecha);
   }, []);
 
   useEffect(() => {

@@ -112,7 +112,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
     // router.replace("/");
     Cookies.remove("next-auth.callback-url");
     Cookies.remove("next-auth.csrf-token");
-    await signOut({ redirect: false });
+    await signOut({ redirect: true });
     router.reload();
   };
 
