@@ -2774,7 +2774,7 @@ export const initialData: SeedData = {
       contrasenia: bcrypt.hashSync("lomabonita123"),
       role: ["gerencia de ventas"],
       sucursalOFranquicia: "Sucursal",
-      nombreSucursalOFranquicia: "Loma Bonita",
+      nombreSucursalOFranquicia: "LOMA BONITA",
     },
     {
       nombre: "Colaborador - Chapala",
@@ -2782,7 +2782,7 @@ export const initialData: SeedData = {
       contrasenia: bcrypt.hashSync("chapala123"),
       role: ["gerencia de ventas"],
       sucursalOFranquicia: "Sucursal",
-      nombreSucursalOFranquicia: "Chapala",
+      nombreSucursalOFranquicia: "CHAPALA",
     },
     {
       nombre: "Colaborador - Santa Tere",
@@ -2790,7 +2790,7 @@ export const initialData: SeedData = {
       contrasenia: bcrypt.hashSync("santatere123"),
       role: ["gerencia de ventas"],
       sucursalOFranquicia: "Sucursal",
-      nombreSucursalOFranquicia: "Santa Tere",
+      nombreSucursalOFranquicia: "SANTA TERE",
     },
     {
       nombre: "Colaborador - Plaza #14",
@@ -2798,7 +2798,7 @@ export const initialData: SeedData = {
       contrasenia: bcrypt.hashSync("plaza14123"),
       role: ["gerencia de ventas"],
       sucursalOFranquicia: "Sucursal",
-      nombreSucursalOFranquicia: "Plaza #14",
+      nombreSucursalOFranquicia: "PLAZA 14",
     },
   ],
 };
