@@ -9,13 +9,10 @@ import { LugarDeVenta } from "../../../interfaces";
 import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operativa/sucursalYFranquicia";
 import { AuthContext } from "../../../context/auth";
 import { cambiarFormatoFecha } from "../../../utils";
+import { moneyFormat } from "../../../utils/moneyFormat";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
-
-const anio = hoy.getFullYear();
-const mes = hoy.getMonth() + 1;
-const dia = hoy.getDate();
 
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
@@ -34,6 +31,8 @@ const VerReporteDeVentasIndividual = () => {
   );
   const [inputNombreSucursalOFranquicia, setInputNombreSucursalOFranquicia] =
     useState(user?.nombreSucursalOFranquicia);
+
+  const [sumaTotalVentasDiaria, setSumaTotalVentasDiaria] = useState(0);
 
   const { reportesVentasIndividual, refreshReportesVentasIndividual } =
     useContext(ReportesVentasIndividualContext);
@@ -106,6 +105,21 @@ const VerReporteDeVentasIndividual = () => {
           reporteVentasIndividual={reporteVentasIndividual}
         />
       ));
+
+    const ventasFiltradas = reportesVentasIndividualMemo.filter(
+      (reporteVentasIndividual) =>
+        reporteVentasIndividual.fecha === inputNuevaFecha &&
+        reporteVentasIndividual.lugarDeVenta === inputLugarDeLaVenta &&
+        reporteVentasIndividual.nombreLugarDeVenta ===
+          inputNombreSucursalOFranquicia
+    );
+
+    const sumaTotalVentasDiaria = ventasFiltradas.reduce(
+      (acumulador, venta) => acumulador + venta.totalDeLaVenta,
+      0
+    );
+
+    setSumaTotalVentasDiaria(sumaTotalVentasDiaria);
   }, [inputFecha, inputLugarDeLaVenta, inputNombreSucursalOFranquicia]);
 
   return (
@@ -342,6 +356,11 @@ const VerReporteDeVentasIndividual = () => {
             </div>
           </div>
         </div>
+        {change && (
+          <h2 className="text-2xl font-semibold mt-10 text-right text-gray-900">
+            Total de ventas: ${moneyFormat(sumaTotalVentasDiaria)}
+          </h2>
+        )}
       </div>
     </SidebarLayoutGerenciaVentas>
   );
