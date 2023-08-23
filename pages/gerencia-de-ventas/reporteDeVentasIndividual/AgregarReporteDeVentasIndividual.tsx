@@ -7,6 +7,7 @@ import {
   ListadoDeProductos,
   LugarDeVenta,
   TipoDeProducto,
+  VentasSucursalIndividual,
 } from "../../../interfaces";
 
 import { ReportesVentasIndividualContext } from "../../../context/gerencia-de-ventas/reporteVentasIndividual/ReportesVentasIndividualContext";
@@ -359,10 +360,15 @@ const AgregarReporteDeVentasIndividual = () => {
 
     const [, mes, anio] = dividirFecha(hoy.toLocaleDateString());
 
+    const datosSucursal: VentasSucursalIndividual = {
+      nombreSucursal: inputNombreSucursalOFranquicia!,
+      ventasSucursal: inputSumaTotal,
+    };
+
     agregarNuevoReporteDeGanancia(
       mes,
       anio,
-      inputNombreSucursalOFranquicia!,
+      datosSucursal!,
       inputSumaTotal,
       0,
       0

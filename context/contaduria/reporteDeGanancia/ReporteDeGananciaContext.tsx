@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ReporteDeGanancia } from "../../../interfaces";
+import { ReporteDeGanancia, VentasSucursalIndividual } from "../../../interfaces";
 
 interface ContextProps {
   reportesDeGanancias: ReporteDeGanancia[];
@@ -8,7 +8,7 @@ interface ContextProps {
   agregarNuevoReporteDeGanancia: (
     mes: string,
     anio: string,
-    sucursal: string,
+    ventasSucursalIndividual: VentasSucursalIndividual,
     totalVentas: number,
     totalCompras: number,
     balance: number,

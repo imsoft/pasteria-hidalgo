@@ -39,7 +39,7 @@ const postReporteDeGanancia = async (
   const {
     mes = "",
     anio = "",
-    sucursal = "",
+    ventasSucursalIndividual = "",
     totalVentas = "",
     totalCompras = "",
     balance = "",
@@ -48,20 +48,20 @@ const postReporteDeGanancia = async (
   const newReporteDeGanancia = new ReporteDeGanancia({
     mes,
     anio,
-    sucursal,
+    ventasSucursalIndividual,
     totalVentas,
     totalCompras,
     balance,
   });
 
-  console.log(newReporteDeGanancia);
+  // console.log(newReporteDeGanancia);
 
   try {
     await db.connect();
 
     const report = await ReporteDeGanancia.findOne({ mes, anio });
 
-    console.log("report: " + report);
+    // console.log("report: " + report);
 
     if (!report) {
       await newReporteDeGanancia.save();

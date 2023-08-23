@@ -34,7 +34,7 @@ export const reportesDeGananciasReducer = (
           if (reporteDeGanancia._id === action.payload._id) {
             reporteDeGanancia.mes = action.payload.mes;
             reporteDeGanancia.anio = action.payload.anio;
-            reporteDeGanancia.sucursal = action.payload.sucursal;
+            reporteDeGanancia.ventasSucursalIndividual = action.payload.ventasSucursalIndividual;
             reporteDeGanancia.totalVentas = action.payload.totalVentas;
             reporteDeGanancia.totalCompras = action.payload.totalCompras;
             reporteDeGanancia.balance = action.payload.balance;

@@ -10,6 +10,7 @@ import {
   ManejoDeAlmacen,
   Temperatura,
   Unidades,
+  VentasSucursalIndividual,
   YesNo,
 } from "../../../interfaces";
 
@@ -242,10 +243,15 @@ export default function ReporteDeCompras() {
 
     const [ , mes, anio] = dividirFecha(inputFechaDeCompra);
 
+    const datosSucursal: VentasSucursalIndividual = {
+      nombreSucursal: "Sucursal A",
+      ventasSucursal: 0,
+    };
+
     agregarNuevoReporteDeGanancia(
       mes,
       anio,
-      "",
+      datosSucursal,
       0,
       inputPrecioTotalDelCompra,
       0,

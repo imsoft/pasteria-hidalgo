@@ -3,7 +3,7 @@ import { FC, ReactNode, useEffect, useReducer } from "react";
 import { entriesApi } from "../../../baseUrlApi";
 
 import Swal from "sweetalert2";
-import { ReporteDeGanancia } from "../../../interfaces";
+import { ReporteDeGanancia, VentasSucursalIndividual } from "../../../interfaces";
 import { ReporteDeGananciaContext, reportesDeGananciasReducer } from ".";
 
 export interface ReportesDeGananciasState {
@@ -55,7 +55,7 @@ export const ReporteDeGananciaProvider: FC<Props> = ({ children }) => {
   const agregarNuevoReporteDeGanancia = async (
     mes: string,
     anio: string,
-    sucursal: string,
+    ventasSucursalIndividual: VentasSucursalIndividual,
     totalVentas: number,
     totalCompras: number,
     balance: number,
@@ -67,7 +67,7 @@ export const ReporteDeGananciaProvider: FC<Props> = ({ children }) => {
         {
           mes,
           anio,
-          sucursal,
+          ventasSucursalIndividual,
           totalVentas,
           totalCompras,
           balance,
@@ -97,7 +97,7 @@ export const ReporteDeGananciaProvider: FC<Props> = ({ children }) => {
       _id,
       mes,
       anio,
-      sucursal,
+      ventasSucursalIndividual,
       totalVentas,
       totalCompras,
       balance,
@@ -110,7 +110,7 @@ export const ReporteDeGananciaProvider: FC<Props> = ({ children }) => {
         {
           mes,
           anio,
-          sucursal,
+          ventasSucursalIndividual,
           totalVentas,
           totalCompras,
           balance,

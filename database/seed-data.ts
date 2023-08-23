@@ -189,6 +189,21 @@ interface SeedManejoDeAlmacen {
   cantidad: number;
 }
 
+interface SeedReporteDeGanancia {
+  mes: string;
+  anio: string;
+  ventasSucursalIndividual: SeedVentasSucursalIndividual[];
+  totalVentas: number;
+  totalCompras: number;
+  balance: number;
+}
+
+interface SeedVentasSucursalIndividual {
+  nombreSucursal: string;
+  ventasSucursal: number;
+}
+
+
 interface SeedUsuario {
   nombre: string;
   correoElectronico: string;
@@ -217,6 +232,7 @@ interface SeedData {
   materiaPrima: SeedMateriaPrima[];
   asignarComision: SeedAsignarComision[];
   manejoDeAlmacen: SeedManejoDeAlmacen[];
+  reporteDeGanancia: SeedReporteDeGanancia[];
   usuario: SeedUsuario[];
 }
 
@@ -372,8 +388,7 @@ export const initialData: SeedData = {
       referencia2Nombre: "Isabel",
       referencia2Empresa: "Empresa de Bienes Raíces",
       referencia2NumeroTelefonico: "6667778888",
-      referencia2Observaciones:
-        "Gran capacidad para solucionar problemas legales",
+      referencia2Observaciones: "Gran capacidad para solucionar problemas legales",
       referencia3Nombre: "Javier",
       referencia3Empresa: "Empresa de Seguridad",
       referencia3NumeroTelefonico: "6663332222",
@@ -403,8 +418,7 @@ export const initialData: SeedData = {
       referencia3Nombre: "Pedro",
       referencia3Empresa: "Empresa de Automatización Industrial",
       referencia3NumeroTelefonico: "5556667777",
-      referencia3Observaciones:
-        "Muy hábil en la implementación de soluciones tecnológicas",
+      referencia3Observaciones: "Muy hábil en la implementación de soluciones tecnológicas",
     },
     {
       // 8
@@ -430,15 +444,13 @@ export const initialData: SeedData = {
       referencia3Nombre: "Mónica",
       referencia3Empresa: "Centro de Investigación en Salud Mental",
       referencia3NumeroTelefonico: "7778889999",
-      referencia3Observaciones:
-        "Excelente en la investigación y análisis de casos clínicos",
+      referencia3Observaciones: "Excelente en la investigación y análisis de casos clínicos",
     },
     {
       // 9
       nombre: "Pedro García",
       puesto: "Gerencia de ventas",
-      descripcionDelPuesto:
-        "Asesoría y representación legal en derecho corporativo",
+      descripcionDelPuesto: "Asesoría y representación legal en derecho corporativo",
       fechaDeNacimiento: "1985-07-01",
       domicilio: "Calle de la Paz #321",
       curp: "GAPD850701HDFRRR02",
@@ -454,13 +466,11 @@ export const initialData: SeedData = {
       referencia2Nombre: "José",
       referencia2Empresa: "Departamento Legal de Empresa de Telecomunicaciones",
       referencia2NumeroTelefonico: "5552221111",
-      referencia2Observaciones:
-        "Gran conocimiento en derecho de telecomunicaciones",
+      referencia2Observaciones: "Gran conocimiento en derecho de telecomunicaciones",
       referencia3Nombre: "Luis",
       referencia3Empresa: "Notaría Pública",
       referencia3NumeroTelefonico: "5557778888",
-      referencia3Observaciones:
-        "Muy preciso y detallista en la revisión de documentos legales",
+      referencia3Observaciones: "Muy preciso y detallista en la revisión de documentos legales",
     },
     {
       // 10
@@ -478,18 +488,15 @@ export const initialData: SeedData = {
       referencia1Nombre: "Juan",
       referencia1Empresa: "Centro de Salud",
       referencia1NumeroTelefonico: "7772223333",
-      referencia1Observaciones:
-        "Gran dedicación y compromiso con sus pacientes",
+      referencia1Observaciones: "Gran dedicación y compromiso con sus pacientes",
       referencia2Nombre: "María",
       referencia2Empresa: "Clínica de Especialidades Médicas",
       referencia2NumeroTelefonico: "7775556666",
-      referencia2Observaciones:
-        "Muy hábil en el diagnóstico y tratamiento de enfermedades crónicas",
+      referencia2Observaciones: "Muy hábil en el diagnóstico y tratamiento de enfermedades crónicas",
       referencia3Nombre: "Jorge",
       referencia3Empresa: "Hospital General",
       referencia3NumeroTelefonico: "7778889999",
-      referencia3Observaciones:
-        "Excelente coordinación y liderazgo en equipos médicos multidisciplinarios",
+      referencia3Observaciones: "Excelente coordinación y liderazgo en equipos médicos multidisciplinarios",
     },
   ],
   personalActivo: [
@@ -511,8 +518,7 @@ export const initialData: SeedData = {
       noContrato: "JLGP20230115",
       noExpediente: "20230115",
       bajaTemporal: "No",
-      comentarios:
-        "Posee amplios conocimientos en programación y bases de datos.",
+      comentarios: "Posee amplios conocimientos en programación y bases de datos.",
     },
     {
       // 3, relacionado con candidato #2
@@ -532,8 +538,7 @@ export const initialData: SeedData = {
       noContrato: "RP20200301",
       noExpediente: "20200301",
       bajaTemporal: "No",
-      comentarios:
-        "Excelente manejo de la contabilidad y finanzas de la empresa.",
+      comentarios: "Excelente manejo de la contabilidad y finanzas de la empresa.",
     },
     {
       // 5, relacionado con candidato #5
@@ -553,8 +558,7 @@ export const initialData: SeedData = {
       noContrato: "JCTH20220520",
       noExpediente: "20220520",
       bajaTemporal: "No",
-      comentarios:
-        "Responsable de la supervisión y ejecución de proyectos de construcción.",
+      comentarios: "Responsable de la supervisión y ejecución de proyectos de construcción.",
     },
   ],
   checkInDePersonal: [
@@ -1838,80 +1842,70 @@ export const initialData: SeedData = {
       sucursalOFranquicia: "Franquicia",
       nombreSucursalOFranquicia: "Polanco",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 2
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Condesa",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 3
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Roma",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 4
       sucursalOFranquicia: "Franquicia",
       nombreSucursalOFranquicia: "Santa Fe",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 5
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Polanco",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 6
       sucursalOFranquicia: "Franquicia",
       nombreSucursalOFranquicia: "Interlomas",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 7
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Satélite",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 8
       sucursalOFranquicia: "Franquicia",
       nombreSucursalOFranquicia: "Centro Histórico",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 9
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Providencia",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
     {
       // 10
       sucursalOFranquicia: "Sucursal",
       nombreSucursalOFranquicia: "Zapopan",
       nombreDelArchivo: "Hoja Membretada_imSoft.pdf",
-      urlDelArchivo:
-        "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
+      urlDelArchivo: "https://firebasestorage.googleapis.com/v0/b/la-casa-del-paste.appspot.com/o/apartado-juridico%2FHoja%20Membretada_imSoft.pdf?alt=media&token=8a6d51af-97a6-4e47-b9f8-72596388444a",
     },
   ],
   sucursalYFranquicia: [
@@ -2698,6 +2692,219 @@ export const initialData: SeedData = {
       cantidad: 40,
     },
   ],
+  reporteDeGanancia: [
+    {
+      "mes": "Enero",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Polanco",
+          "ventasSucursal": 150000
+        },
+        {
+          "nombreSucursal": "Condesa",
+          "ventasSucursal": 120000
+        },
+        {
+          "nombreSucursal": "Santa Fe",
+          "ventasSucursal": 95000
+        }
+      ],
+      "totalVentas": 365000,
+      "totalCompras": 280000,
+      "balance": 85000
+    },
+    {
+      "mes": "Febrero",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Roma Norte",
+          "ventasSucursal": 135000
+        },
+        {
+          "nombreSucursal": "Providencia",
+          "ventasSucursal": 110000
+        },
+        {
+          "nombreSucursal": "Andares",
+          "ventasSucursal": 125000
+        }
+      ],
+      "totalVentas": 370000,
+      "totalCompras": 220000,
+      "balance": 150000
+    },
+    {
+      "mes": "Marzo",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Polanco",
+          "ventasSucursal": 142000
+        },
+        {
+          "nombreSucursal": "Condesa",
+          "ventasSucursal": 135000
+        },
+        {
+          "nombreSucursal": "Santa Fe",
+          "ventasSucursal": 120000
+        }
+      ],
+      "totalVentas": 397000,
+      "totalCompras": 260000,
+      "balance": 137000
+    },
+    {
+      "mes": "Abril",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Roma Norte",
+          "ventasSucursal": 155000
+        },
+        {
+          "nombreSucursal": "Providencia",
+          "ventasSucursal": 95000
+        },
+        {
+          "nombreSucursal": "Andares",
+          "ventasSucursal": 145000
+        }
+      ],
+      "totalVentas": 395000,
+      "totalCompras": 210000,
+      "balance": 185000
+    },
+    {
+      "mes": "Mayo",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Polanco",
+          "ventasSucursal": 168000
+        },
+        {
+          "nombreSucursal": "Condesa",
+          "ventasSucursal": 112000
+        },
+        {
+          "nombreSucursal": "Santa Fe",
+          "ventasSucursal": 118000
+        }
+      ],
+      "totalVentas": 398000,
+      "totalCompras": 275000,
+      "balance": 123000
+    },
+    {
+      "mes": "Junio",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Roma Norte",
+          "ventasSucursal": 130000
+        },
+        {
+          "nombreSucursal": "Providencia",
+          "ventasSucursal": 105000
+        },
+        {
+          "nombreSucursal": "Andares",
+          "ventasSucursal": 155000
+        }
+      ],
+      "totalVentas": 390000,
+      "totalCompras": 245000,
+      "balance": 145000
+    },
+    {
+      "mes": "Julio",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Polanco",
+          "ventasSucursal": 148000
+        },
+        {
+          "nombreSucursal": "Condesa",
+          "ventasSucursal": 122000
+        },
+        {
+          "nombreSucursal": "Santa Fe",
+          "ventasSucursal": 115000
+        }
+      ],
+      "totalVentas": 385000,
+      "totalCompras": 250000,
+      "balance": 135000
+    },
+    {
+      "mes": "Agosto",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Roma Norte",
+          "ventasSucursal": 140000
+        },
+        {
+          "nombreSucursal": "Providencia",
+          "ventasSucursal": 115000
+        },
+        {
+          "nombreSucursal": "Andares",
+          "ventasSucursal": 140000
+        }
+      ],
+      "totalVentas": 395000,
+      "totalCompras": 260000,
+      "balance": 135000
+    },
+    {
+      "mes": "Septiembre",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Polanco",
+          "ventasSucursal": 160000
+        },
+        {
+          "nombreSucursal": "Condesa",
+          "ventasSucursal": 130000
+        },
+        {
+          "nombreSucursal": "Santa Fe",
+          "ventasSucursal": 125000
+        }
+      ],
+      "totalVentas": 415000,
+      "totalCompras": 265000,
+      "balance": 150000
+    },
+    {
+      "mes": "Octubre",
+      "anio": "2023",
+      "ventasSucursalIndividual": [
+        {
+          "nombreSucursal": "Roma Norte",
+          "ventasSucursal": 145000
+        },
+        {
+          "nombreSucursal": "Providencia",
+          "ventasSucursal": 110000
+        },
+        {
+          "nombreSucursal": "Andares",
+          "ventasSucursal": 135000
+        }
+      ],
+      "totalVentas": 390000,
+      "totalCompras": 215000,
+      "balance": 175000
+    }
+  ]
+  ,
   usuario: [
     {
       nombre: "Juan Pérez",

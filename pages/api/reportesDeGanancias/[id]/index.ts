@@ -64,7 +64,7 @@ const updateReporteDeGanancia = async (
   const {
     mes = reporteDeGananciaToUpdate.mes,
     anio = reporteDeGananciaToUpdate.anio,
-    sucursal = reporteDeGananciaToUpdate.sucursal,
+    ventasSucursalIndividual = reporteDeGananciaToUpdate.ventasSucursalIndividual,
     totalVentas = reporteDeGananciaToUpdate.totalVentas,
     totalCompras = reporteDeGananciaToUpdate.totalCompras,
     balance = reporteDeGananciaToUpdate.balance,
@@ -76,7 +76,7 @@ const updateReporteDeGanancia = async (
       {
         mes,
         anio,
-        sucursal,
+        ventasSucursalIndividual,
         totalVentas,
         totalCompras,
         balance,

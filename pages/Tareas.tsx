@@ -172,7 +172,7 @@ const tasksList = [
       {
         title: "Reporte de ganancias",
         tasks: [
-          "⚒️ Arreglar lo de mayúsculas y minúsculas",
+          "🔵 Arreglar lo de mayúsculas y minúsculas",
           "⚒️ Filtrar por nombre de la sucursal",
         ],
       },
