@@ -30,11 +30,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  // if (process.env.NODE_ENV === "production") {
-  //   return res.status(401).json({
-  //     message: "No tiene acceso a este servicio",
-  //   });
-  // }
+  if (process.env.NODE_ENV === "production") {
+    return res.status(401).json({
+      message: "No tiene acceso a este servicio",
+    });
+  }
 
   await db.connect();
 
@@ -95,10 +95,10 @@ export default async function handler(
   // await Usuario.deleteMany(); //Borra todo de la DB
   // await Usuario.insertMany(seedDatabase.initialData.usuario);
 
-  await ReporteVentasIndividual.updateMany(
-    { nombreLugarDeVenta: "Loma Bonita" },
-    { $set: { nombreLugarDeVenta: "LOMA BONITA" } }
-  );
+  // await ReporteVentasIndividual.updateMany(
+  //   { nombreLugarDeVenta: "Loma Bonita" },
+  //   { $set: { nombreLugarDeVenta: "LOMA BONITA" } }
+  // );
 
   await db.disconnect();
 
