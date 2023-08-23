@@ -861,7 +861,7 @@ const AgregarReporteDeVentasIndividual = () => {
                   ¿Quieres usar tus puntos?
                 </label>
                 <p className="text-sm leading-5 text-gray-500">
-                  Recuera preguntarle al cliente si quiere usar sus puntos
+                  Recuerda preguntarle al cliente si quiere usar sus puntos
                 </p>
                 <fieldset className="mt-4">
                   <legend className="sr-only">

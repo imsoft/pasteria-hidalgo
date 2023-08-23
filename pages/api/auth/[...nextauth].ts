@@ -5,7 +5,7 @@ import { dbUsuarios } from "../../../database";
 export default NextAuth({
   providers: [
     Credentials({
-      name: "Custom login",
+      name: "Custom Login",
       credentials: {
         correoElectronico: {
           label: "correo",
@@ -29,8 +29,8 @@ export default NextAuth({
 
   // Custom pages
   pages: {
-    signIn: "/usuarios/login",
-    newUser: "/usuarios/register",
+    signIn: "/usuario/login",
+    newUser: "/usuario/registro",
   },
 
   session: {

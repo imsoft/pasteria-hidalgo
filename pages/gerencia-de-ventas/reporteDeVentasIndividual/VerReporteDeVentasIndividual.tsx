@@ -10,6 +10,7 @@ import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operati
 import { AuthContext } from "../../../context/auth";
 import { cambiarFormatoFecha } from "../../../utils";
 import { moneyFormat } from "../../../utils/moneyFormat";
+import { useRouter } from 'next/router';
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
@@ -17,6 +18,7 @@ const hoy = new Date(tiempoTranscurrido);
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
 const VerReporteDeVentasIndividual = () => {
+  const router = useRouter();
   const { user } = useContext(AuthContext);
   const [inputFecha, setInputFecha] = useState(
     new Date().toISOString().slice(0, 10)
@@ -73,10 +75,11 @@ const VerReporteDeVentasIndividual = () => {
 
   const mostrarTodos = () => {
     setChange(false);
-    setInputFecha(hoy.toLocaleDateString());
-    setInputNuevaFecha(hoy.toLocaleDateString());
     setInputLugarDeLaVenta("");
     setInputNombreSucursalOFranquicia("");
+    setInputFecha(hoy.toLocaleDateString());
+    setInputNuevaFecha(hoy.toLocaleDateString());
+    // router.reload();
   };
 
   useEffect(() => {
@@ -180,6 +183,7 @@ const VerReporteDeVentasIndividual = () => {
               id="TxtEspecificacionDeLugarDeVenta"
               name="TxtEspecificacionDeLugarDeVenta"
               className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+              value={inputLugarDeLaVenta}
               onChange={onTextFieldChangedLugarDeLaVenta}
             >
               {user?.role.includes("admin") ? (
@@ -212,7 +216,7 @@ const VerReporteDeVentasIndividual = () => {
               id="CmbFranquicia"
               name="CmbFranquicia"
               className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-              defaultValue="Selecciona un producto..."
+              value={inputNombreSucursalOFranquicia}
               onChange={onTextFieldChangedNombreSucursalOFranquicia}
             >
               {user?.role.includes("admin") ? (

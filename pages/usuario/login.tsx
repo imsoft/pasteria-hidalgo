@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 import { Resolver, useForm } from "react-hook-form";
 
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
 import { validations } from "../../utils";
-import { AuthContext } from "../../context/auth";
 import { useRouter } from "next/router";
 import { getSession, signIn } from "next-auth/react";
 import { GetServerSideProps } from "next";
@@ -43,11 +42,11 @@ const resolver: Resolver<FormData> = async (values) => {
   };
 };
 
-export default function Login() {
+const LoginPage = () => {
   const router = useRouter();
   const [showError, setShowError] = useState(false);
 
-  const { loginUser } = useContext(AuthContext);
+  // const { loginUser } = useContext(AuthContext);
 
   const {
     register,
@@ -56,19 +55,24 @@ export default function Login() {
   } = useForm<FormData>({ resolver });
 
   const onLoginUser = async ({ correoElectronico, contrasenia }: FormData) => {
-    setShowError(false);
+    try {
+      setShowError(false);
 
-    await signIn("credentials", { correoElectronico, contrasenia });
+      const res: any = await signIn("credentials", {
+        correoElectronico,
+        contrasenia,
+        redirect: false,
+      });
 
-    // const isValidLogin = await loginUser(correoElectronico, contrasenia);
+      if (!res.ok) {
+        setShowError(true);  
+      }
 
-    // if (!isValidLogin) {
-    //   setShowError(true);
-    //   setTimeout(() => setShowError(false), 3000);
-    //   return;
-    // }
-
-    // router.push("/");
+      router.reload();
+    } catch (error) {
+      console.log('Aqui hay algun error');
+      setShowError(true);
+    }
   };
 
   return (
@@ -81,6 +85,7 @@ export default function Login() {
             alt="Pasteria la Hidalguense"
             width={128}
             height={128}
+            priority={true}
           />
         </div>
 
@@ -179,7 +184,7 @@ export default function Login() {
               </button>
             </div>
 
-            <div className={`relative mt-4 ${showError || "invisible"}`}>
+            <div className={`relative mt-4 ${showError ? "" : "invisible"}`}>
               <div className="pointer-events-none absolute flex items-center">
                 <ExclamationCircleIcon
                   className="h-5 w-5 text-red-500"
@@ -195,17 +200,22 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
 
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query,
+}) => {
   const session = await getSession({ req });
+
+  const { p = "/" } = query;
 
   if (session) {
     return {
       redirect: {
-        destination: "/",
+        destination: p.toString(),
         permanent: false,
       },
     };
@@ -215,3 +225,5 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     props: {},
   };
 };
+
+export default LoginPage;

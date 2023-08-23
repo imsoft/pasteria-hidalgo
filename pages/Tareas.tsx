@@ -147,15 +147,33 @@ const tasksList = [
     subtopics: [
       {
         title: "General",
+        tasks: [""],
+      },
+      {
+        title: "Login",
+        tasks: ["🔵 Poner leyenda de usuario o contraseña incorrecta"],
+      },
+      {
+        title: "Reporte de ventas individual",
+        tasks: ["🔵 Corregir la palabra “Recuera” por “Recuerda”"],
+      },
+      {
+        title: "Ver reporte de ventas individual",
+        tasks: ["🔵 Bug al tener que seleccionar y dos seleccionar la sucursal"],
+      },
+      {
+        title: "Actualizar sucursales y franquicias",
+        tasks: ["🔵 No aparece el nombre de la sucursal"],
+      },
+      {
+        title: "Ver reporta de ventas individual en contaduria",
+        tasks: ["🔵 Agregar filtrados"],
+      },
+      {
+        title: "Reporte de ganancias",
         tasks: [
-          "🔵 cuando se presiona el icono, no se regresa al menú principal",
-          "🔵 En el campo, monto de pago, en sucursales y franquicias, poner de tipo cantidad dinero (con comas)",
-          "🔵 Reporte de compras no se filtra por fecha",
-          "🔵 Distancia de la fábrica no se autopopula",
-          "🔵 No se puede acceder a el reporte de salida para modificar/ eliminar",
-          "🔵 En unidades de materia prima, agregar “por pieza”",
-          "🔵 Esconder lo que se venden en las demás sucursales",
-          "🔵 Agregar las promociones",
+          "⚒️ Arreglar lo de mayúsculas y minúsculas",
+          "⚒️ Filtrar por nombre de la sucursal",
         ],
       },
     ],
