@@ -248,6 +248,9 @@ const AgregarReporteDeVentasIndividual = () => {
       case "Compra 10 pastes y llevate 2":
         setInputSumaTotal((inputSumaTotal = -60));
         break;
+      case "Paste gratis":
+        setInputSumaTotal((inputSumaTotal = -30));
+        break;
 
       default:
         return;
@@ -611,6 +614,7 @@ const AgregarReporteDeVentasIndividual = () => {
                   <option>No</option>
                   <option>Compra 6 pastes y llevate 1</option>
                   <option>Compra 10 pastes y llevate 2</option>
+                  <option>Paste gratis</option>
                 </select>
               </div>
 
