@@ -101,7 +101,8 @@ const AgregarReporteDeVentasIndividual = () => {
   const [inputPromocion, setInputPromocion] = useState("No");
   const [inputMetodoDePago, setInputMetodoDePago] = useState("");
 
-  const [pasteCount, setpasteCount] = useState(0);
+  const [pasteCount, setPasteCount] = useState(0);
+  const [cantidadDePastes, setCantidadDePastes] = useState(0);
 
   const [touched, setTouched] = useState(false);
 
@@ -256,7 +257,7 @@ const AgregarReporteDeVentasIndividual = () => {
         setInputPromocionTotal(0);
         break;
       case "Compra 6 pastes y llevate 1":
-        if (pasteCount === 7) {
+        if (cantidadDePastes === 7) {
           setInputPromocionTotal(inputSumaTotal);
           setInputPromocionTotal(30);
         } else {
@@ -273,7 +274,7 @@ const AgregarReporteDeVentasIndividual = () => {
         }
         break;
       case "Compra 10 pastes y llevate 2":
-        if (pasteCount === 12) {
+        if (cantidadDePastes === 12) {
           setInputPromocionTotal(inputSumaTotal);
           setInputPromocionTotal(60);
         } else {
@@ -327,7 +328,8 @@ const AgregarReporteDeVentasIndividual = () => {
       nuevaListaProductos.tipoDeProducto === "Paste Mini Dulce" ||
       nuevaListaProductos.tipoDeProducto === "Paste Mini Salado"
     ) {
-      setpasteCount(pasteCount + 1);
+      setCantidadDePastes(nuevaListaProductos.cantidad + cantidadDePastes);
+      setInputPromocion("");
     }
 
     resetForm();
