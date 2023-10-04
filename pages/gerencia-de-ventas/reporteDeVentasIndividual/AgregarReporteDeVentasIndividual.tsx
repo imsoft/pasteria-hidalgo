@@ -28,6 +28,13 @@ import Swal from "sweetalert2";
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 const paymentMethods: string[] = ["Efectivo", "Tarjeta bancaria"];
 
+const validPromotions = [
+  "No",
+  "Compra 6 pastes y llevate 1",
+  "Compra 10 pastes y llevate 2",
+  "Paste gratis",
+];
+
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
 
@@ -98,7 +105,7 @@ const AgregarReporteDeVentasIndividual = () => {
   >([]);
 
   const [inputUsarPuntos, setInputUsarPuntos] = useState("");
-  const [inputPromocion, setInputPromocion] = useState("No");
+  const [inputPromocion, setInputPromocion] = useState("");
   const [inputMetodoDePago, setInputMetodoDePago] = useState("");
 
   const [pasteCount, setPasteCount] = useState(0);
@@ -263,7 +270,7 @@ const AgregarReporteDeVentasIndividual = () => {
         } else {
           setInputPromocionTotal(inputSumaTotal);
           setInputPromocionTotal(0);
-          setInputPromocion("");
+          setInputPromocion("No");
           Swal.fire({
             position: "top-end",
             icon: "warning",
@@ -280,7 +287,7 @@ const AgregarReporteDeVentasIndividual = () => {
         } else {
           setInputPromocionTotal(inputSumaTotal);
           setInputPromocionTotal(0);
-          setInputPromocion("");
+          setInputPromocion("No");
           Swal.fire({
             position: "top-end",
             icon: "warning",
@@ -329,7 +336,7 @@ const AgregarReporteDeVentasIndividual = () => {
       nuevaListaProductos.tipoDeProducto === "Paste Mini Salado"
     ) {
       setCantidadDePastes(nuevaListaProductos.cantidad + cantidadDePastes);
-      setInputPromocion("");
+      setInputPromocion("No");
     }
 
     resetForm();
@@ -466,6 +473,8 @@ const AgregarReporteDeVentasIndividual = () => {
     setInputLugarDeLaVenta("");
     setInputTipoDeProducto("");
     setInputSaborProducto("");
+    setInputPromocion("");
+    setInputMetodoDePago("");
     setInputCantidad(1);
     setInputPrecioProducto(0);
     setInputMonto(0);
@@ -473,6 +482,10 @@ const AgregarReporteDeVentasIndividual = () => {
     setInputCorreoClienteFrecuente("");
     setInputPuntosClienteFrecuente(0);
   };
+
+  useEffect(() => {
+    console.log(inputPromocion);
+  }, [inputPromocion]);
 
   return (
     <SidebarLayoutGerenciaVentas>
@@ -665,10 +678,11 @@ const AgregarReporteDeVentasIndividual = () => {
                   id="CmbPromocion"
                   name="CmbPromocion"
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
-                  value={inputPromocion || ""}
+                  value={inputPromocion}
                   onChange={onTextFieldChangedPromocion}
                   onBlur={() => setTouched(true)}
                 >
+                  <option hidden>Selecciona una opción...</option>
                   <option>No</option>
                   <option>Compra 6 pastes y llevate 1</option>
                   <option>Compra 10 pastes y llevate 2</option>
