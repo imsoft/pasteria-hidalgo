@@ -70,6 +70,16 @@ const ListaReportesVentasIndividual: FC<Props> = ({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           <div className="font-medium text-gray-900">
+            {reporteVentasIndividual.promocionUsada}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
+            {reporteVentasIndividual.metodoDePago}
+          </div>
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <div className="font-medium text-gray-900">
             {reporteVentasIndividual.correoElectronicoClienteFrecuente}
           </div>
         </td>

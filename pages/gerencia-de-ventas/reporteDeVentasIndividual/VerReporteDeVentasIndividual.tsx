@@ -10,7 +10,7 @@ import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operati
 import { AuthContext } from "../../../context/auth";
 import { cambiarFormatoFecha } from "../../../utils";
 import { moneyFormat } from "../../../utils/moneyFormat";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
@@ -35,6 +35,8 @@ const VerReporteDeVentasIndividual = () => {
     useState(user?.nombreSucursalOFranquicia);
 
   const [sumaTotalVentasDiaria, setSumaTotalVentasDiaria] = useState(0);
+  const [sumaVentasEfectivo, setSumaVentasEfectivo] = useState(0);
+  const [sumaVentasTarjeta, setSumaVentasTarjeta] = useState(0);
 
   const { reportesVentasIndividual, refreshReportesVentasIndividual } =
     useContext(ReportesVentasIndividualContext);
@@ -123,6 +125,24 @@ const VerReporteDeVentasIndividual = () => {
     );
 
     setSumaTotalVentasDiaria(sumaTotalVentasDiaria);
+
+    const ventasEfectivo = ventasFiltradas.filter(
+      (venta) => venta.metodoDePago === "Efectivo"
+    );
+    const sumaVentasEfectivo = ventasEfectivo.reduce(
+      (acumulador, venta) => acumulador + venta.totalDeLaVenta,
+      0
+    );
+    setSumaVentasEfectivo(sumaVentasEfectivo);
+
+    const ventasTarjeta = ventasFiltradas.filter(
+      (venta) => venta.metodoDePago === "Tarjeta bancaria"
+    );
+    const sumaVentasTarjeta = ventasTarjeta.reduce(
+      (acumulador, venta) => acumulador + venta.totalDeLaVenta,
+      0
+    );
+    setSumaVentasTarjeta(sumaVentasTarjeta);
   }, [inputFecha, inputLugarDeLaVenta, inputNombreSucursalOFranquicia]);
 
   return (
@@ -314,6 +334,18 @@ const VerReporteDeVentasIndividual = () => {
                         scope="col"
                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
+                        Promoción Usada
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Metodo De Pago
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
                         Correo Electrónico Cliente Frecuente
                       </th>
                       <th
@@ -361,9 +393,17 @@ const VerReporteDeVentasIndividual = () => {
           </div>
         </div>
         {change && (
-          <h2 className="text-2xl font-semibold mt-10 text-right text-gray-900">
-            Total de ventas: ${moneyFormat(sumaTotalVentasDiaria)}
-          </h2>
+          <>
+            <p className="text-xl font-semibold mt-10 text-right text-gray-900">
+              Ventas en Efectivo: ${moneyFormat(sumaVentasEfectivo)}
+            </p>
+            <p className="text-xl font-semibold mt-2 text-right text-gray-900">
+              Ventas con Tarjeta Bancaria: ${moneyFormat(sumaVentasTarjeta)}
+            </p>
+            <h2 className="text-2xl font-semibold mt-2 text-right text-gray-900">
+              Total de ventas: ${moneyFormat(sumaTotalVentasDiaria)}
+            </h2>
+          </>
         )}
       </div>
     </SidebarLayoutGerenciaVentas>

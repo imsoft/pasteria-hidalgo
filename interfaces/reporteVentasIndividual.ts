@@ -7,6 +7,8 @@ export interface ReporteVentasIndividual {
   lugarDeVenta: LugarDeVenta;
   nombreLugarDeVenta: string;
   totalDeLaVenta: number;
+  promocionUsada: string;
+  metodoDePago: string;
   listadoDeProductos: ListadoDeProductos[];
   correoElectronicoClienteFrecuente: string;
   puntosClienteFrecuente: number;

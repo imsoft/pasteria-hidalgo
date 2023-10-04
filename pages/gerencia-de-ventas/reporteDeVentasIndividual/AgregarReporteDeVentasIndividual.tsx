@@ -23,8 +23,10 @@ import {
 } from "../../../utils";
 import { MinusIcon, PlusIcon } from "@heroicons/react/outline";
 import { AuthContext } from "../../../context/auth";
+import Swal from "sweetalert2";
 
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
+const paymentMethods: string[] = ["Efectivo", "Tarjeta bancaria"];
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
@@ -79,10 +81,11 @@ const AgregarReporteDeVentasIndividual = () => {
   );
   const [inputTipoDeProducto, setInputTipoDeProducto] = useState("");
   const [inputSaborProducto, setInputSaborProducto] = useState("");
-  const [inputCantidad, setInputCantidad] = useState(0);
+  const [inputCantidad, setInputCantidad] = useState(1);
   const [inputPrecioProducto, setInputPrecioProducto] = useState(0);
   const [inputMonto, setInputMonto] = useState(0);
   let [inputSumaTotal, setInputSumaTotal] = useState(0);
+  let [inputPromocionTotal, setInputPromocionTotal] = useState(0);
   const [inputCorreoClienteFrecuente, setInputCorreoClienteFrecuente] =
     useState("");
   const [inputPuntosClienteFrecuente, setInputPuntosClienteFrecuente] =
@@ -96,6 +99,9 @@ const AgregarReporteDeVentasIndividual = () => {
 
   const [inputUsarPuntos, setInputUsarPuntos] = useState("");
   const [inputPromocion, setInputPromocion] = useState("No");
+  const [inputMetodoDePago, setInputMetodoDePago] = useState("");
+
+  const [pasteCount, setpasteCount] = useState(0);
 
   const [touched, setTouched] = useState(false);
 
@@ -179,6 +185,12 @@ const AgregarReporteDeVentasIndividual = () => {
     setInputPromocion(event.target.value);
   };
 
+  const onTextFieldChangedMetodoDePago = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setInputMetodoDePago(event.target.value);
+  };
+
   const lookUpProductPrice = () => {
     try {
       const result = validMenuProducts.find(
@@ -221,7 +233,7 @@ const AgregarReporteDeVentasIndividual = () => {
   useEffect(() => {
     setInputCodigoProducto("");
     setInputPrecioProducto(0);
-    setInputCantidad(0);
+    setInputCantidad(1);
   }, [inputTipoDeProducto]);
 
   useEffect(() => {
@@ -240,16 +252,46 @@ const AgregarReporteDeVentasIndividual = () => {
   useEffect(() => {
     switch (inputPromocion) {
       case "No":
-        setInputSumaTotal((inputSumaTotal = -0));
+        setInputPromocionTotal(inputSumaTotal);
+        setInputPromocionTotal(0);
         break;
       case "Compra 6 pastes y llevate 1":
-        setInputSumaTotal((inputSumaTotal = -30));
+        if (pasteCount === 7) {
+          setInputPromocionTotal(inputSumaTotal);
+          setInputPromocionTotal(30);
+        } else {
+          setInputPromocionTotal(inputSumaTotal);
+          setInputPromocionTotal(0);
+          setInputPromocion("");
+          Swal.fire({
+            position: "top-end",
+            icon: "warning",
+            title: "No se puede usar esta promoción",
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }
         break;
       case "Compra 10 pastes y llevate 2":
-        setInputSumaTotal((inputSumaTotal = -60));
+        if (pasteCount === 12) {
+          setInputPromocionTotal(inputSumaTotal);
+          setInputPromocionTotal(60);
+        } else {
+          setInputPromocionTotal(inputSumaTotal);
+          setInputPromocionTotal(0);
+          setInputPromocion("");
+          Swal.fire({
+            position: "top-end",
+            icon: "warning",
+            title: "No se puede usar esta promoción",
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }
         break;
       case "Paste gratis":
-        setInputSumaTotal((inputSumaTotal = -30));
+        setInputPromocionTotal(inputSumaTotal);
+        setInputPromocionTotal(30);
         break;
 
       default:
@@ -276,6 +318,18 @@ const AgregarReporteDeVentasIndividual = () => {
 
     setInputListaDeProductos([...inputListaDeProductos, nuevaListaProductos]);
     setInputSumaTotal(inputMonto + inputSumaTotal);
+
+    if (
+      nuevaListaProductos.tipoDeProducto === "Paste Dulce" ||
+      nuevaListaProductos.tipoDeProducto === "Paste Salado" ||
+      nuevaListaProductos.tipoDeProducto === "Paste Empleado Dulce" ||
+      nuevaListaProductos.tipoDeProducto === "Paste Empleado Salado" ||
+      nuevaListaProductos.tipoDeProducto === "Paste Mini Dulce" ||
+      nuevaListaProductos.tipoDeProducto === "Paste Mini Salado"
+    ) {
+      setpasteCount(pasteCount + 1);
+    }
+
     resetForm();
   };
 
@@ -383,6 +437,8 @@ const AgregarReporteDeVentasIndividual = () => {
       inputLugarDeLaVenta!,
       inputNombreSucursalOFranquicia!,
       inputSumaTotal,
+      inputPromocion,
+      inputMetodoDePago,
       inputListaDeProductos,
       inputCorreoClienteFrecuente,
       inputPuntosClienteFrecuente,
@@ -408,7 +464,7 @@ const AgregarReporteDeVentasIndividual = () => {
     setInputLugarDeLaVenta("");
     setInputTipoDeProducto("");
     setInputSaborProducto("");
-    setInputCantidad(0);
+    setInputCantidad(1);
     setInputPrecioProducto(0);
     setInputMonto(0);
     setInputSumaTotal(0);
@@ -704,7 +760,7 @@ const AgregarReporteDeVentasIndividual = () => {
                     id="TxtCantidadDeProducto"
                     autoComplete="off"
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-                    value={inputCantidad || ""}
+                    value={inputCantidad}
                     onChange={onTextFieldChangedCantidad}
                     onBlur={() => setTouched(true)}
                   />
@@ -813,7 +869,7 @@ const AgregarReporteDeVentasIndividual = () => {
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                     placeholder="0"
                     aria-describedby="price-currency"
-                    value={inputSumaTotal || 0}
+                    value={inputSumaTotal - inputPromocionTotal || 0}
                     onChange={onTextFieldChangedSumaTotal}
                     onBlur={() => setTouched(true)}
                     readOnly
@@ -827,6 +883,30 @@ const AgregarReporteDeVentasIndividual = () => {
                     </span>
                   </div>
                 </div>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="TxtMetodoDePago"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Método de pago
+                </label>
+
+                <select
+                  id="TxtMetodoDePago"
+                  name="TxtMetodoDePago"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm rounded-md"
+                  onChange={onTextFieldChangedMetodoDePago}
+                  onBlur={() => setTouched(true)}
+                >
+                  <>
+                    <option hidden>Selecciona un método de pago...</option>
+                    {paymentMethods.map((paymentMethod) => (
+                      <option key={paymentMethod}>{paymentMethod}</option>
+                    ))}
+                  </>
+                </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">

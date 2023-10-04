@@ -9,6 +9,8 @@ const reporteVentasIndividualSchema = new Schema({
   lugarDeVenta: { type: String, required: true },
   nombreLugarDeVenta: { type: String, required: true },
   totalDeLaVenta: { type: Number, required: true },
+  promocionUsada: { type: String, required: true },
+  metodoDePago: { type: String, required: true },
   listadoDeProductos: [
     {
       idProducto: { type: String, required: true },

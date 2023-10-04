@@ -14,6 +14,8 @@ interface ContextProps {
     lugarDeVenta: string,
     nombreLugarDeVenta: string,
     totalDeLaVenta: number,
+    promocionUsada: string,
+    metodoDePago: string,
     listadoDeProductos: ListadoDeProductos[],
     correoElectronicoClienteFrecuente?: string,
     puntosClienteFrecuente?: number,
