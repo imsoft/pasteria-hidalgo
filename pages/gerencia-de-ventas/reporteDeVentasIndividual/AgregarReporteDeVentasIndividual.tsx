@@ -92,6 +92,7 @@ const AgregarReporteDeVentasIndividual = () => {
   const [inputPrecioProducto, setInputPrecioProducto] = useState(0);
   const [inputMonto, setInputMonto] = useState(0);
   let [inputSumaTotal, setInputSumaTotal] = useState(0);
+  let [inputSumaTotalAux, setInputSumaTotalAux] = useState(0);
   let [inputPromocionTotal, setInputPromocionTotal] = useState(0);
   const [inputCorreoClienteFrecuente, setInputCorreoClienteFrecuente] =
     useState("");
@@ -107,8 +108,6 @@ const AgregarReporteDeVentasIndividual = () => {
   const [inputUsarPuntos, setInputUsarPuntos] = useState("");
   const [inputPromocion, setInputPromocion] = useState("");
   const [inputMetodoDePago, setInputMetodoDePago] = useState("");
-
-  const [pasteCount, setPasteCount] = useState(0);
   const [cantidadDePastes, setCantidadDePastes] = useState(0);
 
   const [touched, setTouched] = useState(false);
@@ -256,6 +255,10 @@ const AgregarReporteDeVentasIndividual = () => {
   useEffect(() => {
     usoDePuntosClienteFrecuente();
   }, [inputPuntosClienteFrecuente, inputCorreoClienteFrecuente]);
+
+  useEffect(() => {
+    setInputSumaTotal(inputSumaTotal - inputPromocionTotal);
+  }, [inputPromocion, inputPromocionTotal]);
 
   useEffect(() => {
     switch (inputPromocion) {
@@ -885,7 +888,8 @@ const AgregarReporteDeVentasIndividual = () => {
                     className="focus:ring-primary-yellow focus:border-primary-yellow block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                     placeholder="0"
                     aria-describedby="price-currency"
-                    value={inputSumaTotal - inputPromocionTotal || 0}
+                    // value={inputSumaTotal - inputPromocionTotal || 0}
+                    value={inputSumaTotal}
                     onChange={onTextFieldChangedSumaTotal}
                     onBlur={() => setTouched(true)}
                     readOnly
