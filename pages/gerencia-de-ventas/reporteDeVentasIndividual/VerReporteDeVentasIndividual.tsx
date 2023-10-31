@@ -10,18 +10,22 @@ import { SucursalesYFranquiciasContext } from "../../../context/gerencia-operati
 import { AuthContext } from "../../../context/auth";
 import { cambiarFormatoFecha } from "../../../utils";
 import { moneyFormat } from "../../../utils/moneyFormat";
-import { useRouter } from "next/router";
 
 const tiempoTranscurrido = Date.now();
 const hoy = new Date(tiempoTranscurrido);
 
+const now = new Date();
+const year = now.getFullYear();
+const month = String(now.getMonth() + 1).padStart(2, '0');
+const day = String(now.getDate()).padStart(2, '0');
+const formattedDate = `${year}-${month}-${day}`;
+
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
 const VerReporteDeVentasIndividual = () => {
-  const router = useRouter();
   const { user } = useContext(AuthContext);
   const [inputFecha, setInputFecha] = useState(
-    new Date().toISOString().slice(0, 10)
+    formattedDate
   );
   const [inputNuevaFecha, setInputNuevaFecha] = useState(
     cambiarFormatoFecha(inputFecha)
@@ -88,6 +92,11 @@ const VerReporteDeVentasIndividual = () => {
     refreshReportesVentasIndividual();
     refreshSucursalesYFranquicias();
   }, []);
+
+  useEffect(() => {
+    console.log(inputFecha);
+  }
+  , [inputFecha, inputNuevaFecha, inputLugarDeLaVenta, inputNombreSucursalOFranquicia]);
 
   useEffect(() => {
     reportesVentasIndividualMemo
