@@ -110,7 +110,7 @@ export const validMenuProducts: Menu[] = [
     tipoDeProducto: "Paste Salado",
   },
   {
-    _id: "PS_P",
+    _id: "PS_PP",
     saborDelPaste: "Pepperoni",
     precio: 30,
     tipoDeProducto: "Paste Salado",
@@ -267,7 +267,7 @@ export const validMenuProducts: Menu[] = [
     tipoDeProducto: "Otros",
   },
   {
-    _id: "O_J",
+    _id: "O_JX",
     saborDelPaste: "Jumex",
     precio: 12,
     tipoDeProducto: "Otros",
@@ -383,7 +383,7 @@ export const validMenuProducts: Menu[] = [
     tipoDeProducto: "Paste Mini Salado",
   },
   {
-    _id: "PMS_P",
+    _id: "PMS_PP",
     saborDelPaste: "Pepperoni",
     precio: 18,
     tipoDeProducto: "Paste Mini Salado",
@@ -529,7 +529,7 @@ export const validMenuProducts: Menu[] = [
     tipoDeProducto: "Paste Empleado Salado",
   },
   {
-    _id: "PES_P",
+    _id: "PES_PP",
     saborDelPaste: "Pepperoni",
     precio: 25,
     tipoDeProducto: "Paste Empleado Salado",
