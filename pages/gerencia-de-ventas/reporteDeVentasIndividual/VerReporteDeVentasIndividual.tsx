@@ -16,17 +16,15 @@ const hoy = new Date(tiempoTranscurrido);
 
 const now = new Date();
 const year = now.getFullYear();
-const month = String(now.getMonth() + 1).padStart(2, '0');
-const day = String(now.getDate()).padStart(2, '0');
+const month = String(now.getMonth() + 1).padStart(2, "0");
+const day = String(now.getDate()).padStart(2, "0");
 const formattedDate = `${year}-${month}-${day}`;
 
 const validSalesPlace: LugarDeVenta[] = ["Evento", "Franquicia", "Sucursal"];
 
 const VerReporteDeVentasIndividual = () => {
   const { user } = useContext(AuthContext);
-  const [inputFecha, setInputFecha] = useState(
-    formattedDate
-  );
+  const [inputFecha, setInputFecha] = useState('');
   const [inputNuevaFecha, setInputNuevaFecha] = useState(
     cambiarFormatoFecha(inputFecha)
   );
@@ -95,8 +93,12 @@ const VerReporteDeVentasIndividual = () => {
 
   useEffect(() => {
     console.log(inputFecha);
-  }
-  , [inputFecha, inputNuevaFecha, inputLugarDeLaVenta, inputNombreSucursalOFranquicia]);
+  }, [
+    inputFecha,
+    inputNuevaFecha,
+    inputLugarDeLaVenta,
+    inputNombreSucursalOFranquicia,
+  ]);
 
   useEffect(() => {
     reportesVentasIndividualMemo
@@ -401,7 +403,7 @@ const VerReporteDeVentasIndividual = () => {
             </div>
           </div>
         </div>
-        {change && (
+        {/* {change && ( */}
           <>
             <p className="text-xl font-semibold mt-10 text-right text-gray-900">
               Ventas en Efectivo: ${moneyFormat(sumaVentasEfectivo)}
@@ -413,7 +415,7 @@ const VerReporteDeVentasIndividual = () => {
               Total de ventas: ${moneyFormat(sumaTotalVentasDiaria)}
             </h2>
           </>
-        )}
+        {/* )} */}
       </div>
     </SidebarLayoutGerenciaVentas>
   );
