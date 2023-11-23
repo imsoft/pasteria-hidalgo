@@ -56,11 +56,12 @@ const VerReporteDeVentasIndividual = () => {
   );
 
   const onTextFieldChangedFecha = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputFecha(event.target.value);
     const nuevaFecha = event.target.value.split("-", 3);
     const dia = nuevaFecha[2];
     const mes = nuevaFecha[1];
     const anio = nuevaFecha[0];
+
+    setInputFecha(event.target.value);
     setInputNuevaFecha(`${dia}/${mes}/${anio}`);
     setChange(true);
   };
@@ -90,15 +91,6 @@ const VerReporteDeVentasIndividual = () => {
     refreshReportesVentasIndividual();
     refreshSucursalesYFranquicias();
   }, []);
-
-  useEffect(() => {
-    console.log(inputFecha);
-  }, [
-    inputFecha,
-    inputNuevaFecha,
-    inputLugarDeLaVenta,
-    inputNombreSucursalOFranquicia,
-  ]);
 
   useEffect(() => {
     reportesVentasIndividualMemo
@@ -155,6 +147,12 @@ const VerReporteDeVentasIndividual = () => {
     );
     setSumaVentasTarjeta(sumaVentasTarjeta);
   }, [inputFecha, inputLugarDeLaVenta, inputNombreSucursalOFranquicia]);
+
+  useEffect(() => {
+    if (user?.role.includes("admin")) {
+      setInputFecha("");
+    }
+  }, []);
 
   return (
     <SidebarLayoutGerenciaVentas>
@@ -367,7 +365,6 @@ const VerReporteDeVentasIndividual = () => {
                       </th>
                     </tr>
                   </thead>
-
                   {!change && user?.role.includes("admin")
                     ? reportesVentasIndividualMemo.map(
                         (reporteVentasIndividual) => (
@@ -404,17 +401,17 @@ const VerReporteDeVentasIndividual = () => {
           </div>
         </div>
         {/* {change && ( */}
-          <>
-            <p className="text-xl font-semibold mt-10 text-right text-gray-900">
-              Ventas en Efectivo: ${moneyFormat(sumaVentasEfectivo)}
-            </p>
-            <p className="text-xl font-semibold mt-2 text-right text-gray-900">
-              Ventas con Tarjeta Bancaria: ${moneyFormat(sumaVentasTarjeta)}
-            </p>
-            <h2 className="text-2xl font-semibold mt-2 text-right text-gray-900">
-              Total de ventas: ${moneyFormat(sumaTotalVentasDiaria)}
-            </h2>
-          </>
+        <>
+          <p className="text-xl font-semibold mt-10 text-right text-gray-900">
+            Ventas en Efectivo: ${moneyFormat(sumaVentasEfectivo)}
+          </p>
+          <p className="text-xl font-semibold mt-2 text-right text-gray-900">
+            Ventas con Tarjeta Bancaria: ${moneyFormat(sumaVentasTarjeta)}
+          </p>
+          <h2 className="text-2xl font-semibold mt-2 text-right text-gray-900">
+            Total de ventas: ${moneyFormat(sumaTotalVentasDiaria)}
+          </h2>
+        </>
         {/* )} */}
       </div>
     </SidebarLayoutGerenciaVentas>

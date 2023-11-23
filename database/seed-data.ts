@@ -1868,6 +1868,66 @@ export const initialData: SeedData = {
       correoElectronicoClienteFrecuente: "pedro@gmail.com",
       puntosClienteFrecuente: 5,
     },
+    {
+      // 11
+      fecha: "01/11/2023",
+      nombreDelVendedor: "Pedro",
+      lugarDeVenta: "Franquicia",
+      nombreLugarDeVenta: "Polanco",
+      totalDeLaVenta: 420,
+      promocionUsada: "Paste gratis",
+      metodoDePago: "Tarjeta bancaria",
+      listadoDeProductos: [
+        {
+          idProducto: "AB_A",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Aretes",
+          cantidad: 1,
+          precioProducto: 350,
+          monto: 350,
+        },
+        {
+          idProducto: "PD_CCM",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Cajeta con caramelo",
+          cantidad: 2,
+          precioProducto: 35,
+          monto: 70,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "pedro@gmail.com",
+      puntosClienteFrecuente: 5,
+    },
+    {
+      // 12
+      fecha: "02/11/2023",
+      nombreDelVendedor: "Pedro",
+      lugarDeVenta: "Franquicia",
+      nombreLugarDeVenta: "Polanco",
+      totalDeLaVenta: 420,
+      promocionUsada: "Paste gratis",
+      metodoDePago: "Tarjeta bancaria",
+      listadoDeProductos: [
+        {
+          idProducto: "AB_A",
+          tipoDeProducto: "Paste Salado",
+          saborProducto: "Aretes",
+          cantidad: 1,
+          precioProducto: 350,
+          monto: 350,
+        },
+        {
+          idProducto: "PD_CCM",
+          tipoDeProducto: "Paste Dulce",
+          saborProducto: "Cajeta con caramelo",
+          cantidad: 2,
+          precioProducto: 35,
+          monto: 70,
+        },
+      ],
+      correoElectronicoClienteFrecuente: "pedro@gmail.com",
+      puntosClienteFrecuente: 5,
+    },
   ],
   apartadoJuridico: [
     {
