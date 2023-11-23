@@ -198,7 +198,7 @@ const VerReporteDeVentasIndividual = () => {
               id="TxtFecha"
               autoComplete="off"
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary-yellow focus:border-primary-yellow sm:text-sm"
-              // value={inputFecha}
+              value={inputFecha}
               onChange={onTextFieldChangedFecha}
             />
           </div>
@@ -403,7 +403,7 @@ const VerReporteDeVentasIndividual = () => {
             </div>
           </div>
         </div>
-        {change && (
+        {/* {change && ( */}
           <>
             <p className="text-xl font-semibold mt-10 text-right text-gray-900">
               Ventas en Efectivo: ${moneyFormat(sumaVentasEfectivo)}
@@ -415,7 +415,7 @@ const VerReporteDeVentasIndividual = () => {
               Total de ventas: ${moneyFormat(sumaTotalVentasDiaria)}
             </h2>
           </>
-        )}
+        {/* )} */}
       </div>
     </SidebarLayoutGerenciaVentas>
   );
